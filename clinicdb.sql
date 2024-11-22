@@ -21,7 +21,7 @@ create table [user]
 
 CREATE TABLE Patient
 (
-	ID int IDENTITY(1,1),
+	ID int,
 	SSNValidation BIT,
 	PenaltyFees int,
 	PRIMARY KEY (ID),
@@ -31,7 +31,7 @@ CREATE TABLE Patient
 
 CREATE TABLE Doctor 
 (
-	ID int IDENTITY(1,1),
+	ID int,
 	PricePA int,
 	SSNValidation BIT,
 	Banned BIT,
@@ -273,3 +273,192 @@ ADD CONSTRAINT chk_valid_field_name CHECK (
         'Palliative Care', 'Medical Genetics'
     )
 );
+
+
+
+
+
+INSERT INTO [user] (FName, LName, SSN, RegistrationDate, Gender, [Password], BirthDate, City, Governorate, Email)
+VALUES 
+
+('John', 'Doe', 123456789, '2023-01-01', 'M', 'password123', '1985-05-15', 'Cairo', 'Cairo', 'john.doe@example.com'),
+('Jane', 'Smith', 987654321, '2023-01-02', 'F', 'securepass', '1990-07-20', 'Giza', 'Giza', 'jane.smith@example.com'),
+('Ahmed', 'Ali', 223344556, '2023-01-03', 'M', 'ahmedpass', '1975-09-12', 'Alexandria', 'Alexandria', 'ahmed.ali@example.com'),
+('Sara', 'Hassan', 445566778, '2023-01-04', 'F', 'sarapass', '1992-03-25', 'Aswan', 'Aswan', 'sara.hassan@example.com'),
+('Mohamed', 'Youssef', 112233445, '2023-01-05', 'M', 'mypassword', '1987-09-18', 'Zamalek', 'Cairo', 'mohamed.youssef@example.com'),
+('Nora', 'Farid', 998877665, '2023-01-06', 'F', 'norapass', '1993-11-25', 'Heliopolis', 'Cairo', 'nora.farid@example.com'),
+('Ali', 'Kamal', 667788990, '2023-01-07', 'M', 'alikpass', '1988-03-19', 'Nasr City', 'Cairo', 'ali.kamal@example.com'),
+('Mona', 'Gamal', 445566334, '2023-01-08', 'F', 'monag123', '1991-06-14', 'Maadi', 'Cairo', 'mona.gamal@example.com'),
+('Hassan', 'Tariq', 332211009, '2023-01-09', 'M', 'hassanpass', '1979-12-11', 'Shobra', 'Cairo', 'hassan.tariq@example.com'),
+('Layla', 'Nashat', 776655443, '2023-01-10', 'F', 'laylapass', '1995-02-28', 'Zamalek', 'Cairo', 'layla.nashat@example.com'),
+('Tamer', 'Saad', 123123123, '2023-01-11', 'M', 'tamerpass', '1980-05-01', 'Giza', 'Giza', 'tamer.saad@example.com'),
+('Heba', 'Ezz', 987987987, '2023-01-12', 'F', 'hebapass', '1985-09-10', 'Alexandria', 'Alexandria', 'heba.ezz@example.com'),
+('Omar', 'Rashid', 456456456, '2023-01-13', 'M', 'omarpass', '1990-12-15', 'Aswan', 'Aswan', 'omar.rashid@example.com'),
+('Salma', 'Khaled', 789789789, '2023-01-14', 'F', 'salmapass', '1983-03-25', 'Cairo', 'Cairo', 'salma.khaled@example.com'),
+('Youssef', 'Nader', 321321321, '2023-01-15', 'M', 'youssefpass', '1987-07-30', 'Dokki', 'Giza', 'youssef.nader@example.com'),
+('Hana', 'Mostafa', 654654654, '2023-01-16', 'F', 'hanapass', '1995-11-05', 'Maadi', 'Cairo', 'hana.mostafa@example.com'),
+('Karim', 'Fathi', 888888888, '2023-01-17', 'M', 'karimpass', '1978-02-20', '6th of October', 'Giza', 'karim.fathi@example.com'),
+('Amira', 'Zain', 555555555, '2023-01-18', 'F', 'amirapass', '1992-08-14', 'El Sheikh Zayed', 'Giza', 'amira.zain@example.com'),
+('Hisham', 'Hafez', 333333333, '2023-01-19', 'M', 'hishampass', '1986-04-28', 'Alexandria', 'Alexandria', 'hisham.hafez@example.com'),
+('Rana', 'Tamer', 999999999, '2023-01-20', 'F', 'ranapass', '1994-06-06', 'Heliopolis', 'Cairo', 'rana.tamer@example.com');
+
+
+INSERT INTO Patient (ID, SSNValidation, PenaltyFees)
+VALUES 
+(1, 1, 0), 
+(2, 0, 50), 
+(3, 1, 20), 
+(4, 1, 0), 
+(5, 0, 10), 
+(6, 1, 5), 
+(7, 1, 15),
+(8, 0, 25),
+(9, 1, 0),
+(10, 1, 50);
+
+
+
+
+INSERT INTO Doctor (ID, PricePA, SSNValidation, Banned, SSN)
+VALUES 
+(11, 500, 1, 0, 123123123),
+(12, 700, 1, 0, 987987987),
+(13, 450, 1, 0, 456456456),
+(14, 600, 1, 1, 789789789),
+(15, 750, 1, 0, 321321321),
+(16, 400, 1, 0, 654654654), 
+(17, 550, 1, 0, 888888888), 
+(18, 800, 1, 0, 555555555), 
+(19, 450, 1, 0, 333333333), 
+(20, 700, 1, 0, 999999999);
+
+
+
+INSERT INTO FieldOfMedicine (FieldName, FDescription, CommonConditions)
+VALUES 
+('General Medicine', 'General health care', 'Flu, Minor Injuries'),
+('Family Medicine', 'Comprehensive care for families', 'Flu, Hypertension'),
+('Internal Medicine', 'Adult healthcare', 'Diabetes, Hypertension'),
+('General Surgery', 'Surgical care', 'Appendicitis, Trauma'),
+('Cardiology', 'Heart and vascular health', 'Heart Attack, Hypertension'),
+('Neurology', 'Brain and nervous system', 'Stroke, Epilepsy'),
+('Orthopedic Surgery', 'Bones, joints, and ligaments', 'Fractures, Arthritis'),
+('Oncology', 'Cancer care', 'Breast Cancer, Lung Cancer'),
+('Endocrinology', 'Hormonal and gland disorders', 'Diabetes, Thyroid Diseases'),
+('Pulmonology', 'Lung and respiratory health', 'Asthma, COPD'),
+('Gastroenterology', 'Digestive system care', 'Ulcers, IBS'),
+('Hematology', 'Blood disorders', 'Anemia, Hemophilia'),
+('Nephrology', 'Kidney health', 'Chronic Kidney Disease, Kidney Stones'),
+('Urological Surgery', 'Urinary tract and male reproductive system', 'Prostate Cancer, UTIs'),
+('Vascular Surgery', 'Blood vessels and lymphatic system', 'Varicose Veins, Aneurysms'),
+('Plastic Surgery', 'Reconstructive and cosmetic surgery', 'Burn Reconstruction, Rhinoplasty'),
+('Palliative Care', 'Care for serious illness', 'Chronic Pain, End-of-Life Care');
+
+
+
+INSERT INTO DoctorCurWorkplace (City, Governorate, Institution, JobPosition, DoctorID)
+VALUES 
+('Cairo', 'Cairo', 'Cairo General Hospital', 'Cardiologist', 11),
+('Giza', 'Giza', 'Giza Medical Center', 'Pediatrician', 12),
+('Alexandria', 'Alexandria', 'Alexandria Health Institute', 'Neurologist', 13),
+('Aswan', 'Aswan', 'Aswan Specialized Clinic', 'Surgeon', 14),
+('Maadi', 'Cairo', 'Maadi Family Health', 'General Practitioner', 15),
+('Heliopolis', 'Cairo', 'Heliopolis Medical Center', 'Dermatologist', 16),
+('Nasr City', 'Cairo', 'Nasr City Hospital', 'Orthopedist', 17),
+('6th of October', 'Giza', 'October Polyclinic', 'Gynecologist', 18),
+('El Sheikh Zayed', 'Giza', 'Sheikh Zayed Clinic', 'Radiologist', 19),
+('Dokki', 'Giza', 'Dokki Specialist Hospital', 'Oncologist', 20);
+
+
+
+
+
+INSERT INTO DoctorExperience (DoctorID, Institution, Proof, SpanYears, SpanMonths, JobPosition)
+VALUES 
+(11, 'Cairo University', NULL, 10, 1, 'Senior Cardiologist'),
+(12, 'Ain Shams University', NULL, 8, 3, 'Pediatrics Specialist'),
+(13, 'Alexandria University', NULL, 7, 6, 'Neurology Fellow'),
+(14, 'Aswan Medical College', NULL, 12, 3, 'Senior Surgeon'),
+(15, 'Maadi Hospital', NULL, 6, 2, 'Family Medicine Practitioner'),
+(16, 'Heliopolis Dermatology Center', NULL, 9, 1, 'Dermatology Consultant'),
+(17, 'Nasr Orthopedic Institute', NULL, 8, 8, 'Orthopedics Specialist'),
+(18, 'October Women’s Health Center', NULL, 5, 10, 'Gynecology Consultant'),
+(19, 'Sheikh Zayed Diagnostic Labs', NULL, 4, 6, 'Radiology Specialist'),
+(20, 'Dokki Oncology Center', NULL, 11, 5, 'Oncology Consultant');
+
+
+
+
+INSERT INTO DoctorCertificate (DoctorID, date_of_acq, Institute, Description)
+VALUES 
+(11, '2013-06-10', 'Cairo University', 'Board Certification in Cardiology'),
+(12, '2015-05-20', 'Ain Shams University', 'Pediatrics Fellowship Certification'),
+(13, '2017-04-15', 'Alexandria University', 'Neurology Residency Certificate'),
+(14, '2010-09-12', 'Aswan Medical College', 'Master’s in General Surgery'),
+(15, '2016-02-18', 'Maadi Hospital', 'Family Medicine Specialist Certificate'),
+(16, '2014-11-25', 'Heliopolis Dermatology Center', 'Board Certification in Dermatology'),
+(17, '2018-07-30', 'Nasr Orthopedic Institute', 'Fellowship in Orthopedics'),
+(18, '2019-08-22', 'October Women’s Health Center', 'Gynecology Consultant Certification'),
+(19, '2020-01-12', 'Sheikh Zayed Diagnostic Labs', 'Certification in Diagnostic Radiology'),
+(20, '2011-03-05', 'Dokki Oncology Center', 'Advanced Oncology Certification');
+
+
+
+
+
+INSERT INTO Symptom (PatientID, [type], DateOfFirstInstance, Severity, OnsetDuration_years, OnsetDuration_months, OnsetDuration_days, IsPresent)
+VALUES 
+(1, 'Fever', '2023-06-01', 2, 0, 1, 10, 1),
+(2, 'Cough', '2023-06-10', 3, 0, 0, 20, 1),
+(3, 'Headache', '2023-07-15', 1, 0, 0, 5, 1),
+(4, 'Back pain', '2023-07-20', 3, 1, 0, 12, 1),
+(5, 'Nausea', '2023-08-01', 2, 0, 2, 7, 1),
+(6, 'Fatigue', '2023-08-10', 1, 0, 0, 15, 1),
+(7, 'Dizziness', '2023-08-20', 2, 0, 1, 10, 1),
+(8, 'Blurred vision', '2023-09-15', 3, 0, 2, 10, 1);
+
+
+
+INSERT INTO LongTermConditions (PatientID, [type], Severity, DateOfFirstInstance)
+VALUES 
+(8, 'Hypertension', 3, '2015-08-01'),
+(2, 'Pulmonary Fibrosis', 2, '2020-02-15'),
+(7, 'Leukemia', 1, '2018-01-10'),
+(4, 'HIV/AIDS', 2, '2016-05-20'),
+(5, 'Parkinson’s Disease', 3, '2017-11-30');
+
+
+
+
+INSERT INTO Appointment (DoctorID, PatientID, IsFinished, IsConfirmed, DatenTime)
+VALUES 
+(11, 1, 0, 1, '2024-11-25 10:00:00'),
+(12, 2, 1, 1, '2024-11-26 15:30:00'),
+(13, 3, 0, 0, '2024-11-27 14:00:00'),
+(14, 4, 1, 1, '2024-11-28 11:45:00'),
+(15, 5, 0, 1, '2024-11-29 09:30:00'),
+(16, 6, 1, 0, '2024-12-01 13:30:00'),
+(17, 7, 1, 1, '2024-12-02 14:00:00'),
+(18, 8, 0, 1, '2024-12-03 15:00:00'),
+(19, 9, 1, 1, '2024-12-04 08:45:00'),
+(20, 10, 1, 1, '2024-12-05 12:00:00');
+
+
+INSERT INTO Diagnosis (AppointmentID, DoctorID, PatientID, [condition], [description])
+VALUES 
+(1, 11, 1, 'Flu', 'Prescribed rest and hydration.'),
+(2, 12, 2, 'Diabetes Checkup', 'Adjusted insulin dosage.'),
+(3, 13, 3, 'Asthma', 'Recommended inhaler use.'),
+(4, 14, 4, 'Back Pain', 'Prescribed physiotherapy sessions.'),
+(5, 15, 5, 'Nausea', 'Advised dietary changes.');
+
+
+
+
+INSERT INTO Reviews (DoctorID, PatientID, NStars, Comment)
+VALUES 
+(11, 1, 5, 'Great doctor, very knowledgeable.'),
+(12, 2, 4, 'Helpful and professional.'),
+(13, 3, 3, 'Average experience.'),
+(14, 4, 5, 'Highly recommended!'),
+(15, 5, 4, 'Very kind and understanding.');
