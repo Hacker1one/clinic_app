@@ -1,0 +1,96 @@
+﻿@page
+@model webapplication.Pages.SignupPatientModel
+@{
+	Layout = ".\\Shared\\_LayoutLogin.cshtml";
+}
+
+<div class="w-75 mx-auto mt-5 my-auto">
+
+	@if(@Model.HttpContext.Session.GetString("user_type") == "p")
+	{
+		<h2 class="text-center fw-bold mb-4">Sign Up</h2>
+	}else
+	{
+		<h2 class="text-center fw-bold mb-4">Physician Sign Up</h2>
+	}
+    <form method="post" asp-page-handler="SignUpPatient">
+        <!-- First Name -->
+        <div class="form-floating mb-3 mx-auto w-50">
+            <input class="form-control" id="fname" placeholder="First name"  asp-for="fname" required>
+            <label for="fname">First name</label>
+        </div>
+        <!-- Last Name -->
+        <div class="form-floating mb-3 mx-auto w-50">
+            <input class="form-control" id="lname" asp-for="lname" placeholder="Last name" required>
+            <label for="lname">Last name</label>
+        </div>
+
+        <!-- Gender -->
+        <div class="w-50 mx-auto my-3">
+            <label class="w-100 fw-bold text-center mx-auto mb-3">Gender</label>
+            <div class="d-flex justify-content-center">
+				<div class="form-check form-check-inline mx-auto">
+					<input class="form-check-input" type="radio" asp-for="gender" name="Gender" id="RadioM" value="M">
+					<label class="form-check-label" for="RadioM">Male</label>
+				</div>
+				<div class="form-check form-check-inline mx-auto">
+					<input class="form-check-input" type="radio" asp-for="gender" name="Gender" id="RadioF" value="F">
+					<label class="form-check-label" for="RadioF">Female</label>
+				</div>
+            </div>
+        </div>
+
+        <!-- Phone number -->
+        <div class="form-floating mb-3 mx-auto w-50">
+            <input class="form-control" id="phone" asp-for="phone_number" placeholder="+201119422687" required>
+            <label for="phone">Phone number</label>
+        </div>
+
+		<div class="form-floating mb-3 mx-auto w-50">
+			<input type="email" class="form-control" asp-for="email" id="email" placeholder="Email Address" required>
+			<label for="email">Email</label>
+		</div>
+		@if(@Model.HttpContext.Session.GetString("user_type") == "dr")
+        {
+			<div class="d-flex justify-content-center align-items-center w-50 mx-auto mb-3">
+                <div class="dropend">
+						<button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Choose a Specialty
+						</button>
+					<div class="dropdown-menu" asp-for="specialty" aria-labelledby="specialtyDropdown">
+						<!-- add for loop here connecting to database later -->
+						<a class="dropdown-item" href="#">Cardiology</a>
+						<a class="dropdown-item" href="#">Dermatology</a>
+						<a class="dropdown-item" href="#">Neurology</a>
+					</div>
+                </div>
+            </div>
+        }
+
+        <!-- Password -->
+        <div class="form-floating mb-3 mx-auto w-50">
+            <input type="password" class="form-control" id="password" asp-for="password" placeholder="Password" required>
+            <label for="password">Password</label>
+            <button type="button" class="btn btn-link btn-sm position-absolute top-50 end-0 translate-middle-y me-2" id="togglePassword">
+                Show
+            </button>
+        </div>
+        <!-- Sign up Button -->
+        <div class="d-grid w-25 mx-auto">
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </div>
+    </form>
+    <!-- Login Link -->
+    <div class="text-center mt-3">
+        <p>Already have an account? <a asp-page="LogIn" class="text-primary">Log In</a></p>
+        <form method="get">
+			@if(@Model.HttpContext.Session.GetString("user_type") == "p")
+			{
+				<p>Or <a asp-page-handler="ChangeToDr">Sign Up</a> as a Doctor</p>
+			}else
+			{
+				<p>Or <a asp-page-handler="ChangeToP">Sign Up</a> as a Patient</p>
+			}
+        </form>
+    </div>
+</div>
