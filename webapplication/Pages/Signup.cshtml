@@ -54,17 +54,13 @@
 		@if(@Model.HttpContext.Session.GetString("user_type") == "dr")
         {
 			<div class="d-flex justify-content-center align-items-center w-50 mx-auto mb-3">
-                <div class="dropend">
-						<button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Choose a Specialty
-						</button>
-					<div class="dropdown-menu" asp-for="specialty" aria-labelledby="specialtyDropdown">
-						<!-- add for loop here connecting to database later -->
-						<a class="dropdown-item" href="#">Cardiology</a>
-						<a class="dropdown-item" href="#">Dermatology</a>
-						<a class="dropdown-item" href="#">Neurology</a>
-					</div>
-                </div>
+				<select class="form-select" asp-for="specialty" aria-label="Specialty">
+                    <!-- add for loop here later connecting to database -->
+					<option selected>Choose Specialty</option>
+					<option value="1">Cardiology</option>
+					<option value="2">Dermatology</option>
+					<option value="3">Neurology</option>
+				</select>
             </div>
         }
 
