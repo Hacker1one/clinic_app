@@ -3,3 +3,8 @@
 ################################################################################
 
 /.vs/
+/obj/Debug/net8.0/apphost.exe
+/obj/Debug/net8.0/db2.AssemblyInfo.cs
+/obj/Debug/net8.0/db2.AssemblyInfoInputs.cache
+/obj/Debug/net8.0/db2.assets.cache
+/obj/Debug/net8.0/db2.GeneratedMSBuildEditorConfig.editorconfig
