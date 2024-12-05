@@ -209,7 +209,7 @@ Version:	1.1
 .service-details-inner h2 {
 	font-size: 24px;
 }
-.appointment .appointment-image{
+.DrAppointment .DrAppointment-image{
 	margin-top:20px;
 }
 .call-action .content {
@@ -269,10 +269,10 @@ Version:	1.1
 	height:100%;
 	width:100%;
 }
-.appointment.single-page {
+.DrAppointment.single-page {
 	padding: 70px 0;
 }
-.appointment.single-page .work-hour {
+.DrAppointment.single-page .work-hour {
 	margin-top: 30px;
 }
 .blog .single-news {
@@ -676,7 +676,7 @@ Version:	1.1
 	font-size: 28px;
 	line-height: 40px;
 }
-.appointment .appointment-image{
+.DrAppointment .DrAppointment-image{
 	margin-top:20px;
 }
 .services .single-service {
@@ -751,10 +751,10 @@ Version:	1.1
 	height:100%;
 	width:100%;
 }
-.appointment.single-page {
+.DrAppointment.single-page {
 	padding: 50px 0;
 }
-.appointment.single-page .work-hour {
+.DrAppointment.single-page .work-hour {
 	margin-top: 30px;
 }
 .blog .single-news {
@@ -1224,7 +1224,7 @@ Version:	1.1
 	height:100%;
 	width:100%;
 }
-.appointment.single-page .appointment-inner {
+.DrAppointment.single-page .DrAppointment-inner {
 	padding: 25px;
 }
 .blog .single-news {

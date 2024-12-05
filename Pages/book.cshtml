@@ -12,7 +12,7 @@
                                 <a href="index"><img src="img/logo.png" alt="#"></a>
                             </div>
                             <div class="mobile-nav"></div>
-                        </div>
+                        </div> 
                         <div class="col-lg-7 col-md-9 col-12">
                             <div class="main-menu">
                                 <nav class="navigation">
@@ -27,8 +27,8 @@
 										<li><a href="Login">Login</a></li>
 										<li><a href="#">Sign Up<i class="icofont-rounded-down"></i></a>
                                             <ul class="dropdown">
-                                                <li><a href="Signup">Patient Sign Up</a></li> 
-												<li><a href="Signup">Physician Sign Up</a></li>
+                                                <li><a href="SignUp?type=p">Patient Sign Up</a></li>
+                								<li><a href="SignUp?type=dr">Physician Sign Up</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -37,7 +37,7 @@
                         </div>
                        @*  <div class="col-lg-2 col-12">
                             <div class="get-quote">
-                                <a href="appointment.html" class="btn">Book Appointment</a>
+                                <a href="DrAppointment.html" class="btn">Book DrAppointment</a>
                             </div>
                         </div> *@
                     </div>
@@ -47,77 +47,88 @@
         </div>
     </header>
 
-@section Filters {
-    <div class="filters">
-        <h4 class="mb-4">Filters</h4>
-
-        <!-- Availability -->
-        <div class="mb-4">
-            <label>Availability</label>
-            <div>
-                <input type="checkbox" id="today" name="availability" value="today">
-                <label for="today">Today</label>
-            </div>
-            <div>
-                <input type="checkbox" id="this-week" name="availability" value="this-week">
-                <label for="this-week">This Week</label>
-            </div>
-            <div>
-                <input type="checkbox" id="online" name="availability" value="online">
-                <label for="online">Online</label>
-            </div>
-        </div>
-
-        <!-- Specific Date or Range -->
-        <div class="mb-4">
-            <label for="date-range">Specific date or range</label>
-            <input type="date" id="date-range" name="date-range" class="form-control">
-        </div>
-
-        <!-- Areas of Interest -->
-        <div class="mb-4">
-            <label for="specialization">Areas of interest</label>
-            <select id="specialization" name="specialization" class="form-control">
-                <option value="">Select Specialization</option>
-                <option value="1">Psychiatry</option>
-                <option value="2">Psychology</option>
-            </select>
-        </div>
-
-        <!-- Session Fees -->
-        <div class="mb-4">
-            <label for="fees-range">Session Fees</label>
-            <input type="range" id="fees-range" name="fees-range" min="140" max="4700" step="10">
-            <div>140 EGP - 4700 EGP</div>
-        </div>
-    </div>
-}
-
 <div class="container mt-5">
     <div class="row">
-        @foreach (var therapist in Model.Therapists)
-        {
-            <div class="col-md-4 mb-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-3">
-                            <img src="@therapist.ProfileImageUrl" alt="@therapist.Name" class="rounded-circle me-3" style="width: 70px; height: 70px;">
-                            <div>
-                                <h5 class="card-title mb-0">@therapist.Name</h5>
-                                <small class="text-muted">@therapist.Specialization.Name</small>
-                            </div>
-                        </div>
-                        <p><strong>Interests:</strong> @string.Join(", ", therapist.Interests)</p>
-                        <p><strong>Nearest appointment:</strong> @therapist.NextAppointment.ToString("dddd, MMM dd, yyyy hh:mm tt")</p>
-                        <p><strong>Fees:</strong> @therapist.SessionFees.ToString("C2") / 60 Min</p>
-                        <div class="d-flex justify-content-between mt-3">
-                            <a href="book" class="btn btn-primary">View Profile</a>
-                            <a href="#" class="btn btn-outline-primary">Book Now</a>
-                        </div>
+        <!-- Filters Section on the left -->
+        <div class="col-md-3 mb-4">
+            <div class="filters">
+                <h4 class="mb-4">Filters</h4>
+
+                <!-- Availability -->
+                <div class="mb-4">
+                    <label>Availability</label>
+                    <div>
+                        <input type="checkbox" id="today" name="availability" value="today">
+                        <label for="today">Today</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="this-week" name="availability" value="this-week">
+                        <label for="this-week">This Week</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="online" name="availability" value="online">
+                        <label for="online">Online</label>
                     </div>
                 </div>
+
+                <!-- Specific Date or Range -->
+                <div class="mb-4">
+                    <label for="date-range">Specific date or range</label>
+                    <input type="date" id="date-range" name="date-range" class="form-control">
+                </div>
+
+                <!-- Areas of Interest -->
+                <div class="mb-4">
+                    <label for="specialization">Areas of interest</label>
+                    <select id="specialization" name="specialization" class="form-control">
+                        <option value="">Select Specialization</option>
+                        <option value="1">Psychiatry</option>
+                        <option value="2">Psychology</option>
+                    </select>
+                </div>
+
+                <!-- Session Fees -->
+                <div class="mb-4">
+                    <label for="fees-range">Session Fees</label>
+                    <input type="range" id="fees-range" name="fees-range" min="140" max="4700" step="10">
+                    <div>140 EGP - 4700 EGP</div>
+                </div>
             </div>
-        }
+        </div>
+
+        <!-- Doctors Cards Section -->
+        <div class="col-md-9 mb-4">
+            <div class="row">
+                @foreach (var therapist in Model.Therapists)
+                {
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card shadow-sm larger-card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="@therapist.ProfileImageUrl" alt="@therapist.Name" class="rounded-circle me-3" style="width: 100px; height: 100px;">
+                                    <div>
+                                        <h5 class="card-title mb-0">Dr, @therapist.Name</h5>
+                                        <small class="text-muted">@therapist.Specialization.Name</small>
+                                    </div>
+                                </div>
+                                <p><strong>Interests:</strong> @string.Join(", ", therapist.Interests)</p>
+                                <p><strong>Nearest DrAppointment:</strong> @therapist.NextDrAppointment.ToString("dddd, MMM dd, yyyy hh:mm tt")</p>
+                                <p><strong>Fees:</strong> @therapist.SessionFees.ToString("C2") / 60 Min</p>
+                                <div class="d-flex justify-content-between mt-3">
+                                    <form method="post" asp-page-handler="P">
+                                        <input type="hidden" name="therapistId" value="@therapist.Id" />
+                                        <button type="submit" class="btn btn" style="background-color: white; color: #1A76D1;">View Profile</button>
+                                    </form>&nbsp;
+                                    <form method="post" asp-page-handler="B">
+                                        <input type="hidden" name="therapistId" value="@therapist.Id" />
+                                        <button type="submit" class="btn btn-primary" >Book Now</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
     </div>
 </div>
-

@@ -1,0 +1,140 @@
+.Appointments {
+    font-family: Arial, sans-serif;
+    padding: 40px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+}
+.tabs {
+    display: flex;
+    gap: 20px; 
+    margin-bottom: 30px; 
+    justify-content: center;
+    align-items: center;
+}
+
+.tab {
+    margin: 0 10px;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    background-color: #2C2D3F;
+}
+.tab:hover {
+    background-color: #1A76D1; 
+}
+.tab.active {
+    color: white;
+    background-color: #1A76D1;
+}
+.tab.active:hover {
+    background-color: #2C2D3F; 
+}
+
+.Appointments-group {
+    align-items: center;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.Appointment-card {
+    align-items: center;   
+    border: 1px solid #ccc;
+    box-shadow: #004085;
+    border-radius: 10px;
+    padding: 15px;
+    width: 300px;
+    background-color: #fff;
+}
+
+.Appointment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+.status.confirmed {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status.pending {
+    background-color: #ffeeba;
+    color: #856404;
+}
+.status.canceled {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.status.completed {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.Appointment-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.icon {
+    margin-right: 5px;
+}
+
+.Appointment-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn.cancel {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.btn.diagnose {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.btn.confirm {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.btn.decline {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+.Appointment-section {
+    display: none; 
+}
+
+.Appointment-section.active {
+    display: block; 
+}

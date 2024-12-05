@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Q4SR7sMLRNFkQ7X9mLPOYAgnfn0S0gI6cAeXwPW9/og=",
+  "Hash": "M83OKGjdWO0vPV97MnOGkR0JHWpp/+GhgAxmrachOBg=",
   "Source": "db2",
   "BasePath": "_content/db2",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/animate.min.css"
+    },
+    {
+      "Identity": "/Users/abdelrahmantaha/Desktop/db2/wwwroot/css/DrAppointments.css",
+      "SourceId": "db2",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/abdelrahmantaha/Desktop/db2/wwwroot/",
+      "BasePath": "_content/db2",
+      "RelativePath": "css/DrAppointments.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/DrAppointments.css"
     },
     {
       "Identity": "/Users/abdelrahmantaha/Desktop/db2/wwwroot/css/bootstrap.min.css",
@@ -908,6 +927,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/img/fun-bg.jpg"
+    },
+    {
+      "Identity": "/Users/abdelrahmantaha/Desktop/db2/wwwroot/img/image.png",
+      "SourceId": "db2",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/abdelrahmantaha/Desktop/db2/wwwroot/",
+      "BasePath": "_content/db2",
+      "RelativePath": "img/image.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/img/image.png"
     },
     {
       "Identity": "/Users/abdelrahmantaha/Desktop/db2/wwwroot/img/logo.png",

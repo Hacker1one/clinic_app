@@ -1,3 +1,11 @@
+/Users/abdelrahmantaha/Desktop/db2/obj/Debug/net8.0/db2.GeneratedMSBuildEditorConfig.editorconfig
+/Users/abdelrahmantaha/Desktop/db2/obj/Debug/net8.0/db2.AssemblyInfoInputs.cache
+/Users/abdelrahmantaha/Desktop/db2/obj/Debug/net8.0/db2.AssemblyInfo.cs
+/Users/abdelrahmantaha/Desktop/db2/obj/Debug/net8.0/db2.csproj.CoreCompileInputs.cache
+/Users/abdelrahmantaha/Desktop/db2/obj/Debug/net8.0/db2.MvcApplicationPartsAssemblyInfo.cache
+/Users/abdelrahmantaha/Desktop/db2/obj/Debug/net8.0/db2.RazorAssemblyInfo.cache
+/Users/abdelrahmantaha/Desktop/db2/obj/Debug/net8.0/db2.RazorAssemblyInfo.cs
+/Users/abdelrahmantaha/Desktop/db2/obj/Debug/net8.0/db2.sourcelink.json
 /Users/abdelrahmantaha/Desktop/db2/bin/Debug/net8.0/appsettings.Development.json
 /Users/abdelrahmantaha/Desktop/db2/bin/Debug/net8.0/appsettings.json
 /Users/abdelrahmantaha/Desktop/db2/bin/Debug/net8.0/db2.staticwebassets.runtime.json
@@ -6,13 +14,6 @@
 /Users/abdelrahmantaha/Desktop/db2/bin/Debug/net8.0/db2.runtimeconfig.json
 /Users/abdelrahmantaha/Desktop/db2/bin/Debug/net8.0/db2.dll
 /Users/abdelrahmantaha/Desktop/db2/bin/Debug/net8.0/db2.pdb
-/Users/abdelrahmantaha/Desktop/db2/obj/Debug/net8.0/db2.GeneratedMSBuildEditorConfig.editorconfig
-/Users/abdelrahmantaha/Desktop/db2/obj/Debug/net8.0/db2.AssemblyInfoInputs.cache
-/Users/abdelrahmantaha/Desktop/db2/obj/Debug/net8.0/db2.AssemblyInfo.cs
-/Users/abdelrahmantaha/Desktop/db2/obj/Debug/net8.0/db2.csproj.CoreCompileInputs.cache
-/Users/abdelrahmantaha/Desktop/db2/obj/Debug/net8.0/db2.MvcApplicationPartsAssemblyInfo.cache
-/Users/abdelrahmantaha/Desktop/db2/obj/Debug/net8.0/db2.RazorAssemblyInfo.cache
-/Users/abdelrahmantaha/Desktop/db2/obj/Debug/net8.0/db2.RazorAssemblyInfo.cs
 /Users/abdelrahmantaha/Desktop/db2/obj/Debug/net8.0/staticwebassets.build.json
 /Users/abdelrahmantaha/Desktop/db2/obj/Debug/net8.0/staticwebassets.development.json
 /Users/abdelrahmantaha/Desktop/db2/obj/Debug/net8.0/staticwebassets/msbuild.db2.Microsoft.AspNetCore.StaticWebAssets.props

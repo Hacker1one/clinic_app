@@ -19,7 +19,14 @@ public class bookModel : PageModel
     {
         Therapists = GetSampleTherapists();
     }
-
+    public IActionResult OnPostB()
+    {
+        return RedirectToPage("/book");
+    }
+    public IActionResult OnPostP()
+    {
+        return RedirectToPage("/DrProfile");
+    }
     // Method to return a list of sample therapists
     private List<Therapist> GetSampleTherapists()
     {
@@ -85,7 +92,7 @@ public class Therapist
 
     // New properties
     public string ProfileImageUrl { get; set; } // Add the ProfileImageUrl property
-    public DateTime NextAppointment { get; set; } // Add the NextAppointment property
+    public DateTime NextDrAppointment { get; set; } // Add the NextDrAppointment property
 }
 
 // Specialization class

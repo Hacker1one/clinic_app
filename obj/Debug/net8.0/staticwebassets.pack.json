@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets/db2.bundle.scp.css"
     },
     {
+      "Id": "/Users/abdelrahmantaha/Desktop/db2/wwwroot/css/Appointments.css",
+      "PackagePath": "staticwebassets/css/Appointments.css"
+    },
+    {
       "Id": "/Users/abdelrahmantaha/Desktop/db2/wwwroot/css/animate.min.css",
       "PackagePath": "staticwebassets/css/animate.min.css"
     },
@@ -183,6 +187,10 @@
     {
       "Id": "/Users/abdelrahmantaha/Desktop/db2/wwwroot/img/fun-bg.jpg",
       "PackagePath": "staticwebassets/img/fun-bg.jpg"
+    },
+    {
+      "Id": "/Users/abdelrahmantaha/Desktop/db2/wwwroot/img/image.png",
+      "PackagePath": "staticwebassets/img/image.png"
     },
     {
       "Id": "/Users/abdelrahmantaha/Desktop/db2/wwwroot/img/logo.png",
