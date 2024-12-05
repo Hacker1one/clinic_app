@@ -9,10 +9,19 @@
 
 	@if(@Model.HttpContext.Session.GetString("user_type") == "p")
 	{
-		<h2 class="text-center fw-bold mb-4">Sign Up</h2>
+        <div class="d-flex justify-content-center align-items-baseline ms-2 mb-4">
+            <h2 class="text-primary fw-bold mb-0 me-2">Sign Up</h2>
+            <p class="text-secondary fw-bold mb-0 me-2">as a</p>
+            <p class="text-primary fw-bold mb-0 text-lg-center">Patient.</p>
+        </div>
+
 	}else
 	{
-		<h2 class="text-center fw-bold mb-4">Physician Sign Up</h2>
+        <div class="d-flex justify-content-center align-items-baseline ms-2 mb-4">
+            <h2 class="text-primary fw-bold mb-0 me-2">Sign Up</h2>
+            <p class="text-secondary fw-bold mb-0 me-2">as a</p>
+            <p class="text-primary fw-bold text-lg mb-0">Doctor.</p>
+        </div>
 	}
     <form method="post" asp-page-handler="SignUpPatient">
         <!-- First Name -->
@@ -28,7 +37,7 @@
 
         <!-- Gender -->
         <div class="w-50 mx-auto my-3">
-            <label class="w-100 fw-bold text-center mx-auto mb-3">Gender</label>
+            <label class="w-100 fw-bold text-center text-primary mx-auto mb-3">Gender</label>
             <div class="d-flex justify-content-center">
 				<div class="form-check form-check-inline mx-auto">
 					<input class="form-check-input" type="radio" asp-for="gender" name="Gender" id="RadioM" value="M">
@@ -74,13 +83,13 @@
         </div>
         <!-- Sign up Button -->
         <div class="d-grid w-25 mx-auto">
-            <button type="submit" class="btn btn-dark">Submit</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
     <!-- Login Link -->
     <div class="text-center mt-3">
         <p>Already have an account? <a asp-page="LogIn" class="text-primary">Log In</a></p>
-        <form method="get">
+		<form method="get">
 			@if(@Model.HttpContext.Session.GetString("user_type") == "p")
 			{
 				<p>Or <a asp-page-handler="ChangeToDr">Sign Up</a> as a Doctor</p>
@@ -88,6 +97,6 @@
 			{
 				<p>Or <a asp-page-handler="ChangeToP">Sign Up</a> as a Patient</p>
 			}
-        </form>
+		</form>
     </div>
 </div>
