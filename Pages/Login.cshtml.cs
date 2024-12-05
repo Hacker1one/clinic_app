@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace db2.Pages
+namespace webapplication.Pages
 {
     [BindProperties]
     public class LoginModel : PageModel

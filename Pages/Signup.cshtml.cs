@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace db2.Pages
+namespace webapplication.Pages
 {
     [BindProperties]
     public class SignupPatientModel : PageModel
@@ -25,16 +25,9 @@ namespace db2.Pages
             HttpContext.Session.SetString("user_type", "p");
             return Page();
         }
-        public void OnGet(string type)
+        public void OnGet()
         {
-            if (type == "p")
-            {
-                HttpContext.Session.SetString("user_type", "p");
-            }
-            else if (type == "dr")
-            {
-                HttpContext.Session.SetString("user_type", "dr");
-            }
+            HttpContext.Session.SetString("user_type", "p");
         }
         public IActionResult OnPostSignUpPatient()
         {

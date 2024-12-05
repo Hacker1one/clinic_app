@@ -4,65 +4,40 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Clinia</title>
-    <link rel="icon" href="~/img/favicon.png" />
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/nice-select.css" />
-    <link rel="stylesheet" href="~/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="~/css/icofont.css" />
-    <link rel="stylesheet" href="~/css/slicknav.min.css" />
-    <link rel="stylesheet" href="~/css/owl-carousel.css" />
-    <link rel="stylesheet" href="~/css/datepicker.css" />
-    <link rel="stylesheet" href="~/css/animate.min.css" />
-    <link rel="stylesheet" href="~/css/magnific-popup.css" />
-    <link rel="stylesheet" href="~/css/normalize.css" />
-    <link rel="stylesheet" href="~/css/style.css" />
-    <link rel="stylesheet" href="~/css/responsive.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/webapplication.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <!-- Preloader -->
-    <div class="preloader">
-        <div class="loader">
-            <div class="loader-outter"></div>
-            <div class="loader-inner"></div>
-        </div>
-    </div>
-    <!-- End Preloader -->
-
-    <!-- Header -->
     <header>
-        <!-- Include your header content -->
     </header>
-    <!-- Main Content -->
-    <main role="main">
-        @RenderBody()
-    </main>
-    <!-- Footer -->
-    <footer>
-        <!-- Include your footer content -->
-    </footer>
 
-    <!-- Scripts -->
-    <script src="~/js/jquery.min.js"></script>
-    <script src="~/js/jquery-migrate-3.0.0.js"></script>
-    <script src="~/js/jquery-ui.min.js"></script>
-    <script src="~/js/easing.js"></script>
-    <script src="~/js/colors.js"></script>
-    <script src="~/js/popper.min.js"></script>
-    <script src="~/js/bootstrap-datepicker.js"></script>
-    <script src="~/js/jquery.nav.js"></script>
-    <script src="~/js/slicknav.min.js"></script>
-    <script src="~/js/jquery.scrollUp.min.js"></script>
-    <script src="~/js/niceselect.js"></script>
-    <script src="~/js/tilt.jquery.min.js"></script>
-    <script src="~/js/owl-carousel.js"></script>
-    <script src="~/js/jquery.counterup.min.js"></script>
-    <script src="~/js/steller.js"></script>
-    <script src="~/js/wow.min.js"></script>
-    <script src="~/js/jquery.magnific-popup.min.js"></script>
-    <script src="~/js/bootstrap.min.js"></script>
-    <script src="~/js/main.js"></script>
+    <body class="d-flex flex-column min-vh-100">
+			@RenderBody()
+
+		<footer class="bg-light text-center py-3 mt-auto">
+			<p class="mb-0">&copy; 2024 Clinia. All rights reserved</p>
+		</footer>
+    </body>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        // Toggle Password Visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Toggle button text
+            togglePassword.textContent = type === 'password' ? 'Show' : 'Hide';
+        });
+    </script>
 </body>
 </html>
