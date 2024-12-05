@@ -1,0 +1,22 @@
+﻿@page
+@model webclinic.Pages.OTPModel
+@{
+    ViewData["Title"] = "LogIn";
+	Layout = ".\\Shared\\_LayoutLogin.cshtml";
+}
+
+
+<div class="w-75 mx-auto mt-5 my-auto">
+    <h2 class="text-center text-primary fw-bold mb-4">Log In</h2>
+    <form method="post" asp-page-handler="log">
+        <!-- OTP -->
+        <div class="form-floating mb-3 mx-auto w-50">
+            <input class="form-control" asp-for="otp" id="email" placeholder="One Time Passcode" required>
+            <label for="otp">One Time Passcode</label>
+        </div>
+        <!-- Login Button -->
+        <div class="d-grid w-25 mx-auto">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
