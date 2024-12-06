@@ -1,0 +1,114 @@
+﻿@page
+@model webclinic.Pages.PatientProfileModel
+@{
+    ViewData["Title"] = "Profile";
+    Layout = ".\\Shared\\_Layout.cshtml";
+}
+
+
+<div class="header-inner">
+            <div class="container">
+                <div class="inner">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-12">
+                            <div class="logo">
+                                <a href="index"><img src="img/logo.png" alt="#"></a>
+                            </div>
+                            <div class="mobile-nav"></div>
+                        </div>
+                        <div class="col-lg-7 col-md-9 col-12">
+                            <div class="main-menu">
+                                <nav class="navigation">
+                                    <ul class="nav menu">
+                                        <li><a href="index">Home</a></li>
+                                        <li><a href="#">Pages <i class="icofont-rounded-down"></i></a>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+<!-- Breadcrumbs -->
+<div class="breadcrumbs overlay">
+    <div class="container">
+        <div class="bread-inner">
+            <div class="row">
+                <div class="col-12">
+                    <h2>My Profile</h2>
+                    <ul class="bread-list">
+                        <li><a href="Index">Home</a></li>
+                        <li><i class="icofont-simple-right"></i></li>
+                        <li class="active">My Profile</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+
+
+
+
+<div class="container my-5">
+    <!-- Profile Section -->
+    <div class="row mb-5 align-items-center">
+        <div class="col-md-2 text-center">
+            <img src="https://via.placeholder.com/100" alt="Profile Image" class="rounded-circle" />
+        </div>
+        <div class="col-md-10">
+            <h2>@Model.PatientName</h2>
+            <p class="text-muted">Age: <strong>@Model.PatientAge</strong></p>
+        </div>
+    </div>
+
+    <!-- Long-term Conditions Section -->
+    <div class="mb-5">
+        <h5 class="mb-3">Long-term Conditions & Symptoms 
+            <a href="#" class="ms-2 text-decoration-none">
+                ✎
+            </a>
+        </h5>
+        <div class="row g-3">
+            @foreach (var condition in Model.Conditions)
+            {
+                <div class="col-md-6">
+                    <div class="p-3 border rounded">
+                        <h6 class="mb-1">@condition.Name</h6>
+                        <p class="text-muted">@condition.Description</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- History Section -->
+    <div>
+        <h5 class="mb-3">History 
+            <a href="#" class="ms-2 text-decoration-none">
+                ✎
+            </a>
+        </h5>
+        <div class="row g-3">
+            @foreach (var history in Model.History)
+            {
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center p-3 border rounded">
+                        <div class="me-3">
+                            <img src="https://via.placeholder.com/50" alt="Doctor Image" class="rounded-circle" />
+                        </div>
+                        <div>
+                            <h6>@history.DoctorName</h6>
+                            <p class="mb-0">@history.Title</p>
+                            <p class="text-muted">@history.Description</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
