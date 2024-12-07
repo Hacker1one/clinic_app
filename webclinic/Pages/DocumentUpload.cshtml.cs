@@ -8,5 +8,9 @@ namespace webclinic.Pages
         public void OnGet()
         {
         }
+        public IActionResult OnPost()
+        {
+            return RedirectToPage("Login");
+        }
     }
 }
