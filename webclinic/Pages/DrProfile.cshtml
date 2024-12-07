@@ -1,0 +1,267 @@
+﻿@page
+@model webclinic.Pages.DrProfileModel
+@{
+    ViewData["Title"] = "Doctor Profile";
+    Layout = ".\\Shared\\_Layout.cshtml";
+}
+
+
+
+<div class="header-inner">
+            <div class="container">
+                <div class="inner">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-12">
+                            <div class="logo">
+                                <a href="index"><img src="img/logo.png" alt="#"></a>
+                            </div>
+                            <div class="mobile-nav"></div>
+                        </div>
+                        <div class="col-lg-7 col-md-9 col-12">
+                            <div class="main-menu">
+                                <nav class="navigation">
+                                    <ul class="nav menu">
+                                        <li><a href="index">Home</a></li>
+                                        <li><a href="#">Pages <i class="icofont-rounded-down"></i></a>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+<!-- Breadcrumbs -->
+<div class="breadcrumbs overlay">
+    <div class="container">
+        <div class="bread-inner">
+            <div class="row">
+                <div class="col-12">
+                    <h2>My Profile</h2>
+                    <ul class="bread-list">
+                        <li><a href="Index">Home</a></li>
+                        <li><i class="icofont-simple-right"></i></li>
+                        <li class="active">My Profile</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+
+
+
+<div class="container my-5">
+    <!-- Profile Section -->
+    <div class="row mb-5 align-items-center">
+        <div class="col-md-3 text-center">
+            <img src="@Model.DoctorImage" alt="Doctor's Profile Image" class="rounded-circle" style="width: 180px; height: 180px;" />
+        </div>
+        <div class="col-md-9">
+            <h2>@Model.DoctorName</h2>
+            <p class="text-muted">@Model.Specialization</p>
+            <div class="ratings mb-3">
+                <p><strong>Rating:</strong> @Model.Rating</p>
+                <p><strong>Patients Treated:</strong> @Model.PatientsTreated</p>
+            </div>
+            <p>@Model.About</p>
+        </div>
+    </div>
+
+    <!-- Education Section -->
+    <div class="mb-5">
+        <h5 class="mb-3">Education 
+            <a href="#" class="ms-2 text-decoration-none">✎</a>
+        </h5>
+        <div class="row g-3">
+            @foreach (var education in Model.Education_list)
+            {
+                <div class="col-md-6">
+                    <div class="p-3 border rounded">
+                        <h6 class="mb-1">@education.Institution</h6>
+                        <p class="text-muted">@education.Degree</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Experience Section -->
+    <div class="mb-5">
+        <h5 class="mb-3">Experience 
+            <a href="#" class="ms-2 text-decoration-none">✎</a>
+        </h5>
+        <div class="row g-3">
+            @foreach (var experience in Model.Experience_list)
+            {
+                <div class="col-md-6">
+                    <div class="p-3 border rounded">
+                        <h6 class="mb-1">@experience.Position</h6>
+                        <p class="text-muted">@experience.Organization</p>
+                        <p>@experience.Description</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Clinic Section -->
+    <div class="mb-5">
+        <h5 class="mb-3">Clinic Details 
+            <a href="#" class="ms-2 text-decoration-none">✎</a>
+        </h5>
+        <div class="row">
+            <div class="col-md-12">
+                <p><strong>@Model.ClinicDetails.Name</strong></p>
+                <p>@Model.ClinicDetails.Address</p>
+            </div>
+        </div>
+    </div>
+<!-- Booking Information Section -->
+    <div class="row mb-5">
+        <div class="col-md-6">
+            <div class="p-4 border rounded">
+                <h5 class="mb-3">Booking Information 
+                    <a href="#" class="ms-2 text-decoration-none">✎</a>
+                </h5>
+                <p class="h4 text-primary">@Model.Fee</p>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="p-4 border rounded">
+                <h5 class="mb-3">Available Times</h5>
+
+                <!-- Add Dates Section -->
+                <div class="mb-3">
+                    <p class="text-muted">Add Dates</p>
+                    <hr class="my-2">
+                    <div class="btn-group w-100" role="group" aria-label="Add Dates">
+                        @foreach (var date in Model.AvailableDates)
+                        {
+                                <button class="btn btn-outline-secondary time-slot-btn">@date</button>
+                        }
+                    </div>
+                    <!-- Add Button -->
+                    <button class="btn btn-outline-primary w-100 mt-3" data-toggle="modal" data-target="#addDateModal">
+                        + Add Date
+                    </button>
+                </div>
+
+                <!-- Add Available Time Section -->
+                <div>
+                    <p class="text-muted">Add Available Time</p>
+                    <hr class="my-2">
+                    <div class="btn-group w-100" role="group" aria-label="Available Time Slots">
+                        @foreach (var time in Model.AvailableTimes)
+                        {
+                                <button class="btn btn-outline-secondary time-slot-btn">@time</button>
+                        }
+                    </div>
+                    <!-- Add Button -->
+                    <button class="btn btn-outline-primary w-100 mt-3" data-toggle="modal" data-target="#addTimeModal">
+                        + Add Time
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Add Date -->
+<div class="modal fade" id="addDateModal" tabindex="-1" role="dialog" aria-labelledby="addDateModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addDateModalLabel">Add Date</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="date" class="form-control" id="newDate" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save Date</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Add Time -->
+<div class="modal fade" id="addTimeModal" tabindex="-1" role="dialog" aria-labelledby="addTimeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addTimeModalLabel">Add Available Time</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="time" class="form-control" id="newTime" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save Time</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Inline Styling -->
+<style>
+    /* Increased size of the available time buttons and borders */
+    .time-slot-btn {
+        background-color: #fff;
+        border: 2px solid #ddd;
+        padding: 15px 25px;  /* Increased padding */
+        margin: 5px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .time-slot-btn:hover {
+        background-color: #00BFAE;
+        color: white;
+    }
+
+    /* Add lines for "Add Dates" and "Add Available Time" */
+    hr {
+        border-top: 2px solid #ddd;
+    }
+
+    /* Adjustments for text color and positioning */
+    .text-muted {
+        color: #6c757d;
+        font-weight: bold;
+    }
+
+    /* Custom styling for the buttons */
+    .btn-outline-secondary {
+        border-color: #ddd;
+        color: #555;
+        font-weight: normal;
+    }
+
+    .btn-outline-secondary:hover {
+        background-color: #f8f9fa;
+    }
+
+    .btn-outline-primary {
+        border-color: #00BFAE;
+        color: #00BFAE;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #00BFAE;
+        color: white;
+    }
+</style>
