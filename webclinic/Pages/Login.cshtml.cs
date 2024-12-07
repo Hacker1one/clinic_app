@@ -8,12 +8,21 @@ namespace webapplication.Pages
     {
         public string email { get; set; }
         public string password { get; set; }
-        public void OnGet()
+        public IActionResult OnGet()
         {
+			if (string.IsNullOrEmpty(HttpContext.Session.GetString("email")))
+			{
+                return Page();
+            }
+            else
+            {
+                return RedirectToPage("Index");
+            }
         }
         public IActionResult OnPostLog()
         {
-            return RedirectToPage("Home");
+            HttpContext.Session.SetString("email", email);
+            return RedirectToPage("Index");
         }
     }
 }

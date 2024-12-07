@@ -1,0 +1,27 @@
+﻿@page
+@model webclinic.Pages.DocumentUploadModel
+@{
+    ViewData["Title"] = "Document Upload";
+	Layout = ".\\Shared\\_LayoutLogin.cshtml";
+}
+
+<div class="w-75 mx-auto mt-5 my-auto">
+    <h2 class="text-center text-primary fw-bold mb-4">Document Uploads</h2>
+    <form method="post" asp-page-handler="log">
+        <!-- National ID -->
+        <h6 class="fw-bold text-start mx-auto w-25">National ID</h6>
+        <input type="file" class="form-control w-25 mx-auto mb-3" id="nationalID" required/>
+
+        @if(HttpContext.Session.GetString("type") == "dr")
+        {
+			<!-- Doctor documents -->
+			<h6 class="fw-bold text-start mx-auto w-25">Medical practice official certificate</h6>
+			<input type="file" class="form-control w-25 mx-auto mb-3" id="docdoc" required/>
+        }
+
+        <!-- Login Button -->
+        <div class="d-grid w-25 mx-auto">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>

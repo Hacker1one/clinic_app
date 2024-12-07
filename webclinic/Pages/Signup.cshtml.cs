@@ -32,7 +32,7 @@ namespace webapplication.Pages
         public IActionResult OnPostSignUpPatient()
         {
             Console.WriteLine(specialty);
-            return RedirectToPage("Login");
+            return RedirectToPage("DocumentUpload");
         }
     }
 }
