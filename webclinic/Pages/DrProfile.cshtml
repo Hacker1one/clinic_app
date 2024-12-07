@@ -66,7 +66,15 @@
             <div class="ratings mb-3">
                 <p><strong>Rating:</strong> @Model.Rating</p>
                 <p><strong>Patients Treated:</strong> @Model.PatientsTreated</p>
+                @if (HttpContext.Session.GetString("type") == "a")
+{
+    <span class="badge @(Model.IsVerified ? "bg-success" : "bg-secondary")">
+        @(Model.IsVerified ? "Verified" : "Unverified")
+    </span>
+}
+
             </div>
+
             <p>@Model.About</p>
         </div>
     </div>
@@ -130,6 +138,14 @@
                 <p class="h4 text-primary">@Model.Fee</p>
             </div>
         </div>
+        @if (HttpContext.Session.GetString("type") == "a")
+        {
+        <div class="text-center">
+            <button class="btn @(Model.IsVerified ? "btn-danger" : "btn-success") btn-lg px-4" onclick="toggleStatus()">
+                    @(Model.IsVerified ? "Verified" : "Unverified")
+            </button>
+        </div>
+        }
 
         <div class="col-md-6">
             <div class="p-4 border rounded">
