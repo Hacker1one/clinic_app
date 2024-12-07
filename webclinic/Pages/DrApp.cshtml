@@ -25,7 +25,7 @@
                                         </li>
                                         <li><a href="ContactUs">Contact Us</a></li>
 										<li class="active"><a href="/Appointments/PatientApp">Appointments</a></li>
-									
+                                        <li><a href="DrProfile">My Profile</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -159,7 +159,6 @@
         </div>
     </div>
 
-    <!-- Pending Appointments -->
     <div id="pending" class="Appointment-section">
         <h2>Pending for confirmation</h2>
         <br>
@@ -242,27 +241,27 @@
     </div>
 </div>
 
-function showSection(sectionId) {
-    // Hide all sections by removing the active class
-    document.querySelectorAll('.appointment-section').forEach(function(section) {
-        section.classList.remove('active');
-    });
+<script>
+    function showSection(sectionId) {
+        document.querySelectorAll('.Appointment-section').forEach(function (section) {
+            section.classList.remove('active');
+            section.style.display = "none"; // Hide all sections
+        });
 
-    // Remove active class from all tabs
-    document.querySelectorAll('.tab').forEach(function(tab) {
-        tab.classList.remove('active');
-    });
+        document.querySelectorAll('.tab').forEach(function (tab) {
+            tab.classList.remove('active');
+        });
 
-    // Show the selected section
-    const selectedSection = document.getElementById(sectionId);
-    if (selectedSection) {
-        selectedSection.classList.add('active');
+        const selectedSection = document.getElementById(sectionId);
+        if (selectedSection) {
+            selectedSection.classList.add('active');
+            selectedSection.style.display = "block";
+        }
+
+        event.target.classList.add('active');
     }
 
-    // Add active class to the clicked tab
-    event.target.classList.add('active');
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    showSection('upcoming');  // Default to the 'upcoming' tab
-});
+    document.addEventListener('DOMContentLoaded', function () {
+        showSection('upcoming'); 
+    });
+</script>

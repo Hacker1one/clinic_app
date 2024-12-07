@@ -4236,3 +4236,49 @@ aside {
         margin-top: 20px;  /* Add space between content and filter on small screens */
     }
 }
+/* Card styling */
+.therapist-card {
+    border-radius: 12px; /* Rounded corners */
+    overflow: hidden; /* Ensure content doesn't overflow */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth animation */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    height: 100%; /* Make all cards the same height */
+}
+
+/* Hover effect */
+.therapist-card:hover {
+    transform: translateY(-8px); /* Lift card on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhance shadow */
+}
+
+/* Therapist image */
+.therapist-image {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #1A76D1; /* Add a border */
+    object-fit: cover; /* Ensure consistent aspect ratio */
+}
+
+/* Button customization */
+.btn-outline-primary {
+    border: 2px solid #1A76D1;
+    color: #1A76D1;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-outline-primary:hover {
+    background-color: #1A76D1;
+    color: #ffffff;
+}
+
+.btn-primary {
+    background-color: #1A76D1;
+    border: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #1457A0; /* Darker blue on hover */
+}
