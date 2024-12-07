@@ -19,26 +19,19 @@
                                     <ul class="nav menu">
                                         <li class="active"><a href="index">Home</a></li>
                                         <li><a href="#">Pages <i class="icofont-rounded-down"></i></a>
-                                            <ul class="dropdown">
-                                                <li><a href="404.html">404 Error</a></li>
-                                            </ul>
                                         </li>
                                         <li><a href="ContactUs">Contact Us</a></li>
-									@* 	@if (HttpContext.Session.GetString("UserType") == "Patient")
+
+										@if (string.IsNullOrEmpty(this.ViewContext.HttpContext.Session.GetString("email")))
                                         {
-                                            <li><a href="PatientApp">Appointments</a></li>
-                                            <li><a href="PatientProfile">My Profile</a></li>
+											<li><a href="Login">Login</a></li>
+											<li><a href="Signup">Sign Up</a></li>
                                         }
-                                        else if (HttpContext.Session.GetString("UserType") == "Doctor")
-                                        {                                       
-                                            <li><a href="DrApp">Appointments</a></li>
-                                            <li><a href="DrProfile">My Profile</a></li>
+                                        else
+                                        {
+											<li><a href="Logout">LogOut</a></li>
                                         }
-                                        else *@
-                                        
-                                            <li><a href="Login">Login</a></li>
-                                            <li><a href="Signup2">Sign Up</a></li>
-                                        
+
                                     </ul>
                                 </nav>
                             </div>
@@ -105,41 +98,38 @@
         </div>
 
         <!-- Doctors Cards Section -->
-       <div class="col-md-9 mb-4">
-    <div class="row">
-        @foreach (var therapist in Model.Therapists)
-        {
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card therapist-card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-4">
-                            <img src="@therapist.ProfileImageUrl" alt="@therapist.Name" 
-                                 class="rounded-circle me-3 therapist-image">
-                            <div>
-                                <h5 class="card-title mb-1">Dr. @therapist.Name</h5>
-                                <small class="text-muted">@therapist.Specialization.Name</small>
+        <div class="col-md-9 mb-4">
+            <div class="row">
+                @foreach (var therapist in Model.Therapists)
+                {
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card shadow-sm larger-card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="@therapist.ProfileImageUrl" alt="@therapist.Name" class="rounded-circle me-3" style="width: 100px; height: 100px;">
+                                    <div>
+                                        <h5 class="card-title mb-0">Dr, @therapist.Name</h5>
+                                        <small class="text-muted">@therapist.Specialization.Name</small>
+                                    </div>
+                                </div>
+                                <p><strong>Interests:</strong> @string.Join(", ", therapist.Interests)</p>
+                                <p><strong>Nearest DrAppointment:</strong> @therapist.NextDrAppointment.ToString("dddd, MMM dd, yyyy hh:mm tt")</p>
+                                <p><strong>Fees:</strong> @therapist.SessionFees.ToString("C2") / 60 Min</p>
+                                <div class="d-flex justify-content-between mt-3">
+                                    <form method="post" asp-page-handler="P">
+                                        <input type="hidden" name="therapistId" value="@therapist.Id" />
+                                        <button type="submit" class="btn btn" style="background-color: white; color: #1A76D1;">View Profile</button>
+                                    </form>&nbsp;
+                                    <form method="post" asp-page-handler="B">
+                                        <input type="hidden" name="therapistId" value="@therapist.Id" />
+                                        <button type="submit" class="btn btn-primary" >Book Now</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                        <p><strong>Interests:</strong> @string.Join(", ", therapist.Interests)</p>
-                        <p><strong>Nearest Dr. Appointment:</strong> 
-                            @therapist.NextDrAppointment.ToString("dddd, MMM dd, yyyy hh:mm tt")
-                        </p>
-                        <p><strong>Fees:</strong> @therapist.SessionFees.ToString("C2") / 60 Min</p>
-                        <div class="d-flex justify-content-between mt-3">
-                            <form method="post" asp-page-handler="P">
-                                <input type="hidden" name="therapistId" value="@therapist.Id" />
-                                <button type="submit" class="btn btn-outline-primary" style="background-color: white;">View Profile</button>
-                            </form>&nbsp;
-                            <form method="post" asp-page-handler="B">
-                                <input type="hidden" name="therapistId" value="@therapist.Id" />
-                                <button type="submit" class="btn btn-primary">Book Now</button>
-                            </form>
-                        </div>
                     </div>
-                </div>
+                }
             </div>
-        }
-    </div>
-</div>
+        </div>
     </div>
 </div>
