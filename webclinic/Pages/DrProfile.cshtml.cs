@@ -9,6 +9,7 @@ namespace webclinic.Pages
     {
         // Properties to hold data for the Razor Page
         public string DoctorName { get; set; }
+        public bool IsVerified { get; set; } = true;
         public string Specialization { get; set; }
         public double Rating { get; set; }
         public int PatientsTreated { get; set; }
@@ -21,6 +22,13 @@ namespace webclinic.Pages
         public List<string> AvailableDates { get; set; }
         public List<string> AvailableTimes { get; set; }
 
+
+
+        public void OnPostToggleStatus()
+        {
+            // Toggle the patient's status
+            IsVerified = !IsVerified;
+        }
         public class Education
         {
             public string Institution { get; set; }

@@ -7,8 +7,10 @@ namespace webclinic.Pages
     {
         public string PatientName { get; set; }
         public int PatientAge { get; set; }
+        public bool IsActive { get; set; } = true;
         public List<Condition> Conditions { get; set; }
         public List<History> History { get; set; }
+
 
         public void OnGet()
         {
@@ -28,6 +30,12 @@ namespace webclinic.Pages
             new History { DoctorName = "Dr. Yassin Elbedwihly", Title = "Oncologist", Description = "Stage 2 encephalitis" },
             new History { DoctorName = "Dr. Ahmed Abdelsamee", Title = "Oncologist", Description = "Stage 3 encephalitis" }
         };
+        }
+
+        public void OnPostToggleStatus()
+        {
+            // Toggle the patient's status
+            IsActive = !IsActive;
         }
     }
 
