@@ -90,12 +90,12 @@
     <div class="text-center mt-3">
         <p>Already have an account? <a asp-page="LogIn" class="text-primary">Log In</a></p>
 		<form method="get">
-			@if(@Model.HttpContext.Session.GetString("user_type") == "p")
-			{
-				<p>Or <a asp-page-handler="ChangeToDr">Sign Up</a> as a Doctor</p>
-			}else
+			@if(@Model.HttpContext.Session.GetString("user_type") == "dr")
 			{
 				<p>Or <a asp-page-handler="ChangeToP">Sign Up</a> as a Patient</p>
+			}else
+			{
+				<p>Or <a asp-page-handler="ChangeToDr">Sign Up</a> as a Doctor</p>
 			}
 		</form>
     </div>

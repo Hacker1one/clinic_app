@@ -1,0 +1,86 @@
+﻿@page
+@model webclinic.Pages.ListOfDoctorsModel
+@{
+}
+
+
+
+
+
+<div class="header-inner">
+            <div class="container">
+                <div class="inner">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-12">
+                            <div class="logo">
+                                <a href="index"><img src="img/logo.png" alt="#"></a>
+                            </div>
+                            <div class="mobile-nav"></div>
+                        </div>
+                        <div class="col-lg-7 col-md-9 col-12">
+                            <div class="main-menu">
+                                <nav class="navigation">
+                                    <ul class="nav menu">
+                                        <li><a href="index">Home</a></li>
+                                        <li><a href="#">Pages <i class="icofont-rounded-down"></i></a>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+<!-- Breadcrumbs -->
+<div class="breadcrumbs overlay">
+    <div class="container">
+        <div class="bread-inner">
+            <div class="row">
+                <div class="col-12">
+                    <h2>List Of Doctors</h2>
+                    <ul class="bread-list">
+                        <li><a href="Index">Home</a></li>
+                        <li><i class="icofont-simple-right"></i></li>
+                        <li class="active">List Of Patients</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+
+
+
+
+<div class="container">
+    <h2>Browse Doctors</h2>
+
+    <!-- Search Bar -->
+    <form method="get">
+        <div class="input-group mb-3">
+            <input type="text" name="SearchTerm" class="form-control" placeholder="Search Doctor's Name"
+                   value="@Model.SearchTerm">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    <!-- Doctor List -->
+    @foreach (var doctor in Model.Doctors)
+    {
+        <div class="d-flex align-items-center mb-3">
+            <!-- Doctor Image -->
+            <img src="https://via.placeholder.com/50" alt="Doctor Photo" class="rounded-circle me-3">
+
+            <!-- Doctor Details -->
+            <div>
+                <h5 class="mb-0">@doctor.Name</h5>
+                    <span class="badge px-3 py-2 text-white" style="background-color: @(doctor.IsVerified ? "#28a745" : "#dc3545");">
+                    @(doctor.IsVerified ? "Active" : "Banned")
+                    </span>
+            </div>
+        </div>
+    }
+</div>

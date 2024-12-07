@@ -22,6 +22,18 @@ namespace webapplication.Pages
         public IActionResult OnPostLog()
         {
             HttpContext.Session.SetString("email", email);
+            if(email == "admin@gmail.com" && password == "admin")
+            {
+                HttpContext.Session.SetString("type", "a");
+            }
+            if(email == "doctor@gmail.com" && password == "doctor")
+            {
+                HttpContext.Session.SetString("type", "dr");
+            }
+            if(email == "patient@gmail.com" && password == "patient")
+            {
+                HttpContext.Session.SetString("type", "p");
+            }
             return RedirectToPage("Index");
         }
     }
