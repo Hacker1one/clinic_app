@@ -15,6 +15,7 @@ create table [user]
 	City VARCHAR(30),
 	Governorate VARCHAR(30),
 	Email VARCHAR(50),
+	[Type] CHAR NOT NULL,
 	PRIMARY KEY(ID),
 	UNIQUE(Email),
 );
@@ -278,29 +279,29 @@ ADD CONSTRAINT chk_valid_field_name CHECK (
 
 
 
-INSERT INTO [user] (FName, LName, SSN, RegistrationDate, Gender, [Password], BirthDate, City, Governorate, Email)
+INSERT INTO [user] (FName, LName, SSN, RegistrationDate, Gender, [Password], BirthDate, City, Governorate, Email, [Type])
 VALUES 
 
-('John', 'Doe', 123456789, '2023-01-01', 'M', 'password123', '1985-05-15', 'Cairo', 'Cairo', 'john.doe@example.com'),
-('Jane', 'Smith', 987654321, '2023-01-02', 'F', 'securepass', '1990-07-20', 'Giza', 'Giza', 'jane.smith@example.com'),
-('Ahmed', 'Ali', 223344556, '2023-01-03', 'M', 'ahmedpass', '1975-09-12', 'Alexandria', 'Alexandria', 'ahmed.ali@example.com'),
-('Sara', 'Hassan', 445566778, '2023-01-04', 'F', 'sarapass', '1992-03-25', 'Aswan', 'Aswan', 'sara.hassan@example.com'),
-('Mohamed', 'Youssef', 112233445, '2023-01-05', 'M', 'mypassword', '1987-09-18', 'Zamalek', 'Cairo', 'mohamed.youssef@example.com'),
-('Nora', 'Farid', 998877665, '2023-01-06', 'F', 'norapass', '1993-11-25', 'Heliopolis', 'Cairo', 'nora.farid@example.com'),
-('Ali', 'Kamal', 667788990, '2023-01-07', 'M', 'alikpass', '1988-03-19', 'Nasr City', 'Cairo', 'ali.kamal@example.com'),
-('Mona', 'Gamal', 445566334, '2023-01-08', 'F', 'monag123', '1991-06-14', 'Maadi', 'Cairo', 'mona.gamal@example.com'),
-('Hassan', 'Tariq', 332211009, '2023-01-09', 'M', 'hassanpass', '1979-12-11', 'Shobra', 'Cairo', 'hassan.tariq@example.com'),
-('Layla', 'Nashat', 776655443, '2023-01-10', 'F', 'laylapass', '1995-02-28', 'Zamalek', 'Cairo', 'layla.nashat@example.com'),
-('Tamer', 'Saad', 123123123, '2023-01-11', 'M', 'tamerpass', '1980-05-01', 'Giza', 'Giza', 'tamer.saad@example.com'),
-('Heba', 'Ezz', 987987987, '2023-01-12', 'F', 'hebapass', '1985-09-10', 'Alexandria', 'Alexandria', 'heba.ezz@example.com'),
-('Omar', 'Rashid', 456456456, '2023-01-13', 'M', 'omarpass', '1990-12-15', 'Aswan', 'Aswan', 'omar.rashid@example.com'),
-('Salma', 'Khaled', 789789789, '2023-01-14', 'F', 'salmapass', '1983-03-25', 'Cairo', 'Cairo', 'salma.khaled@example.com'),
-('Youssef', 'Nader', 321321321, '2023-01-15', 'M', 'youssefpass', '1987-07-30', 'Dokki', 'Giza', 'youssef.nader@example.com'),
-('Hana', 'Mostafa', 654654654, '2023-01-16', 'F', 'hanapass', '1995-11-05', 'Maadi', 'Cairo', 'hana.mostafa@example.com'),
-('Karim', 'Fathi', 888888888, '2023-01-17', 'M', 'karimpass', '1978-02-20', '6th of October', 'Giza', 'karim.fathi@example.com'),
-('Amira', 'Zain', 555555555, '2023-01-18', 'F', 'amirapass', '1992-08-14', 'El Sheikh Zayed', 'Giza', 'amira.zain@example.com'),
-('Hisham', 'Hafez', 333333333, '2023-01-19', 'M', 'hishampass', '1986-04-28', 'Alexandria', 'Alexandria', 'hisham.hafez@example.com'),
-('Rana', 'Tamer', 999999999, '2023-01-20', 'F', 'ranapass', '1994-06-06', 'Heliopolis', 'Cairo', 'rana.tamer@example.com');
+('John', 'Doe', 123456789, '2023-01-01', 'M', 'password123', '1985-05-15', 'Cairo', 'Cairo', 'john.doe@example.com', 'p'),
+('Jane', 'Smith', 987654321, '2023-01-02', 'F', 'securepass', '1990-07-20', 'Giza', 'Giza', 'jane.smith@example.com', 'p'),
+('Ahmed', 'Ali', 223344556, '2023-01-03', 'M', 'ahmedpass', '1975-09-12', 'Alexandria', 'Alexandria', 'ahmed.ali@example.com', 'p'),
+('Sara', 'Hassan', 445566778, '2023-01-04', 'F', 'sarapass', '1992-03-25', 'Aswan', 'Aswan', 'sara.hassan@example.com', 'p'),
+('Mohamed', 'Youssef', 112233445, '2023-01-05', 'M', 'mypassword', '1987-09-18', 'Zamalek', 'Cairo', 'mohamed.youssef@example.com', 'p'),
+('Nora', 'Farid', 998877665, '2023-01-06', 'F', 'norapass', '1993-11-25', 'Heliopolis', 'Cairo', 'nora.farid@example.com', 'p'),
+('Ali', 'Kamal', 667788990, '2023-01-07', 'M', 'alikpass', '1988-03-19', 'Nasr City', 'Cairo', 'ali.kamal@example.com', 'p'),
+('Mona', 'Gamal', 445566334, '2023-01-08', 'F', 'monag123', '1991-06-14', 'Maadi', 'Cairo', 'mona.gamal@example.com', 'p'),
+('Hassan', 'Tariq', 332211009, '2023-01-09', 'M', 'hassanpass', '1979-12-11', 'Shobra', 'Cairo', 'hassan.tariq@example.com', 'p'),
+('Layla', 'Nashat', 776655443, '2023-01-10', 'F', 'laylapass', '1995-02-28', 'Zamalek', 'Cairo', 'layla.nashat@example.com', 'p'),
+('Tamer', 'Saad', 123123123, '2023-01-11', 'M', 'tamerpass', '1980-05-01', 'Giza', 'Giza', 'tamer.saad@example.com', 'd'),
+('Heba', 'Ezz', 987987987, '2023-01-12', 'F', 'hebapass', '1985-09-10', 'Alexandria', 'Alexandria', 'heba.ezz@example.com', 'd'),
+('Omar', 'Rashid', 456456456, '2023-01-13', 'M', 'omarpass', '1990-12-15', 'Aswan', 'Aswan', 'omar.rashid@example.com', 'd'),
+('Salma', 'Khaled', 789789789, '2023-01-14', 'F', 'salmapass', '1983-03-25', 'Cairo', 'Cairo', 'salma.khaled@example.com', 'd'),
+('Youssef', 'Nader', 321321321, '2023-01-15', 'M', 'youssefpass', '1987-07-30', 'Dokki', 'Giza', 'youssef.nader@example.com', 'd'),
+('Hana', 'Mostafa', 654654654, '2023-01-16', 'F', 'hanapass', '1995-11-05', 'Maadi', 'Cairo', 'hana.mostafa@example.com', 'd'),
+('Karim', 'Fathi', 888888888, '2023-01-17', 'M', 'karimpass', '1978-02-20', '6th of October', 'Giza', 'karim.fathi@example.com', 'd'),
+('Amira', 'Zain', 555555555, '2023-01-18', 'F', 'amirapass', '1992-08-14', 'El Sheikh Zayed', 'Giza', 'amira.zain@example.com', 'd'),
+('Hisham', 'Hafez', 333333333, '2023-01-19', 'M', 'hishampass', '1986-04-28', 'Alexandria', 'Alexandria', 'hisham.hafez@example.com', 'd'),
+('Rana', 'Tamer', 999999999, '2023-01-20', 'F', 'ranapass', '1994-06-06', 'Heliopolis', 'Cairo', 'rana.tamer@example.com', 'd');
 
 
 INSERT INTO Patient (ID, SSNValidation, PenaltyFees)
