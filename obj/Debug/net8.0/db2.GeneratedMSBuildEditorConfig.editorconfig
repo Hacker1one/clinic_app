@@ -1,0 +1,75 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = db2
+build_property.RootNamespace = db2
+build_property.ProjectDir = C:\Users\yassi\Source\Repos\clinic_app\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\yassi\Source\Repos\clinic_app
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Appointments/Dr.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d2ViY2xpbmljXFBhZ2VzXEFwcG9pbnRtZW50c1xEci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Appointments/PAppointment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d2ViY2xpbmljXFBhZ2VzXEFwcG9pbnRtZW50c1xQQXBwb2ludG1lbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/book.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d2ViY2xpbmljXFBhZ2VzXGJvb2suY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/ContactUs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d2ViY2xpbmljXFBhZ2VzXENvbnRhY3RVcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d2ViY2xpbmljXFBhZ2VzXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d2ViY2xpbmljXFBhZ2VzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d2ViY2xpbmljXFBhZ2VzXExvZ2luLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d2ViY2xpbmljXFBhZ2VzXFByaXZhY3kuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Shared/_LayoutLogin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d2ViY2xpbmljXFBhZ2VzXFNoYXJlZFxfTGF5b3V0TG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d2ViY2xpbmljXFBhZ2VzXFNoYXJlZFxfVmFsaWRhdGlvblNjcmlwdHNQYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Signup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d2ViY2xpbmljXFBhZ2VzXFNpZ251cC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d2ViY2xpbmljXFBhZ2VzXF9WaWV3SW1wb3J0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d2ViY2xpbmljXFBhZ2VzXF9WaWV3U3RhcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d2ViY2xpbmljXFBhZ2VzXFNoYXJlZFxfTGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = b-8sopd76v5z
