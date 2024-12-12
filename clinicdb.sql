@@ -12,8 +12,8 @@ create table [user]
 	Gender CHAR,
 	[Password] VARCHAR(40),
 	BirthDate Date,
-	City VARCHAR(30),
-	Governorate VARCHAR(30),
+	City VARCHAR(50),
+	Governorate VARCHAR(50),
 	Email VARCHAR(50),
 	PRIMARY KEY(ID),
 	UNIQUE(Email),
@@ -42,8 +42,8 @@ CREATE TABLE Doctor
 
 CREATE TABLE DoctorCurWorkplace
 (
-	City VARCHAR(20),
-	Governorate VARCHAR(20),
+	City VARCHAR(50),
+	Governorate VARCHAR(50),
 	Institution VARCHAR(40),
 	JobPosition VARCHAR (30),
 	DoctorID int,
@@ -149,67 +149,72 @@ Create table Reviews
 	Foreign key (PatientID) references Patient,
 );
 
-Alter table [user]
-ADD CONSTRAINT chk_valid_City_Governorate_user CHECK (
-        (Governorate = 'Cairo' AND City IN ('Cairo', 'Nasr City', 'Heliopolis', 'Maadi', 'Shobra', 'Zamalek')) OR
-        (Governorate = 'Giza' AND City IN ('Giza', '6th of October', 'El Sheikh Zayed', 'Haram', 'Dokki')) OR
-        (Governorate = 'Alexandria' AND City IN ('Alexandria', 'Borg El Arab')) OR
-        (Governorate = 'Aswan' AND City IN ('Aswan', 'Edfu', 'Kom Ombo')) OR
-        (Governorate = 'Asyut' AND City IN ('Asyut', 'Dayrout', 'Manfalut')) OR
-        (Governorate = 'Beheira' AND City IN ('Damanhour', 'Kafr El Dawwar', 'Edku')) OR
-        (Governorate = 'Beni Suef' AND City IN ('Beni Suef', 'Al Fashn', 'Ihnasia')) OR
-        (Governorate = 'Dakahlia' AND City IN ('Mansoura', 'Talkha', 'Mit Ghamr')) OR
-        (Governorate = 'Damietta' AND City IN ('Damietta', 'Ras El Bar', 'Faraskur')) OR
-        (Governorate = 'Faiyum' AND City IN ('Faiyum', 'Senoures', 'Itsa')) OR
-        (Governorate = 'Gharbia' AND City IN ('Tanta', 'El Mahalla El Kubra', 'Kafr El Zayat')) OR
-        (Governorate = 'Ismailia' AND City IN ('Ismailia', 'Fayed', 'Qantara')) OR
-        (Governorate = 'Kafr El Sheikh' AND City IN ('Kafr El Sheikh', 'Baltim', 'Desouk')) OR
-        (Governorate = 'Luxor' AND City IN ('Luxor', 'Armant', 'Esna')) OR
-        (Governorate = 'Matrouh' AND City IN ('Marsa Matrouh', 'Sidi Abdel Rahman', 'El Alamein')) OR
-        (Governorate = 'Minya' AND City IN ('Minya', 'Beni Mazar', 'Mallawi')) OR
-        (Governorate = 'Monufia' AND City IN ('Shibin El Kom', 'Menouf', 'Quesna')) OR
-        (Governorate = 'New Valley' AND City IN ('Kharga', 'Dakhla')) OR
-        (Governorate = 'North Sinai' AND City IN ('Arish', 'Sheikh Zuwayed', 'Rafah')) OR
-        (Governorate = 'Port Said' AND City IN ('Port Said', 'Port Fouad')) OR
-        (Governorate = 'Qalyubia' AND City IN ('Benha', 'Shubra El Kheima', 'Kafr Shukr')) OR
-        (Governorate = 'Qena' AND City IN ('Qena', 'Nag Hammadi', 'Qus')) OR
-        (Governorate = 'Red Sea' AND City IN ('Hurghada', 'Safaga', 'Marsa Alam')) OR
-        (Governorate = 'Sharqia' AND City IN ('Zagazig', 'Belbeis', '10th of Ramadan')) OR
-        (Governorate = 'Sohag' AND City IN ('Sohag', 'Akhmim', 'Girga')) OR
-        (Governorate = 'South Sinai' AND City IN ('Sharm El Sheikh', 'Dahab', 'El Tor')) OR
-        (Governorate = 'Suez' AND City IN ('Suez', 'Ain Sokhna'))
-)
 
-Alter table DoctorCurWorkplace
-ADD CONSTRAINT chk_valid_City_Governorate_doctorworkplace CHECK (
-        (Governorate = 'Cairo' AND City IN ('Cairo', 'Nasr City', 'Heliopolis', 'Maadi', 'Shobra', 'Zamalek')) OR
-        (Governorate = 'Giza' AND City IN ('Giza', '6th of October', 'El Sheikh Zayed', 'Haram', 'Dokki')) OR
-        (Governorate = 'Alexandria' AND City IN ('Alexandria', 'Borg El Arab')) OR
-        (Governorate = 'Aswan' AND City IN ('Aswan', 'Edfu', 'Kom Ombo')) OR
-        (Governorate = 'Asyut' AND City IN ('Asyut', 'Dayrout', 'Manfalut')) OR
-        (Governorate = 'Beheira' AND City IN ('Damanhour', 'Kafr El Dawwar', 'Edku')) OR
-        (Governorate = 'Beni Suef' AND City IN ('Beni Suef', 'Al Fashn', 'Ihnasia')) OR
-        (Governorate = 'Dakahlia' AND City IN ('Mansoura', 'Talkha', 'Mit Ghamr')) OR
-        (Governorate = 'Damietta' AND City IN ('Damietta', 'Ras El Bar', 'Faraskur')) OR
-        (Governorate = 'Faiyum' AND City IN ('Faiyum', 'Senoures', 'Itsa')) OR
-        (Governorate = 'Gharbia' AND City IN ('Tanta', 'El Mahalla El Kubra', 'Kafr El Zayat')) OR
-        (Governorate = 'Ismailia' AND City IN ('Ismailia', 'Fayed', 'Qantara')) OR
-        (Governorate = 'Kafr El Sheikh' AND City IN ('Kafr El Sheikh', 'Baltim', 'Desouk')) OR
-        (Governorate = 'Luxor' AND City IN ('Luxor', 'Armant', 'Esna')) OR
-        (Governorate = 'Matrouh' AND City IN ('Marsa Matrouh', 'Sidi Abdel Rahman', 'El Alamein')) OR
-        (Governorate = 'Minya' AND City IN ('Minya', 'Beni Mazar', 'Mallawi')) OR
-        (Governorate = 'Monufia' AND City IN ('Shibin El Kom', 'Menouf', 'Quesna')) OR
-        (Governorate = 'New Valley' AND City IN ('Kharga', 'Dakhla')) OR
-        (Governorate = 'North Sinai' AND City IN ('Arish', 'Sheikh Zuwayed', 'Rafah')) OR
-        (Governorate = 'Port Said' AND City IN ('Port Said', 'Port Fouad')) OR
-        (Governorate = 'Qalyubia' AND City IN ('Benha', 'Shubra El Kheima', 'Kafr Shukr')) OR
-        (Governorate = 'Qena' AND City IN ('Qena', 'Nag Hammadi', 'Qus')) OR
-        (Governorate = 'Red Sea' AND City IN ('Hurghada', 'Safaga', 'Marsa Alam')) OR
-        (Governorate = 'Sharqia' AND City IN ('Zagazig', 'Belbeis', '10th of Ramadan')) OR
-        (Governorate = 'Sohag' AND City IN ('Sohag', 'Akhmim', 'Girga')) OR
-        (Governorate = 'South Sinai' AND City IN ('Sharm El Sheikh', 'Dahab', 'El Tor')) OR
-        (Governorate = 'Suez' AND City IN ('Suez', 'Ain Sokhna'))
+CREATE TABLE AllowedGovernorates
+(
+    Governorate VARCHAR(50) PRIMARY KEY
 );
+
+CREATE TABLE AllowedCities
+(
+    City VARCHAR(50),
+    Governorate VARCHAR(50),
+    FOREIGN KEY (Governorate) REFERENCES AllowedGovernorates(Governorate),
+    PRIMARY KEY (City, Governorate)
+);
+
+-- Populate it with your allowed governorates
+INSERT INTO AllowedGovernorates (Governorate)
+VALUES
+    ('Cairo'), ('Giza'), ('Alexandria'), ('Aswan'), ('Asyut'),
+    ('Beheira'), ('Beni Suef'), ('Dakahlia'), ('Damietta'), ('Faiyum'),
+    ('Gharbia'), ('Ismailia'), ('Kafr El Sheikh'), ('Luxor'), ('Matrouh'),
+    ('Minya'), ('Monufia'), ('New Valley'), ('North Sinai'), ('Port Said'),
+    ('Qalyubia'), ('Qena'), ('Red Sea'), ('Sharqia'), ('Sohag'),
+    ('South Sinai'), ('Suez');
+
+
+-- Populate it with the allowed cities for each governorate
+INSERT INTO AllowedCities (City, Governorate)
+VALUES
+    ('Cairo', 'Cairo'), ('Nasr City', 'Cairo'), ('Heliopolis', 'Cairo'),
+    ('Maadi', 'Cairo'), ('Shobra', 'Cairo'), ('Zamalek', 'Cairo'),
+    ('Giza', 'Giza'), ('6th of October', 'Giza'), ('El Sheikh Zayed', 'Giza'),
+    ('Haram', 'Giza'), ('Dokki', 'Giza'),
+    ('Alexandria', 'Alexandria'), ('Borg El Arab', 'Alexandria'),
+    ('Aswan', 'Aswan'), ('Edfu', 'Aswan'), ('Kom Ombo', 'Aswan'),
+    ('Asyut', 'Asyut'), ('Dayrout', 'Asyut'), ('Manfalut', 'Asyut'),
+    ('Damanhour', 'Beheira'), ('Kafr El Dawwar', 'Beheira'), ('Edku', 'Beheira'),
+    ('Beni Suef', 'Beni Suef'), ('Al Fashn', 'Beni Suef'), ('Ihnasia', 'Beni Suef'),
+    ('Mansoura', 'Dakahlia'), ('Talkha', 'Dakahlia'), ('Mit Ghamr', 'Dakahlia'),
+    ('Damietta', 'Damietta'), ('Ras El Bar', 'Damietta'), ('Faraskur', 'Damietta'),
+    ('Faiyum', 'Faiyum'), ('Senoures', 'Faiyum'), ('Itsa', 'Faiyum'),
+    ('Tanta', 'Gharbia'), ('El Mahalla El Kubra', 'Gharbia'), ('Kafr El Zayat', 'Gharbia'),
+    ('Ismailia', 'Ismailia'), ('Fayed', 'Ismailia'), ('Qantara', 'Ismailia'),
+    ('Kafr El Sheikh', 'Kafr El Sheikh'), ('Baltim', 'Kafr El Sheikh'), ('Desouk', 'Kafr El Sheikh'),
+    ('Luxor', 'Luxor'), ('Armant', 'Luxor'), ('Esna', 'Luxor'),
+    ('Marsa Matrouh', 'Matrouh'), ('Sidi Abdel Rahman', 'Matrouh'), ('El Alamein', 'Matrouh'),
+    ('Minya', 'Minya'), ('Beni Mazar', 'Minya'), ('Mallawi', 'Minya'),
+    ('Shibin El Kom', 'Monufia'), ('Menouf', 'Monufia'), ('Quesna', 'Monufia'),
+    ('Kharga', 'New Valley'), ('Dakhla', 'New Valley'),
+    ('Arish', 'North Sinai'), ('Sheikh Zuwayed', 'North Sinai'), ('Rafah', 'North Sinai'),
+    ('Port Said', 'Port Said'), ('Port Fouad', 'Port Said'),
+    ('Benha', 'Qalyubia'), ('Shubra El Kheima', 'Qalyubia'), ('Kafr Shukr', 'Qalyubia'),
+    ('Qena', 'Qena'), ('Nag Hammadi', 'Qena'), ('Qus', 'Qena'),
+    ('Hurghada', 'Red Sea'), ('Safaga', 'Red Sea'), ('Marsa Alam', 'Red Sea'),
+    ('Zagazig', 'Sharqia'), ('Belbeis', 'Sharqia'), ('10th of Ramadan', 'Sharqia'),
+    ('Sohag', 'Sohag'), ('Akhmim', 'Sohag'), ('Girga', 'Sohag'),
+    ('Sharm El Sheikh', 'South Sinai'), ('Dahab', 'South Sinai'), ('El Tor', 'South Sinai'),
+    ('Suez', 'Suez'), ('Ain Sokhna', 'Suez');
+
+ALTER TABLE [user]
+ADD CONSTRAINT FK_Governorate FOREIGN KEY (Governorate)
+    REFERENCES AllowedGovernorates (Governorate);
+
+ALTER TABLE [user]
+ADD CONSTRAINT FK_City FOREIGN KEY (City, Governorate)
+    REFERENCES AllowedCities (City, Governorate);
+
 
 ALTER TABLE Symptom
 ADD CONSTRAINT chk_valid_symptom_type CHECK (

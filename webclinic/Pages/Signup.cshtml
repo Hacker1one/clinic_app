@@ -66,7 +66,7 @@
         {
 			<div class="d-flex justify-content-center align-items-center w-50 mx-auto mb-3">
 				<select class="form-select" asp-for="specialty" aria-label="Specialty" required>
-					<option>Choose Specialty</option>
+					<option value="">Choose Specialty</option>
                     @for(int i = 0; i < Model.fields.Rows.Count; i++ )
                     {
 						<option value="@i">@Model.fields.Rows[i]["FieldName"].ToString()</option>
@@ -76,9 +76,10 @@
         }
 
         <!-- City dropdown -->
+        <!-- TODOOOO -->
 		<div class="d-flex justify-content-center align-items-center w-50 mx-auto mb-3">
 			<select class="form-select" asp-for="city" aria-label="City" required>
-				<option>City</option>
+				<option value="">City</option>
 				<option value="1">Cardiology</option>
 				<option value="2">Dermatology</option>
 				<option value="3">Neurology</option>
@@ -88,7 +89,7 @@
         <!-- Governorate dropdown -->
 		<div class="d-flex justify-content-center align-items-center w-50 mx-auto mb-3">
 			<select class="form-select" asp-for="governorate" aria-label="Governorate" required>
-				<option>Governorate</option>
+				<option value="">Governorate</option>
 				<option value="1">Cardiology</option>
 				<option value="2">Dermatology</option>
 				<option value="3">Neurology</option>

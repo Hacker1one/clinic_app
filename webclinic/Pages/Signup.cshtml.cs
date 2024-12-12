@@ -42,7 +42,8 @@ namespace webapplication.Pages
         public IActionResult OnPostSignUpPatient()
         {
             Console.WriteLine(specialty);
-            return RedirectToPage("DocumentUpload");
+            // db.addPatient();
+            return RedirectToPage("Login");
         }
     }
 }

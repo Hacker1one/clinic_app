@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\webclinic",
+    "\\webclinic\\Models"
   ],
+  "SelectedNode": "\\webclinic\\Models\\DB.cs",
   "PreviewInSolutionExplorer": false
 }
