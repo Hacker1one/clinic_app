@@ -111,7 +111,6 @@ DECLARE @Email VARCHAR(50) = 'yassin.elbedwihy@example.com';
 
 BEGIN TRANSACTION;
 -- Insert into [user] table
--- TODO ana neseet a7ot el city/governorate list fi el front end
 INSERT INTO [user] (
     FName, LName, SSN, RegistrationDate, Gender, [Password], BirthDate, City, Governorate, Email
 )

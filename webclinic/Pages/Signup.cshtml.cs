@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Data;
+using webclinic.Models;
 
 namespace webapplication.Pages
 {
@@ -15,17 +17,25 @@ namespace webapplication.Pages
         public string password { get; set; }
         public string gender { get; set; }
         public string specialty { get; set; }
-        public IActionResult OnGetChangeToDr()
+        public string city { get; set; }
+        public string governorate { get; set; }
+
+        [BindProperty(SupportsGet=true)]
+        public DataTable fields { get; set; }
+        public DB db { get; set; }
+        public IActionResult OnGetChangeToDr(DB db)
         {
             HttpContext.Session.SetString("user_type", "dr");
+            this.db = db;
+            fields = new DataTable();
+            fields = db.getFields();
             return Page();
         }
         public IActionResult OnGetChangeToP()
         {
-            HttpContext.Session.SetString("user_type", "p");
-            return Page();
+            return RedirectToPage("Signup");
         }
-        public void OnGet()
+        public void OnGet(DB db)
         {
             HttpContext.Session.SetString("user_type", "p");
         }

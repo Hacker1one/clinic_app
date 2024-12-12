@@ -8,7 +8,7 @@ namespace webclinic.Pages
         public IActionResult OnGet()
         {
             HttpContext.Session.Remove("email");
-            HttpContext.Session.Remove("type");
+            HttpContext.Session.Remove("user_type");
             return RedirectToPage("Index");
         }
     }

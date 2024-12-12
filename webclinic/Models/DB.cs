@@ -15,6 +15,27 @@ namespace webclinic.Models
 			con.ConnectionString = connectionString;
 		}
 
+		public DataTable getFields()
+		{
+			string queryString = "Select FieldName from FieldOfMedicine";
+			DataTable dt = new DataTable();
+			SqlCommand cmd = new SqlCommand(queryString, con);
+			try
+			{
+				con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+			catch (Exception ex)
+			{
+				Console.Write(ex.ToString());
+			}
+			finally
+			{
+				con.Close();
+			}
+
+			return dt;
+        }
 
 		public Dictionary<string, int> getNumUsersJan()
 		{

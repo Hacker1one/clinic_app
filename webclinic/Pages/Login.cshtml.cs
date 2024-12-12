@@ -24,15 +24,15 @@ namespace webapplication.Pages
             HttpContext.Session.SetString("email", email);
             if(email == "admin@gmail.com" && password == "admin")
             {
-                HttpContext.Session.SetString("type", "a");
+                HttpContext.Session.SetString("user_type", "a");
             }
             if(email == "doctor@gmail.com" && password == "doctor")
             {
-                HttpContext.Session.SetString("type", "dr");
+                HttpContext.Session.SetString("user_type", "dr");
             }
             if(email == "patient@gmail.com" && password == "patient")
             {
-                HttpContext.Session.SetString("type", "p");
+                HttpContext.Session.SetString("user_type", "p");
             }
             return RedirectToPage("Index");
         }

@@ -60,18 +60,40 @@
 			<input type="email" class="form-control" asp-for="email" id="email" placeholder="Email Address" required>
 			<label for="email">Email</label>
 		</div>
+
+        <!-- Specialty dropdown -->
 		@if(@Model.HttpContext.Session.GetString("user_type") == "dr")
         {
 			<div class="d-flex justify-content-center align-items-center w-50 mx-auto mb-3">
-				<select class="form-select" asp-for="specialty" aria-label="Specialty">
-                    <!-- add for loop here later connecting to database -->
-					<option selected>Choose Specialty</option>
-					<option value="1">Cardiology</option>
-					<option value="2">Dermatology</option>
-					<option value="3">Neurology</option>
+				<select class="form-select" asp-for="specialty" aria-label="Specialty" required>
+					<option>Choose Specialty</option>
+                    @for(int i = 0; i < Model.fields.Rows.Count; i++ )
+                    {
+						<option value="@i">@Model.fields.Rows[i]["FieldName"].ToString()</option>
+                    }
 				</select>
             </div>
         }
+
+        <!-- City dropdown -->
+		<div class="d-flex justify-content-center align-items-center w-50 mx-auto mb-3">
+			<select class="form-select" asp-for="city" aria-label="City" required>
+				<option>City</option>
+				<option value="1">Cardiology</option>
+				<option value="2">Dermatology</option>
+				<option value="3">Neurology</option>
+			</select>
+		</div>
+        
+        <!-- Governorate dropdown -->
+		<div class="d-flex justify-content-center align-items-center w-50 mx-auto mb-3">
+			<select class="form-select" asp-for="governorate" aria-label="Governorate" required>
+				<option>Governorate</option>
+				<option value="1">Cardiology</option>
+				<option value="2">Dermatology</option>
+				<option value="3">Neurology</option>
+			</select>
+		</div>
 
         <!-- Password -->
         <div class="form-floating mb-3 mx-auto w-50">
@@ -81,11 +103,25 @@
                 Show
             </button>
         </div>
+
+        <!-- National ID -->
+        <h6 class="fw-bold text-start mx-auto w-25">National ID</h6>
+        <input type="file" class="form-control w-25 mx-auto mb-3" id="nationalID" required/>
+
+        @if(HttpContext.Session.GetString("user_type") == "dr")
+        {
+			<!-- Doctor documents -->
+			<h6 class="fw-bold text-start mx-auto w-25">Medical practice official certificate</h6>
+			<input type="file" class="form-control w-25 mx-auto mb-3" id="docdoc" required/>
+        }
+
         <!-- Sign up Button -->
         <div class="d-grid w-25 mx-auto">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
+
+
     <!-- Login Link -->
     <div class="text-center mt-3">
         <p>Already have an account? <a asp-page="LogIn" class="text-primary">Log In</a></p>
@@ -100,3 +136,9 @@
 		</form>
     </div>
 </div>
+
+<script>
+    function showGenreSpecialty(item) {
+        document.getElementById("specialty_dropdown").innerHTML = item.innerHTML;
+    }
+</script>

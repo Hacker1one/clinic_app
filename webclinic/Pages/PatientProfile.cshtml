@@ -64,7 +64,7 @@
             <h2>@Model.PatientName</h2>
             <p class="text-muted">Age: <strong>@Model.PatientAge</strong></p>
 
-            @if (HttpContext.Session.GetString("type") == "a")
+            @if (HttpContext.Session.GetString("user_type") == "a")
             {
         <span class="badge @(Model.IsActive ? "bg-success" : "bg-secondary")">
                     @(Model.IsActive ? "Active" : "Banned")
@@ -120,7 +120,7 @@
             }
         </div>
     </div>
-            @if (HttpContext.Session.GetString("type") == "a")
+            @if (HttpContext.Session.GetString("user_type") == "a")
             {
         <div class="text-center">
             <button class="btn @(Model.IsActive ? "btn-danger" : "btn-success") btn-lg px-4" onclick="toggleStatus()">
