@@ -18,6 +18,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\yassi\Source\Repos\clinic_app\webclinic
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/AdminAnalytics.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5BbmFseXRpY3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/book.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcYm9vay5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -26,8 +30,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29udGFjdFVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/DocumentUpload.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9jdW1lbnRVcGxvYWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/DrApp.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRHJBcHAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/DrProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRHJQcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Error.cshtml]
@@ -38,16 +50,40 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/ListOfDoctors.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGlzdE9mRG9jdG9ycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/ListOfPatients.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGlzdE9mUGF0aWVudHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nb3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/OTP.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT1RQLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/PatientApp.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF0aWVudEFwcC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/PatientProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF0aWVudFByb2ZpbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Shared/_LayoutAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXRBZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Shared/_LayoutLogin.cshtml]
@@ -60,6 +96,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Signup.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2lnbnVwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Signup2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2lnbnVwMi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/_ViewImports.cshtml]

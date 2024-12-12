@@ -7,7 +7,7 @@ create table [user]
 	ID int IDENTITY(1,1),
 	FName VARCHAR(20) NOT NULL,
 	LName VARCHAR(20) NOT NULL,
-	SSN int,
+	SSN bigint,
 	RegistrationDate Date NOT NULL,
 	Gender CHAR,
 	[Password] VARCHAR(40),
