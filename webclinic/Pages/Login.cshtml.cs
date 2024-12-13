@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Data.Common;
+using webclinic.Models;
 
 namespace webapplication.Pages
 {
@@ -8,6 +10,11 @@ namespace webapplication.Pages
     {
         public string email { get; set; }
         public string password { get; set; }
+        public DB db { get; set; }
+        public LoginModel(DB db)
+        {
+            this.db = db;
+        }
         public IActionResult OnGet()
         {
 			if (string.IsNullOrEmpty(HttpContext.Session.GetString("email")))
@@ -21,19 +28,14 @@ namespace webapplication.Pages
         }
         public IActionResult OnPostLog()
         {
+            string type = db.isValidLogin(email, password);
+            if(string.IsNullOrEmpty(type))
+            {
+                HttpContext.Session.SetString("err", "1");
+                return RedirectToPage("Login");
+            }
             HttpContext.Session.SetString("email", email);
-            if(email == "admin@gmail.com" && password == "admin")
-            {
-                HttpContext.Session.SetString("user_type", "a");
-            }
-            if(email == "doctor@gmail.com" && password == "doctor")
-            {
-                HttpContext.Session.SetString("user_type", "dr");
-            }
-            if(email == "patient@gmail.com" && password == "patient")
-            {
-                HttpContext.Session.SetString("user_type", "p");
-            }
+            HttpContext.Session.SetString("user_type", type);
             return RedirectToPage("Index");
         }
     }

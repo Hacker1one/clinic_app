@@ -35,6 +35,20 @@
             <label for="lname">Last name</label>
         </div>
 
+        <!-- Email -->
+		<div class="form-floating mb-3 mx-auto w-50">
+			<input type="email" class="form-control" asp-for="email" id="email" placeholder="Email Address" required>
+			<label for="email">Email</label>
+		</div>
+        <!-- Password -->
+        <div class="form-floating mb-3 mx-auto w-50">
+            <input type="password" class="form-control" id="password" asp-for="password" placeholder="Password" required>
+            <label for="password">Password</label>
+            <button type="button" class="btn btn-link btn-sm position-absolute top-50 end-0 translate-middle-y me-2" id="togglePassword">
+                Show
+            </button>
+        </div>
+
         <!-- Gender -->
         <div class="w-50 mx-auto my-3">
             <label class="w-100 fw-bold text-center text-primary mx-auto mb-3">Gender</label>
@@ -56,13 +70,15 @@
             <label for="phone">Phone number</label>
         </div>
 
-		<div class="form-floating mb-3 mx-auto w-50">
-			<input type="email" class="form-control" asp-for="email" id="email" placeholder="Email Address" required>
-			<label for="email">Email</label>
-		</div>
+        <!-- Birthdate -->
+        <div class="form-floating mb-3 mx-auto w-50">
+            <input type="date" class="form-control" id="birthdate" asp-for="birthdate" required>
+            <label for="birthdate">Birthdate</label>
+        </div>
+
 
         <!-- Specialty dropdown -->
-		@if(@Model.HttpContext.Session.GetString("user_type") == "dr")
+		@if(@Model.HttpContext.Session.GetString("user_type") == "d")
         {
 			<div class="d-flex justify-content-center align-items-center w-50 mx-auto mb-3">
 				<select class="form-select" asp-for="specialty" aria-label="Specialty" required>
@@ -75,45 +91,43 @@
             </div>
         }
 
-        <!-- City dropdown -->
-        <!-- TODOOOO -->
-		<div class="d-flex justify-content-center align-items-center w-50 mx-auto mb-3">
-			<select class="form-select" asp-for="city" aria-label="City" required>
-				<option value="">City</option>
-				<option value="1">Cardiology</option>
-				<option value="2">Dermatology</option>
-				<option value="3">Neurology</option>
-			</select>
-		</div>
-        
         <!-- Governorate dropdown -->
 		<div class="d-flex justify-content-center align-items-center w-50 mx-auto mb-3">
-			<select class="form-select" asp-for="governorate" aria-label="Governorate" required>
+			<select class="form-select" asp-for="governorate" id="governorateSelect" aria-label="Governorate"  onchange="showCity()" required>
 				<option value="">Governorate</option>
-				<option value="1">Cardiology</option>
-				<option value="2">Dermatology</option>
-				<option value="3">Neurology</option>
+				@for(int i = 0; i < Model.allGovernorates.Rows.Count; i++ )
+				{
+					<option value="@i">@Model.allGovernorates.Rows[i]["Governorate"].ToString()</option>
+				}
 			</select>
 		</div>
 
-        <!-- Password -->
-        <div class="form-floating mb-3 mx-auto w-50">
-            <input type="password" class="form-control" id="password" asp-for="password" placeholder="Password" required>
-            <label for="password">Password</label>
-            <button type="button" class="btn btn-link btn-sm position-absolute top-50 end-0 translate-middle-y me-2" id="togglePassword">
-                Show
-            </button>
-        </div>
+        <!-- City dropdown -->
+		<select class="form-select d-none justify-content-center align-items-center w-50 mx-auto mb-3" asp-for="city" id="citySelect" aria-label="City" required>
+			<option value="">City</option>
+			@for(int i = 0; i < Model.allCities.Rows.Count; i++ )
+			{
+				<option value="@i">@Model.allCities.Rows[i]["City"].ToString()</option>
+			}
+            <option value="1">ay 7aga</option>
+		</select>
+        
 
         <!-- National ID -->
-        <h6 class="fw-bold text-start mx-auto w-25">National ID</h6>
-        <input type="file" class="form-control w-25 mx-auto mb-3" id="nationalID" required/>
+		<div class="form-floating mb-3 mx-auto w-50">
+			<input class="form-control" asp-for="ssn" id="ssn" placeholder="National ID" required>
+			<label for="ssn">National ID</label>
+		</div>
 
-        @if(HttpContext.Session.GetString("user_type") == "dr")
+        <!-- National ID picture-->
+        <h6 class="fw-bold text-start mx-auto w-50">National ID</h6>
+        <input type="file" class="form-control w-50 mx-auto mb-3" id="nationalID" required/>
+
+        @if(HttpContext.Session.GetString("user_type") == "d")
         {
 			<!-- Doctor documents -->
-			<h6 class="fw-bold text-start mx-auto w-25">Medical practice official certificate</h6>
-			<input type="file" class="form-control w-25 mx-auto mb-3" id="docdoc" required/>
+			<h6 class="fw-bold text-start mx-auto w-50">Medical practice official certificate</h6>
+			<input type="file" class="form-control w-50 mx-auto mb-3" required/>
         }
 
         <!-- Sign up Button -->
@@ -127,7 +141,7 @@
     <div class="text-center mt-3">
         <p>Already have an account? <a asp-page="LogIn" class="text-primary">Log In</a></p>
 		<form method="get">
-			@if(@Model.HttpContext.Session.GetString("user_type") == "dr")
+			@if(@Model.HttpContext.Session.GetString("user_type") == "d")
 			{
 				<p>Or <a asp-page-handler="ChangeToP">Sign Up</a> as a Patient</p>
 			}else
@@ -138,3 +152,20 @@
     </div>
 </div>
 
+<script>
+    function showCity() {
+        var x = document.getElementById("governorateSelect").value;
+
+        if (x != "")
+        {
+            document.getElementById("citySelect").classList.remove("d-none");
+            document.getElementById("citySelect").classList.add("d-flex");
+            fetch(`?handler=ChangeCities&govern=${x}`);
+        }
+        else
+        {
+            document.getElementById("citySelect").classList.remove("d-flex");
+            document.getElementById("citySelect").classList.add("d-none");
+        }
+    }
+</script>
