@@ -78,7 +78,7 @@ CREATE TABLE DoctorCertificate
 CREATE TABLE FieldOfMedicine
 (
 	FieldCode int IDENTITY(1,1),
-	FieldName VARCHAR(30),
+	FieldName VARCHAR(60),
 	FDescription VARCHAR(50),
 	CommonConditions VARCHAR(50),
 	PRIMARY KEY (FieldCode)
@@ -88,11 +88,31 @@ ALTER TABLE Doctor
 ADD FieldCode int,
 Constraint fk_fieldcode Foreign KEY (FieldCode) REFERENCES FieldOFMedicine
 
+
+CREATE TABLE SymptomTypes (
+    SymptomID INT identity(1,1) PRIMARY KEY,
+    SymptomName VARCHAR(50) NOT NULL
+);
+
+INSERT INTO SymptomTypes (SymptomName)
+VALUES 
+    ('Hypertension'), ('Acute infections'), ('Routine screenings'), ('Chronic diseases'),
+    ('Preventive care'), ('Fractures'), ('Burn repair'), ('Congenital defects'), ('Aneurysms'), ('Kidney stones'), ('Heart attack'), ('Arrhythmias'), ('Asthma'), ('Cough'), 
+    ('Shortness of breath'), ('Chest pain'), ('Pain'), ('Sepsis'), ('Back pain'), 
+    ('Neuropathic pain'), ('Stroke'), ('Dementia'), ('Osteoporosis'), ('Sprains'), 
+    ('Stress fractures'), ('Fatigue'), ('Fever'), ('Sore throat'), ('Headache'), 
+    ('Abdominal pain'), ('Nausea'), ('Vomiting'), ('Diarrhea'), ('Constipation'), 
+    ('Dizziness'), ('Loss of appetite'), ('Weight loss'), ('Weight gain'), ('Joint pain'), 
+    ('Swelling'), ('Itching'), ('Rash'), ('Blurred vision'), ('Hearing loss'), 
+    ('Runny nose'), ('Nasal congestion'), ('Muscle pain'), ('Night sweats'), 
+    ('Palpitations'), ('Tingling'), ('Numbness'), ('Weakness'), ('Difficulty breathing'), 
+    ('Difficulty swallowing'), ('Confusion'), ('Irritability'), ('Excessive thirst'), 
+    ('Frequent urination'), ('Hair loss'), ('Sweating'), ('Chills'), ('Yellowing of the skin (jaundice)');
+
 CREATE TABLE Symptom
 (
 	PatientID int,
-	SymptomID int IDENTITY(1,1),
-	[type] VARCHAR(50),
+	SymptomID int,
 	DateOfFirstInstance Date,
 	Severity int,
 	OnsetDuration_years int,
@@ -100,18 +120,43 @@ CREATE TABLE Symptom
 	OnsetDuration_days int,
 	IsPresent BIT,
 	primary key(PatientID, SymptomID),
-	foreign key (PatientID) references Patient
+	foreign key (PatientID) references Patient,
+    foreign key (SymptomID) references SymptomTypes,
 );
+
+
+CREATE TABLE LTCTypes (
+    ConditionID INT IDENTITY(1,1) PRIMARY KEY,
+    ConditionName VARCHAR(100) NOT NULL
+);
+
+INSERT INTO LTCTypes (ConditionName)
+VALUES
+    ('Hypertension'), ('Coronary Artery Disease'), ('Heart Failure'), ('Arrhythmia'),
+    ('Stroke'), ('Peripheral Artery Disease'), ('Asthma'), ('Chronic Obstructive Pulmonary Disease (COPD)'),
+    ('Sleep Apnea'), ('Pulmonary Fibrosis'), ('Alzheimer’s Disease'), ('Parkinson’s Disease'),
+    ('Multiple Sclerosis'), ('Epilepsy'), ('Depression'), ('Bipolar Disorder'),
+    ('Schizophrenia'), ('Anxiety Disorders'), ('Diabetes Type 1'), ('Diabetes Type 2'),
+    ('Hypothyroidism'), ('Hyperthyroidism'), ('Polycystic Ovary Syndrome (PCOS)'),
+    ('Cushing''s Syndrome'), ('Inflammatory Bowel Disease (IBD)'), ('Crohn’s Disease'),
+    ('Ulcerative Colitis'), ('Irritable Bowel Syndrome (IBS)'), ('Celiac Disease'),
+    ('Gastroesophageal Reflux Disease (GERD)'), ('Osteoarthritis'), ('Rheumatoid Arthritis'),
+    ('Osteoporosis'), ('Gout'), ('Ankylosing Spondylitis'), ('Psoriasis'), ('Eczema'),
+    ('Vitiligo'), ('Lupus'), ('Breast Cancer'), ('Lung Cancer'), ('Prostate Cancer'),
+    ('Colorectal Cancer'), ('Leukemia'), ('Lymphoma'), ('Systemic Lupus Erythematosus (SLE)'),
+    ('Sjögren’s Syndrome'), ('Hashimoto’s Thyroiditis'), ('Chronic Kidney Disease (CKD)'),
+    ('Polycystic Kidney Disease'), ('Kidney Stones'), ('HIV/AIDS'), ('Chronic Fatigue Syndrome'),
+    ('Fibromyalgia'), ('Sickle Cell Disease'), ('Hemophilia'), ('Thalassemia');
 
 Create Table LongTermConditions
 (
 	PatientID int,
-	FakeID int IDENTITY(1,1),
-	[type] VARCHAR(50),
+	ConditionID int,
 	Severity int,
 	DateOfFirstInstance Date,
-	primary key(PatientID, FakeID),
-	foreign key (PatientID) references Patient
+	primary key(PatientID, ConditionID),
+	foreign key (PatientID) references Patient,
+    foreign key (ConditionID) references LTCTypes,
 );
 
 CREATE TABLE Appointment
@@ -216,68 +261,66 @@ ADD CONSTRAINT FK_City FOREIGN KEY (City, Governorate)
     REFERENCES AllowedCities (City, Governorate);
 
 
-ALTER TABLE Symptom
-ADD CONSTRAINT chk_valid_symptom_type CHECK (
-    [type] IN (
-        'Fever', 'Chills', 'Sweating', 'Fatigue', 'Weakness', 'Weight loss', 'Weight gain',
-        'Loss of appetite', 'Dehydration', 'Swelling', 'Headache', 'Migraine', 'Back pain',
-        'Neck pain', 'Chest pain', 'Abdominal pain', 'Pelvic pain', 'Joint pain', 'Muscle pain',
-        'Cough', 'Shortness of breath', 'Wheezing', 'Sore throat', 'Hoarseness', 'Nasal congestion',
-        'Runny nose', 'Sneezing', 'Nausea', 'Vomiting', 'Diarrhea', 'Constipation', 'Heartburn',
-        'Bloating', 'Abdominal cramps', 'Blood in stool', 'Dizziness', 'Vertigo', 'Fainting',
-        'Tremors', 'Numbness', 'Tingling', 'Seizures', 'Memory loss', 'Anxiety', 'Depression',
-        'Insomnia', 'Mood swings', 'Irritability', 'Confusion', 'Hallucinations', 'Palpitations',
-        'High blood pressure', 'Low blood pressure', 'Cold hands and feet', 'Rash', 'Itching',
-        'Redness', 'Dry skin', 'Bruising', 'Blisters', 'Peeling skin', 'Blurred vision', 'Double vision',
-        'Eye redness', 'Eye pain', 'Watery eyes', 'Light sensitivity', 'Hearing loss', 'Tinnitus',
-        'Ear pain', 'Ear discharge', 'Frequent urination', 'Painful urination', 'Blood in urine',
-        'Incontinence', 'Urgency to urinate', 'Irregular periods', 'Heavy bleeding', 'Pelvic pain',
-        'Discharge', 'Erectile dysfunction', 'Hair loss', 'Cold intolerance', 'Heat intolerance',
-        'Enlarged lymph nodes', 'Difficulty swallowing', 'Hiccups'
-    )
-);
+-- Populating FieldOfMedicine table.
+INSERT INTO FieldOfMedicine (FieldName, FDescription, CommonConditions)
+VALUES
+    ('General Medicine', 'Broad medical practice', 'Hypertension, Diabetes'),
+    ('Family Medicine', 'Comprehensive care for all ages', 'Acute infections, Routine screenings'),
+    ('Internal Medicine', 'Adult medical care', 'Chronic diseases, Preventive care'),
+    ('General Surgery', 'Surgical treatment of conditions', 'Hernias, Appendicitis'),
+    ('Cardiothoracic Surgery', 'Heart and lung surgery', 'Heart valve disease, Lung cancer'),
+    ('Neurosurgery', 'Brain and spinal surgery', 'Brain tumors, Spinal cord injuries'),
+    ('Orthopedic Surgery', 'Bone and joint surgery', 'Fractures, Arthritis'),
+    ('Plastic Surgery', 'Reconstructive and cosmetic surgery', 'Burn repair, Rhinoplasty'),
+    ('Pediatric Surgery', 'Surgery for children', 'Congenital defects, Appendicitis in children'),
+    ('Vascular Surgery', 'Blood vessel surgery', 'Aneurysms, Varicose veins'),
+    ('Urological Surgery', 'Urinary system surgery', 'Kidney stones, Prostate cancer'),
+    ('Cardiology', 'Heart health management', 'Heart attack, Arrhythmias'),
+    ('Endocrinology', 'Hormonal disorders', 'Diabetes, Thyroid disorders'),
+    ('Gastroenterology', 'Digestive system health', 'Irritable bowel syndrome, Ulcers'),
+    ('Hematology', 'Blood disorders', 'Anemia, Leukemia'),
+    ('Nephrology', 'Kidney health management', 'Chronic kidney disease, Kidney stones'),
+    ('Oncology', 'Cancer diagnosis and treatment', 'Breast cancer, Lung cancer'),
+    ('Pulmonology', 'Lung and respiratory care', 'Asthma, COPD'),
+    ('Rheumatology', 'Joint and autoimmune diseases', 'Rheumatoid arthritis, Lupus'),
+    ('Infectious Diseases', 'Management of infections', 'HIV/AIDS, Tuberculosis'),
+    ('General Pediatrics', 'Child health management', 'Vaccinations, Growth disorders'),
+    ('Neonatology', 'Care for newborns', 'Premature birth, Neonatal sepsis'),
+    ('Pediatric Cardiology', 'Heart health in children', 'Congenital heart defects, Arrhythmias in children'),
+    ('Pediatric Neurology', 'Neurological care in children', 'Epilepsy, Cerebral palsy'),
+    ('Obstetrics', 'Pregnancy and childbirth', 'Prenatal care, High-risk pregnancy'),
+    ('Gynecology', 'Women’s reproductive health', 'Endometriosis, Ovarian cysts'),
+    ('Maternal-Fetal Medicine', 'High-risk pregnancies', 'Preeclampsia, Gestational diabetes'),
+    ('Reproductive Endocrinology', 'Fertility treatments', 'Infertility, Polycystic ovary syndrome'),
+    ('Emergency Medicine', 'Acute medical care', 'Trauma, Heart attack'),
+    ('Critical Care Medicine', 'Life-threatening conditions', 'Sepsis, Respiratory failure'),
+    ('Trauma Medicine', 'Emergency injury care', 'Fractures, Internal bleeding'),
+    ('Anesthesiology', 'Pain management during procedures', 'Anesthesia for surgery, Pain control'),
+    ('Pain Medicine', 'Chronic pain management', 'Back pain, Neuropathic pain'),
+    ('Neurology', 'Brain and nervous system care', 'Stroke, Multiple sclerosis'),
+    ('Psychiatry', 'Mental health management', 'Depression, Anxiety disorders'),
+    ('Child and Adolescent Psychiatry', 'Mental health in youth', 'ADHD, Autism spectrum disorders'),
+    ('Diagnostic Radiology', 'Imaging for diagnosis', 'X-rays, MRI scans'),
+    ('Interventional Radiology', 'Minimally invasive procedures', 'Angioplasty, Tumor ablation'),
+    ('Nuclear Medicine', 'Radioactive imaging and treatment', 'Thyroid cancer, Bone scans'),
+    ('Anatomical Pathology', 'Study of tissue for diagnosis', 'Cancer biopsies, Autopsies'),
+    ('Clinical Pathology', 'Laboratory diagnostics', 'Blood tests, Urine analysis'),
+    ('Forensic Pathology', 'Post-mortem examinations', 'Homicide investigations, Accidental deaths'),
+    ('General Dermatology', 'Skin health management', 'Eczema, Acne'),
+    ('Cosmetic Dermatology', 'Aesthetic skin treatments', 'Botox, Laser treatments'),
+    ('Ophthalmology', 'Eye health management', 'Cataracts, Glaucoma'),
+    ('Otolaryngology (ENT)', 'Ear, nose, and throat care', 'Sinusitis, Hearing loss'),
+    ('Public Health', 'Community health and prevention', 'Disease outbreaks, Health education'),
+    ('Occupational Medicine', 'Workplace health', 'Workplace injuries, Occupational asthma'),
+    ('Preventive Medicine', 'Health risk reduction', 'Vaccinations, Lifestyle modifications'),
+    ('Geriatrics', 'Elderly care', 'Dementia, Osteoporosis'),
+    ('Sports Medicine', 'Injuries in athletes', 'Sprains, Stress fractures'),
+    ('Addiction Medicine', 'Substance abuse treatment', 'Alcohol addiction, Opioid dependency'),
+    ('Palliative Care', 'End-of-life and chronic care', 'Cancer pain, Advanced COPD'),
+    ('Medical Genetics', 'Genetic disorders', 'Cystic fibrosis, Genetic counseling');
 
-ALTER TABLE LongTermConditions
-ADD CONSTRAINT chk_valid_condition_type CHECK (
-    type IN (
-        'Hypertension', 'Coronary Artery Disease', 'Heart Failure', 'Arrhythmia', 'Stroke',
-        'Peripheral Artery Disease', 'Asthma', 'Chronic Obstructive Pulmonary Disease (COPD)',
-        'Sleep Apnea', 'Pulmonary Fibrosis', 'Alzheimer’s Disease', 'Parkinson’s Disease',
-        'Multiple Sclerosis', 'Epilepsy', 'Depression', 'Bipolar Disorder', 'Schizophrenia',
-        'Anxiety Disorders', 'Diabetes Type 1', 'Diabetes Type 2', 'Hypothyroidism',
-        'Hyperthyroidism', 'Polycystic Ovary Syndrome (PCOS)', 'Cushing''s Syndrome',
-        'Inflammatory Bowel Disease (IBD)', 'Crohn’s Disease', 'Ulcerative Colitis',
-        'Irritable Bowel Syndrome (IBS)', 'Celiac Disease', 'Gastroesophageal Reflux Disease (GERD)',
-        'Osteoarthritis', 'Rheumatoid Arthritis', 'Osteoporosis', 'Gout', 'Ankylosing Spondylitis',
-        'Psoriasis', 'Eczema', 'Vitiligo', 'Lupus', 'Breast Cancer', 'Lung Cancer', 'Prostate Cancer',
-        'Colorectal Cancer', 'Leukemia', 'Lymphoma', 'Systemic Lupus Erythematosus (SLE)',
-        'Sjögren’s Syndrome', 'Hashimoto’s Thyroiditis', 'Chronic Kidney Disease (CKD)',
-        'Polycystic Kidney Disease', 'Kidney Stones', 'HIV/AIDS', 'Chronic Fatigue Syndrome',
-        'Fibromyalgia', 'Sickle Cell Disease', 'Hemophilia', 'Thalassemia'
-    )
-);
 
 
-ALTER TABLE FieldOfMedicine
-ADD CONSTRAINT chk_valid_field_name CHECK (
-    FieldName IN (
-        'General Medicine', 'Family Medicine', 'Internal Medicine', 'General Surgery',
-        'Cardiothoracic Surgery', 'Neurosurgery', 'Orthopedic Surgery', 'Plastic Surgery',
-        'Pediatric Surgery', 'Vascular Surgery', 'Urological Surgery', 'Cardiology',
-        'Endocrinology', 'Gastroenterology', 'Hematology', 'Nephrology', 'Oncology',
-        'Pulmonology', 'Rheumatology', 'Infectious Diseases', 'General Pediatrics',
-        'Neonatology', 'Pediatric Cardiology', 'Pediatric Neurology', 'Obstetrics',
-        'Gynecology', 'Maternal-Fetal Medicine', 'Reproductive Endocrinology',
-        'Emergency Medicine', 'Critical Care Medicine', 'Trauma Medicine',
-        'Anesthesiology', 'Pain Medicine', 'Neurology', 'Psychiatry',
-        'Child and Adolescent Psychiatry', 'Diagnostic Radiology', 'Interventional Radiology',
-        'Nuclear Medicine', 'Anatomical Pathology', 'Clinical Pathology',
-        'Forensic Pathology', 'General Dermatology', 'Cosmetic Dermatology',
-        'Ophthalmology', 'Otolaryngology (ENT)', 'Public Health', 'Occupational Medicine',
-        'Preventive Medicine', 'Geriatrics', 'Sports Medicine', 'Addiction Medicine',
-        'Palliative Care', 'Medical Genetics'
-    )
-);
 
 
 
@@ -339,27 +382,6 @@ VALUES
 
 
 
-INSERT INTO FieldOfMedicine (FieldName, FDescription, CommonConditions)
-VALUES 
-('General Medicine', 'General health care', 'Flu, Minor Injuries'),
-('Family Medicine', 'Comprehensive care for families', 'Flu, Hypertension'),
-('Internal Medicine', 'Adult healthcare', 'Diabetes, Hypertension'),
-('General Surgery', 'Surgical care', 'Appendicitis, Trauma'),
-('Cardiology', 'Heart and vascular health', 'Heart Attack, Hypertension'),
-('Neurology', 'Brain and nervous system', 'Stroke, Epilepsy'),
-('Orthopedic Surgery', 'Bones, joints, and ligaments', 'Fractures, Arthritis'),
-('Oncology', 'Cancer care', 'Breast Cancer, Lung Cancer'),
-('Endocrinology', 'Hormonal and gland disorders', 'Diabetes, Thyroid Diseases'),
-('Pulmonology', 'Lung and respiratory health', 'Asthma, COPD'),
-('Gastroenterology', 'Digestive system care', 'Ulcers, IBS'),
-('Hematology', 'Blood disorders', 'Anemia, Hemophilia'),
-('Nephrology', 'Kidney health', 'Chronic Kidney Disease, Kidney Stones'),
-('Urological Surgery', 'Urinary tract and male reproductive system', 'Prostate Cancer, UTIs'),
-('Vascular Surgery', 'Blood vessels and lymphatic system', 'Varicose Veins, Aneurysms'),
-('Plastic Surgery', 'Reconstructive and cosmetic surgery', 'Burn Reconstruction, Rhinoplasty'),
-('Palliative Care', 'Care for serious illness', 'Chronic Pain, End-of-Life Care');
-
-
 
 INSERT INTO DoctorCurWorkplace (City, Governorate, Institution, JobPosition, DoctorID)
 VALUES 
@@ -408,31 +430,35 @@ VALUES
 (20, '2011-03-05', 'Dokki Oncology Center', 'Advanced Oncology Certification');
 
 
+INSERT INTO Symptom (PatientID, SymptomID, DateOfFirstInstance, Severity, OnsetDuration_years, OnsetDuration_months, OnsetDuration_days, IsPresent)
+VALUES
+    (1, 1, '2023-02-01', 3, 0, 11, 5, 1), -- Hypertension, ongoing symptom
+    (2, 5, '2023-10-15', 2, 0, 1, 10, 1), -- Cough, recent onset
+    (3, 12, '2022-05-30', 4, 1, 6, 15, 1), -- Joint pain, chronic symptom
+    (4, 25, '2024-01-01', 1, 0, 0, 12, 1), -- Fatigue, mild
+    (5, 30, '2021-08-12', 5, 2, 4, 0, 0), -- Nausea, resolved
+    (6, 17, '2023-09-10', 3, 0, 3, 20, 1), -- Rash, ongoing
+    (7, 8, '2020-11-20', 2, 3, 0, 10, 1), -- Shortness of breath, long-term symptom
+    (8, 18, '2023-04-05', 3, 0, 8, 0, 1), -- Abdominal pain, persistent
+    (9, 35, '2023-07-15', 4, 0, 6, 25, 1), -- Dizziness, recent
+    (10, 40, '2024-02-01', 2, 0, 0, 10, 1); -- Headache, acute and mild
 
 
+INSERT INTO LongTermConditions (PatientID, ConditionID, Severity, DateOfFirstInstance)
+VALUES
+    (1, 1, 2, '2020-03-15'), -- Hypertension
+    (1, 8, 3, '2019-05-10'), -- Asthma
 
-INSERT INTO Symptom (PatientID, [type], DateOfFirstInstance, Severity, OnsetDuration_years, OnsetDuration_months, OnsetDuration_days, IsPresent)
-VALUES 
-(1, 'Fever', '2023-06-01', 2, 0, 1, 10, 1),
-(2, 'Cough', '2023-06-10', 3, 0, 0, 20, 1),
-(3, 'Headache', '2023-07-15', 1, 0, 0, 5, 1),
-(4, 'Back pain', '2023-07-20', 3, 1, 0, 12, 1),
-(5, 'Nausea', '2023-08-01', 2, 0, 2, 7, 1),
-(6, 'Fatigue', '2023-08-10', 1, 0, 0, 15, 1),
-(7, 'Dizziness', '2023-08-20', 2, 0, 1, 10, 1),
-(8, 'Blurred vision', '2023-09-15', 3, 0, 2, 10, 1);
+    (2, 14, 4, '2018-11-22'), -- Depression
 
+    (3, 3, 2, '2021-07-01'), -- Heart Failure
+    (3, 31, 3, '2020-02-14'), -- Osteoarthritis
 
+    (5, 40, 4, '2016-09-30'), -- Breast Cancer
+    (5, 42, 3, '2018-12-05'), -- Prostate Cancer
 
-INSERT INTO LongTermConditions (PatientID, [type], Severity, DateOfFirstInstance)
-VALUES 
-(8, 'Hypertension', 3, '2015-08-01'),
-(2, 'Pulmonary Fibrosis', 2, '2020-02-15'),
-(7, 'Leukemia', 1, '2018-01-10'),
-(4, 'HIV/AIDS', 2, '2016-05-20'),
-(5, 'Parkinson’s Disease', 3, '2017-11-30');
-
-
+    (8, 7, 2, '2022-01-20'), -- COPD
+    (8, 10, 1, '2023-06-10'); -- Pulmonary Fibrosis
 
 
 INSERT INTO Appointment (DoctorID, PatientID, IsFinished, IsConfirmed, DatenTime)
