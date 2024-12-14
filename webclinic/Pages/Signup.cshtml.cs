@@ -70,9 +70,10 @@ namespace webapplication.Pages
             return RedirectToPage("Login");
         }
 
-        public void OnGetChangeCities(string govern)
+        public IActionResult OnGetChangeCities(string govern)
         {
             this.allCities = db.getCities(allGovernorates.Rows[int.Parse(govern)]["Governorate"].ToString()!);
+            return Page();
         }
     }
 }

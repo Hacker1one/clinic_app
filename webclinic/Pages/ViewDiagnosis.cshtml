@@ -1,0 +1,94 @@
+@page "/ViewDiagnosis"
+@model webclinic.Pages.ViewDiagnosisModel
+@{
+    ViewData["Title"] = "View Diagnosis";
+}
+
+<div class="header-inner">
+            <div class="container">
+                <div class="inner">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-12">
+                            <div class="logo">
+                                <a href="index"><img src="img/logo.png" alt="#"></a>
+                            </div>
+                            <div class="mobile-nav"></div>
+                        </div> 
+                        <div class="col-lg-7 col-md-9 col-12">
+                            <div class="main-menu">
+                                <nav class="navigation">
+                                    <ul class="nav menu">
+                                        <li><a href="index">Home</a></li>
+                                        <li><a href="#">Pages <i class="icofont-rounded-down"></i></a>
+                                            <ul class="dropdown">
+                                                <li><a href="404.html">404 Error</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="ContactUs">Contact Us</a></li>
+                                        @if (HttpContext.Session.GetString("type") == "dr")
+                                        {
+										    <li class="active"><a href="DrApp">Appointments</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li class="active"><a href="PatientApp">Appointments</a></li>
+                                        }       
+                                        <li><a href="DrProfile">My Profile</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</header>
+
+<div class="breadcrumbs overlay">
+    <div class="container-fluid">
+        <div class="bread-inner">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Add Diagnosis</h2>
+                    <ul class="bread-list">
+                        <li><a href="Index">Home</a></li>
+                        <li><i class="icofont-simple-right"></i></li>
+                        <li><a href="DrApp">Appointments</a></li>
+                        <li><i class="icofont-simple-right"></i></li>
+                        <li class="active">View Diagnosis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-black" style="background-color: white;">
+            <h4>Patient: @Model.PatientName</h4>
+        </div>
+        <div class="card-body">
+            <h5><strong>Conditions:</strong></h5>
+            <p>@Model.Conditions</p>
+
+            <h5><strong>Description:</strong></h5>
+            <p>@Model.Description</p>
+
+            <h5><strong>Prescription:</strong></h5>
+            <p>@Model.Prescription</p>
+        </div>
+        <div class="card-footer text-end">
+             @if (HttpContext.Session.GetString("type") == "dr")
+                {
+                    <a href="/DrApp" class="btn btn-secondary">Appointments</a>
+                }
+                else
+                {
+                    <a href="/PatientApp" class="btn btn-secondary">Appointments</a>
+                }      
+        </div>
+    </div>
+</div>

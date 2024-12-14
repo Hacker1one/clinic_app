@@ -1,0 +1,128 @@
+@page
+@model webclinic.Pages.DiagnosisModel
+@{
+    ViewData["Title"] = "Diagnosis";
+}
+<div class="header-inner">
+            <div class="container">
+                <div class="inner">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-12">
+                            <div class="logo">
+                                <a href="index"><img src="img/logo.png" alt="#"></a>
+                            </div>
+                            <div class="mobile-nav"></div>
+                        </div> 
+                        <div class="col-lg-7 col-md-9 col-12">
+                            <div class="main-menu">
+                                <nav class="navigation">
+                                    <ul class="nav menu">
+                                        <li><a href="index">Home</a></li>
+                                        <li><a href="#">Pages <i class="icofont-rounded-down"></i></a>
+                                            <ul class="dropdown">
+                                                <li><a href="404.html">404 Error</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="ContactUs">Contact Us</a></li>
+										<li class="active"><a href="DrApp">Appointments</a></li>
+                                        <li><a href="DrProfile">My Profile</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</header>
+
+<div class="breadcrumbs overlay">
+    <div class="container-fluid">
+        <div class="bread-inner">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Add Diagnosis</h2>
+                    <ul class="bread-list">
+                        <li><a href="Index">Home</a></li>
+                        <li><i class="icofont-simple-right"></i></li>
+                        <li><a href="DrApp">Appointments</a></li>
+                        <li><i class="icofont-simple-right"></i></li>
+                        <li class="active">Add Diagnosis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    
+<div class="container my-5">
+    <!-- Profile Section -->
+    <div class="row mb-5 align-items-center">
+        <div class="col-md-2 text-center">
+            <img src="https://via.placeholder.com/100" alt="Profile Image" class="rounded-circle" />
+        </div>
+        <div class="col-md-10">
+            <h2>@Model.PatientName</h2>
+            <p class="text-muted">Age: <strong>@Model.PatientAge</strong></p>
+        </div>
+    </div>
+
+    <!-- Long-term Conditions Section -->
+    <div class="mb-5">
+        <h5 class="mb-3">Long-term Conditions & Symptoms  </h5>
+        <div class="row g-3">
+            @foreach (var condition in Model.Conditions)
+            {
+                <div class="col-md-6">
+                    <div class="p-3 border rounded">
+                        <h6 class="mb-1">@condition.Name</h6>
+                        <p class="text-muted">@condition.Description</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- History Section -->
+    <div>
+        <h5 class="mb-3">History</h5>
+        <div class="row g-3">
+            @foreach (var history in Model.History)
+            {
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center p-3 border rounded">
+                        <div>
+                            <p class="mb-0">@history.Title</p>
+                            <p class="text-muted">@history.Description</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <form method="post" class="bg-light p-5 rounded shadow-lg">
+                <div class="mb-3">
+                    <label for="conditions" class="form-label">Conditions</label>
+                    <input type="text" class="form-control" id="conditions" name="Conditions" placeholder="Enter the diagnosed conditions" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" name="Description" rows="4" placeholder="Enter a detailed description of the diagnosis" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="prescription" class="form-label">Prescription</label>
+                    <textarea class="form-control" id="prescription" name="Prescription" rows="3" placeholder="Enter the prescribed medications or treatment" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Submit Diagnosis</button>
+            </form>
+        </div>
+    </div>
+</div>
+ 
