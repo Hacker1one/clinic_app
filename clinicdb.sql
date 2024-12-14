@@ -69,8 +69,9 @@ CREATE TABLE DoctorCertificate
 	CertID int IDENTITY(1,1),
 	DoctorID int,
 	date_of_acq date,
+    cert_validation bit,
 	Institute Varchar(40),
-	Description VarChar(80),
+	[Description] VarChar(80),
 	PRIMARY KEY (CertID, DoctorID),
 	foreign key (DoctorID) references Doctor
 );
@@ -422,19 +423,18 @@ VALUES
 
 
 
-
-INSERT INTO DoctorCertificate (DoctorID, date_of_acq, Institute, Description)
+INSERT INTO DoctorCertificate (DoctorID, date_of_acq, cert_validation, Institute, [Description])
 VALUES 
-(11, '2013-06-10', 'Cairo University', 'Board Certification in Cardiology'),
-(12, '2015-05-20', 'Ain Shams University', 'Pediatrics Fellowship Certification'),
-(13, '2017-04-15', 'Alexandria University', 'Neurology Residency Certificate'),
-(14, '2010-09-12', 'Aswan Medical College', 'Master’s in General Surgery'),
-(15, '2016-02-18', 'Maadi Hospital', 'Family Medicine Specialist Certificate'),
-(16, '2014-11-25', 'Heliopolis Dermatology Center', 'Board Certification in Dermatology'),
-(17, '2018-07-30', 'Nasr Orthopedic Institute', 'Fellowship in Orthopedics'),
-(18, '2019-08-22', 'October Women’s Health Center', 'Gynecology Consultant Certification'),
-(19, '2020-01-12', 'Sheikh Zayed Diagnostic Labs', 'Certification in Diagnostic Radiology'),
-(20, '2011-03-05', 'Dokki Oncology Center', 'Advanced Oncology Certification');
+(11, '2013-06-10', 1, 'Cairo University', 'Board Certification in Cardiology'),
+(12, '2015-05-20', 0, 'Ain Shams University', 'Pediatrics Fellowship Certification'),
+(13, '2017-04-15', 1, 'Alexandria University', 'Neurology Residency Certificate'),
+(14, '2010-09-12', 0, 'Aswan Medical College', 'Master’s in General Surgery'),
+(15, '2016-02-18', 1, 'Maadi Hospital', 'Family Medicine Specialist Certificate'),
+(16, '2014-11-25', 0, 'Heliopolis Dermatology Center', 'Board Certification in Dermatology'),
+(17, '2018-07-30', 1, 'Nasr Orthopedic Institute', 'Fellowship in Orthopedics'),
+(18, '2019-08-22', 0, 'October Women’s Health Center', 'Gynecology Consultant Certification'),
+(19, '2020-01-12', 1, 'Sheikh Zayed Diagnostic Labs', 'Certification in Diagnostic Radiology'),
+(20, '2011-03-05', 0, 'Dokki Oncology Center', 'Advanced Oncology Certification');
 
 
 INSERT INTO Symptom (PatientID, SymptomID, DateOfFirstInstance, Severity, OnsetDuration_years, OnsetDuration_months, OnsetDuration_days, IsPresent)

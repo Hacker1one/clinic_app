@@ -131,3 +131,273 @@ COMMIT TRANSACTION;
 
 
 
+
+-- retrieve doctors in the booking search
+
+DECLARE @MinPrice DECIMAL(10, 2) = 150.00;
+DECLARE @MaxPrice DECIMAL(10, 2) = 250.00;
+DECLARE @MedicalFieldCode INT = 1;
+DECLARE @StartDate DATETIME = '2024-01-01 00:00:00';
+DECLARE @EndDate DATETIME = '2024-01-31 23:59:59';
+
+SELECT 
+    U.FName AS DoctorFirstName,
+    U.LName AS DoctorLastName,
+    FM.FieldName AS MedicalField,
+    D.PricePA AS PricePerAppointment,
+    MIN(A.DatenTime) AS NearestAppointment
+FROM 
+    [user] U JOIN Doctor D ON U.ID = D.ID
+	JOIN FieldOfMedicine FM ON D.FieldCode = FM.FieldCode
+	JOIN Appointment A ON A.DoctorID = D.ID
+WHERE 
+    D.PricePA BETWEEN @MinPrice AND @MaxPrice AND
+    FM.FieldCode = @MedicalFieldCode AND
+    A.DatenTime BETWEEN @StartDate AND @EndDate
+GROUP BY 
+    D.ID, U.FName, U.LName, FM.FieldName, D.PricePA
+
+
+
+
+-- retrieve doctor profile information
+DECLARE @DOCTOR_ID INT = 1
+
+SELECT  Fname, Lname, PricePA, FieldName
+FROM Doctor, [user], FieldOfMedicine
+WHERE Doctor.ID = @DOCTOR_ID and [user].ID = @DOCTOR_ID and FieldOfMedicine.FieldCode = Doctor.FieldCode
+
+SELECT city, Governorate, Institution, JobPosition
+FROM DoctorCurWorkplace
+WHERE DoctorID = @DOCTOR_ID
+
+SELECT Institution, SpanYears, SpanMonths, JobPosition
+FROM DoctorExperience
+WHERE DoctorID = @DOCTOR_ID
+
+SELECT date_of_acq, Institute, [Description]
+FROM DoctorCertificate
+WHERE DoctorID = @DOCTOR_ID
+
+SELECT*
+FROM Appointment
+
+
+SELECT CONVERT(TIME, DatenTime) as [time] --retrieve the time slots of specific day
+FROM Appointment 
+WHERE DoctorID = @DOCTOR_ID and  CONVERT(DATE, DatenTime) = CONVERT(date, @StartDate)
+order by CONVERT(TIME, DatenTime) 
+
+
+DECLARE @currentdate DATETIME = '2024-01-31 23:59:59';
+SELECT DISTINCT CONVERT(DATE, DatenTime) as [date] -- retrieve all upcoming working days for a doctor
+FROM Appointment 
+WHERE DoctorID = @DOCTOR_ID and CONVERT(DATE, DatenTime)>= @currentdate
+order by CONVERT(DATE, DatenTime) 
+
+
+SELECT COUNT(PatientID) as Patients_Treated -- retrieve number of patient treated by a doctor
+FROM Appointment
+WHERE DoctorID = @DOCTOR_ID and PatientID is not null
+group by DoctorID
+
+
+SELECT AVG(NStars) as rating -- retraive doctor rating
+FROM Reviews
+WHERE DoctorID = @DOCTOR_ID
+group by DoctorID
+
+
+
+
+
+
+
+
+
+-- retrieve pateint profile information
+
+
+DECLARE @Patient_ID INT = 1
+
+SELECT  Fname, Lname, BirthDate
+FROM Patient, [user] 
+WHERE Patient.ID = @Patient_ID and [user].ID = @Patient_ID
+
+SELECT DoctorID, condition,[description]
+FROM Diagnosis
+where PatientID = @Patient_ID
+
+SELECT SymptomName,Severity, DateOfFirstInstance, IsPresent
+FROM Symptom, SymptomTypes
+WHERE PatientID = @Patient_ID AND symptom.SymptomID = SymptomTypes.SymptomID
+
+SELECT ConditionName, Severity, DateOfFirstInstance
+FROM LongTermConditions, LTCTypes
+WHERE PatientID = @Patient_ID AND LongTermConditions.ConditionID = LTCTypes.ConditionID
+
+
+
+ -- add new time slot for doctor's appointments
+
+DECLARE @day INT = 1;
+DECLARE @hour INT = 1;
+DECLARE @minute INT = 1;
+INSERT INTO Appointment(DoctorID, PatientID, DatenTime, IsConfirmed, IsFinished)
+values(@DOCTOR_ID,@Patient_ID,DATETIMEFROMPARTS(@Year,@Month,@day,@hour,@minute,0,0), 0,0);
+
+
+
+-- booking an appointment
+Update Appointment
+set PatientID = @Patient_ID
+where DoctorID = @DOCTOR_ID and DatenTime = DATETIMEFROMPARTS(@Year,@Month,@day,@hour,@minute,0,0)
+
+
+
+-- changing appointments price
+DECLARE @price INT = 1;
+update Doctor
+set PricePA = @price
+where ID = @DOCTOR_ID
+
+
+
+use clinicdb
+
+/*Doctors Count */
+SELECT COUNT(ID)
+from Doctor
+
+/* Count Finished Patients */
+SELECT COUNT(PatientID)
+from Appointment
+where IsFinished = 1 
+
+
+SELECT u.FName, u.LName, Doctor.PricePA, Doctor.FieldCode, Appointment.DatenTime
+from [user] as u join Doctor on (u.ID = Doctor.ID ) join Appointment on (Doctor.ID = DoctorID)
+where IsConfirmed = 0  and PatientID = null 
+
+
+/* Upcoming DR Appointments*/
+SELECT u.FName, u.LName, Appointment.DatenTime
+from [user] as u join Patient on (u.ID = Patient.ID ) join Appointment on (Patient.ID = PatientID)
+where IsConfirmed = 1 and IsFinished = 0
+
+/* Pending DR Appointments*/
+SELECT u.FName, u.LName, Appointment.DatenTime
+from [user] as u join Patient on (u.ID = Patient.ID ) join Appointment on (Patient.ID = PatientID)
+where IsConfirmed = 0 and IsFinished = 0
+
+/* Completed DR Appointments*/
+SELECT u.FName, u.LName, Appointment.DatenTime
+from [user] as u join Patient on (u.ID = Patient.ID ) join Appointment on (Patient.ID = PatientID)
+where IsConfirmed = 1 and IsFinished = 1
+
+/* Canceled DR Appointments*/
+SELECT u.FName, u.LName, Appointment.DatenTime
+from [user] as u join Patient on (u.ID = Patient.ID ) join Appointment on (Patient.ID = PatientID)
+where IsConfirmed = 0 and IsFinished = 1
+
+
+
+
+/*Cancel in Dr Appointment*/
+/UPDATE Appointment 
+SET IsConfirmed = 0, IsFinished = 1
+where ID = PatientID
+
+
+/* Confirm in Dr Appointment*/
+UPDATE Appointment 
+SET IsConfirmed = 1, IsFinished = 0
+where ID = PatientID 
+ 
+/* Complete in Dr Appointment*/
+UPDATE Appointment 
+SET IsConfirmed = 1, IsFinished = 1
+where ID = PatientID 
+ 
+
+
+
+/* Upcoming Patient Appointments*/
+SELECT u.FName, u.LName, Appointment.DatenTime
+from [user] as u join Doctor on (u.ID = Doctor.ID ) join Appointment on (Doctor.ID = DoctorID)
+where IsConfirmed = 1 and IsFinished = 0
+
+
+/* Pending Patient Appointments*/
+SELECT u.FName, u.LName, Appointment.DatenTime
+from [user] as u join Doctor on (u.ID = Doctor.ID ) join Appointment on (Doctor.ID = DoctorID)
+where IsConfirmed = 0 and IsFinished = 0
+
+/* Completed Patient Appointments*/
+SELECT u.FName, u.LName, Appointment.DatenTime
+from [user] as u join Doctor on (u.ID = Doctor.ID ) join Appointment on (Doctor.ID = DoctorID)
+where IsConfirmed = 1 and IsFinished = 1
+
+/* Canceled Patient Appointments*/
+SELECT u.FName, u.LName, Appointment.DatenTime
+from [user] as u join Doctor on (u.ID = Doctor.ID ) join Appointment on (Doctor.ID = DoctorID)
+where IsConfirmed = 0 and IsFinished = 1 
+
+
+/* Cancel in patient Appointment*/
+UPDATE Appointment 
+SET IsConfirmed = 0, IsFinished = 1
+where ID = DoctorID 
+
+
+/*Add review in patient Appointment*/
+insert into Reviews (DoctorID, PatientID, NStars, Comment) 
+VALUES (DID, PID, Stars, Comment) 
+
+
+/* View Diagnose in patient Appointment*/
+select Diagnosis.condition, Diagnosis.description
+from Diagnosis
+where DID = Diagnosis.DoctorID and PID = Diagnosis.PatientID 
+
+
+/* Add Diagnosis*/
+INSERT into Diagnosis(AppointmentID, DoctorID, PatientID, condition, description)
+values(AID, DID, PID, condition, description1)
+
+
+/* check if there is a review of this appointment in reviews*/
+SELECT AppointmentID
+from Appointment
+where AppointmentID = id
+
+
+
+-- admin ban/unban
+UPDATE Doctor
+SET Banned = 1
+WHERE ID = <DoctorID>;
+
+UPDATE Doctor
+SET Banned = 0
+WHERE ID = <DoctorID>;
+
+-- admin verify/unverify
+UPDATE Doctor
+SET SSNValidation = 1 -- or 0
+WHERE ID = <DoctorID>;
+
+UPDATE Patient
+SET SSNValidation = 1 -- or 0
+WHERE ID = <PatientID>;
+
+
+-- add penalty fees
+UPDATE Patient
+SET PenaltyFees = PenaltyFees + <Amount>
+WHERE ID = <PatientID>;
+
+-- verify doctor certificate.
+UPDATE DoctorCertificate
+SET cert_validation = 1
+WHERE CertID = <InputCertID>;
