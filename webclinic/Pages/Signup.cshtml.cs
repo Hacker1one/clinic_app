@@ -65,6 +65,10 @@ namespace webapplication.Pages
                 return RedirectToPage("Signup");
             }
 
+            governorate = HttpContext.Session.GetString("govern")!;
+            allCities = db.getCities(governorate);
+            city = allCities.Rows[int.Parse(city)]["City"].ToString()!;
+
             if(!string.IsNullOrEmpty(specialty))
             {
                 db.addUser(fname, lname, ssn, password, governorate, city, email, gender, 
@@ -78,12 +82,13 @@ namespace webapplication.Pages
             return RedirectToPage("Login");
         }
 
-        [HttpGet]
         public JsonResult OnGetChangeCities(string govern)
         {
-            var selectedGovernorate = allGovernorates.Rows[int.Parse(govern)]["Governorate"].ToString();
-            var cities = db.getCities(selectedGovernorate); // Returns a DataTable
-            var cityList = cities.AsEnumerable().Select(row => row["City"].ToString()).ToList();
+
+            string selectedGovernorate = allGovernorates.Rows[int.Parse(govern)]["Governorate"].ToString()!;
+            HttpContext.Session.SetString("govern", selectedGovernorate);
+            DataTable cities = db.getCities(selectedGovernorate); // Returns a DataTable
+            List<string> cityList = cities.AsEnumerable().Select(row => row["City"].ToString()).ToList()!;
             return new JsonResult(cityList);
         }
 

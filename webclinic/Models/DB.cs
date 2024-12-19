@@ -100,7 +100,7 @@ namespace webclinic.Models
 				"INSERT INTO[user] \n" +
 				"(FName, LName, SSN, RegistrationDate, Gender, [Password], BirthDate, City, Governorate, Email, [type]) \n" +
 				"VALUES " +
-				$"('{fname}', '{lname}', {ssn}, '{today}', '{gender}', '{password}', '{bd}', 'Giza', 'Giza', '{email}', '{user_type}')\n" +
+				$"('{fname}', '{lname}', {ssn}, '{today}', '{gender}', '{password}', '{bd}', '{city}', '{governorate}', '{email}', '{user_type}')\n" +
 				"DECLARE @NewUserID INT = SCOPE_IDENTITY(); \n" +
 				"INSERT INTO Patient(ID, SSNValidation, PenaltyFees)\n" +
 				"VALUES(@NewUserID, 0, 0);\n" +
@@ -112,7 +112,7 @@ namespace webclinic.Models
 				"INSERT INTO[user] \n" +
 				"(FName, LName, SSN, RegistrationDate, Gender, [Password], BirthDate, City, Governorate, Email, [type]) \n" +
 				"VALUES " +
-				$"('{fname}', '{lname}', {ssn}, '{today}', '{gender}', '{password}', '{bd}', 'Giza', 'Giza', '{email}', '{user_type}')\n" +
+				$"('{fname}', '{lname}', {ssn}, '{today}', '{gender}', '{password}', '{bd}', '{city}', '{governorate}', '{email}', '{user_type}')\n" +
 				"DECLARE @NewUserID INT = SCOPE_IDENTITY(); \n" +
 				"INSERT INTO Doctor(ID, PricePA, SSNValidation, Banned, FieldCode)\n" +
 				$"VALUES(@NewUserID, 0, 0, 0, {field_code});\n" +

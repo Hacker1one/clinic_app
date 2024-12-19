@@ -2,7 +2,7 @@
   "Files": [
     {
       "Id": "C:\\Users\\yassi\\Source\\Repos\\clinic_app\\webclinic\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\webclinic.bundle.scp.css",
-      "PackagePath": "staticwebassets\\webclinic.bundle.scp.css"
+      "PackagePath": "staticwebassets\\webclinic.9yh0vystvd.bundle.scp.css"
     },
     {
       "Id": "C:\\Users\\yassi\\Source\\Repos\\clinic_app\\webclinic\\wwwroot\\css\\Appointments.css",
@@ -659,6 +659,10 @@
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.webclinic.props",
       "PackagePath": "buildTransitive\\webclinic.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.webclinic.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.webclinic.Microsoft.AspNetCore.StaticWebAssets.props",
