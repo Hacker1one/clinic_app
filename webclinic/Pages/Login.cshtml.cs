@@ -23,6 +23,7 @@ namespace webapplication.Pages
             }
             else
             {
+                HttpContext.Session.Remove("invlogin");
                 return RedirectToPage("Index");
             }
         }
@@ -31,11 +32,12 @@ namespace webapplication.Pages
             string type = db.isValidLogin(email, password);
             if(string.IsNullOrEmpty(type))
             {
-                HttpContext.Session.SetString("err", "1");
+                HttpContext.Session.SetString("invlogin", "1");
                 return RedirectToPage("Login");
             }
             HttpContext.Session.SetString("email", email);
             HttpContext.Session.SetString("user_type", type);
+            HttpContext.Session.Remove("invlogin");
             return RedirectToPage("Index");
         }
     }

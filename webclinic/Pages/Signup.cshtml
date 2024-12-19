@@ -105,10 +105,6 @@
         <!-- City dropdown -->
 		<select class="form-select d-none justify-content-center align-items-center w-50 mx-auto mb-3" asp-for="city" id="citySelect" aria-label="City" required>
 			<option value="">City</option>
-			@for(int i = 0; i < Model.allCities.Rows.Count; i++ )
-			{
-				<option value="@i">@Model.allCities.Rows[i]["City"].ToString()</option>
-			}
 		</select>
         
 
@@ -152,19 +148,39 @@
 </div>
 
 <script>
-    function showCity() {
-        var x = document.getElementById("governorateSelect").value;
+	function showCity() {
+        var governorateSelect = document.getElementById("governorateSelect");
+        var citySelect = document.getElementById("citySelect");
+        var selectedValue = governorateSelect.value;
 
-        if (x != "")
-        {
-            document.getElementById("citySelect").classList.remove("d-none");
-            document.getElementById("citySelect").classList.add("d-flex");
-            fetch(`?handler=ChangeCities&govern=${x}`);
-        }
-        else
-        {
-            document.getElementById("citySelect").classList.remove("d-flex");
-            document.getElementById("citySelect").classList.add("d-none");
+        if (selectedValue !== "") {
+            // Show the city dropdown
+            citySelect.classList.remove("d-none");
+            citySelect.classList.add("d-flex");
+
+            // Fetch cities dynamically
+            fetch(`?handler=ChangeCities&govern=${selectedValue}`)
+                .then(response => response.json())
+                .then(cities => {
+                    // Clear existing options
+                    citySelect.innerHTML = '<option value="">City</option>';
+
+                    // Populate the dropdown with new city options
+                    cities.forEach((city, index) => {
+                        var option = document.createElement("option");
+                        option.value = index;
+                        option.textContent = city;
+                        citySelect.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error fetching cities:", error);
+                });
+        } else {
+            // Hide the city dropdown
+            citySelect.classList.remove("d-flex");
+            citySelect.classList.add("d-none");
         }
     }
+
 </script>

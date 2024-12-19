@@ -8,11 +8,18 @@
 
 <div class="w-75 mx-auto mt-5 my-auto">
     <h2 class="text-center text-primary fw-bold mb-4">Log In</h2>
+    @if (!string.IsNullOrEmpty(HttpContext.Session.GetString("invlogin")))
+    {
+        <div class="alert alert-danger w-50 mx-auto">
+            Invalid username or password. Please try again.
+        </div>
+    }
+
     <form method="post" asp-page-handler="log">
         <!-- Email Address -->
         <div class="form-floating mb-3 mx-auto w-50">
             <input type="email" class="form-control" asp-for="email" id="email" placeholder="Email Address" required>
-            <label for="email">Email Address</label>
+            <label for="email">Email</label>
         </div>
         <!-- Password -->
         <div class="form-floating mb-3 mx-auto w-50">

@@ -65,15 +65,27 @@ namespace webapplication.Pages
                 return RedirectToPage("Signup");
             }
 
-            db.addUser(fname, lname, ssn, password, governorate, city, email, gender, 
-                birthdate, HttpContext.Session.GetString("user_type")!, int.Parse(specialty)+1);
+            if(!string.IsNullOrEmpty(specialty))
+            {
+                db.addUser(fname, lname, ssn, password, governorate, city, email, gender, 
+                    birthdate, HttpContext.Session.GetString("user_type")!, int.Parse(specialty)+1);
+            }
+            else
+            {
+                db.addUser(fname, lname, ssn, password, governorate, city, email, gender, 
+                    birthdate, HttpContext.Session.GetString("user_type")!, -1);
+            }
             return RedirectToPage("Login");
         }
 
-        public IActionResult OnGetChangeCities(string govern)
+        [HttpGet]
+        public JsonResult OnGetChangeCities(string govern)
         {
-            this.allCities = db.getCities(allGovernorates.Rows[int.Parse(govern)]["Governorate"].ToString()!);
-            return Page();
+            var selectedGovernorate = allGovernorates.Rows[int.Parse(govern)]["Governorate"].ToString();
+            var cities = db.getCities(selectedGovernorate); // Returns a DataTable
+            var cityList = cities.AsEnumerable().Select(row => row["City"].ToString()).ToList();
+            return new JsonResult(cityList);
         }
+
     }
 }
