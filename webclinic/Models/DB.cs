@@ -95,12 +95,84 @@ namespace webclinic.Models
 			}
 			return dt;
 		}
+        public DataTable getdrgovernments()
+        {
+            string queryString = $"SELECT DISTINCT \r\n    Governorate\r\nFROM \r\n    [user]\r\nWHERE \r\n    [user].type = 'd';";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+        public DataTable getdrspecialities()
+        {
+            string queryString = $"SELECT DISTINCT \r\n    FieldName\r\nFROM \r\n    Doctor join FieldOfMedicine on (Doctor.FieldCode = FieldOfMedicine.FieldCode)";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+        public DataTable GetDoctorData()
+        {
+            string queryString = @"
+        SELECT 
+            FName, 
+            LName, 
+            Governorate,
+            City,
+            Doctor.ID, 
+            PricePA,
+            Doctor.FieldCode,
+            FieldName, 
+            ProfileImageUrl,
+            COALESCE(AVG(NStars), 5) AS AverageRating
+        FROM 
+            [user]
+        JOIN 
+            Doctor ON [user].ID = Doctor.ID
+        JOIN 
+            FieldOfMedicine ON Doctor.FieldCode = FieldOfMedicine.FieldCode
+        LEFT JOIN 
+            Reviews ON Doctor.ID = Reviews.DoctorID
+        WHERE 
+            [user].type = 'd'
+        GROUP BY 
+            FName, 
+            LName, 
+            Doctor.ID, 
+            PricePA, 
+            Doctor.FieldCode,
+            FieldName,
+            Governorate,
+	        City,
+            ProfileImageUrl";
 
-        public DataTable getdrsdata()
-        {
-            string queryString = "select FName, LName, ID from [user] where type = 'd'";
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand(queryString, con);
+
             try
             {
                 con.Open();
@@ -108,34 +180,17 @@ namespace webclinic.Models
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Console.WriteLine(ex.ToString());  // Make sure to use Console.WriteLine for better logging in C#
             }
             finally
             {
                 con.Close();
             }
+
             return dt;
         }
-        public DataTable getotherdrdata(int id)
-        {
-            string queryString = $"select PricePa, FieldCode from Doctor Where ID = '{id}'";
-            DataTable dt = new DataTable();
-            SqlCommand cmd = new SqlCommand(queryString, con);
-            try
-            {
-                con.Open();
-                dt.Load(cmd.ExecuteReader());
-            }
-            catch (Exception ex)
-            {
-                Console.Write(ex.ToString());
-            }
-            finally
-            {
-                con.Close();
-            }
-            return dt;
-        }
+
+
 
         public bool addUser(string fname, string lname, string ssn, string password, string governorate, string city, string email, string gender, DateTime birthdate, string user_type, int field_code)
 		{

@@ -50,36 +50,61 @@
         <div class="col-md-3 mb-4">
             <div class="filters">
                 <h4 class="mb-4">Filters</h4>
-                <!-- Availability -->                <div class="mb-4">
-                    <label>Availability</label>                    <div>
-                        <input type="checkbox" id="today" name="availability" value="today">                        <label for="today">Today</label>
+                <!-- Availability -->                
+                <div class="mb-4">
+                    <label>Availability</label>                    
+                    <div>
+                        <input type="checkbox" id="today" name="availability" value="today">                        
+                        <label for="today">Today</label>
                     </div>                    <div>
-                        <input type="checkbox" id="this-week" name="availability" value="this-week">                        <label for="this-week">This Week</label>
+                        <input type="checkbox" id="this-week" name="availability" value="this-week">                        
+                        <label for="this-week">This Week</label>
                     </div>                    <div>
-                        <input type="checkbox" id="online" name="availability" value="online">                        <label for="online">Online</label>
+                        <input type="checkbox" id="online" name="availability" value="online">                       
+                        <label for="online">Online</label>
                     </div>
                 </div>
 
                 <!-- Specific Date or Range -->
                 <div class="mb-4">
                     <label for="date-range">Specific date or range</label>
-                    <input type="date" id="date-range" name="date-range" class="form-control">
+                    <input type="date" id="date-range" name="date-range"
+                           class="form-control">
                 </div>
 
-                <!-- Areas of Interest -->
-                <div class="mb-4">
-                    <label for="specialization">Areas of interest</label>
-                    <select id="specialization" name="specialization" class="form-control">
-                        <option>Choose a speciality</option>
+                <div class="mb-4" ">
+                    <label for="specialization">Speciality</label>
+                    <br>
+                    <select id="specialization" class="form-control" asp-for="special" >
+                        <option value="">Select Specialization</option>
+                        
                         @for (int i = 0; i < Model.fields.Rows.Count; i++)
                         {
                             <option value="@i">@Model.fields.Rows[i]["FieldName"].ToString()</option>
                         }
                     </select>
                 </div>
+                
+                <!-- Governorate dropdown -->
+                <div class="mb-4" style="margin: 60px 0;">
+                    <label for="action="government"">Government</label>
+                    <br >
+                    <select id="governorateSelect"  class="form-control" asp-for="governorate" onchange="showCity()">
+                        <option value="">Governorate</option>
+                        @for (int i = 0; i < Model.allGovernorates.Rows.Count; i++)
+                        {
+                            <option value="@i">@Model.allGovernorates.Rows[i]["Governorate"].ToString()</option>
+                        }
+                    </select>
+                </div>
 
+     @*            <!-- City dropdown -->
+                <select class="form-select d-none justify-content-center align-items-center w-50 mx-auto mb-3" asp-for="city" id="citySelect" aria-label="City" required>
+                    <option value="">City</option>
+                </select>
+                *@
                 <!-- Session Fees -->
-                <div class="mb-4">
+                <div class="mb-4" style="margin: 60px 0;">
                     <label for="fees-range">Session Fees</label>
                     <input type="range" id="fees-range" name="fees-range" min="140" max="4700" step="10">
                     <div>140 EGP - 4700 EGP</div>
@@ -90,6 +115,7 @@
         <!-- Doctors Cards Section -->
         <div class="col-md-9 mb-4">
             <div class="row">
+             
                 @foreach (var therapist in Model.Therapists)
                 {
                     <div class="col-md-6 col-lg-4 mb-4">
@@ -127,3 +153,43 @@
         </div>
     </div>
 </div>
+
+<script>
+    <script>
+     function showCity() {
+         var governorateSelect = document.getElementById("governorateSelect");
+         var citySelect = document.getElementById("citySelect");
+         var selectedValue = governorateSelect.value;
+
+         if (selectedValue !== "") {
+             // Show the city dropdown
+             citySelect.classList.remove("d-none");
+             citySelect.classList.add("d-flex");
+
+             // Fetch cities dynamically
+             fetch(`?handler=ChangeCities&govern=${selectedValue}`)
+                 .then(response => response.json())
+                 .then(cities => {
+                     // Clear existing options
+                     citySelect.innerHTML = '<option value="">City</option>';
+
+                     // Populate the dropdown with new city options
+                     cities.forEach((city, index) => {
+                         var option = document.createElement("option");
+                         option.value = index;
+                         option.textContent = city;
+                         citySelect.appendChild(option);
+                     });
+                 })
+                 .catch(error => {
+                     console.error("Error fetching cities:", error);
+                 });
+         } else {
+             // Hide the city dropdown
+             citySelect.classList.remove("d-flex");
+             citySelect.classList.add("d-none");
+         }
+     }
+
+</script>
+</script>

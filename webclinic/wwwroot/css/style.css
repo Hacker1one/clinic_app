@@ -4282,3 +4282,29 @@ aside {
 .btn-primary:hover {
     background-color: #1457A0; /* Darker blue on hover */
 }
+
+/* The drawer (hidden by default) */
+.drawer {
+	position: fixed;
+	top: 0;
+	left: -300px; /* Start off-screen */
+	width: 300px;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	color: white;
+	padding: 20px;
+	overflow-y: auto;
+	transition: left 0.3s ease-in-out;
+}
+
+/* Style for the input and button */
+#filterInput {
+	margin-bottom: 10px;
+}
+
+/* Style the select box */
+select {
+	width: 100%;
+	font-size: 16px;
+}
+
