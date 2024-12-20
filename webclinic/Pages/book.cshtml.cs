@@ -1,23 +1,33 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
+using System.ComponentModel.DataAnnotations;
+using System.Data;
+using webclinic.Models;
 namespace webclinic.Pages;
 
+[BindProperties]
 public class bookModel : PageModel
 {
     private readonly ILogger<bookModel> _logger;
 
-    public bookModel(ILogger<bookModel> logger)
+    public bookModel(ILogger<bookModel> logger, DB db)
     {
+
         _logger = logger;
+        this.db = db;
     }
 
     // Public property for therapists
+    [BindProperty(SupportsGet = true)]
+    public DataTable fields { get; set; }
     public List<Therapist> Therapists { get; private set; }
+    public DB db { get; set; }
 
     public void OnGet()
     {
         Therapists = GetSampleTherapists();
+        fields = new DataTable();
+        fields = db.getFields();
     }
     public IActionResult OnPostB()
     {

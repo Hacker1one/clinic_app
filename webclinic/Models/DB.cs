@@ -27,14 +27,14 @@ namespace webclinic.Models
 			// connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
 			// yassin's connection string:
-            connectionString = "Data Source=AMNESIA\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
+            connectionString = "Data Source=AN\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
             con.ConnectionString = connectionString;
 		}
 
 		public DataTable getFields()
 		{
-			string queryString = "Select FieldName from FieldOfMedicine";
+			string queryString = "Select FieldName from FieldOfMedicine ORDER BY FIELDNAME ASC";
 			DataTable dt = new DataTable();
 			SqlCommand cmd = new SqlCommand(queryString, con);
 			try
@@ -95,7 +95,49 @@ namespace webclinic.Models
 			}
 			return dt;
 		}
-		public bool addUser(string fname, string lname, string ssn, string password, string governorate, string city, string email, string gender, DateTime birthdate, string user_type, int field_code)
+
+        public DataTable getdrsdata()
+        {
+            string queryString = "select FName, LName, ID from [user] where type = 'd'";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+        public DataTable getotherdrdata(int id)
+        {
+            string queryString = $"select PricePa, FieldCode from Doctor Where ID = '{id}'";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+
+        public bool addUser(string fname, string lname, string ssn, string password, string governorate, string city, string email, string gender, DateTime birthdate, string user_type, int field_code)
 		{
 			string today = DateTime.Today.Date.ToString("yyyy-MM-dd");
 			string bd = birthdate.Date.ToString("yyyy-MM-dd");
