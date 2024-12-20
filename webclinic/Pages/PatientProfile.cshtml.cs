@@ -1,55 +1,59 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Data;
+using webclinic.Models;
 
 namespace webclinic.Pages
 {
     public class PatientProfileModel : PageModel
     {
+        [BindProperty(SupportsGet = true)]
+        public DataTable symptoms { get; set; }
+        public DataTable history { get; set; }
+
+        public DB db { get; set; }
         public string PatientName { get; set; }
         public int PatientAge { get; set; }
         public bool IsActive { get; set; } = true;
-        public List<Condition> Conditions { get; set; }
-        public List<History> History { get; set; }
 
 
+        public PatientProfileModel(DB db)
+        {
+            this.db = db;
+
+        }
         public void OnGet()
         {
-            PatientName = "Anna Jones";
-            PatientAge = 19;
 
-            // Long-term conditions
-            Conditions = new List<Condition>
-        {
-            new Condition { Name = "????", Description = "Description" },
-            new Condition { Name = "Cancer", Description = "Description" }
-        };
 
-            // History
-            History = new List<History>
-        {
-            new History { DoctorName = "Dr. Yassin Elbedwihly", Title = "Oncologist", Description = "Stage 2 encephalitis" },
-            new History { DoctorName = "Dr. Ahmed Abdelsamee", Title = "Oncologist", Description = "Stage 3 encephalitis" }
-        };
+            PatientName = db.getName(HttpContext.Session.GetString("email"));
+            PatientAge = db.getAge(HttpContext.Session.GetString("email"));
+
+
+            symptoms = new DataTable();
+            symptoms = db.getSymptoms(HttpContext.Session.GetString("email"));
+
+            history = new DataTable();
+            history = db.getHistory(HttpContext.Session.GetString("email"));
+
+
         }
 
-        public void OnPostToggleStatus()
-        {
-            // Toggle the patient's status
-            IsActive = !IsActive;
-        }
-    }
-
-    public class Condition
-    {
-        public string Name { get; set; }
-        public string Description { get; set; }
-    }
-
-    public class History
-    {
-        public string DoctorName { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
     }
 
 }
+
+public class Condition
+{
+    public string Name { get; set; }
+    public string Description { get; set; }
+}
+
+public class History
+{
+    public string DoctorName { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+}
+
+

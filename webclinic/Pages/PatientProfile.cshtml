@@ -66,9 +66,9 @@
 
             @if (HttpContext.Session.GetString("user_type") == "a")
             {
-        <span class="badge @(Model.IsActive ? "bg-success" : "bg-secondary")">
+            <span class="badge @(Model.IsActive ? "bg-success" : "bg-secondary")">
                     @(Model.IsActive ? "Active" : "Banned")
-        </span>
+            </span>
             }
 
 
@@ -83,14 +83,14 @@
             </a>
         </h5>
         <div class="row g-3">
-            @foreach (var condition in Model.Conditions)
+            @for (int i = 0; i < Model.symptoms.Rows.Count; i++)
             {
-                <div class="col-md-6">
-                    <div class="p-3 border rounded">
-                        <h6 class="mb-1">@condition.Name</h6>
-                        <p class="text-muted">@condition.Description</p>
+                    <div class="col-md-6">
+                        <div class="p-3 border rounded">
+                                <h6 class="mb-1">@Model.symptoms.Rows[i]["SymptomName"].ToString()</h6>
+                                    <p class="text-muted">Severity: @Model.symptoms.Rows[i]["Severity"].ToString()</p>
+                        </div>
                     </div>
-                </div>
             }
         </div>
     </div>
@@ -103,33 +103,33 @@
             </a>
         </h5>
         <div class="row g-3">
-            @foreach (var history in Model.History)
+            @for (int i = 0; i < Model.history.Rows.Count; i++)
             {
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center p-3 border rounded">
-                        <div class="me-3">
-                            <img src="https://via.placeholder.com/50" alt="Doctor Image" class="rounded-circle" />
-                        </div>
-                        <div>
-                            <h6>@history.DoctorName</h6>
-                            <p class="mb-0">@history.Title</p>
-                            <p class="text-muted">@history.Description</p>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center p-3 border rounded">
+                            <div class="me-3">
+                                <img src="https://via.placeholder.com/50" alt="Doctor Image" class="rounded-circle" />
+                            </div>
+                            <div>
+                                <h6>@Model.history.Rows[i]["Fname"].ToString() @Model.history.Rows[i]["Lname"].ToString()</h6>
+                                <p class="mb-0">@Model.history.Rows[i]["condition"].ToString()</p>
+                                <p class="text-muted">@Model.history.Rows[i]["description"].ToString()</p>
+                            </div>
                         </div>
                     </div>
-                </div>
             }
         </div>
     </div>
-            @if (HttpContext.Session.GetString("user_type") == "a")
-            {
-        <div class="text-center">
-            <button class="btn @(Model.IsActive ? "btn-danger" : "btn-success") btn-lg px-4" onclick="toggleStatus()">
-                        @(Model.IsActive ? "Ban" : "Activate")
-            </button>
-        </div>
-            }
+    @if (HttpContext.Session.GetString("user_type") == "a")
+    {
+            <div class="text-center">
+                <button class="btn @(Model.IsActive ? "btn-danger" : "btn-success") btn-lg px-4" onclick="toggleStatus()">
+                @(Model.IsActive ? "Ban" : "Activate")
+                </button>
+            </div>
+    }
 
-     
+
 </div>
 
 
