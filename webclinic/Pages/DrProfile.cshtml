@@ -64,7 +64,7 @@
             <h2>@Model.DoctorName</h2>
             <p class="text-muted">@Model.Specialization</p>
             <div class="ratings mb-3">
-                <p><strong>Rating:</strong> @Model.Rating</p>
+                <p><strong>Rating:</strong> @Model.Rating/5</p>
                 <p><strong>Patients Treated:</strong> @Model.PatientsTreated</p>
                 @if (HttpContext.Session.GetString("user_type") == "a")
 {
@@ -75,7 +75,7 @@
 
             </div>
 
-            <p>@Model.About</p>
+            <p>Age: @Model.Age</p>
         </div>
     </div>
 
@@ -85,12 +85,12 @@
             <a href="#" class="ms-2 text-decoration-none">✎</a>
         </h5>
         <div class="row g-3">
-            @foreach (var education in Model.Education_list)
+            @for (int i = 0; i < Model.education.Rows.Count; i++)
             {
                 <div class="col-md-6">
                     <div class="p-3 border rounded">
-                        <h6 class="mb-1">@education.Institution</h6>
-                        <p class="text-muted">@education.Degree</p>
+                                    <h6 class="mb-1">@Model.education.Rows[i]["Institute"].ToString()</h6>
+                                <p class="text-muted">@Model.education.Rows[i]["Description"].ToString()</p>
                     </div>
                 </div>
             }
@@ -103,13 +103,12 @@
             <a href="#" class="ms-2 text-decoration-none">✎</a>
         </h5>
         <div class="row g-3">
-            @foreach (var experience in Model.Experience_list)
+            @for (int i = 0; i < Model.experiance.Rows.Count; i++)
             {
                 <div class="col-md-6">
                     <div class="p-3 border rounded">
-                        <h6 class="mb-1">@experience.Position</h6>
-                        <p class="text-muted">@experience.Organization</p>
-                        <p>@experience.Description</p>
+                                <h6 class="mb-1">@Model.experiance.Rows[i]["Institution"].ToString()</h6>
+                                <p class="text-muted">@Model.experiance.Rows[i]["JobPosition"].ToString()</p>
                     </div>
                 </div>
             }
@@ -123,8 +122,8 @@
         </h5>
         <div class="row">
             <div class="col-md-12">
-                <p><strong>@Model.ClinicDetails.Name</strong></p>
-                <p>@Model.ClinicDetails.Address</p>
+                <p><strong>@Model.ClinicDetails.Rows[0]["Institution"].ToString()</strong></p>
+                <p>@Model.ClinicDetails.Rows[0]["address"].ToString()</p>
             </div>
         </div>
     </div>
@@ -161,10 +160,6 @@
                                 <button class="btn btn-outline-secondary time-slot-btn">@date</button>
                         }
                     </div>
-                    <!-- Add Button -->
-                    <button class="btn btn-outline-primary w-100 mt-3" data-toggle="modal" data-target="#addDateModal">
-                        + Add Date
-                    </button>
                 </div>
 
                 <!-- Add Available Time Section -->
@@ -186,28 +181,6 @@
         </div>
     </div>
 </div>
-
-<!-- Modal for Add Date -->
-<div class="modal fade" id="addDateModal" tabindex="-1" role="dialog" aria-labelledby="addDateModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addDateModalLabel">Add Date</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <input type="date" class="form-control" id="newDate" />
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save Date</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Modal for Add Time -->
 <div class="modal fade" id="addTimeModal" tabindex="-1" role="dialog" aria-labelledby="addTimeModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -220,6 +193,9 @@
             </div>
             <div class="modal-body">
                 <input type="time" class="form-control" id="newTime" />
+            </div>
+            <div class="modal-body">
+                <input type="date" class="form-control" id="newDate" />
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
