@@ -9,6 +9,7 @@ namespace webapplication.Pages
     public class LoginModel : PageModel
     {
         public string email { get; set; }
+        public int id { get; set; }
         public string password { get; set; }
         public DB db { get; set; }
         public LoginModel(DB db)
@@ -36,6 +37,8 @@ namespace webapplication.Pages
                 return RedirectToPage("Login");
             }
             HttpContext.Session.SetString("email", email);
+            id = db.getID(email);
+            HttpContext.Session.SetInt32("id", id);
             HttpContext.Session.SetString("user_type", type);
             HttpContext.Session.Remove("invlogin");
             return RedirectToPage("Index");

@@ -10,6 +10,7 @@ using webclinic.Pages;
 using System.Runtime.Versioning;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Specialized;
+using System.Reflection.Metadata;
 
 namespace webclinic.Models
 {
@@ -298,6 +299,188 @@ namespace webclinic.Models
 
             return name;
         }
+
+        public int getRating(int id)
+        {
+            int rating = 0;
+            string queryString = $"SELECT AVG(NStars) as rating\r\nFROM Reviews\r\nWHERE DoctorID = '{id}'\r\ngroup by DoctorID";
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                rating = (int)cmd.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return rating;
+        }
+
+
+        public int getPatientsTreated(int id)
+        {
+            int rating = 0;
+            string queryString = $"SELECT COUNT(PatientID) as Patients_Treated\r\nFROM Appointment\r\nWHERE DoctorID = '{id}' and PatientID is not null\r\ngroup by DoctorID";
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                rating = (int)cmd.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return rating;
+        }
+
+        public string getMedicalField(int id)
+        {
+            string field = "";
+            string queryString = $"SELECT FieldName\r\nFROM Doctor, FieldOfMedicine\r\nWHERE Doctor.ID = '{id}' and FieldOfMedicine.FieldCode = Doctor.FieldCode";
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            
+            try
+            {
+                con.Open();
+                field = (string) cmd.ExecuteScalar(); ;
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return field;
+        }
+
+        public int getID(string email)
+        {
+            int id = 0;
+            string queryString = $"Select id\r\nfrom [user]\r\nwhere email = '{email}'";
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                id = (int)cmd.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return id;
+        }
+
+        public int getFee(int id)
+        {
+            int fee = 0;
+            string queryString = $"SELECT PricePA\r\nFROM Doctor\r\nWHERE Doctor.ID = '{id}'";
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                fee = (int)cmd.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return fee;
+        }
+        public DataTable getClinic(int id)
+        {
+
+            string queryString = $"SELECT city + ', ' +Governorate As address, Institution, JobPosition FROM DoctorCurWorkplace WHERE DoctorID = '{id}'";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+
+        public DataTable getExperiance(int id)
+        {
+
+            string queryString = $"SELECT Institution, JobPosition\r\nFROM DoctorExperience\r\nWHERE DoctorID = '{id}'";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+
+        public DataTable getEducation(int id)
+        {
+
+            string queryString = $"SELECT Institute, [Description]\r\nFROM DoctorCertificate\r\nWHERE DoctorID = '{id}' And cert_validation = 1";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+
+
+
+
 
     }
 }
