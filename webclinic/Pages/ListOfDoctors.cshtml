@@ -1,11 +1,9 @@
 ﻿@page
 @model webclinic.Pages.ListOfDoctorsModel
 @{
+    ViewData["Title"] = "Profile";
+    Layout = ".\\Shared\\_Layout.cshtml";
 }
-
-
-
-
 
 <div class="header-inner">
             <div class="container">
@@ -43,7 +41,7 @@
                     <ul class="bread-list">
                         <li><a href="Index">Home</a></li>
                         <li><i class="icofont-simple-right"></i></li>
-                        <li class="active">List Of Patients</li>
+                        <li class="active">List Of Doctors</li>
                     </ul>
                 </div>
             </div>
@@ -53,34 +51,95 @@
 <!-- End Breadcrumbs -->
 
 
-
-
 <div class="container">
-    <h2>Browse Doctors</h2>
+    <h2 class="mb-4">Browse Doctors</h2>
 
-    <!-- Search Bar -->
-    <form method="get">
-        <div class="input-group mb-3">
-            <input type="text" name="SearchTerm" class="form-control" placeholder="Search Doctor's Name"
-                   value="@Model.SearchTerm">
-            <button type="submit" class="btn btn-primary">Search</button>
+    <!-- Search Bar and Status Filter -->
+    <form method="get" class="mb-4">
+        <div class="row g-3 align-items-center">
+            <!-- Search by Name -->
+            <div class="col-md-3">
+                <input type="text" name="SearchTerm" class="form-control" placeholder="Search Doctor's Name"
+                       value="@Model.SearchTerm">
+            </div>
+
+            <!-- Search by ID -->
+            <div class="col-md-3">
+                <input type="text" name="SearchID" class="form-control" placeholder="Search Doctor's ID"
+                       value="@Model.SearchID">
+            </div>
+
+            <!-- Status Filter (Active, Banned, All) -->
+            <div class="col-md-3">
+                <select asp-for="SelectedStatus" class="form-control" onchange="this.form.submit()">
+                    <option value="">Show All</option>
+                    <option value="Active">Show Only Active</option>
+                    <option value="Banned">Show Only Banned</option>
+                </select>
+            </div>
+
+            <!-- Search Button -->
+            <div class="col-md-3 text-end">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
         </div>
     </form>
 
-    <!-- Doctor List -->
-    @foreach (var doctor in Model.Doctors)
-    {
-        <div class="d-flex align-items-center mb-3">
-            <!-- Doctor Image -->
-            <img src="https://via.placeholder.com/50" alt="Doctor Photo" class="rounded-circle me-3">
+    <!-- Doctor List Table -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col" class="text-center">Photo</th>
+                    <th scope="col">Name</th>
+                    <th scope="col" class="text-center">ID</th>
+                    <th scope="col" class="text-center">Registration Date</th>
+                    <th scope="col" class="text-center">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Doctors.Rows.Count > 0)
+                {
+                    @for (int i = 0; i < Model.Doctors.Rows.Count; i++)
+                    {
+                        <tr>
+                            <!-- Doctor Photo -->
+                            <td class="text-center">
+                                <img src="https://via.placeholder.com/50" alt="Doctor Photo" class="rounded-circle">
+                            </td>
 
-            <!-- Doctor Details -->
-            <div>
-                <h5 class="mb-0">@doctor.Name</h5>
-                    <span class="badge px-3 py-2 text-white" style="background-color: @(doctor.IsVerified ? "#28a745" : "#dc3545");">
-                    @(doctor.IsVerified ? "Active" : "Banned")
-                    </span>
-            </div>
-        </div>
-    }
+                            <!-- Doctor Name -->
+                            <td>
+                                <strong>@Model.Doctors.Rows[i]["name"].ToString()</strong>
+                            </td>
+
+                            <!-- Doctor ID -->
+                            <td class="text-center">
+                                <span class="fw-bold">ID: @Model.Doctors.Rows[i]["id"].ToString()</span>
+                            </td>
+
+                            <!-- Registration Date -->
+                            <td class="text-center">
+                                @Model.Doctors.Rows[i]["RegistrationDate"].ToString()
+                            </td>
+
+                            <!-- Banned/Active Status -->
+                            <td class="text-center">
+                                <span class="badge px-3 py-2 text-white" 
+                                      style="background-color: @(Convert.ToBoolean(Model.Doctors.Rows[i]["Banned"]) ? "#28a745" : "#dc3545");">
+                                    @(Convert.ToBoolean(Model.Doctors.Rows[i]["Banned"]) ? "Active" : "Banned")
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" class="text-center">No results found.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

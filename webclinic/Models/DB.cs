@@ -27,7 +27,7 @@ namespace webclinic.Models
 			// connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
 			// yassin's connection string:
-            connectionString = "Data Source=AMNESIA\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
+            connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
             con.ConnectionString = connectionString;
 		}
@@ -272,7 +272,8 @@ namespace webclinic.Models
         public int getAge(string email)
         {
             int age = 0;
-            string queryString = $"SELECT FLOOR(DATEDIFF(year, birthdate,'2024-12-20')) AS age\r\nFROM [user]\r\nWHERE Email = '{email}'";
+            string today = DateTime.Today.Date.ToString("yyyy-MM-dd");
+            string queryString = $"SELECT FLOOR(DATEDIFF(year, birthdate,'{today}')) AS age\r\nFROM [user]\r\nWHERE Email = '{email}'";
             SqlCommand cmd = new SqlCommand(queryString, con);
             try
             {
@@ -492,6 +493,53 @@ namespace webclinic.Models
             return dt;
         }
 
+
+        public DataTable getAllDoctors()
+        {
+
+            string queryString = $"select Fname + ' ' + Lname as [name], Banned, doctor.id, RegistrationDate \r\nfrom doctor, [user]\r\nwhere doctor.id = [user].id";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+
+
+        public DataTable getAllPatients()
+        {
+
+            string queryString = $"select Fname + ' ' + Lname as [name], SSNvalidation, patient.id, RegistrationDate \r\nfrom patient, [user]\r\nwhere patient.id = [user].id";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
 
 
 
