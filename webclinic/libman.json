@@ -3,7 +3,7 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "library": "Chart.js@4.4.1",
+      "library": "Chart.js@4.3.0",
       "destination": "wwwroot/lib/chartjs"
     }
   ]

@@ -21,8 +21,14 @@ namespace webclinic.Models
 		public DB()
 		{
 			// change the constring before running locally here
-			connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
-			con.ConnectionString = connectionString;
+
+			// adel's connection string:
+			// connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
+
+			// yassin's connection string:
+            connectionString = "Data Source=AMNESIA\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
+
+            con.ConnectionString = connectionString;
 		}
 
 		public DataTable getFields()
@@ -169,15 +175,24 @@ namespace webclinic.Models
 		}
 
 
-        
 
 
 
 
 
-        public Dictionary<string, int> getNumUsersJan()
+
+		public Dictionary<string, int> getRegisteredUsers(string from, string to, string type)
 		{
-			string queryString = "select Day(RegistrationDate) as [Day], count(RegistrationDate) as NumUsersInJan from [user] Where RegistrationDate between '2023-01-01' and '2023-01-30' group by RegistrationDate";
+			string queryString;
+			if (type == "dp")
+			{
+				queryString = $"WITH DateRange AS (SELECT CAST('{from}' AS DATE) AS [Date] UNION ALL SELECT DATEADD(DAY, 1, [Date]) FROM DateRange WHERE [Date] < '{to}' ) SELECT d.[Date], COUNT(u.RegistrationDate) AS NumUsers FROM DateRange d LEFT JOIN [user] u ON u.RegistrationDate = d.[Date] AND u.type != 'a' GROUP BY d.[Date] ORDER BY d.[Date] OPTION (MAXRECURSION 0);";
+			}
+			else
+			{
+				queryString = $"WITH DateRange AS (SELECT CAST('{from}' AS DATE) AS [Date] UNION ALL SELECT DATEADD(DAY, 1, [Date]) FROM DateRange WHERE [Date] < '{to}' ) SELECT d.[Date], COUNT(u.RegistrationDate) AS NumUsers FROM DateRange d LEFT JOIN [user] u ON u.RegistrationDate = d.[Date] AND u.type = '{type}' GROUP BY d.[Date] ORDER BY d.[Date] OPTION (MAXRECURSION 0);";
+			}
+
 			SqlCommand cmd = new SqlCommand(queryString, con);
 			Dictionary<string, int> dayAndNum = new Dictionary<string, int>();
 			try
@@ -186,8 +201,7 @@ namespace webclinic.Models
 				SqlDataReader rdr  = cmd.ExecuteReader();
 				while (rdr.Read())
 				{
-					dayAndNum.Add(rdr["day"].ToString(), (int)rdr["NumUsersInJan"]);
-
+					dayAndNum.Add(rdr["Date"].ToString()!, (int)rdr["NumUsers"]);
 				}
 			}
 			catch (Exception ex)
