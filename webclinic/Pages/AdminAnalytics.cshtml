@@ -37,8 +37,7 @@
 
 
 <body>
-<div class="container d-flex flex-column" id="users">
-
+<div class="container @(HttpContext.Session.GetString("tab") == "users" ? "d-flex" : "d-none") flex-column" id="users">
 	<h2 class="mt-4 mx-auto w-50 text-center">Number of registered users</h2>
 
 	<form method="post" asp-page-handler="RegisteredUsers">
@@ -75,46 +74,114 @@
 	</form>
 
 	<div class="chart-container w-50 mx-auto" width="600" height="400">
-		<canvas id="barChart"></canvas>
+		<canvas id="userChart"></canvas>
 	</div>
 </div>
 
-<div class="container" id="app">
+<div class="container @(HttpContext.Session.GetString("tab") == "app" ? "d-flex" : "d-none") flex-column" id="app">
+	<h2 class="mt-4 mx-auto w-50 text-center">Number of appointments</h2>
 
+	<form method="post" asp-page-handler="AppRange">
+		<div class="d-flex justify-content-center gap-3">
+			<div class="row">
+				<div class="col form-floating mb-3 mx-auto w-50">
+					<input type="date" class="form-control" id="from" asp-for="from" required value=0>
+					<label for="from">From:</label>
+				</div>
+
+				<div class="col form-floating mb-3 mx-auto w-50">
+					<input type="date" class="form-control" id="to" asp-for="to" required value=0>
+					<label for="to">To:</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="d-grid w-25 mx-auto">
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</div>
+	</form>
+
+	<div class="chart-container w-50 mx-auto" width="600" height="400">
+		<canvas id="appChart"></canvas>
+	</div>
+</div>
+
+
+<div class="container @(HttpContext.Session.GetString("tab") == "doc" ? "d-flex" : "d-none") flex-column" id="doc">
+	<h2 class="mt-4 mx-auto w-50 text-center">Field of medicine decomposition</h2>
+
+	<form method="post" asp-page-handler="AppRange">
+		<div class="d-flex justify-content-center gap-3">
+			<div class="row">
+				<div class="col form-floating mb-3 mx-auto w-50">
+					<input type="date" class="form-control" id="from" asp-for="from" required value=0>
+					<label for="from">From:</label>
+				</div>
+
+				<div class="col form-floating mb-3 mx-auto w-50">
+					<input type="date" class="form-control" id="to" asp-for="to" required value=0>
+					<label for="to">To:</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="d-grid w-25 mx-auto">
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</div>
+	</form>
+
+	<div class="chart-container w-50 mx-auto" width="600" height="400">
+		<canvas id="appChart"></canvas>
+	</div>
 </div>
 
 <script type="module" src="~/lib/chartjs/chart.umd.js"></script>
 <script type="module">
 	document.addEventListener('DOMContentLoaded', (event) => {
+		var ctx1 = document.getElementById('userChart');
+		var userChart = new Chart(ctx1, @Html.Raw(Model.userChartJson) );
 
-		var ctx = document.getElementById('barChart');
-		var myChart = new Chart(ctx, @Html.Raw(Model.ChartJson) );
+		var ctx2 = document.getElementById('appChart');
+		var appChart = new Chart(ctx2, @Html.Raw(Model.appChartJson) );
+
+		var ctx3 = document.getElementById('docChart');
+		var docChart = new Chart(ctx3, @Html.Raw(Model.docChartJson) );
 	});
 </script>
 
 
 <script>
-	function setSelected(sel) {
-		// List of valid ids
-		const validIds = ["users", "app", "doc"];
+function setSelected(sel) {
+	// List of valid ids
+	const validIds = ["users", "app", "doc"];
 
-		// Iterate over all valid ids
-		validIds.forEach(id => {
-			const element = document.getElementById(id);
-			if (element) {
-				if (id === sel) {
-					// Remove 'd-none' and add 'd-flex' for the selected id
-					element.classList.remove("d-none");
-					element.classList.add("d-flex");
-				} else {
-					// Remove 'd-flex' and add 'd-none' for non-selected ids
-					element.classList.remove("d-flex");
-					element.classList.add("d-none");
-				}
+	// Iterate over all valid ids
+	validIds.forEach(id => {
+		const element = document.getElementById(id);
+		if (element) {
+			if (id === sel) {
+				// Remove 'd-none' and add 'd-flex' for the selected id
+				element.classList.remove("d-none");
+				element.classList.add("d-flex");
 			} else {
-				console.warn(`Element with id "${id}" not found.`);
+				// Remove 'd-flex' and add 'd-none' for non-selected ids
+				element.classList.remove("d-flex");
+				element.classList.add("d-none");
 			}
-		});
-	}
+		} else {
+			console.warn(`Element with id "${id}" not found.`);
+		}
+	});
+
+	// Update the session on the server and redirect
+	fetch('?handler=SetTab&tab=' + encodeURIComponent(sel))
+	.then(response => {
+		if (!response.ok) {
+			console.error('Failed to update session on the server.');
+		}
+	})
+	.catch(error => console.error('Error:', error));
+
+}
 </script>
 </body>
