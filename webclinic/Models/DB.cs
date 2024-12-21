@@ -191,7 +191,46 @@ namespace webclinic.Models
         }
 
 
-
+        public DataTable getmaxprice()
+        {
+            string queryString = $"select max(PricePA)\r\nfrom Doctor";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+        public DataTable getminprice()
+        {
+            string queryString = $"select min(PricePA)\r\nfrom Doctor";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
         public bool addUser(string fname, string lname, string ssn, string password, string governorate, string city, string email, string gender, DateTime birthdate, string user_type, int field_code)
 		{
 			string today = DateTime.Today.Date.ToString("yyyy-MM-dd");
