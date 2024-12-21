@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/webclinic/FileContentIndex
+/webclinic/obj/Debug/net8.0/webclinic.AssemblyInfo.cs
+/webclinic/obj/Debug/net8.0/webclinic.AssemblyInfoInputs.cache
+/webclinic/obj/Debug/net8.0/webclinic.assets.cache
+/webclinic/obj/Debug/net8.0/webclinic.csproj.AssemblyReference.cache
+/webclinic/obj/Debug/net8.0/webclinic.GeneratedMSBuildEditorConfig.editorconfig
+/webclinic/obj/project.nuget.cache
+/webclinic/obj/project.assets.json
+/webclinic/obj/webclinic.csproj.nuget.dgspec.json
+/webclinic/obj/webclinic.csproj.nuget.g.props
