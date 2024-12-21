@@ -314,8 +314,58 @@ namespace webclinic.Models
 		}
 
 
+		public Dictionary<string, int> getAppAnalytics(string from, string to)
+		{
+			string queryString = $"WITH DateRange AS ( SELECT CAST('{from}' AS DATE) AS DatenTime UNION ALL SELECT DATEADD(DAY, 1, DatenTime) FROM DateRange WHERE DatenTime < '{to}' ) SELECT d.DatenTime AS [Date], COUNT(a.DatenTime) AS AppCount FROM DateRange d LEFT JOIN Appointment a ON CAST(a.DatenTime AS DATE) = d.DatenTime GROUP BY d.DatenTime ORDER BY d.DatenTime;";
+
+			SqlCommand cmd = new SqlCommand(queryString, con);
+			Dictionary<string, int> dayAndNum = new Dictionary<string, int>();
+			try
+			{
+				con.Open();
+				SqlDataReader rdr  = cmd.ExecuteReader();
+				while (rdr.Read())
+				{
+					dayAndNum.Add(rdr["Date"].ToString()!, (int)rdr["AppCount"]);
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex);
+			}
+			finally
+			{
+				con.Close();
+			}
+			return dayAndNum;
+		}
+
+		public Dictionary<string, int> getFieldAnalytics(string from, string to)
+		{
+			string queryString = $"select FieldName, Count(*) as DocN from Doctor join [user] on Doctor.ID = [user].ID join FieldOfMedicine on Doctor.FieldCode = FieldOfMedicine.FieldCode Where RegistrationDate > '{from}' and RegistrationDate < '{to}' Group By FieldName";
 
 
+            SqlCommand cmd = new SqlCommand(queryString, con);
+			Dictionary<string, int> fieldAndNum = new Dictionary<string, int>();
+			try
+			{
+				con.Open();
+				SqlDataReader rdr  = cmd.ExecuteReader();
+				while (rdr.Read())
+				{
+					fieldAndNum.Add(rdr["FieldName"].ToString()!, (int)rdr["DocN"]);
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex);
+			}
+			finally
+			{
+				con.Close();
+			}
+			return fieldAndNum;
+		}
 
 
         public DataTable getSymptoms(int id)
