@@ -4,70 +4,63 @@
     ViewData["Title"] = "Book Page";
 }
 <div class="header-inner">
-            <div class="container">
-                <div class="inner">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 col-12">
-                            <div class="logo">
-                                <a href="index"><img src="img/logo.png" alt="#"></a>
-                            </div>
-                            <div class="mobile-nav"></div>
-                        </div> 
-                        <div class="col-lg-7 col-md-9 col-12">
-                            <div class="main-menu">
-                                <nav class="navigation">
-                                    <ul class="nav menu">
-                                        <li class="active"><a href="index">Home</a></li>
-                                        <li><a href="#">Pages <i class="icofont-rounded-down"></i></a>
-                                        </li>
-                                        <li><a href="ContactUs">Contact Us</a></li>
-
-										@if (string.IsNullOrEmpty(this.ViewContext.HttpContext.Session.GetString("email")))
-                                        {
-											<li><a href="Login">Login</a></li>
-											<li><a href="Signup">Sign Up</a></li>
-                                        }
-                                        else
-                                        {
-											<li><a href="Logout">LogOut</a></li>
-                                        }
-
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                       @*  <div class="col-lg-2 col-12">
-                            <div class="get-quote">
-                                <a href="DrAppointment.html" class="btn">Book DrAppointment</a>
-                            </div>
-                        </div> *@
+    <div class="container">
+        <div class="inner">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-12">
+                    <div class="logo">
+                        <a href="index"><img src="img/logo.png" alt="#"></a>
                     </div>
-                    </div>
+                    <div class="mobile-nav"></div>
                 </div>
+                <div class="col-lg-7 col-md-9 col-12">
+                    <div class="main-menu">
+                        <nav class="navigation">
+                            <ul class="nav menu">
+                                <li class="active"><a href="index">Home</a></li>
+                                <li>
+                                    <a href="#">Pages <i class="icofont-rounded-down"></i></a>
+                                    <ul class="dropdown">
+                                        <li><a href="404.html">404 Error</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="ContactUs">Contact Us</a></li>
+                                @*  @if (HttpContext.Session.GetString("UserType") == "Patient")                                        {
+                                            <li><a href="PatientApp">Appointments</a></li>                                            <li><a href="PatientProfile">My Profile</a></li>
+                                        }                                        else if (HttpContext.Session.GetString("UserType") == "Doctor")
+                                        {                                                                                   <li><a href="DrApp">Appointments</a></li>
+                                            <li><a href="DrProfile">My Profile</a></li>                                        }
+                                        else *@                                        
+                                            <li><a href="Login">Login</a></li>
+                                <li><a href="Signup2">Sign Up</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>                       @*  <div class="col-lg-2 col-12">
+                            <div class="get-quote">                                <a href="DrAppointment.html" class="btn">Book DrAppointment</a>
+                            </div>                        </div> *@
             </div>
         </div>
-    </header>
-
+    </div>
+</div>
+        </div>    </header>
 <div class="container mt-5">
     <div class="row">
         <!-- Filters Section on the left -->
         <div class="col-md-3 mb-4">
             <div class="filters">
                 <h4 class="mb-4">Filters</h4>
-
-                <!-- Availability -->
+                <!-- Availability -->                
                 <div class="mb-4">
-                    <label>Availability</label>
+                    <label>Availability</label>                    
                     <div>
-                        <input type="checkbox" id="today" name="availability" value="today">
+                        <input type="checkbox" id="today" name="availability" value="today">                        
                         <label for="today">Today</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="this-week" name="availability" value="this-week">
+                    </div>                    <div>
+                        <input type="checkbox" id="this-week" name="availability" value="this-week">                        
                         <label for="this-week">This Week</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="online" name="availability" value="online">
+                    </div>                    <div>
+                        <input type="checkbox" id="online" name="availability" value="online">                       
                         <label for="online">Online</label>
                     </div>
                 </div>
@@ -75,21 +68,43 @@
                 <!-- Specific Date or Range -->
                 <div class="mb-4">
                     <label for="date-range">Specific date or range</label>
-                    <input type="date" id="date-range" name="date-range" class="form-control">
+                    <input type="date" id="date-range" name="date-range"
+                           class="form-control">
                 </div>
 
-                <!-- Areas of Interest -->
-                <div class="mb-4">
-                    <label for="specialization">Areas of interest</label>
-                    <select id="specialization" name="specialization" class="form-control">
+                <div class="mb-4" ">
+                    <label for="specialization">Speciality</label>
+                    <br>
+                    <select id="specialization" class="form-control" asp-for="special" >
                         <option value="">Select Specialization</option>
-                        <option value="1">Psychiatry</option>
-                        <option value="2">Psychology</option>
+                        
+                        @for (int i = 0; i < Model.fields.Rows.Count; i++)
+                        {
+                            <option value="@i">@Model.fields.Rows[i]["FieldName"].ToString()</option>
+                        }
+                    </select>
+                </div>
+                
+                <!-- Governorate dropdown -->
+                <div class="mb-4" style="margin: 60px 0;">
+                    <label for="action="government"">Government</label>
+                    <br >
+                    <select id="governorateSelect"  class="form-control" asp-for="governorate" onchange="showCity()">
+                        <option value="">Governorate</option>
+                        @for (int i = 0; i < Model.allGovernorates.Rows.Count; i++)
+                        {
+                            <option value="@i">@Model.allGovernorates.Rows[i]["Governorate"].ToString()</option>
+                        }
                     </select>
                 </div>
 
+     @*            <!-- City dropdown -->
+                <select class="form-select d-none justify-content-center align-items-center w-50 mx-auto mb-3" asp-for="city" id="citySelect" aria-label="City" required>
+                    <option value="">City</option>
+                </select>
+                *@
                 <!-- Session Fees -->
-                <div class="mb-4">
+                <div class="mb-4" style="margin: 60px 0;">
                     <label for="fees-range">Session Fees</label>
                     <input type="range" id="fees-range" name="fees-range" min="140" max="4700" step="10">
                     <div>140 EGP - 4700 EGP</div>
@@ -100,29 +115,34 @@
         <!-- Doctors Cards Section -->
         <div class="col-md-9 mb-4">
             <div class="row">
+             
                 @foreach (var therapist in Model.Therapists)
                 {
                     <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card shadow-sm larger-card">
+                        <div class="card therapist-card">
                             <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="@therapist.ProfileImageUrl" alt="@therapist.Name" class="rounded-circle me-3" style="width: 100px; height: 100px;">
+                                <div class="d-flex align-items-center mb-4">
+                                    <img src="@therapist.ProfileImageUrl" alt="@therapist.Name"
+                                         class="rounded-circle me-3 therapist-image">
                                     <div>
-                                        <h5 class="card-title mb-0">Dr, @therapist.Name</h5>
+                                        <h5 class="card-title mb-1">Dr. @therapist.Name</h5>
                                         <small class="text-muted">@therapist.Specialization.Name</small>
                                     </div>
                                 </div>
                                 <p><strong>Interests:</strong> @string.Join(", ", therapist.Interests)</p>
-                                <p><strong>Nearest DrAppointment:</strong> @therapist.NextDrAppointment.ToString("dddd, MMM dd, yyyy hh:mm tt")</p>
+                                <p>
+                                    <strong>Nearest Dr. Appointment:</strong>
+                                    @therapist.NextDrAppointment.ToString("dddd, MMM dd, yyyy hh:mm tt")
+                                </p>
                                 <p><strong>Fees:</strong> @therapist.SessionFees.ToString("C2") / 60 Min</p>
                                 <div class="d-flex justify-content-between mt-3">
                                     <form method="post" asp-page-handler="P">
                                         <input type="hidden" name="therapistId" value="@therapist.Id" />
-                                        <button type="submit" class="btn btn" style="background-color: white; color: #1A76D1;">View Profile</button>
+                                        <button type="submit" class="btn btn-outline-primary" style="background-color: white;">View Profile</button>
                                     </form>&nbsp;
                                     <form method="post" asp-page-handler="B">
                                         <input type="hidden" name="therapistId" value="@therapist.Id" />
-                                        <button type="submit" class="btn btn-primary" >Book Now</button>
+                                        <button type="submit" class="btn btn-primary">Book Now</button>
                                     </form>
                                 </div>
                             </div>
@@ -133,3 +153,43 @@
         </div>
     </div>
 </div>
+
+<script>
+    <script>
+     function showCity() {
+         var governorateSelect = document.getElementById("governorateSelect");
+         var citySelect = document.getElementById("citySelect");
+         var selectedValue = governorateSelect.value;
+
+         if (selectedValue !== "") {
+             // Show the city dropdown
+             citySelect.classList.remove("d-none");
+             citySelect.classList.add("d-flex");
+
+             // Fetch cities dynamically
+             fetch(`?handler=ChangeCities&govern=${selectedValue}`)
+                 .then(response => response.json())
+                 .then(cities => {
+                     // Clear existing options
+                     citySelect.innerHTML = '<option value="">City</option>';
+
+                     // Populate the dropdown with new city options
+                     cities.forEach((city, index) => {
+                         var option = document.createElement("option");
+                         option.value = index;
+                         option.textContent = city;
+                         citySelect.appendChild(option);
+                     });
+                 })
+                 .catch(error => {
+                     console.error("Error fetching cities:", error);
+                 });
+         } else {
+             // Hide the city dropdown
+             citySelect.classList.remove("d-flex");
+             citySelect.classList.add("d-none");
+         }
+     }
+
+</script>
+</script>

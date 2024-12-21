@@ -27,14 +27,14 @@ namespace webclinic.Models
 			// connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
 			// yassin's connection string:
-            connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
+            connectionString = "Data Source=AN\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
             con.ConnectionString = connectionString;
 		}
 
 		public DataTable getFields()
 		{
-			string queryString = "Select FieldName from FieldOfMedicine";
+			string queryString = "Select FieldName from FieldOfMedicine ORDER BY FIELDNAME ASC";
 			DataTable dt = new DataTable();
 			SqlCommand cmd = new SqlCommand(queryString, con);
 			try
@@ -95,7 +95,104 @@ namespace webclinic.Models
 			}
 			return dt;
 		}
-		public bool addUser(string fname, string lname, string ssn, string password, string governorate, string city, string email, string gender, DateTime birthdate, string user_type, int field_code)
+        public DataTable getdrgovernments()
+        {
+            string queryString = $"SELECT DISTINCT \r\n    Governorate\r\nFROM \r\n    [user]\r\nWHERE \r\n    [user].type = 'd';";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+        public DataTable getdrspecialities()
+        {
+            string queryString = $"SELECT DISTINCT \r\n    FieldName\r\nFROM \r\n    Doctor join FieldOfMedicine on (Doctor.FieldCode = FieldOfMedicine.FieldCode)";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+        public DataTable GetDoctorData()
+        {
+            string queryString = @"
+        SELECT 
+            FName, 
+            LName, 
+            Governorate,
+            City,
+            Doctor.ID, 
+            PricePA,
+            Doctor.FieldCode,
+            FieldName, 
+            ProfileImageUrl,
+            COALESCE(AVG(NStars), 5) AS AverageRating
+        FROM 
+            [user]
+        JOIN 
+            Doctor ON [user].ID = Doctor.ID
+        JOIN 
+            FieldOfMedicine ON Doctor.FieldCode = FieldOfMedicine.FieldCode
+        LEFT JOIN 
+            Reviews ON Doctor.ID = Reviews.DoctorID
+        WHERE 
+            [user].type = 'd'
+        GROUP BY 
+            FName, 
+            LName, 
+            Doctor.ID, 
+            PricePA, 
+            Doctor.FieldCode,
+            FieldName,
+            Governorate,
+	        City,
+            ProfileImageUrl";
+
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());  // Make sure to use Console.WriteLine for better logging in C#
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+
+
+
+        public bool addUser(string fname, string lname, string ssn, string password, string governorate, string city, string email, string gender, DateTime birthdate, string user_type, int field_code)
 		{
 			string today = DateTime.Today.Date.ToString("yyyy-MM-dd");
 			string bd = birthdate.Date.ToString("yyyy-MM-dd");

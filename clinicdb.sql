@@ -180,6 +180,7 @@ Create table Diagnosis
 	PatientID int,
 	condition VARCHAR(50),
 	[description] VARCHAR(100),
+	prescription varchar(1000),
 	PRIMARY KEY (AppointmentID, DoctorID, PatientID),
 	FOREIGN KEY (AppointmentID, DoctorID) references Appointment,
 	FOREIGN KEY (PatientID) references Patient

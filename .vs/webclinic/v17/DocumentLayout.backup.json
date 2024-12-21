@@ -1,133 +1,133 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\yassi\\source\\repos\\clinic_app\\",
+  "WorkspaceRootPath": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\signup.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\signup.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\models\\db.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\models\\db.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\signup.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\signup.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\shared\\_layoutlogin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\shared\\_layoutlogin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\logout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\logout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\drprofile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\drprofile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\patientprofile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\patientprofile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\logout.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\logout.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\book.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\book.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\listofdoctors.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\listofdoctors.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\listofpatients.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\listofpatients.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\libman.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\libman.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\adminanalytics.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\adminanalytics.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\otp.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\otp.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\otp.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\otp.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\shared\\_layout.cshtml.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\shared\\_layout.cshtml.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\book.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\book.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\book.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\book.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\book.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\signup.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\signup.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\signup.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\signup.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\models\\db.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\models\\db.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\patientprofile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\patientprofile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\patientprofile.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\patientprofile.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\shared\\_layoutlogin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\shared\\_layoutlogin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\logout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\logout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\drprofile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\drprofile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\logout.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\logout.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\listofdoctors.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\listofdoctors.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\listofpatients.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\listofpatients.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\libman.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\libman.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\otp.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\otp.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\otp.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\otp.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\shared\\_layout.cshtml.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\shared\\_layout.cshtml.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\drapp.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\drapp.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\drapp.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\patientapp.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\patientapp.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\patientapp.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\contactus.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\contactus.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\contactus.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\patientapp.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\patientapp.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\patientapp.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\drapp.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\drapp.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\drapp.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\yassi\\source\\repos\\clinic_app\\webclinic\\pages\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
@@ -138,7 +138,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -150,79 +150,80 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Program.cs",
-              "RelativeDocumentMoniker": "webclinic\\Program.cs",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Program.cs",
-              "RelativeToolTip": "webclinic\\Program.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAnwB4AAAAAAAAAAAAAAA==",
+              "Title": "DB.cs",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Models\\DB.cs",
+              "RelativeDocumentMoniker": "webclinic\\Models\\DB.cs",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Models\\DB.cs",
+              "RelativeToolTip": "webclinic\\Models\\DB.cs",
+              "ViewState": "AgIAAJkBAAAAAAAAAAAiwLgBAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T20:26:56.097Z",
+              "WhenOpened": "2024-12-13T12:36:15.612Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "_LayoutLogin.cshtml",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Shared\\_LayoutLogin.cshtml",
-              "RelativeDocumentMoniker": "webclinic\\Pages\\Shared\\_LayoutLogin.cshtml",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Shared\\_LayoutLogin.cshtml",
-              "RelativeToolTip": "webclinic\\Pages\\Shared\\_LayoutLogin.cshtml",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAACgAAAAMAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "book.cshtml",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\book.cshtml",
+              "RelativeDocumentMoniker": "webclinic\\Pages\\book.cshtml",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\book.cshtml",
+              "RelativeToolTip": "webclinic\\Pages\\book.cshtml",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAEwAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-07T12:25:43.175Z",
+              "WhenOpened": "2024-12-05T17:52:56.75Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Login.cshtml",
-              "RelativeDocumentMoniker": "webclinic\\Pages\\Login.cshtml",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Login.cshtml",
-              "RelativeToolTip": "webclinic\\Pages\\Login.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-05T18:58:55.23Z"
+              "DocumentIndex": 0,
+              "Title": "book.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\book.cshtml.cs",
+              "RelativeDocumentMoniker": "webclinic\\Pages\\book.cshtml.cs",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\book.cshtml.cs",
+              "RelativeToolTip": "webclinic\\Pages\\book.cshtml.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABQAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-05T17:53:39.525Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Signup.cshtml",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Signup.cshtml",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Signup.cshtml",
               "RelativeDocumentMoniker": "webclinic\\Pages\\Signup.cshtml",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Signup.cshtml",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Signup.cshtml",
               "RelativeToolTip": "webclinic\\Pages\\Signup.cshtml",
-              "ViewState": "AgIAADQAAAAAAAAAAAArwLAAAABCAAAAAAAAAA==",
+              "ViewState": "AgIAAEkAAAAAAAAAAAArwFgAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-12-13T14:27:28.628Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "Signup.cshtml.cs",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Signup.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Signup.cshtml.cs",
               "RelativeDocumentMoniker": "webclinic\\Pages\\Signup.cshtml.cs",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Signup.cshtml.cs",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Signup.cshtml.cs",
               "RelativeToolTip": "webclinic\\Pages\\Signup.cshtml.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAowE8AAABGAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-07T12:10:44.734Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "Login.cshtml.cs",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Login.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Login.cshtml.cs",
               "RelativeDocumentMoniker": "webclinic\\Pages\\Login.cshtml.cs",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Login.cshtml.cs",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Login.cshtml.cs",
               "RelativeToolTip": "webclinic\\Pages\\Login.cshtml.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAiwBUAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -230,24 +231,35 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DB.cs",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Models\\DB.cs",
-              "RelativeDocumentMoniker": "webclinic\\Models\\DB.cs",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Models\\DB.cs",
-              "RelativeToolTip": "webclinic\\Models\\DB.cs",
-              "ViewState": "AgIAAFgAAAAAAAAAAAAwwHIAAABoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-13T12:36:15.612Z",
-              "EditorCaption": ""
+              "DocumentIndex": 10,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Login.cshtml",
+              "RelativeDocumentMoniker": "webclinic\\Pages\\Login.cshtml",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Login.cshtml",
+              "RelativeToolTip": "webclinic\\Pages\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-05T18:58:55.23Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 6,
+              "Title": "PatientProfile.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\PatientProfile.cshtml.cs",
+              "RelativeDocumentMoniker": "webclinic\\Pages\\PatientProfile.cshtml.cs",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\PatientProfile.cshtml.cs",
+              "RelativeToolTip": "webclinic\\Pages\\PatientProfile.cshtml.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAqwDsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-20T02:06:17.818Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "DrProfile.cshtml",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\DrProfile.cshtml",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\DrProfile.cshtml",
               "RelativeDocumentMoniker": "webclinic\\Pages\\DrProfile.cshtml",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\DrProfile.cshtml",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\DrProfile.cshtml",
               "RelativeToolTip": "webclinic\\Pages\\DrProfile.cshtml",
               "ViewState": "AgIAAH8AAAAAAAAAAAAvwIwAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -255,11 +267,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Index.cshtml",
               "RelativeDocumentMoniker": "webclinic\\Pages\\Index.cshtml",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Index.cshtml",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Index.cshtml",
               "RelativeToolTip": "webclinic\\Pages\\Index.cshtml",
               "ViewState": "AgIAAHAAAAAAAAAAAAAAAHAAAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -267,11 +279,47 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 5,
+              "Title": "PatientProfile.cshtml",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\PatientProfile.cshtml",
+              "RelativeDocumentMoniker": "webclinic\\Pages\\PatientProfile.cshtml",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\PatientProfile.cshtml",
+              "RelativeToolTip": "webclinic\\Pages\\PatientProfile.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFUAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-07T11:46:52.885Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "_LayoutLogin.cshtml",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Shared\\_LayoutLogin.cshtml",
+              "RelativeDocumentMoniker": "webclinic\\Pages\\Shared\\_LayoutLogin.cshtml",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Shared\\_LayoutLogin.cshtml",
+              "RelativeToolTip": "webclinic\\Pages\\Shared\\_LayoutLogin.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACgAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-07T12:25:43.175Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Program.cs",
+              "RelativeDocumentMoniker": "webclinic\\Program.cs",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Program.cs",
+              "RelativeToolTip": "webclinic\\Program.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAnwB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-18T20:26:56.097Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
               "Title": "_Layout.cshtml.css",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Shared\\_Layout.cshtml.css",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Shared\\_Layout.cshtml.css",
               "RelativeDocumentMoniker": "webclinic\\Pages\\Shared\\_Layout.cshtml.css",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Shared\\_Layout.cshtml.css",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Shared\\_Layout.cshtml.css",
               "RelativeToolTip": "webclinic\\Pages\\Shared\\_Layout.cshtml.css",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
@@ -279,35 +327,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "PatientProfile.cshtml",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\PatientProfile.cshtml",
-              "RelativeDocumentMoniker": "webclinic\\Pages\\PatientProfile.cshtml",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\PatientProfile.cshtml",
-              "RelativeToolTip": "webclinic\\Pages\\PatientProfile.cshtml",
-              "ViewState": "AgIAAG0AAAAAAAAAAAAvwHoAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-07T11:46:52.885Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "book.cshtml.cs",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\book.cshtml.cs",
-              "RelativeDocumentMoniker": "webclinic\\Pages\\book.cshtml.cs",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\book.cshtml.cs",
-              "RelativeToolTip": "webclinic\\Pages\\book.cshtml.cs",
-              "ViewState": "AgIAAFUAAAAAAAAAAAAUwCcAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-05T17:53:39.525Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
               "Title": "Logout.cshtml.cs",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Logout.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Logout.cshtml.cs",
               "RelativeDocumentMoniker": "webclinic\\Pages\\Logout.cshtml.cs",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Logout.cshtml.cs",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Logout.cshtml.cs",
               "RelativeToolTip": "webclinic\\Pages\\Logout.cshtml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -315,11 +339,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "OTP.cshtml.cs",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\OTP.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\OTP.cshtml.cs",
               "RelativeDocumentMoniker": "webclinic\\Pages\\OTP.cshtml.cs",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\OTP.cshtml.cs",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\OTP.cshtml.cs",
               "RelativeToolTip": "webclinic\\Pages\\OTP.cshtml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -327,11 +351,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "Logout.cshtml",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Logout.cshtml",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Logout.cshtml",
               "RelativeDocumentMoniker": "webclinic\\Pages\\Logout.cshtml",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Logout.cshtml",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Logout.cshtml",
               "RelativeToolTip": "webclinic\\Pages\\Logout.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -339,11 +363,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "OTP.cshtml",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\OTP.cshtml",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\OTP.cshtml",
               "RelativeDocumentMoniker": "webclinic\\Pages\\OTP.cshtml",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\OTP.cshtml",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\OTP.cshtml",
               "RelativeToolTip": "webclinic\\Pages\\OTP.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -351,35 +375,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "book.cshtml",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\book.cshtml",
-              "RelativeDocumentMoniker": "webclinic\\Pages\\book.cshtml",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\book.cshtml",
-              "RelativeToolTip": "webclinic\\Pages\\book.cshtml",
-              "ViewState": "AgIAAAYAAAAAAAAAAIBJwBUAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-05T17:52:56.75Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "AdminAnalytics.cshtml",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\AdminAnalytics.cshtml",
-              "RelativeDocumentMoniker": "webclinic\\Pages\\AdminAnalytics.cshtml",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\AdminAnalytics.cshtml",
-              "RelativeToolTip": "webclinic\\Pages\\AdminAnalytics.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-07T19:39:25.297Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "ListOfDoctors.cshtml",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\ListOfDoctors.cshtml",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\ListOfDoctors.cshtml",
               "RelativeDocumentMoniker": "webclinic\\Pages\\ListOfDoctors.cshtml",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\ListOfDoctors.cshtml",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\ListOfDoctors.cshtml",
               "RelativeToolTip": "webclinic\\Pages\\ListOfDoctors.cshtml",
               "ViewState": "AgIAABcAAAAAAAAAAAAowCkAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -387,11 +387,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "libman.json",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\libman.json",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\libman.json",
               "RelativeDocumentMoniker": "webclinic\\libman.json",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\libman.json",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\libman.json",
               "RelativeToolTip": "webclinic\\libman.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
@@ -399,11 +399,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "ListOfPatients.cshtml",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\ListOfPatients.cshtml",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\ListOfPatients.cshtml",
               "RelativeDocumentMoniker": "webclinic\\Pages\\ListOfPatients.cshtml",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\ListOfPatients.cshtml",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\ListOfPatients.cshtml",
               "RelativeToolTip": "webclinic\\Pages\\ListOfPatients.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -413,9 +413,9 @@
               "$type": "Document",
               "DocumentIndex": 23,
               "Title": "DrApp.cshtml",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\DrApp.cshtml",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\DrApp.cshtml",
               "RelativeDocumentMoniker": "webclinic\\Pages\\DrApp.cshtml",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\DrApp.cshtml",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\DrApp.cshtml",
               "RelativeToolTip": "webclinic\\Pages\\DrApp.cshtml",
               "ViewState": "AgIAAOoAAAAAAAAAAIBZwD0AAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -425,9 +425,9 @@
               "$type": "Document",
               "DocumentIndex": 21,
               "Title": "style.css",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\wwwroot\\css\\style.css",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\wwwroot\\css\\style.css",
               "RelativeDocumentMoniker": "webclinic\\wwwroot\\css\\style.css",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\wwwroot\\css\\style.css",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\wwwroot\\css\\style.css",
               "RelativeToolTip": "webclinic\\wwwroot\\css\\style.css",
               "ViewState": "AgIAAHUAAAAAAAAAAIBZwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
@@ -437,9 +437,9 @@
               "$type": "Document",
               "DocumentIndex": 22,
               "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Shared\\_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "webclinic\\Pages\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "webclinic\\Pages\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAAJAAAAAAAAAAAIBZwLQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -449,9 +449,9 @@
               "$type": "Document",
               "DocumentIndex": 25,
               "Title": "_ValidationScriptsPartial.cshtml",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
               "RelativeDocumentMoniker": "webclinic\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
               "RelativeToolTip": "webclinic\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -461,9 +461,9 @@
               "$type": "Document",
               "DocumentIndex": 24,
               "Title": "Index.cshtml.cs",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Index.cshtml.cs",
               "RelativeDocumentMoniker": "webclinic\\Pages\\Index.cshtml.cs",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Index.cshtml.cs",
               "RelativeToolTip": "webclinic\\Pages\\Index.cshtml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -473,9 +473,9 @@
               "$type": "Document",
               "DocumentIndex": 26,
               "Title": "PatientApp.cshtml",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\PatientApp.cshtml",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\PatientApp.cshtml",
               "RelativeDocumentMoniker": "webclinic\\Pages\\PatientApp.cshtml",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\PatientApp.cshtml",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\PatientApp.cshtml",
               "RelativeToolTip": "webclinic\\Pages\\PatientApp.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -485,9 +485,9 @@
               "$type": "Document",
               "DocumentIndex": 28,
               "Title": "PatientApp.cshtml.cs",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\PatientApp.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\PatientApp.cshtml.cs",
               "RelativeDocumentMoniker": "webclinic\\Pages\\PatientApp.cshtml.cs",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\PatientApp.cshtml.cs",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\PatientApp.cshtml.cs",
               "RelativeToolTip": "webclinic\\Pages\\PatientApp.cshtml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -497,9 +497,9 @@
               "$type": "Document",
               "DocumentIndex": 29,
               "Title": "DrApp.cshtml.cs",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\DrApp.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\DrApp.cshtml.cs",
               "RelativeDocumentMoniker": "webclinic\\Pages\\DrApp.cshtml.cs",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\DrApp.cshtml.cs",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\DrApp.cshtml.cs",
               "RelativeToolTip": "webclinic\\Pages\\DrApp.cshtml.cs",
               "ViewState": "AgIAACgAAAAAAAAAAAAswD8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -509,9 +509,9 @@
               "$type": "Document",
               "DocumentIndex": 27,
               "Title": "ContactUs.cshtml",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\ContactUs.cshtml",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\ContactUs.cshtml",
               "RelativeDocumentMoniker": "webclinic\\Pages\\ContactUs.cshtml",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\ContactUs.cshtml",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\ContactUs.cshtml",
               "RelativeToolTip": "webclinic\\Pages\\ContactUs.cshtml",
               "ViewState": "AgIAABkAAAAAAAAAAAAAwCYAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -521,9 +521,9 @@
               "$type": "Document",
               "DocumentIndex": 30,
               "Title": "Privacy.cshtml",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Privacy.cshtml",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Privacy.cshtml",
               "RelativeDocumentMoniker": "webclinic\\Pages\\Privacy.cshtml",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Privacy.cshtml",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Privacy.cshtml",
               "RelativeToolTip": "webclinic\\Pages\\Privacy.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -533,9 +533,9 @@
               "$type": "Document",
               "DocumentIndex": 31,
               "Title": "Error.cshtml",
-              "DocumentMoniker": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Error.cshtml",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Error.cshtml",
               "RelativeDocumentMoniker": "webclinic\\Pages\\Error.cshtml",
-              "ToolTip": "C:\\Users\\yassi\\source\\repos\\clinic_app\\webclinic\\Pages\\Error.cshtml",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Error.cshtml",
               "RelativeToolTip": "webclinic\\Pages\\Error.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",

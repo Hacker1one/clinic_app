@@ -1731,23 +1731,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\AbdElrahman\\.nuget\\packages\\": {},
+    "C:\\Users\\antah\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\AbdElrahman\\Source\\Repos\\clinic_app2\\webclinic\\webclinic.csproj",
+      "projectUniqueName": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\webclinic.csproj",
       "projectName": "webclinic",
-      "projectPath": "C:\\Users\\AbdElrahman\\Source\\Repos\\clinic_app2\\webclinic\\webclinic.csproj",
-      "packagesPath": "C:\\Users\\AbdElrahman\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\AbdElrahman\\Source\\Repos\\clinic_app2\\webclinic\\obj\\",
+      "projectPath": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\webclinic.csproj",
+      "packagesPath": "C:\\Users\\antah\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\AbdElrahman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\antah\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -1773,7 +1773,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -1807,7 +1808,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
