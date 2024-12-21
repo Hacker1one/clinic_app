@@ -21,13 +21,13 @@
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<li class="nav-item active">
-					<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="javascript:void(0);" onclick="setSelected('users');">Users</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Link</a>
+					<a class="nav-link" href="javascript:void(0);" onclick="setSelected('app');">Appointments</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link disabled" href="#">Disabled</a>
+					<a class="nav-link" href="javascript:void(0);" onclick="setSelected('doc');">Doctors</a>
 				</li>
 			</ul>
 		</div>
@@ -37,46 +37,51 @@
 
 
 <body>
+<div class="container d-flex flex-column" id="users">
 
-<h2 class="mt-4 mx-auto w-50 text-center">Number of registered users</h2>
+	<h2 class="mt-4 mx-auto w-50 text-center">Number of registered users</h2>
 
-<form method="post" asp-page-handler="RegisteredUsers">
-	<div class="container d-flex justify-content-center align-items-center w-50 mx-auto">
-		<div class="row">
-			<div class="col text-center">
-				<select class="form-select mb-3" aria-label="User Type" asp-for="utype" required>
-					<option value="" selected>User Type</option>
-					<option value="d">Doctors</option>
-					<option value="p">Patients</option>
-					<option value="dp">All</option>
-				</select>
+	<form method="post" asp-page-handler="RegisteredUsers">
+		<div class="container d-flex justify-content-center align-items-center w-50 mx-auto">
+			<div class="row">
+				<div class="col text-center">
+					<select class="form-select mb-3" aria-label="User Type" asp-for="utype" required>
+						<option value="" selected>User Type</option>
+						<option value="d">Doctors</option>
+						<option value="p">Patients</option>
+						<option value="dp">All</option>
+					</select>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="d-flex justify-content-center gap-3">
-		<div class="row">
-			<div class="col form-floating mb-3 mx-auto w-50">
-				<input type="date" class="form-control" id="from" asp-for="from" required>
-				<label for="from">From:</label>
-			</div>
+		<div class="d-flex justify-content-center gap-3">
+			<div class="row">
+				<div class="col form-floating mb-3 mx-auto w-50">
+					<input type="date" class="form-control" id="from" asp-for="from" required value=0>
+					<label for="from">From:</label>
+				</div>
 
-			<div class="col form-floating mb-3 mx-auto w-50">
-				<input type="date" class="form-control" id="to" asp-for="to" required>
-				<label for="to">To:</label>
+				<div class="col form-floating mb-3 mx-auto w-50">
+					<input type="date" class="form-control" id="to" asp-for="to" required value=0>
+					<label for="to">To:</label>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="d-grid w-25 mx-auto">
-		<button type="submit" class="btn btn-primary">Submit</button>
-	</div>
-</form>
+		<div class="d-grid w-25 mx-auto">
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</div>
+	</form>
 
-<div class="chart-container w-50 mx-auto" width="600" height="400">
-	<canvas id="barChart"></canvas>
+	<div class="chart-container w-50 mx-auto" width="600" height="400">
+		<canvas id="barChart"></canvas>
+	</div>
 </div>
 
+<div class="container" id="app">
+
+</div>
 
 <script type="module" src="~/lib/chartjs/chart.umd.js"></script>
 <script type="module">
@@ -86,7 +91,30 @@
 		var myChart = new Chart(ctx, @Html.Raw(Model.ChartJson) );
 	});
 </script>
-<script>
 
+
+<script>
+	function setSelected(sel) {
+		// List of valid ids
+		const validIds = ["users", "app", "doc"];
+
+		// Iterate over all valid ids
+		validIds.forEach(id => {
+			const element = document.getElementById(id);
+			if (element) {
+				if (id === sel) {
+					// Remove 'd-none' and add 'd-flex' for the selected id
+					element.classList.remove("d-none");
+					element.classList.add("d-flex");
+				} else {
+					// Remove 'd-flex' and add 'd-none' for non-selected ids
+					element.classList.remove("d-flex");
+					element.classList.add("d-none");
+				}
+			} else {
+				console.warn(`Element with id "${id}" not found.`);
+			}
+		});
+	}
 </script>
 </body>
