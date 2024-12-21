@@ -20,14 +20,24 @@ public class bookModel : PageModel
     // Public property for therapists
     [BindProperty(SupportsGet = true)]
     public DataTable fields { get; set; }
+    public DataTable Doctors { get; set; }
     public List<Therapist> Therapists { get; private set; }
     public DB db { get; set; }
-
+    public DataTable allGovernorates { get; set; }
+    public string governorate { get; set; }
+    public string special { get; set; }
+    public string city { get; set; }
+    public DataTable allCities { get; set; }
     public void OnGet()
     {
-        Therapists = GetSampleTherapists();
         fields = new DataTable();
-        fields = db.getFields();
+        fields = db.getdrspecialities();
+        allGovernorates = new DataTable();
+        allGovernorates = db.getdrgovernments();
+        allCities = new DataTable();
+        Doctors = new DataTable();
+        Doctors = db.GetDoctorData();
+       Therapists = MapDoctorsToTherapists(Doctors);
     }
     public IActionResult OnPostB()
     {
@@ -37,59 +47,51 @@ public class bookModel : PageModel
     {
         return RedirectToPage("/DrProfile");
     }
-    // Method to return a list of sample therapists
-    private List<Therapist> GetSampleTherapists()
+
+    public JsonResult OnGetChangeCities(string govern)
     {
-        return new List<Therapist>
-        {
-            new Therapist
-            {
-                Id = 1,
-                Name = "Huda Radwan",
-                Specialization = new Specialization { Id = 1, Name = "Psychiatrist" },
-                SessionFees = 1500,
-                Ratings = 4.85,
-                ProfileImageUrl = "img/author1.jpg",
-            },
-            new Therapist
-            {
-                Id = 2,
-                Name = "Bahaa Mahmoud",
-                Specialization = new Specialization { Id = 2, Name = "Psychologist" },
-                SessionFees = 620,
-                Ratings = 4.89,
-                ProfileImageUrl = "img/author1.jpg",
 
-            },
-            new Therapist
-            {
-                Id = 2,
-                Name = "Bahaa Mahmoud",
-                Specialization = new Specialization { Id = 2, Name = "Psychologist" },
-                SessionFees = 620,
-                Ratings = 4.89,
-                ProfileImageUrl = "img/author1.jpg",
-
-            },
-            new Therapist
-            {
-                Id = 2,
-                Name = "Bahaa Mahmoud",
-                Specialization = new Specialization { Id = 2, Name = "Psychologist" },
-                SessionFees = 620,
-                Ratings = 4.89,
-                ProfileImageUrl = "img/author1.jpg",
-
-            }
-        };
+        string selectedGovernorate = allGovernorates.Rows[int.Parse(govern)]["Governorate"].ToString()!;
+        HttpContext.Session.SetString("govern", selectedGovernorate);
+        DataTable cities = db.getCities(selectedGovernorate); // Returns a DataTable
+        List<string> cityList = cities.AsEnumerable().Select(row => row["City"].ToString()).ToList()!;
+        return new JsonResult(cityList);
     }
-}
+    private List<Therapist> MapDoctorsToTherapists(DataTable doctorsData)
+    {
+        var therapistsList = new List<Therapist>();
+
+        foreach (DataRow row in doctorsData.Rows)
+        {
+            var therapist = new Therapist
+            {
+                Id = Convert.ToInt32(row["ID"]),
+                Name = $"{row["FName"]} {row["LName"]}", // Assuming first and last name columns
+                Specialization = new Specialization
+                {
+                    Id = Convert.ToInt32(row["FieldCode"]),
+                    Name = row["FieldName"].ToString() // FieldName column
+                },
+                SessionFees = Convert.ToDouble(row["PricePA"]),
+                Ratings = Convert.ToDouble(row["AverageRating"]),
+                ProfileImageUrl = "img/author1.jpg", // You can replace this with the actual profile image path if available
+                NextDrAppointment = DateTime.Now.AddDays(1) // This is a placeholder, you can replace with actual appointment date
+            };
+
+            therapistsList.Add(therapist);
+        }
+
+        return therapistsList;
+    }
+};
 
 // Therapist class
 public class Therapist
 {
     public int Id { get; set; }
     public string Name { get; set; }
+    public string Governerate { get; set; }
+    public string City { get; set; }
     public int SpecializationId { get; set; }
     public double SessionFees { get; set; }
     public double Ratings { get; set; }
