@@ -88,7 +88,7 @@ namespace webclinic.Pages
             {
                 Dictionary<string, int> fieldAndNum = db.getFieldAnalytics($"{curYear}-{curMonth}-01", tomorrow);
 
-                setUpBarChart(fieldAndNum, tab);
+                setUpPieChart(fieldAndNum);
             }
 
 		}
@@ -145,7 +145,7 @@ namespace webclinic.Pages
 
                 foreach (var data in dataToDisplay)
                 {
-                    labelsArray.Add(data.Key.Split(' ')[0]);
+                    labelsArray.Add(data.Key);
                     dataArray.Add(data.Value);
                 }
 
@@ -153,7 +153,7 @@ namespace webclinic.Pages
 
                 // 3. set up a dataset
                 var firsDataset = new Dataset();
-                firsDataset.label = "Number of Users registered per day";
+                firsDataset.label = "Number of doctors in a specified Field";
                 firsDataset.data = dataArray.ToArray();
 
                 PieChart.data.datasets.Add(firsDataset);
