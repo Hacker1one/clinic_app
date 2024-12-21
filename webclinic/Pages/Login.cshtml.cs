@@ -38,7 +38,7 @@ namespace webapplication.Pages
             }
             HttpContext.Session.SetString("email", email);
             id = db.getID(email);
-            HttpContext.Session.SetInt32("id", id);
+            HttpContext.Session.SetInt32("user_id", id);
             HttpContext.Session.SetString("user_type", type);
             HttpContext.Session.Remove("invlogin");
             return RedirectToPage("Index");

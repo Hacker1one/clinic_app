@@ -66,14 +66,26 @@
 
             @if (HttpContext.Session.GetString("user_type") == "a")
             {
-            <span class="badge @(Model.IsActive ? "bg-success" : "bg-secondary")">
-                    @(Model.IsActive ? "Active" : "Banned")
-            </span>
+                <span class="badge text-white @(Model.IsVerified ? "bg-success" : "bg-warning text-dark")">
+                    @(Model.IsVerified ? "Verified" : "Unverified")
+                </span>
+
             }
 
 
         </div>
     </div>
+
+    @if (HttpContext.Session.GetString("user_type") == "a")
+    {
+        <div class="d-flex justify-content-end gap-5">
+            <form method="post" asp-page-handler="ToggleSSSN">
+                <button type="submit" class="btn @(Model.IsVerified ? "btn-danger" : "btn-success") btn-lg px-4">
+                    @(Model.IsVerified ? "Unverify" : "Verify")
+                </button>
+            </form>
+        </div>
+    }
 
     <!-- Long-term Conditions Section -->
     <div class="mb-5">
@@ -120,14 +132,7 @@
             }
         </div>
     </div>
-    @if (HttpContext.Session.GetString("user_type") == "a")
-    {
-            <div class="text-center">
-                <button class="btn @(Model.IsActive ? "btn-danger" : "btn-success") btn-lg px-4" onclick="toggleStatus()">
-                @(Model.IsActive ? "Ban" : "Activate")
-                </button>
-            </div>
-    }
+
 
 
 </div>

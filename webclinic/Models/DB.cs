@@ -27,7 +27,7 @@ namespace webclinic.Models
 			// connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
 			// yassin's connection string:
-            connectionString = "Data Source=AMNESIA\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
+            connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
             con.ConnectionString = connectionString;
 		}
@@ -318,10 +318,10 @@ namespace webclinic.Models
 
 
 
-        public DataTable getSymptoms(string email)
+        public DataTable getSymptoms(int id)
         {
 
-            string queryString = $"(SELECT SymptomName,Severity, DateOfFirstInstance\r\nFROM Symptom, SymptomTypes\r\nWHERE symptom.SymptomID = SymptomTypes.SymptomID AND PatientID = (select ID from [user] where Email = '{email}'))\r\nUNION\r\n(SELECT ConditionName, Severity, DateOfFirstInstance\r\nFROM LongTermConditions, LTCTypes\r\nWHERE LongTermConditions.ConditionID = LTCTypes.ConditionID AND PatientID = (select ID from [user] where Email = '{email}'))";
+            string queryString = $"(SELECT SymptomName,Severity, DateOfFirstInstance\r\nFROM Symptom, SymptomTypes\r\nWHERE symptom.SymptomID = SymptomTypes.SymptomID AND PatientID = '{id}')\r\nUNION\r\n(SELECT ConditionName, Severity, DateOfFirstInstance\r\nFROM LongTermConditions, LTCTypes\r\nWHERE LongTermConditions.ConditionID = LTCTypes.ConditionID AND PatientID = '{id}')";
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand(queryString, con);
             try
@@ -343,10 +343,10 @@ namespace webclinic.Models
 
 
 
-        public DataTable getHistory(string email)
+        public DataTable getHistory(int id)
         {
 
-            string queryString = $"SELECT Fname, Lname, condition, [description]\r\nFROM Diagnosis, [user]\r\nWHERE [user].ID = DoctorID  AND  PatientID = (select ID from [user] where Email = '{email}')";
+            string queryString = $"SELECT Fname, Lname, condition, [description]\r\nFROM Diagnosis, [user]\r\nWHERE [user].ID = DoctorID  AND  PatientID = '{id}'";
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand(queryString, con);
             try
@@ -366,11 +366,11 @@ namespace webclinic.Models
             return dt;
         }
 
-        public int getAge(string email)
+        public int getAge(int id)
         {
             int age = 0;
             string today = DateTime.Today.Date.ToString("yyyy-MM-dd");
-            string queryString = $"SELECT FLOOR(DATEDIFF(year, birthdate,'{today}')) AS age\r\nFROM [user]\r\nWHERE Email = '{email}'";
+            string queryString = $"SELECT FLOOR(DATEDIFF(year, birthdate,'{today}')) AS age\r\nFROM [user]\r\nWHERE ID = '{id}'";
             SqlCommand cmd = new SqlCommand(queryString, con);
             try
             {
@@ -389,10 +389,10 @@ namespace webclinic.Models
             return age;
         }
 
-        public string getName(string email)
+        public string getName(int id)
         {
             string name = "";
-            string queryString = $"SELECT Fname + ' '  +Lname as [name]\r\nFROM [user]\r\nWHERE Email = '{email}'";
+            string queryString = $"SELECT Fname + ' '  +Lname as [name]\r\nFROM [user]\r\nWHERE ID = '{id}'";
 
             SqlCommand cmd = new SqlCommand(queryString, con);
             try
@@ -594,7 +594,7 @@ namespace webclinic.Models
         public DataTable getAllDoctors()
         {
 
-            string queryString = $"select Fname + ' ' + Lname as [name], Banned, doctor.id, RegistrationDate \r\nfrom doctor, [user]\r\nwhere doctor.id = [user].id";
+            string queryString = $"select Fname + ' ' + Lname as [name], Banned, doctor.id, RegistrationDate, SSN, SSNValidation \r\nfrom doctor, [user]\r\nwhere doctor.id = [user].id";
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand(queryString, con);
             try
@@ -618,7 +618,7 @@ namespace webclinic.Models
         public DataTable getAllPatients()
         {
 
-            string queryString = $"select Fname + ' ' + Lname as [name], SSNvalidation, patient.id, RegistrationDate \r\nfrom patient, [user]\r\nwhere patient.id = [user].id";
+            string queryString = $"select Fname + ' ' + Lname as [name], SSNvalidation, patient.id, RegistrationDate, SSN \r\nfrom patient, [user]\r\nwhere patient.id = [user].id";
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand(queryString, con);
             try
@@ -637,9 +637,104 @@ namespace webclinic.Models
 
             return dt;
         }
+        public bool getDrStatus(int id)
+        {
+            bool status = false;
+            string queryString = $"SELECT Banned FROM Doctor WHERE Doctor.ID = '{id}'";
+            SqlCommand cmd = new SqlCommand(queryString, con);
+
+
+            try
+            {
+                con.Open();
+                status = Convert.ToBoolean(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return status;
+        }
+
+
+        public bool ToggleDoctorStatus(int id)
+        {
+
+            string queryString;
+            queryString = $"update Doctor\r\nSET Banned = CASE \r\nWHEN Banned = 1 THEN 0\r\nELSE 1\r\nEND\r\nwhere ID = '{id}'";
+            SqlCommand cmd = new SqlCommand(queryString, con);
+
+            try
+            {
+                con.Open();
+                cmd.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return true;
+        }
+
+
+        public bool getSSN(int id)
+        {
+            bool status = false;
+            string queryString = $"SELECT SSNValidation FROM [user] WHERE ID = '{id}'";
+            SqlCommand cmd = new SqlCommand(queryString, con);
+
+
+            try
+            {
+                con.Open();
+                status = Convert.ToBoolean(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return status;
+        }
 
 
 
+        public bool ToggleSSN(int id)
+        {
 
+            string queryString;
+            queryString = $"update [user]\r\nSET SSNValidation = CASE \r\nWHEN SSNValidation = 1 THEN 0\r\nELSE 1\r\nEND\r\nwhere ID = '{id}'";
+            SqlCommand cmd = new SqlCommand(queryString, con);
+
+            try
+            {
+                con.Open();
+                cmd.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return true;
+        }
     }
 }

@@ -10,11 +10,12 @@ namespace webclinic.Pages
         [BindProperty(SupportsGet = true)]
         public DataTable symptoms { get; set; }
         public DataTable history { get; set; }
-
+        public string type { get; set; }
+        public int id { get; set; }
         public DB db { get; set; }
         public string PatientName { get; set; }
         public int PatientAge { get; set; }
-        public bool IsActive { get; set; } = true;
+        public bool IsVerified { get; set; } = true;
 
 
         public PatientProfileModel(DB db)
@@ -25,20 +26,40 @@ namespace webclinic.Pages
         public void OnGet()
         {
 
+            type = HttpContext.Session.GetString("user_type");
+            if (type == "p")
+            {
+                id = HttpContext.Session.GetInt32("user_id").Value;
+            }
+            else
+            {
+                id = HttpContext.Session.GetInt32("Patient_ID").Value;
+            }
+            
 
-            PatientName = db.getName(HttpContext.Session.GetString("email"));
-            PatientAge = db.getAge(HttpContext.Session.GetString("email"));
+            PatientName = db.getName(id);
+            PatientAge = db.getAge(id);
 
 
             symptoms = new DataTable();
-            symptoms = db.getSymptoms(HttpContext.Session.GetString("email"));
+            symptoms = db.getSymptoms(id);
 
             history = new DataTable();
-            history = db.getHistory(HttpContext.Session.GetString("email"));
+            history = db.getHistory(id);
+            IsVerified = db.getSSN(id);
 
 
         }
 
+
+        public IActionResult OnPostToggleSSSN()
+        {
+            int doctorId = HttpContext.Session.GetInt32("Patient_ID").Value;
+
+            db.ToggleSSN(doctorId);
+
+            return RedirectToPage();
+        }
     }
 
 }

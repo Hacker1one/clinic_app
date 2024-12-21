@@ -52,29 +52,29 @@
 
 
 <div class="container">
-    <h2 class="mb-4">Browse Doctors</h2>
+    <h2 class="mb-4">Browse Patients</h2>
 
     <!-- Search Bar and Status Filter -->
     <form method="get" class="mb-4">
         <div class="row g-3 align-items-center">
             <!-- Search by Name -->
             <div class="col-md-3">
-                <input type="text" name="SearchTerm" class="form-control" placeholder="Search Doctor's Name"
+                <input type="text" name="SearchTerm" class="form-control" placeholder="Search Patient's Name"
                        value="@Model.SearchTerm">
             </div>
 
             <!-- Search by ID -->
             <div class="col-md-3">
-                <input type="text" name="SearchID" class="form-control" placeholder="Search Doctor's ID"
+                <input type="text" name="SearchID" class="form-control" placeholder="Search Patient's' ID"
                        value="@Model.SearchID">
             </div>
 
-            <!-- Status Filter (Active, Banned, All) -->
+            
             <div class="col-md-3">
                 <select asp-for="SelectedStatus" class="form-control" onchange="this.form.submit()">
                     <option value="">Show All</option>
-                    <option value="Active">Show Only Active</option>
-                    <option value="Banned">Show Only Banned</option>
+                    <option value="Active">Show Only Verified</option>
+                    <option value="Banned">Show Only Unverified</option>
                 </select>
             </div>
 
@@ -93,8 +93,10 @@
                     <th scope="col" class="text-center">Photo</th>
                     <th scope="col">Name</th>
                     <th scope="col" class="text-center">ID</th>
+                    <th scope="col" class="text-center">SSN</th>
                     <th scope="col" class="text-center">Registration Date</th>
-                    <th scope="col" class="text-center">Status</th>
+                    <th scope="col" class="text-center">SSN Validation</th>
+                    <th scope="col" class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -115,9 +117,12 @@
 
                                     <!-- Doctor ID -->
                                     <td class="text-center">
-                                        <span class="fw-bold">ID: @Model.Patients.Rows[i]["id"].ToString()</span>
+                                        <span class="fw-bold">@Model.Patients.Rows[i]["id"].ToString()</span>
                                     </td>
-
+                                            <!-- Doctor SSN -->
+                                    <td class="text-center">
+                                        <span class="fw-bold">@Model.Patients.Rows[i]["SSN"].ToString()</span>
+                                    </td>
                                     <!-- Registration Date -->
                                     <td class="text-center">
                                 @Model.Patients.Rows[i]["RegistrationDate"].ToString()
@@ -127,9 +132,17 @@
                                     <td class="text-center">
                                         <span class="badge px-3 py-2 text-white" 
                                                       style="background-color: @(Convert.ToBoolean(Model.Patients.Rows[i]["SSNValidation"]) ? "#28a745" : "#dc3545");">
-                                    @(Convert.ToBoolean(Model.Patients.Rows[i]["SSNValidation"]) ? "Active" : "Banned")
+                                    @(Convert.ToBoolean(Model.Patients.Rows[i]["SSNValidation"]) ? "Verified" : "Unverified")
                                         </span>
                                     </td>
+
+                                            <td class="text-center">
+                                            <form method="post" asp-page-handler="ViewPatient">
+                                                <input type="hidden" name="PatientId" value="@Model.Patients.Rows[i]["id"].ToString()" />
+                                                <button type="submit" class="btn btn-primary btn-sm">View Patient</button>
+                                            </form>
+                                        </td>
+
                                 </tr>
                     }
                 }

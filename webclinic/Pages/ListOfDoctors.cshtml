@@ -5,6 +5,11 @@
     Layout = ".\\Shared\\_Layout.cshtml";
 }
 
+
+
+
+
+
 <div class="header-inner">
             <div class="container">
                 <div class="inner">
@@ -93,8 +98,11 @@
                     <th scope="col" class="text-center">Photo</th>
                     <th scope="col">Name</th>
                     <th scope="col" class="text-center">ID</th>
+                    <th scope="col" class="text-center">SSN</th>
                     <th scope="col" class="text-center">Registration Date</th>
                     <th scope="col" class="text-center">Status</th>
+                    <th scope="col" class="text-center">SSN Validation</th>
+                    <th scope="col" class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -115,7 +123,11 @@
 
                             <!-- Doctor ID -->
                             <td class="text-center">
-                                <span class="fw-bold">ID: @Model.Doctors.Rows[i]["id"].ToString()</span>
+                                <span class="fw-bold">@Model.Doctors.Rows[i]["id"].ToString()</span>
+                            </td>
+                            <!-- Doctor SSN -->
+                            <td class="text-center">
+                                <span class="fw-bold">@Model.Doctors.Rows[i]["SSN"].ToString()</span>
                             </td>
 
                             <!-- Registration Date -->
@@ -130,6 +142,21 @@
                                     @(Convert.ToBoolean(Model.Doctors.Rows[i]["Banned"]) ? "Active" : "Banned")
                                 </span>
                             </td>
+
+                                     <td class="text-center">
+                                        <span class="badge px-3 py-2 text-white" 
+                                                      style="background-color: @(Convert.ToBoolean(Model.Doctors.Rows[i]["SSNValidation"]) ? "#28a745" : "#dc3545");">
+                                    @(Convert.ToBoolean(Model.Doctors.Rows[i]["SSNValidation"]) ? "Verified" : "Unverified")
+                                        </span>
+                                    </td>
+
+                                            <!-- Actions (View Doctor) -->
+                                <td class="text-center">
+                                    <form method="post" asp-page-handler="ViewDoctor">
+                                        <input type="hidden" name="DoctorId" value="@Model.Doctors.Rows[i]["id"].ToString()" />
+                                        <button type="submit" class="btn btn-primary btn-sm">View Doctor</button>
+                                    </form>
+                                </td>
                         </tr>
                     }
                 }
