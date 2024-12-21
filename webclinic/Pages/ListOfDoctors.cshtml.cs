@@ -1,54 +1,94 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Data;
+using webclinic.Models;
 
 namespace webclinic.Pages
 {
     public class ListOfDoctorsModel : PageModel
     {
-        // List of all doctors (simulating a database)
-        private List<Doctor> AllDoctors { get; set; }
+        // The DataTable to hold all doctors data
+        public DataTable AllDoctors { get; set; }
 
-        // List of filtered doctors to display
-        public List<Doctor> Doctors { get; set; }
+        // The DataTable to hold filtered doctors data to display
+        public DataTable Doctors { get; set; }
 
+        // Property to bind search term for doctor name
         [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
 
+        // Property to bind search term for doctor ID
+        [BindProperty(SupportsGet = true)]
+        public string SearchID { get; set; }
+
+        // Property to bind selected status filter (Active, Banned, or All)
+        [BindProperty(SupportsGet = true)]
+        public string SelectedStatus { get; set; }
+
+        // Database access instance
+        public DB db { get; set; }
+
+        // List of status options for filtering (Active, Banned, or All)
+        public List<SelectListItem> StatusOptions { get; set; }
+
+        // Constructor to initialize the DB object
+        public ListOfDoctorsModel(DB db)
+        {
+            this.db = db;
+        }
+
+        // OnGet method to handle the logic for retrieving and filtering doctor data
         public void OnGet()
         {
-            // Sample data (replace with your database logic)
-            AllDoctors = new List<Doctor>
+            // Retrieve all doctors from the database (simulating with db.getAllDoctors())
+            AllDoctors = db.getAllDoctors();
+
+            // Set up the status filter options
+            StatusOptions = new List<SelectListItem>
             {
-                new Doctor { Name = "Dr. Ahmed Ali", IsVerified = true },
-                new Doctor { Name = "Dr. Sarah Ahmed", IsVerified = false },
-                new Doctor { Name = "Dr. Yassin Omar", IsVerified = true },
-                new Doctor { Name = "Dr. Maha Sameer", IsVerified = false },
-                new Doctor { Name = "Dr. Khalid Basem", IsVerified = true },
-                new Doctor { Name = "Dr. Amal Nour", IsVerified = true }
+                new SelectListItem { Text = "Show All", Value = "" },
+                new SelectListItem { Text = "Show Only Active", Value = "Active" },
+                new SelectListItem { Text = "Show Only Banned", Value = "Banned" }
             };
 
-            // Filter based on the search term
+            // Start with all doctors (no filter)
+            var filteredRows = AllDoctors.AsEnumerable();
+
+            // Filtering based on the search term (name)
             if (!string.IsNullOrEmpty(SearchTerm))
             {
-                Doctors = AllDoctors
-                    .Where(d => d.Name.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
-                    .ToList();
+                filteredRows = filteredRows.Where(row => row.Field<string>("name")
+                    .Contains(SearchTerm, StringComparison.OrdinalIgnoreCase));
+            }
+
+            // Filtering based on the search term (ID)
+            if (!string.IsNullOrEmpty(SearchID))
+            {
+                filteredRows = filteredRows.Where(row => row.Field<object>("id") != DBNull.Value &&
+                                                          row.Field<object>("id").ToString()
+                                                          .Contains(SearchID, StringComparison.OrdinalIgnoreCase));
+            }
+
+            // Filtering based on the selected status (Active/Banned/All)
+            if (SelectedStatus == "Active")
+            {
+                filteredRows = filteredRows.Where(row => row.Field<bool>("Banned") == true);
+            }
+            else if (SelectedStatus == "Banned")
+            {
+                filteredRows = filteredRows.Where(row => row.Field<bool>("Banned") == false);
+            }
+
+            // Apply the filtered rows to the Doctors DataTable
+            if (filteredRows.Any())
+            {
+                Doctors = filteredRows.CopyToDataTable();
             }
             else
             {
-                Doctors = AllDoctors;
+                Doctors = new DataTable(); // Return an empty DataTable if no results
             }
         }
-
-        // Optional: Add methods for actions like toggling verification status
-    }
-
-    // Doctor model
-    public class Doctor
-    {
-        public string Name { get; set; }
-        public bool IsVerified { get; set; }
     }
 }
-

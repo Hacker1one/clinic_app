@@ -33,19 +33,6 @@ namespace webclinic.Pages
             // Toggle the patient's status
             IsVerified = !IsVerified;
         }
-        public class Education
-        {
-            public string Institution { get; set; }
-            public string Degree { get; set; }
-        }
-
-        public class Experience
-        {
-            public string Position { get; set; }
-            public string Organization { get; set; }
-            public string Description { get; set; }
-            
-        }
 
         public class Clinic
         {
