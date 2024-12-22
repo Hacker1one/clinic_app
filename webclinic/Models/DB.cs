@@ -11,6 +11,9 @@ using System.Runtime.Versioning;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Specialized;
 using System.Reflection.Metadata;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Drive.v3;
+using Google.Apis.Services;
 
 namespace webclinic.Models
 {
@@ -192,7 +195,7 @@ namespace webclinic.Models
 
 
 
-        public bool addUser(string fname, string lname, string ssn, string password, string governorate, string city, string email, string gender, DateTime birthdate, string user_type, int field_code)
+        public async Task<bool> addUserAsync(string fname, string lname, string ssn, string password, string governorate, string city, string email, string gender, DateTime birthdate, string user_type, int field_code, IFormFile nationalIDPic, IFormFile docCertPic)
 		{
 			string today = DateTime.Today.Date.ToString("yyyy-MM-dd");
 			string bd = birthdate.Date.ToString("yyyy-MM-dd");
@@ -228,11 +231,98 @@ namespace webclinic.Models
 			}
             SqlCommand cmd = new SqlCommand(queryString, con);
 
-			try
-			{
-				con.Open();
-				cmd.ExecuteReader();
-			}
+            try
+            {
+                con.Open();
+                cmd.ExecuteReader();
+
+                // recieve images from post request
+                if (nationalIDPic == null || nationalIDPic.Length == 0)
+                {
+                    throw new InvalidOperationException("Please upload a valid file.");
+                }
+
+                // Save the Picture temporarily in the backend
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+                string natIDPath = Path.Combine(uploadsFolder, "NationalID_" + email + Path.GetExtension(nationalIDPic.FileName));
+                using (var fileStream = new FileStream(natIDPath, FileMode.Create))
+                {
+                    await nationalIDPic.CopyToAsync(fileStream);
+                }
+
+                string docCertPath = "";
+
+                if (user_type == "d")
+                {
+                    if (docCertPic == null || docCertPic.Length == 0)
+                    {
+                        throw new InvalidOperationException("Please upload a valid file.");
+                    }
+                    docCertPath = Path.Combine(uploadsFolder, "DocCert_" + email + Path.GetExtension(docCertPic.FileName));
+                    using (var fileStream = new FileStream(docCertPath, FileMode.Create))
+                    {
+                        await docCertPic.CopyToAsync(fileStream);
+                    }
+                }
+
+                List<string> filePaths = new List<string> { natIDPath };
+                if (!string.IsNullOrEmpty(docCertPath))
+                {
+                    filePaths.Add(docCertPath);
+                }
+
+
+                // upload National ID to google drive
+                string credentialsPath = ".\\bin\\Debug\\credentials.json";
+                string folderID = "10_kLHobgMJhTHluPik28qiK9k3q4T0B4";
+                GoogleCredential credential;
+
+                using (var stream = new FileStream(credentialsPath, FileMode.Open, FileAccess.Read))
+                {
+                    credential = GoogleCredential.FromStream(stream).CreateScoped(new[]
+                    {
+                        DriveService.ScopeConstants.DriveFile
+                    });
+                }
+
+                var service = new DriveService(new BaseClientService.Initializer()
+                {
+                    HttpClientInitializer = credential,
+                    ApplicationName = "Google drive SSN upload"
+                });
+
+                foreach (var p in filePaths)
+                {
+                    var fileMetaData = new Google.Apis.Drive.v3.Data.File()
+                    {
+                        Name = Path.GetFileName(p),
+                        Parents = new List<string> { folderID }
+                    };
+
+                    FilesResource.CreateMediaUpload request;
+                    using (var stream = new FileStream(p, FileMode.Open))
+                    {
+                        request = service.Files.Create(fileMetaData, stream, "");
+                        request.Fields = "id";
+                        request.Upload();
+                    }
+                    var uploadedFile = request.ResponseBody;
+                    string link = $"https://drive.google.com/file/d/{uploadedFile.Id}/view";
+                    Console.WriteLine($"File '{fileMetaData.Name}' uploaded with ID: {link}");
+                }
+                if (File.Exists(natIDPath))
+                {
+                    File.Delete(natIDPath);
+                }
+                if (File.Exists(docCertPath))
+                {
+                    File.Delete(docCertPath);
+                }
+            }
 			catch (Exception ex)
 			{
 				Console.Write(ex.ToString());

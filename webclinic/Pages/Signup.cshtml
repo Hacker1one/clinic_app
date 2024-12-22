@@ -23,7 +23,14 @@
             <p class="text-primary fw-bold text-lg mb-0">Doctor.</p>
         </div>
 	}
-    <form method="post" asp-page-handler="SignUpPatient">
+
+    @if (!string.IsNullOrEmpty(HttpContext.Session.GetString("invsignup")))
+    {
+        <div class="alert alert-danger w-50 mx-auto">
+            Something went wrong while signing you up, please check the console for errors and try again.
+        </div>
+    }
+    <form method="post" asp-page-handler="SignUp" enctype="multipart/form-data">
         <!-- First Name -->
         <div class="form-floating mb-3 mx-auto w-50">
             <input class="form-control" id="fname" placeholder="First name"  asp-for="fname" required>
@@ -116,13 +123,13 @@
 
         <!-- National ID picture-->
         <h6 class="fw-bold text-start mx-auto w-50">National ID</h6>
-        <input type="file" class="form-control w-50 mx-auto mb-3" id="nationalID" required/>
+        <input type="file" class="form-control w-50 mx-auto mb-3" id="nationalID" asp-for="nationalIDPic" required/>
 
         @if(HttpContext.Session.GetString("user_type") == "d")
         {
 			<!-- Doctor documents -->
 			<h6 class="fw-bold text-start mx-auto w-50">Medical practice official certificate</h6>
-			<input type="file" class="form-control w-50 mx-auto mb-3" required/>
+			<input type="file" class="form-control w-50 mx-auto mb-3" asp-for="docCertPic" required/>
         }
 
         <!-- Sign up Button -->
