@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7sHxIynhGJ8b6rT9XdTfr3X+Czk8l2fdq4veeV+n3f4=",
+  "Hash": "Q+uQyxn422sF5d87joUAf3ey7r1wJYkozcZF5bJAR6I=",
   "Source": "webclinic",
   "BasePath": "_content/webclinic",
   "Mode": "Default",
@@ -367,8 +367,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "1pp18wczp0",
-      "Integrity": "VUDDXBhv0shDyoEszMSt+MRCwNwxuNLPQJgRdQaSAE4=",
+      "Fingerprint": "4on2t6n6hd",
+      "Integrity": "VOl9KoJxOv5XdDj+MtDnAc9c4HkdgOIMQxPIXufnZg4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\style.css"
@@ -1023,6 +1023,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\contact-img.png"
+    },
+    {
+      "Identity": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\wwwroot\\img\\defaultuser.jpg",
+      "SourceId": "webclinic",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\wwwroot\\",
+      "BasePath": "_content/webclinic",
+      "RelativePath": "img/defaultuser#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "i6j7gwd2ww",
+      "Integrity": "2jyU/A3+UahRfVnkA+dUDRi7P0k6EyIMAbEPr0nAzIA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\defaultuser.jpg"
     },
     {
       "Identity": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\wwwroot\\img\\favicon.png",
@@ -4590,7 +4611,7 @@
       ]
     },
     {
-      "Route": "css/style.1pp18wczp0.css",
+      "Route": "css/style.4on2t6n6hd.css",
       "AssetFile": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\wwwroot\\css\\style.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -4600,7 +4621,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "88649"
+          "Value": "89096"
         },
         {
           "Name": "Content-Type",
@@ -4608,11 +4629,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"VUDDXBhv0shDyoEszMSt+MRCwNwxuNLPQJgRdQaSAE4=\""
+          "Value": "\"VOl9KoJxOv5XdDj+MtDnAc9c4HkdgOIMQxPIXufnZg4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 20 Dec 2024 18:58:52 GMT"
+          "Value": "Fri, 20 Dec 2024 21:22:01 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4622,7 +4643,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "1pp18wczp0"
+          "Value": "4on2t6n6hd"
         },
         {
           "Name": "label",
@@ -4630,7 +4651,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-VUDDXBhv0shDyoEszMSt+MRCwNwxuNLPQJgRdQaSAE4="
+          "Value": "sha256-VOl9KoJxOv5XdDj+MtDnAc9c4HkdgOIMQxPIXufnZg4="
         }
       ]
     },
@@ -4645,7 +4666,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "88649"
+          "Value": "89096"
         },
         {
           "Name": "Content-Type",
@@ -4653,11 +4674,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"VUDDXBhv0shDyoEszMSt+MRCwNwxuNLPQJgRdQaSAE4=\""
+          "Value": "\"VOl9KoJxOv5XdDj+MtDnAc9c4HkdgOIMQxPIXufnZg4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 20 Dec 2024 18:58:52 GMT"
+          "Value": "Fri, 20 Dec 2024 21:22:01 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4667,7 +4688,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-VUDDXBhv0shDyoEszMSt+MRCwNwxuNLPQJgRdQaSAE4="
+          "Value": "sha256-VOl9KoJxOv5XdDj+MtDnAc9c4HkdgOIMQxPIXufnZg4="
         }
       ]
     },
@@ -7210,6 +7231,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-WIw6Yhxcm45pWCzalXuGZScaGmGvY7k5EMXMzy3nl9M="
+        }
+      ]
+    },
+    {
+      "Route": "img/defaultuser.i6j7gwd2ww.jpg",
+      "AssetFile": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\wwwroot\\img\\defaultuser.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7402"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2jyU/A3+UahRfVnkA+dUDRi7P0k6EyIMAbEPr0nAzIA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 20 Dec 2024 23:12:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "i6j7gwd2ww"
+        },
+        {
+          "Name": "label",
+          "Value": "img/defaultuser.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-2jyU/A3+UahRfVnkA+dUDRi7P0k6EyIMAbEPr0nAzIA="
+        }
+      ]
+    },
+    {
+      "Route": "img/defaultuser.jpg",
+      "AssetFile": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\wwwroot\\img\\defaultuser.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7402"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2jyU/A3+UahRfVnkA+dUDRi7P0k6EyIMAbEPr0nAzIA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 20 Dec 2024 23:12:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-2jyU/A3+UahRfVnkA+dUDRi7P0k6EyIMAbEPr0nAzIA="
         }
       ]
     },
@@ -16666,7 +16769,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 20 Dec 2024 18:58:52 GMT"
+          "Value": "Sat, 21 Dec 2024 11:59:10 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -16711,7 +16814,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 20 Dec 2024 18:58:52 GMT"
+          "Value": "Sat, 21 Dec 2024 11:59:10 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -16756,7 +16859,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 20 Dec 2024 18:58:52 GMT"
+          "Value": "Sat, 21 Dec 2024 11:59:10 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -16793,7 +16896,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 20 Dec 2024 18:58:52 GMT"
+          "Value": "Sat, 21 Dec 2024 11:59:10 GMT"
         },
         {
           "Name": "Cache-Control",

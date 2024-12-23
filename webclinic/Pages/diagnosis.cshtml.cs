@@ -3,10 +3,18 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace webclinic.Pages
 {
+    [BindProperties]
     public class DiagnosisModel : PageModel
     {
         public string PatientName { get; set; }
+        [BindProperty(SupportsGet =true)]
         public int PatientAge { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public int AppointmentID { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public int PatientID { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public int DoctorID { get; set; }
         public List<Condition> Conditions { get; set; }
         public List<History> History { get; set; }
         public IActionResult OnGet()

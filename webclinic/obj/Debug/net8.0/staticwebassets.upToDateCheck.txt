@@ -44,6 +44,7 @@ wwwroot\img\client4.png
 wwwroot\img\client5.png
 wwwroot\img\client-bg.jpg
 wwwroot\img\contact-img.png
+wwwroot\img\defaultuser.jpg
 wwwroot\img\favicon.png
 wwwroot\img\fun-bg.jpg
 wwwroot\img\image.png

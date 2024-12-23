@@ -74,7 +74,7 @@
         <!-- Filters Section on the left -->
         <div class="col-md-3 mb-4">
             <div class="filters">
-                <form method="post" asp-page-handler="Filter">
+                <form method="get">
                     <!-- Availability -->
                     <div class="mb-4">
                         <label>Availability</label>
@@ -101,11 +101,13 @@
                     <!-- Specialization -->
                     <div class="mb-4">
                         <label for="specialization">Speciality</label>
-                        <select id="specialization" name="specialization" class="form-control">
+                        <select id="special" name="special" class="form-control" asp-for="special">
                             <option value="">Select Specialization</option>
                             @for (int i = 0; i < Model.fields.Rows.Count; i++)
                             {
-                                <option value="@i">@Model.fields.Rows[i]["FieldName"].ToString()</option>
+                                <option value="@Model.fields.Rows[i]["FieldName"].ToString()">
+                                    @Model.fields.Rows[i]["FieldName"].ToString()
+                                </option>
                             }
                         </select>
                     </div>
@@ -114,11 +116,13 @@
                     <div class="mb-4">
                         <label for="governorate">Governorate</label>
                         <br >
-                        <select id="governorate" name="governorate" class="form-control">
+                        <select id="governorate" name="governorate" class="form-control" asp-for="governorate">
                             <option value="">Select Governorate</option>
                             @for (int i = 0; i < Model.allGovernorates.Rows.Count; i++)
                             {
-                                <option value="@i">@Model.allGovernorates.Rows[i]["Governorate"].ToString()</option>
+                                <option value="@Model.allGovernorates.Rows[i]["Governorate"].ToString()">
+                                    @Model.allGovernorates.Rows[i]["Governorate"].ToString()
+                                </option>
                             }
                         </select>
                     </div>
@@ -126,8 +130,9 @@
                     <!-- Session Fees -->
                     <div class="mb-4" style="margin: 70px 0">
                         <label for="fees-range">Session Fees</label>
-                        <input type="range" name="feesRange" id="fees-range" min="140" max="4700" step="10" class="form-control">
-                        <div>140 EGP - 4700 EGP</div>
+                        <input type="range" name="feesRange" id="fees-range" min="400" max="800" step="10" class="form-control" asp-for="feesRange">
+                        <div> 400 EGP -  800 EGP</div>
+                      
                     </div>
 
                     <div class="mb-4">

@@ -189,6 +189,10 @@
       "PackagePath": "staticwebassets\\img\\contact-img.png"
     },
     {
+      "Id": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\wwwroot\\img\\defaultuser.jpg",
+      "PackagePath": "staticwebassets\\img\\defaultuser.jpg"
+    },
+    {
       "Id": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\wwwroot\\img\\favicon.png",
       "PackagePath": "staticwebassets\\img\\favicon.png"
     },

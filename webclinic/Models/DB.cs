@@ -117,7 +117,7 @@ namespace webclinic.Models
         }
         public DataTable getdrspecialities()
         {
-            string queryString = $"SELECT DISTINCT \r\n    FieldName\r\nFROM \r\n    Doctor join FieldOfMedicine on (Doctor.FieldCode = FieldOfMedicine.FieldCode)";
+            string queryString = $"SELECT DISTINCT \r\n    FieldName\r\nFROM \r\n    Doctor join FieldOfMedicine on (Doctor.FieldCode = FieldOfMedicine.FieldCode) ORDER BY FIELDNAME ASC";
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand(queryString, con);
             try
@@ -190,6 +190,175 @@ namespace webclinic.Models
             return dt;
         }
 
+        public DataTable getupcomingappointment(int id)
+        {
+            string queryString = $"SELECT AppointmentID, PatientID, DoctorID, u.FName, u.LName, Appointment.DatenTime, ProfileImageUrl\r\n\r\nfrom [user] as u join Patient on (u.ID = Patient.ID ) join Appointment on (Patient.ID = PatientID)\r\nwhere IsConfirmed = 1 and IsFinished = 0 and DoctorID = {id}";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+        public DataTable getpendingappointment(int id)
+        {
+            string queryString = $"SELECT AppointmentID, PatientID, DoctorID, u.FName, u.LName, Appointment.DatenTime, ProfileImageUrl\r\n\r\nfrom [user] as u join Patient on (u.ID = Patient.ID ) join Appointment on (Patient.ID = PatientID)\r\nwhere IsConfirmed = 0 and IsFinished = 0 and DoctorID = {id}";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+        public DataTable getcompletedappointment(int id)
+        {
+            string queryString = $"SELECT AppointmentID, PatientID, DoctorID, u.FName, u.LName, Appointment.DatenTime, ProfileImageUrl\r\n\r\nfrom [user] as u join Patient on (u.ID = Patient.ID ) join Appointment on (Patient.ID = PatientID)\r\nwhere IsConfirmed = 1 and IsFinished = 1 and DoctorID = {id}";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+        public DataTable getcanceledappointment(int id)
+        {
+            string queryString = $"SELECT AppointmentID, PatientID, DoctorID, u.FName, u.LName, Appointment.DatenTime, ProfileImageUrl\r\n\r\nfrom [user] as u join Patient on (u.ID = Patient.ID ) join Appointment on (Patient.ID = PatientID)\r\nwhere IsConfirmed = 0 and IsFinished = 1 and DoctorID = {id}";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+        public void CancelAppointment(int aid)
+        {
+            using (SqlConnection connection = new SqlConnection(con.ConnectionString))
+            {
+                string updateQuery = "UPDATE Appointment SET IsConfirmed = 0 and IsFinished = 0 WHERE AppointmentID = @aid";
+                using (SqlCommand cmd = new SqlCommand(updateQuery, connection))
+                {
+                    cmd.Parameters.AddWithValue("@aid", aid);
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public void confirmappointment(int aid)
+        {
+            string queryString = "UPDATE Appointment SET IsConfirmed = 1, IsFinished = 0 WHERE AppointmentID = @aid";
+
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(queryString, con))
+                {
+                    // Add parameters to prevent SQL injection
+                    cmd.Parameters.AddWithValue("@aid", aid);
+
+                    con.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        Console.WriteLine("Appointment canceled successfully.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("No appointment found to cancel.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (consider logging it to a file or a logging system)
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            finally
+            {
+                // Ensure that the connection is closed, even in case of an exception
+                if (con.State == System.Data.ConnectionState.Open)
+                {
+                    con.Close();
+                }
+            }
+        }
+        public void completeappointment(int aid)
+        {
+            string queryString = "UPDATE Appointment SET IsConfirmed = 0, IsFinished = 1 WHERE AppointmentID = @aid";
+
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(queryString, con))
+                {
+                    // Add parameters to prevent SQL injection
+                    cmd.Parameters.AddWithValue("@aid", aid);
+
+                    con.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        Console.WriteLine("Appointment canceled successfully.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("No appointment found to cancel.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (consider logging it to a file or a logging system)
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            finally
+            {
+                // Ensure that the connection is closed, even in case of an exception
+                if (con.State == System.Data.ConnectionState.Open)
+                {
+                    con.Close();
+                }
+            }
+        }
 
         public DataTable getmaxprice()
         {

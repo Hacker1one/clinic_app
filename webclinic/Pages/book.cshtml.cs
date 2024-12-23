@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
+using System.Reflection;
 using webclinic.Models;
 namespace webclinic.Pages;
 
@@ -20,14 +21,27 @@ public class bookModel : PageModel
     // Public property for therapists
     [BindProperty(SupportsGet = true)]
     public DataTable fields { get; set; }
+    [BindProperty(SupportsGet = true)]
+
     public DataTable Doctors { get; set; }
+    [BindProperty(SupportsGet = true)]
+
     public List<Therapist> Therapists { get; private set; }
+    [BindProperty(SupportsGet = true)]
+
     public DB db { get; set; }
+    [BindProperty(SupportsGet = true)]
+
     public DataTable allGovernorates { get; set; }
+    
+    [BindProperty(SupportsGet = true)]
     public string governorate { get; set; }
+    [BindProperty(SupportsGet = true)]
     public string special { get; set; }
+    [BindProperty(SupportsGet = true)]
     public string city { get; set; }
     public int maxp { get; set; }
+    public int feesRange { get; set; }
     public int minp { get; set; }
     public DataTable maxprice { get; set; }
     public DataTable minprice { get; set; }
@@ -42,13 +56,42 @@ public class bookModel : PageModel
         allCities = new DataTable();
         Doctors = new DataTable();
         Doctors = db.GetDoctorData();
-       Therapists = MapDoctorsToTherapists(Doctors);
         maxprice = new DataTable();
         minprice = new DataTable();
 
         maxprice = db.getmaxprice();
         minprice = db.getminprice();
+
+        
+
+        var filteredRows = Doctors.AsEnumerable();
+
+        // Filtering based on the search term (name)
+        if (!string.IsNullOrEmpty(special))
+        {
+            filteredRows = filteredRows.Where(row => row.Field<object>("FieldName") != DBNull.Value && row.Field<object>("FieldName").ToString().Contains(special, StringComparison.OrdinalIgnoreCase));
+
+        }
+
+        if (!string.IsNullOrEmpty(governorate))
+        {
+            filteredRows = filteredRows.Where(row => row.Field<object>("Governorate") != DBNull.Value && row.Field<object>("Governorate").ToString().Contains(governorate, StringComparison.OrdinalIgnoreCase));
+        }
+
+        
+        if (filteredRows.Any())
+        {
+            Doctors = filteredRows.CopyToDataTable();
+        }
+        else
+        {
+            Doctors = new DataTable(); // This will result in no therapists being displayed
+        }
+
+        Therapists = MapDoctorsToTherapists(Doctors);
+
     }
+
     public IActionResult OnPostB()
     {
         return RedirectToPage("/book");
@@ -69,140 +112,6 @@ public class bookModel : PageModel
         maxprice = db.getmaxprice();
         minprice = db.getminprice();
 
-        return Page();
-    }
-    public async Task<IActionResult> OnPostFilter(List<string> availability, DateTime? dateRange, int? specialization, int? governorate, int? feesRange)
-    {
-        // Get all doctors from the database
-        DataTable originalDoctors = db.GetDoctorData(); // Load original data only once.
-        DataTable filteredDoctors = originalDoctors.Clone(); // Initialize with the same structure as the original.
-
-        if (specialization.HasValue)
-        {
-            var filteredRows = originalDoctors.AsEnumerable()
-                .Where(row => row.Field<int>("FieldCode") == specialization.Value);
-
-            if (filteredRows.Any())
-            {
-                filteredDoctors = filteredRows.CopyToDataTable();
-            }
-            else
-            {
-                filteredDoctors.Clear(); // No rows match specialization filter.
-            }
-        }
-
-        if (governorate.HasValue)
-        {
-            var sourceTable = filteredDoctors.Rows.Count > 0 ? filteredDoctors : originalDoctors;
-            var governorateRow = allGovernorates.Rows.Count > governorate.Value ? allGovernorates.Rows[governorate.Value] : null;
-
-            if (governorateRow != null)
-            {
-                string selectedGovernorate = governorateRow["Governorate"].ToString();
-
-                var filteredRows = sourceTable.AsEnumerable()
-                    .Where(row => row.Field<string>("Governorate") == selectedGovernorate);
-
-                if (filteredRows.Any())
-                {
-                    filteredDoctors = filteredRows.CopyToDataTable();
-                }
-                else
-                {
-                    filteredDoctors.Clear(); // No rows match governorate filter.
-                }
-            }
-        }
-
-        if (feesRange.HasValue)
-        {
-            var sourceTable = filteredDoctors.Rows.Count > 0 ? filteredDoctors : originalDoctors;
-
-            var filteredRows = sourceTable.AsEnumerable()
-                .Where(row => Convert.ToDouble(row["PricePA"]) <= feesRange.Value);
-
-            if (filteredRows.Any())
-            {
-                filteredDoctors = filteredRows.CopyToDataTable();
-            }
-            else
-            {
-                filteredDoctors.Clear(); // No rows match feesRange filter.
-            }
-        }
-
-        // After filtering, ensure filteredDoctors is not empty before further processing.
-        // Update the UI with filteredDoctors or handle empty results accordingly.
-        if (filteredDoctors.Rows.Count == 0)
-        {
-            // Handle empty results, e.g., show a message to the user.
-            ViewData["Message"] = "No doctors found matching the selected criteria.";
-        }
-        else
-        {
-            // Proceed with displaying the filtered results.
-            ViewData["Doctors"] = filteredDoctors;
-        }
-        
-        // After applying filters, update the UI or return the filtered data.
-        // Update remaining filters (allGovernorates and fields)
-        if (filteredDoctors.Rows.Count > 0)
-        {
-            // Create a new DataTable for governorates
-            DataTable governoratesTable = new DataTable();
-            governoratesTable.Columns.Add("Governorate", typeof(string));
-
-            // Populate the DataTable with unique governorates
-            var uniqueGovernorates = filteredDoctors.AsEnumerable()
-                .Select(row => row.Field<string>("Governorate"))
-                .Distinct();
-
-            foreach (var governorate1 in uniqueGovernorates)
-            {
-                governoratesTable.Rows.Add(governorate1);
-            }
-
-            allGovernorates = governoratesTable;
-        }
-        else
-        {
-            allGovernorates = new DataTable(); // Empty table
-        }
-
-
-        if (filteredDoctors.Rows.Count > 0)
-        {
-            // Create a new DataTable for fields
-            DataTable fieldsTable = new DataTable();
-            fieldsTable.Columns.Add("FieldCode", typeof(int));
-            fieldsTable.Columns.Add("FieldName", typeof(string));
-
-            // Populate the DataTable with unique fields
-            var uniqueFields = filteredDoctors.AsEnumerable()
-                .Select(row => new
-                {
-                    FieldCode = row.Field<int>("FieldCode"),
-                    FieldName = row.Field<string>("FieldName")
-                })
-                .Distinct();
-
-            foreach (var field in uniqueFields)
-            {
-                fieldsTable.Rows.Add(field.FieldCode, field.FieldName);
-            }
-
-            fields = fieldsTable;
-        }
-        else
-        {
-            fields = new DataTable(); // Empty table
-        }
-
-        // Map filtered doctors to therapists
-        Therapists = MapDoctorsToTherapists(filteredDoctors);
-
-        // Re-render the page with the filtered data
         return Page();
     }
     public JsonResult OnGetChangeCities(string govern)
