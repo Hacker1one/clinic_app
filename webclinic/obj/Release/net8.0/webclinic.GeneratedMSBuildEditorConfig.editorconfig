@@ -9,13 +9,13 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = webclinic
 build_property.RootNamespace = webclinic
-build_property.ProjectDir = C:\Users\yassi\source\repos\clinic_app\webclinic\
+build_property.ProjectDir = C:\Users\yassi\Source\Repos\clinic_app\webclinic\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\yassi\source\repos\clinic_app\webclinic
+build_property.MSBuildProjectDirectory = C:\Users\yassi\Source\Repos\clinic_app\webclinic
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
@@ -68,10 +68,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nb3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/OTP.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT1RQLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/PatientApp.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF0aWVudEFwcC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -84,8 +80,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Shared/_LayoutAdmin.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXRBZG1pbi5jc2h0bWw=
+[C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Shared/_LayoutAdminA.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXRBZG1pbkEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/yassi/Source/Repos/clinic_app/webclinic/Pages/Shared/_LayoutLogin.cshtml]

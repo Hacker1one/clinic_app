@@ -23,18 +23,5 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
-    <script>
-        // Toggle Password Visibility
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
-
-        togglePassword.addEventListener('click', () => {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-
-            // Toggle button text
-            togglePassword.textContent = type === 'password' ? 'Show' : 'Hide';
-        });
-    </script>
 </body>
 </html>

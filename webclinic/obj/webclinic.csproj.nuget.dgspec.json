@@ -50,6 +50,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Google.Apis.Drive.v3": {
+              "target": "Package",
+              "version": "[1.68.0.3627, )"
+            },
+            "Microsoft.AspNet.WebPages": {
+              "target": "Package",
+              "version": "[3.3.0, )"
+            },
             "Microsoft.Data.SqlClient": {
               "target": "Package",
               "version": "[5.2.2, )"

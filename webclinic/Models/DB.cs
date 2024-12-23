@@ -11,6 +11,9 @@ using System.Runtime.Versioning;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Specialized;
 using System.Reflection.Metadata;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Drive.v3;
+using Google.Apis.Services;
 
 namespace webclinic.Models
 {
@@ -360,46 +363,6 @@ namespace webclinic.Models
             }
         }
 
-        public DataTable getmaxprice()
-        {
-            string queryString = $"select max(PricePA)\r\nfrom Doctor";
-            DataTable dt = new DataTable();
-            SqlCommand cmd = new SqlCommand(queryString, con);
-            try
-            {
-                con.Open();
-                dt.Load(cmd.ExecuteReader());
-            }
-            catch (Exception ex)
-            {
-                Console.Write(ex.ToString());
-            }
-            finally
-            {
-                con.Close();
-            }
-            return dt;
-        }
-        public DataTable getminprice()
-        {
-            string queryString = $"select min(PricePA)\r\nfrom Doctor";
-            DataTable dt = new DataTable();
-            SqlCommand cmd = new SqlCommand(queryString, con);
-            try
-            {
-                con.Open();
-                dt.Load(cmd.ExecuteReader());
-            }
-            catch (Exception ex)
-            {
-                Console.Write(ex.ToString());
-            }
-            finally
-            {
-                con.Close();
-            }
-            return dt;
-        }
         public bool addUser(string fname, string lname, string ssn, string password, string governorate, string city, string email, string gender, DateTime birthdate, string user_type, int field_code)
 		{
 			string today = DateTime.Today.Date.ToString("yyyy-MM-dd");
@@ -410,12 +373,12 @@ namespace webclinic.Models
 			{
 				queryString = "BEGIN TRANSACTION \n" +
 				"INSERT INTO[user] \n" +
-				"(FName, LName, SSN, RegistrationDate, Gender, [Password], BirthDate, City, Governorate, Email, [type]) \n" +
+				"(FName, LName, SSN, RegistrationDate, Gender, [Password], BirthDate, City, Governorate, Email, [type], SSNValidation) \n" +
 				"VALUES " +
-				$"('{fname}', '{lname}', {ssn}, '{today}', '{gender}', '{password}', '{bd}', '{city}', '{governorate}', '{email}', '{user_type}')\n" +
+				$"('{fname}', '{lname}', {ssn}, '{today}', '{gender}', '{password}', '{bd}', '{city}', '{governorate}', '{email}', '{user_type}', 0)\n" +
 				"DECLARE @NewUserID INT = SCOPE_IDENTITY(); \n" +
-				"INSERT INTO Patient(ID, SSNValidation, PenaltyFees)\n" +
-				"VALUES(@NewUserID, 0, 0);\n" +
+				"INSERT INTO Patient(ID, PenaltyFees)\n" +
+				"VALUES(@NewUserID, 0);\n" +
 				"COMMIT TRANSACTION;";
 			}
 			else if (user_type == "d")
@@ -426,8 +389,8 @@ namespace webclinic.Models
 				"VALUES " +
 				$"('{fname}', '{lname}', {ssn}, '{today}', '{gender}', '{password}', '{bd}', '{city}', '{governorate}', '{email}', '{user_type}')\n" +
 				"DECLARE @NewUserID INT = SCOPE_IDENTITY(); \n" +
-				"INSERT INTO Doctor(ID, PricePA, SSNValidation, Banned, FieldCode)\n" +
-				$"VALUES(@NewUserID, 0, 0, 0, {field_code});\n" +
+				"INSERT INTO Doctor(ID, PricePA, Banned, FieldCode)\n" +
+				$"VALUES(@NewUserID, 0, 0, {field_code});\n" +
 				"COMMIT TRANSACTION;";
 			}
 			else
@@ -436,11 +399,119 @@ namespace webclinic.Models
 			}
             SqlCommand cmd = new SqlCommand(queryString, con);
 
-			try
-			{
-				con.Open();
-				cmd.ExecuteReader();
-			}
+            try
+            {
+                con.Open();
+                cmd.ExecuteReader();
+
+                // recieve images from post request
+                if (nationalIDPic == null || nationalIDPic.Length == 0)
+                {
+                    throw new InvalidOperationException("Please upload a valid file.");
+                }
+
+                // Save the Picture temporarily in the backend
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+                string natIDPath = Path.Combine(uploadsFolder, "NationalID_" + email + Path.GetExtension(nationalIDPic.FileName));
+                using (var fileStream = new FileStream(natIDPath, FileMode.Create))
+                {
+                    await nationalIDPic.CopyToAsync(fileStream);
+                }
+
+                string docCertPath = "";
+
+                if (user_type == "d")
+                {
+                    if (docCertPic == null || docCertPic.Length == 0)
+                    {
+                        throw new InvalidOperationException("Please upload a valid file.");
+                    }
+                    docCertPath = Path.Combine(uploadsFolder, "DocCert_" + email + Path.GetExtension(docCertPic.FileName));
+                    using (var fileStream = new FileStream(docCertPath, FileMode.Create))
+                    {
+                        await docCertPic.CopyToAsync(fileStream);
+                    }
+                }
+
+                List<string> filePaths = new List<string> { natIDPath };
+                if (!string.IsNullOrEmpty(docCertPath))
+                {
+                    filePaths.Add(docCertPath);
+                }
+
+
+                // upload National ID to google drive
+                string credentialsPath = ".\\bin\\Debug\\credentials.json";
+                string folderID = "10_kLHobgMJhTHluPik28qiK9k3q4T0B4";
+                GoogleCredential credential;
+
+                using (var stream = new FileStream(credentialsPath, FileMode.Open, FileAccess.Read))
+                {
+                    credential = GoogleCredential.FromStream(stream).CreateScoped(new[]
+                    {
+                        DriveService.ScopeConstants.DriveFile
+                    });
+                }
+
+                var service = new DriveService(new BaseClientService.Initializer()
+                {
+                    HttpClientInitializer = credential,
+                    ApplicationName = "Google drive SSN upload"
+                });
+
+                foreach (var p in filePaths)
+                {
+                    var fileMetaData = new Google.Apis.Drive.v3.Data.File()
+                    {
+                        Name = Path.GetFileName(p),
+                        Parents = new List<string> { folderID }
+                    };
+
+                    FilesResource.CreateMediaUpload request;
+                    using (var stream = new FileStream(p, FileMode.Open))
+                    {
+
+                        request = service.Files.Create(fileMetaData, stream, "");
+                        request.Fields = "id";
+                        request.Upload();
+                    }
+                    var uploadedFile = request.ResponseBody;
+                    string link = $"https://drive.google.com/file/d/{uploadedFile.Id}/view";
+                    Console.WriteLine($"File '{fileMetaData.Name}' uploaded with ID: {link}");
+
+                    if(Path.GetFileName(p).StartsWith("National"))
+                    {
+                        queryString = $"UPDATE [user] SET SSNPicture = '{link}' WHERE email = '{email}';";
+                        con.Close();
+                        con.Open();
+                        SqlCommand cmd2 = new SqlCommand(queryString, con);
+                        cmd2.ExecuteReader();
+                    }
+                    else
+                    {
+                        con.Close();
+                        int docid = getID(email);
+                        queryString = $"Insert INTO DoctorCertificate(CertPic, DoctorID, cert_validation, [Description]) values('{link}', {docid}, 0, 'Official Certificate of general Medical Practice')";
+                        con.Open();
+                        SqlCommand cmd2 = new SqlCommand(queryString, con);
+                        cmd2.ExecuteReader();
+                    }
+
+                }
+                
+                if (File.Exists(natIDPath))
+                {
+                    File.Delete(natIDPath);
+                }
+                if (File.Exists(docCertPath))
+                {
+                    File.Delete(docCertPath);
+                }
+            }
 			catch (Exception ex)
 			{
 				Console.Write(ex.ToString());
@@ -522,14 +593,64 @@ namespace webclinic.Models
 		}
 
 
+		public Dictionary<string, int> getAppAnalytics(string from, string to)
+		{
+			string queryString = $"WITH DateRange AS ( SELECT CAST('{from}' AS DATE) AS DatenTime UNION ALL SELECT DATEADD(DAY, 1, DatenTime) FROM DateRange WHERE DatenTime < '{to}' ) SELECT d.DatenTime AS [Date], COUNT(a.DatenTime) AS AppCount FROM DateRange d LEFT JOIN Appointment a ON CAST(a.DatenTime AS DATE) = d.DatenTime GROUP BY d.DatenTime ORDER BY d.DatenTime;";
+
+			SqlCommand cmd = new SqlCommand(queryString, con);
+			Dictionary<string, int> dayAndNum = new Dictionary<string, int>();
+			try
+			{
+				con.Open();
+				SqlDataReader rdr  = cmd.ExecuteReader();
+				while (rdr.Read())
+				{
+					dayAndNum.Add(rdr["Date"].ToString()!, (int)rdr["AppCount"]);
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex);
+			}
+			finally
+			{
+				con.Close();
+			}
+			return dayAndNum;
+		}
+
+		public Dictionary<string, int> getFieldAnalytics(string from, string to)
+		{
+			string queryString = $"select FieldName, Count(*) as DocN from Doctor join [user] on Doctor.ID = [user].ID join FieldOfMedicine on Doctor.FieldCode = FieldOfMedicine.FieldCode Where RegistrationDate > '{from}' and RegistrationDate < '{to}' Group By FieldName";
 
 
+            SqlCommand cmd = new SqlCommand(queryString, con);
+			Dictionary<string, int> fieldAndNum = new Dictionary<string, int>();
+			try
+			{
+				con.Open();
+				SqlDataReader rdr  = cmd.ExecuteReader();
+				while (rdr.Read())
+				{
+					fieldAndNum.Add(rdr["FieldName"].ToString()!, (int)rdr["DocN"]);
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex);
+			}
+			finally
+			{
+				con.Close();
+			}
+			return fieldAndNum;
+		}
 
 
-        public DataTable getSymptoms(string email)
+        public DataTable getSymptoms(int id)
         {
 
-            string queryString = $"(SELECT SymptomName,Severity, DateOfFirstInstance\r\nFROM Symptom, SymptomTypes\r\nWHERE symptom.SymptomID = SymptomTypes.SymptomID AND PatientID = (select ID from [user] where Email = '{email}'))\r\nUNION\r\n(SELECT ConditionName, Severity, DateOfFirstInstance\r\nFROM LongTermConditions, LTCTypes\r\nWHERE LongTermConditions.ConditionID = LTCTypes.ConditionID AND PatientID = (select ID from [user] where Email = '{email}'))";
+            string queryString = $"(SELECT SymptomName,Severity, DateOfFirstInstance\r\nFROM Symptom, SymptomTypes\r\nWHERE symptom.SymptomID = SymptomTypes.SymptomID AND PatientID = '{id}')\r\nUNION\r\n(SELECT ConditionName, Severity, DateOfFirstInstance\r\nFROM LongTermConditions, LTCTypes\r\nWHERE LongTermConditions.ConditionID = LTCTypes.ConditionID AND PatientID = '{id}')";
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand(queryString, con);
             try
@@ -551,10 +672,10 @@ namespace webclinic.Models
 
 
 
-        public DataTable getHistory(string email)
+        public DataTable getHistory(int id)
         {
 
-            string queryString = $"SELECT Fname, Lname, condition, [description]\r\nFROM Diagnosis, [user]\r\nWHERE [user].ID = DoctorID  AND  PatientID = (select ID from [user] where Email = '{email}')";
+            string queryString = $"SELECT Fname, Lname, condition, [description]\r\nFROM Diagnosis, [user]\r\nWHERE [user].ID = DoctorID  AND  PatientID = '{id}'";
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand(queryString, con);
             try
@@ -574,11 +695,11 @@ namespace webclinic.Models
             return dt;
         }
 
-        public int getAge(string email)
+        public int getAge(int id)
         {
             int age = 0;
             string today = DateTime.Today.Date.ToString("yyyy-MM-dd");
-            string queryString = $"SELECT FLOOR(DATEDIFF(year, birthdate,'{today}')) AS age\r\nFROM [user]\r\nWHERE Email = '{email}'";
+            string queryString = $"SELECT FLOOR(DATEDIFF(year, birthdate,'{today}')) AS age\r\nFROM [user]\r\nWHERE ID = '{id}'";
             SqlCommand cmd = new SqlCommand(queryString, con);
             try
             {
@@ -597,10 +718,10 @@ namespace webclinic.Models
             return age;
         }
 
-        public string getName(string email)
+        public string getName(int id)
         {
             string name = "";
-            string queryString = $"SELECT Fname + ' '  +Lname as [name]\r\nFROM [user]\r\nWHERE Email = '{email}'";
+            string queryString = $"SELECT Fname + ' '  +Lname as [name]\r\nFROM [user]\r\nWHERE ID = '{id}'";
 
             SqlCommand cmd = new SqlCommand(queryString, con);
             try
@@ -802,7 +923,7 @@ namespace webclinic.Models
         public DataTable getAllDoctors()
         {
 
-            string queryString = $"select Fname + ' ' + Lname as [name], Banned, doctor.id, RegistrationDate \r\nfrom doctor, [user]\r\nwhere doctor.id = [user].id";
+            string queryString = $"select Fname + ' ' + Lname as [name], Banned, doctor.id, RegistrationDate, SSN, SSNValidation \r\nfrom doctor, [user]\r\nwhere doctor.id = [user].id";
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand(queryString, con);
             try
@@ -826,7 +947,7 @@ namespace webclinic.Models
         public DataTable getAllPatients()
         {
 
-            string queryString = $"select Fname + ' ' + Lname as [name], SSNvalidation, patient.id, RegistrationDate \r\nfrom patient, [user]\r\nwhere patient.id = [user].id";
+            string queryString = $"select Fname + ' ' + Lname as [name], SSNvalidation, patient.id, RegistrationDate, SSN \r\nfrom patient, [user]\r\nwhere patient.id = [user].id";
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand(queryString, con);
             try
@@ -845,9 +966,104 @@ namespace webclinic.Models
 
             return dt;
         }
+        public bool getDrStatus(int id)
+        {
+            bool status = false;
+            string queryString = $"SELECT Banned FROM Doctor WHERE Doctor.ID = '{id}'";
+            SqlCommand cmd = new SqlCommand(queryString, con);
+
+
+            try
+            {
+                con.Open();
+                status = Convert.ToBoolean(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return status;
+        }
+
+
+        public bool ToggleDoctorStatus(int id)
+        {
+
+            string queryString;
+            queryString = $"update Doctor\r\nSET Banned = CASE \r\nWHEN Banned = 1 THEN 0\r\nELSE 1\r\nEND\r\nwhere ID = '{id}'";
+            SqlCommand cmd = new SqlCommand(queryString, con);
+
+            try
+            {
+                con.Open();
+                cmd.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return true;
+        }
+
+
+        public bool getSSN(int id)
+        {
+            bool status = false;
+            string queryString = $"SELECT SSNValidation FROM [user] WHERE ID = '{id}'";
+            SqlCommand cmd = new SqlCommand(queryString, con);
+
+
+            try
+            {
+                con.Open();
+                status = Convert.ToBoolean(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return status;
+        }
 
 
 
+        public bool ToggleSSN(int id)
+        {
 
+            string queryString;
+            queryString = $"update [user]\r\nSET SSNValidation = CASE \r\nWHEN SSNValidation = 1 THEN 0\r\nELSE 1\r\nEND\r\nwhere ID = '{id}'";
+            SqlCommand cmd = new SqlCommand(queryString, con);
+
+            try
+            {
+                con.Open();
+                cmd.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return true;
+        }
     }
 }

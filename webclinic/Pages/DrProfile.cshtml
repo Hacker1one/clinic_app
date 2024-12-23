@@ -68,9 +68,13 @@
                 <p><strong>Patients Treated:</strong> @Model.PatientsTreated</p>
                 @if (HttpContext.Session.GetString("user_type") == "a")
 {
-    <span class="badge @(Model.IsVerified ? "bg-success" : "bg-secondary")">
-        @(Model.IsVerified ? "Verified" : "Unverified")
-    </span>
+        <span class="badge text-white @(Model.IsActivated ? "bg-success" : "bg-warning text-dark")">
+                        @(Model.IsActivated ? "Active" : "Banned")
+        </span>
+            <span class="badge text-white @(Model.IsVerified ? "bg-success" : "bg-warning text-dark")">
+                        @(Model.IsVerified ? "Verified" : "Unverified")
+            </span>
+
 }
 
             </div>
@@ -78,7 +82,26 @@
             <p>Age: @Model.Age</p>
         </div>
     </div>
+    @if (HttpContext.Session.GetString("user_type") == "a")
+    {
+    <div class="d-flex justify-content-end gap-5">
+        <form method="post" asp-page-handler="ToggleStatus">
+            <button type="submit" class="btn @(Model.IsActivated ? "btn-danger" : "btn-success") btn-lg px-4">
+                    @(Model.IsActivated ? "Ban" : "Activate")
+            </button>
+        </form>
 
+        <form method="post" asp-page-handler="ToggleSSSN">
+            <button type="submit" class="btn @(Model.IsVerified ? "btn-danger" : "btn-success") btn-lg px-4">
+                    @(Model.IsVerified ? "Unverify" : "Verify")
+            </button>
+        </form>
+    </div>
+
+
+
+
+    }
     <!-- Education Section -->
     <div class="mb-5">
         <h5 class="mb-3">Education 
@@ -127,6 +150,9 @@
             </div>
         </div>
     </div>
+
+
+   
 <!-- Booking Information Section -->
     <div class="row mb-5">
         <div class="col-md-6">
@@ -137,14 +163,7 @@
                 <p class="h4 text-primary">@Model.Fee</p>
             </div>
         </div>
-        @if (HttpContext.Session.GetString("user_type") == "a")
-        {
-        <div class="text-center">
-            <button class="btn @(Model.IsVerified ? "btn-danger" : "btn-success") btn-lg px-4" onclick="toggleStatus()">
-                    @(Model.IsVerified ? "Verified" : "Unverified")
-            </button>
-        </div>
-        }
+        
 
         <div class="col-md-6">
             <div class="p-4 border rounded">
@@ -172,10 +191,12 @@
                                 <button class="btn btn-outline-secondary time-slot-btn">@time</button>
                         }
                     </div>
-                    <!-- Add Button -->
-                    <button class="btn btn-outline-primary w-100 mt-3" data-toggle="modal" data-target="#addTimeModal">
-                        + Add Time
-                    </button>
+                    @if (HttpContext.Session.GetString("user_type") == "d")
+                    {
+                        <!-- Add Button -->
+                        <button class="btn btn-outline-primary w-100 mt-3" data-toggle="modal" data-target="#addTimeModal">
+                            + Add Time
+                    </button>}
                 </div>
             </div>
         </div>

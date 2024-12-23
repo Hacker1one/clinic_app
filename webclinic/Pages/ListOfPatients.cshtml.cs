@@ -89,6 +89,19 @@ namespace webclinic.Pages
             {
                 Patients = new DataTable(); // Return an empty DataTable if no results
             }
+
+
+
+        }
+        public IActionResult OnPostViewPatient(string PatientId)
+        {
+            if (int.TryParse(PatientId, out int patientId))
+            {
+                HttpContext.Session.SetInt32("Patient_ID", patientId);
+                return RedirectToPage("/PatientProfile");
+            }
+
+            return BadRequest("Invalid Patient ID");
         }
     }
 }

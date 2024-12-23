@@ -12,12 +12,14 @@ namespace webclinic.Pages
         // Properties to hold data for the Razor Page
         public string DoctorName { get; set; }
         public bool IsVerified { get; set; } = true;
+        public bool IsActivated { get; set; } = true;
         public string Specialization { get; set; }
         public double Rating { get; set; }
         public int PatientsTreated { get; set; }
         public int Age { get; set; }
         public string DoctorImage { get; set; }
-        
+        public string type { get; set; }
+        public int id { get; set; }
         public DataTable ClinicDetails { get; set; }
         public int Fee { get; set; }
         public List<string> AvailableDates { get; set; }
@@ -28,17 +30,25 @@ namespace webclinic.Pages
         public DataTable education { get; set; }
 
 
-        public void OnPostToggleStatus()
+        public IActionResult OnPostToggleStatus()
         {
-            // Toggle the patient's status
-            IsVerified = !IsVerified;
+      
+            int doctorId = HttpContext.Session.GetInt32("Dr_ID").Value;
+
+            db.ToggleDoctorStatus(doctorId);
+
+            return RedirectToPage();
         }
 
-        public class Clinic
+        public IActionResult OnPostToggleSSSN()
         {
-            public string Name { get; set; }
-            public string Address { get; set; }
+            int doctorId = HttpContext.Session.GetInt32("Dr_ID").Value;
+
+            db.ToggleSSN(doctorId);
+
+            return RedirectToPage();
         }
+
 
         public DrProfileModel(DB db)
         {
@@ -50,21 +60,33 @@ namespace webclinic.Pages
         public void OnGet()
         {
 
-            DoctorName = db.getName(HttpContext.Session.GetString("email"));
-            Specialization = db.getMedicalField(HttpContext.Session.GetInt32("id").Value);
-            Rating = db.getRating(HttpContext.Session.GetInt32("id").Value);
-            PatientsTreated = db.getPatientsTreated(HttpContext.Session.GetInt32("id").Value);
-            Age = db.getAge(HttpContext.Session.GetString("email"));
+            type = HttpContext.Session.GetString("user_type");
+            if (type == "d")
+            {
+                id = HttpContext.Session.GetInt32("user_id").Value;
+            }
+            else
+            {
+                id = HttpContext.Session.GetInt32("Dr_ID").Value;
+            }
+
+            DoctorName = db.getName(id);
+            Specialization = db.getMedicalField(id);
+            Rating = db.getRating(id);
+            PatientsTreated = db.getPatientsTreated(id);
+            Age = db.getAge(id);
             DoctorImage = "https://via.placeholder.com/180";
-            Fee = db.getFee(HttpContext.Session.GetInt32("id").Value);
+            Fee = db.getFee(id);
+            IsActivated = db.getDrStatus(id);
+            IsVerified = db.getSSN(id);
 
             experiance = new DataTable();
-            experiance = db.getExperiance(HttpContext.Session.GetInt32("id").Value);
+            experiance = db.getExperiance(id);
 
             education = new DataTable();
-            education = db.getEducation(HttpContext.Session.GetInt32("id").Value);
+            education = db.getEducation(id);
 
-            ClinicDetails = db.getClinic(HttpContext.Session.GetInt32("id").Value);
+            ClinicDetails = db.getClinic(id);
 
             // Available dates and times section
             AvailableDates = new List<string>
