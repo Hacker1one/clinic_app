@@ -205,12 +205,12 @@ namespace webclinic.Models
 			{
 				queryString = "BEGIN TRANSACTION \n" +
 				"INSERT INTO[user] \n" +
-				"(FName, LName, SSN, RegistrationDate, Gender, [Password], BirthDate, City, Governorate, Email, [type]) \n" +
+				"(FName, LName, SSN, RegistrationDate, Gender, [Password], BirthDate, City, Governorate, Email, [type], SSNValidation) \n" +
 				"VALUES " +
-				$"('{fname}', '{lname}', {ssn}, '{today}', '{gender}', '{password}', '{bd}', '{city}', '{governorate}', '{email}', '{user_type}')\n" +
+				$"('{fname}', '{lname}', {ssn}, '{today}', '{gender}', '{password}', '{bd}', '{city}', '{governorate}', '{email}', '{user_type}', 0)\n" +
 				"DECLARE @NewUserID INT = SCOPE_IDENTITY(); \n" +
-				"INSERT INTO Patient(ID, SSNValidation, PenaltyFees)\n" +
-				"VALUES(@NewUserID, 0, 0);\n" +
+				"INSERT INTO Patient(ID, PenaltyFees)\n" +
+				"VALUES(@NewUserID, 0);\n" +
 				"COMMIT TRANSACTION;";
 			}
 			else if (user_type == "d")
@@ -221,8 +221,8 @@ namespace webclinic.Models
 				"VALUES " +
 				$"('{fname}', '{lname}', {ssn}, '{today}', '{gender}', '{password}', '{bd}', '{city}', '{governorate}', '{email}', '{user_type}')\n" +
 				"DECLARE @NewUserID INT = SCOPE_IDENTITY(); \n" +
-				"INSERT INTO Doctor(ID, PricePA, SSNValidation, Banned, FieldCode)\n" +
-				$"VALUES(@NewUserID, 0, 0, 0, {field_code});\n" +
+				"INSERT INTO Doctor(ID, PricePA, Banned, FieldCode)\n" +
+				$"VALUES(@NewUserID, 0, 0, {field_code});\n" +
 				"COMMIT TRANSACTION;";
 			}
 			else
@@ -306,6 +306,7 @@ namespace webclinic.Models
                     FilesResource.CreateMediaUpload request;
                     using (var stream = new FileStream(p, FileMode.Open))
                     {
+
                         request = service.Files.Create(fileMetaData, stream, "");
                         request.Fields = "id";
                         request.Upload();
@@ -313,7 +314,27 @@ namespace webclinic.Models
                     var uploadedFile = request.ResponseBody;
                     string link = $"https://drive.google.com/file/d/{uploadedFile.Id}/view";
                     Console.WriteLine($"File '{fileMetaData.Name}' uploaded with ID: {link}");
+
+                    if(Path.GetFileName(p).StartsWith("National"))
+                    {
+                        queryString = $"UPDATE [user] SET SSNPicture = '{link}' WHERE email = '{email}';";
+                        con.Close();
+                        con.Open();
+                        SqlCommand cmd2 = new SqlCommand(queryString, con);
+                        cmd2.ExecuteReader();
+                    }
+                    else
+                    {
+                        con.Close();
+                        int docid = getID(email);
+                        queryString = $"Insert INTO DoctorCertificate(CertPic, DoctorID, cert_validation, [Description]) values('{link}', {docid}, 0, 'Official Certificate of general Medical Practice')";
+                        con.Open();
+                        SqlCommand cmd2 = new SqlCommand(queryString, con);
+                        cmd2.ExecuteReader();
+                    }
+
                 }
+                
                 if (File.Exists(natIDPath))
                 {
                     File.Delete(natIDPath);

@@ -155,7 +155,6 @@ namespace webclinic.Pages
                 var firsDataset = new Dataset();
                 firsDataset.label = "Number of doctors in a specified Field";
                 firsDataset.data = dataArray.ToArray();
-                firsDataset.backgroundColor = ["rgb(255, 99, 132)"];
 
                 PieChart.data.datasets.Add(firsDataset);
 
