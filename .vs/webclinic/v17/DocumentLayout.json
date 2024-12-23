@@ -59,8 +59,7 @@
               "ViewState": "AgIAAAcBAAAAAAAAAAAuwBwBAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-21T16:53:34.988Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -88,8 +87,7 @@
               "RelativeToolTip": "webclinic\\Pages\\ViewDiagnosis.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-21T22:07:39.522Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-21T22:07:39.522Z"
             },
             {
               "$type": "Document",
@@ -101,8 +99,7 @@
               "RelativeToolTip": "webclinic\\Pages\\diagnosis.cshtml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-21T22:00:34.859Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-21T22:00:34.859Z"
             },
             {
               "$type": "Document",
@@ -114,8 +111,7 @@
               "RelativeToolTip": "webclinic\\Pages\\diagnosis.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-21T22:00:29.829Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-21T22:00:29.829Z"
             },
             {
               "$type": "Document",
@@ -125,7 +121,7 @@
               "RelativeDocumentMoniker": "webclinic\\Pages\\PatientApp.cshtml",
               "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\PatientApp.cshtml",
               "RelativeToolTip": "webclinic\\Pages\\PatientApp.cshtml",
-              "ViewState": "AgIAALQAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAALQAAAAAAAAAAAAAAN8AAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-12-21T20:49:17.693Z",
               "EditorCaption": ""
@@ -140,8 +136,7 @@
               "RelativeToolTip": "webclinic\\Pages\\DrApp.cshtml",
               "ViewState": "AgIAAMYAAAAAAAAAAIAwwNoAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-05T17:53:44.151Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-05T17:53:44.151Z"
             },
             {
               "$type": "Document",
@@ -153,8 +148,7 @@
               "RelativeToolTip": "webclinic\\Pages\\DrApp.cshtml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-05T17:54:31.585Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-05T17:54:31.585Z"
             },
             {
               "$type": "Document",
@@ -166,8 +160,7 @@
               "RelativeToolTip": "webclinic\\Pages\\ContactUs.cshtml",
               "ViewState": "AgIAABkAAAAAAAAAAAAAwCYAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-05T17:44:12.193Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-05T17:44:12.193Z"
             },
             {
               "$type": "Document",
@@ -179,8 +172,7 @@
               "RelativeToolTip": "webclinic\\Pages\\Privacy.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-05T17:44:16.741Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-05T17:44:16.741Z"
             }
           ]
         }
