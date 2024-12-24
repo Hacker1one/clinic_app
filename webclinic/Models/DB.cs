@@ -786,5 +786,81 @@ namespace webclinic.Models
 
             return true;
         }
+
+
+
+
+        public DataTable getTime(DateTime d, int id)
+        {
+            string queryString = $"select  AppointmentID, convert(time,(DatenTime)) as [time]\r\nfrom appointment\r\nwhere FORMAT(DatenTime, 'yyyy-MM-dd') = '{d.ToString("yyyy-MM-dd")}' and  DoctorID = '{id}'";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+
+
+        public DataTable getAvailableTime(DateTime d, int id)
+        {
+            string queryString = $"select  AppointmentID, convert(time,(DatenTime)) as [time]\r\nfrom appointment\r\nwhere FORMAT(DatenTime, 'yyyy-MM-dd') = '{d.ToString("yyyy-MM-dd")}' and  DoctorID = '{id}' and PatientID is null";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+
+
+        public DataTable getDates(int id)
+        {
+            string queryString = $"select distinct convert(date,(DatenTime)) as [date]\r\nfrom appointment\r\nwhere DoctorID = '{id}'";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+
+
+
+
+
     }
-}
+    }

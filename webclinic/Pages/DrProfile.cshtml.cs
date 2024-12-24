@@ -9,6 +9,7 @@ namespace webclinic.Pages
 
     public class DrProfileModel : PageModel
     {
+        
         // Properties to hold data for the Razor Page
         public string DoctorName { get; set; }
         public bool IsVerified { get; set; } = true;
@@ -28,6 +29,12 @@ namespace webclinic.Pages
 
         public DataTable experiance { get; set; }
         public DataTable education { get; set; }
+
+        public DataTable time { get; set; }
+        public DataTable dates { get; set; }
+        public DateTime date { get; set; }
+
+        public DateTime booktime { get; set; }
 
 
         public IActionResult OnPostToggleStatus()
@@ -77,7 +84,7 @@ namespace webclinic.Pages
             Age = db.getAge(id);
             DoctorImage = "https://via.placeholder.com/180";
             Fee = db.getFee(id);
-            IsActivated = db.getDrStatus(id);
+            IsActivated = !db.getDrStatus(id);
             IsVerified = db.getSSN(id);
 
             experiance = new DataTable();
@@ -88,18 +95,37 @@ namespace webclinic.Pages
 
             ClinicDetails = db.getClinic(id);
 
-            // Available dates and times section
-            AvailableDates = new List<string>
-            {
-                "17 Mon", "18 Tue", "19 Wed", "20 Thu", "21 Fri", "22 Sat"
-            };
 
-            AvailableTimes = new List<string>
-            {
-                "8:00", "10:30", "13:00", "14:30", "15:00", "16:30"
-            };
+
+
+
+            dates = new DataTable();
+            dates = db.getDates(id);
+
+
 
         }
+
+        public DataTable gettimes(DateTime d)
+        {
+            date = d;
+            time = new DataTable();
+            if(type == "p")
+            {
+                time = db.getAvailableTime(date, id);
+            }
+            else
+            {
+                time = db.getTime(date, id);
+
+            }
+            
+            return time;
+        }
+
+
+
+
     }
 }
 
