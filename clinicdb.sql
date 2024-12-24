@@ -18,6 +18,7 @@ create table [user]
 	City VARCHAR(50),
 	Governorate VARCHAR(50),
 	Email VARCHAR(50),
+	ProfileImageUrl Varchar(150),
 	PRIMARY KEY(ID),
 	UNIQUE(Email),
 );
@@ -328,35 +329,35 @@ VALUES
 
 
 
-INSERT INTO [user] (FName, LName, SSN, SSNValidation, RegistrationDate, Gender, [Password], BirthDate, City, Governorate, Email, [type])
+INSERT INTO [user] (FName, LName, SSN, SSNValidation, RegistrationDate, Gender, [Password], BirthDate, City, Governorate, Email, [type], ProfileImageUrl)
 VALUES 
 
 -- Patients
-('John', 'Doe', 123456789, 0, '2023-01-01', 'M', 'password123', '1985-05-15', 'Cairo', 'Cairo', 'john.doe@example.com', 'p'),
-('Jane', 'Smith', 987654321, 1, '2023-01-02', 'F', 'securepass', '1990-07-20', 'Giza', 'Giza', 'jane.smith@example.com', 'p'),
-('Ahmed', 'Ali', 223344556, 1, '2023-01-03', 'M', 'ahmedpass', '1975-09-12', 'Alexandria', 'Alexandria', 'ahmed.ali@example.com', 'p'),
-('Sara', 'Hassan', 445566778, 1, '2023-01-04', 'F', 'sarapass', '1992-03-25', 'Aswan', 'Aswan', 'sara.hassan@example.com', 'p'),
-('Mohamed', 'Youssef', 112233445, 1, '2023-01-05', 'M', 'mypassword', '1987-09-18', 'Zamalek', 'Cairo', 'mohamed.youssef@example.com', 'p'),
-('Nora', 'Farid', 998877665, 0, '2023-01-06', 'F', 'norapass', '1993-11-25', 'Heliopolis', 'Cairo', 'nora.farid@example.com', 'p'),
-('Ali', 'Kamal', 667788990, 1, '2023-01-07', 'M', 'alikpass', '1988-03-19', 'Nasr City', 'Cairo', 'ali.kamal@example.com', 'p'),
-('Mona', 'Gamal', 445566334, 1, '2023-01-08', 'F', 'monag123', '1991-06-14', 'Maadi', 'Cairo', 'mona.gamal@example.com', 'p'),
-('Hassan', 'Tariq', 332211009, 0, '2023-01-09', 'M', 'hassanpass', '1979-12-11', 'Shobra', 'Cairo', 'hassan.tariq@example.com', 'p'),
-('Layla', 'Nashat', 776655443, 1, '2023-01-10', 'F', 'laylapass', '1995-02-28', 'Zamalek', 'Cairo', 'layla.nashat@example.com', 'p'),
+('John', 'Doe', 123456789, 0, '2023-01-01', 'M', 'password123', '1985-05-15', 'Cairo', 'Cairo', 'john.doe@example.com', 'p', 'author1.jpg'),
+('Jane', 'Smith', 987654321, 1, '2023-01-02', 'F', 'securepass', '1990-07-20', 'Giza', 'Giza', 'jane.smith@example.com', 'p', 'author1.jpg'),
+('Ahmed', 'Ali', 223344556, 1, '2023-01-03', 'M', 'ahmedpass', '1975-09-12', 'Alexandria', 'Alexandria', 'ahmed.ali@example.com', 'p', 'author1.jpg'),
+('Sara', 'Hassan', 445566778, 1, '2023-01-04', 'F', 'sarapass', '1992-03-25', 'Aswan', 'Aswan', 'sara.hassan@example.com', 'p', 'author1.jpg'),
+('Mohamed', 'Youssef', 112233445, 1, '2023-01-05', 'M', 'mypassword', '1987-09-18', 'Zamalek', 'Cairo', 'mohamed.youssef@example.com', 'p', 'author1.jpg'),
+('Nora', 'Farid', 998877665, 0, '2023-01-06', 'F', 'norapass', '1993-11-25', 'Heliopolis', 'Cairo', 'nora.farid@example.com', 'p', 'author1.jpg'),
+('Ali', 'Kamal', 667788990, 1, '2023-01-07', 'M', 'alikpass', '1988-03-19', 'Nasr City', 'Cairo', 'ali.kamal@example.com', 'p', 'author1.jpg'),
+('Mona', 'Gamal', 445566334, 1, '2023-01-08', 'F', 'monag123', '1991-06-14', 'Maadi', 'Cairo', 'mona.gamal@example.com', 'p', 'author1.jpg'),
+('Hassan', 'Tariq', 332211009, 0, '2023-01-09', 'M', 'hassanpass', '1979-12-11', 'Shobra', 'Cairo', 'hassan.tariq@example.com', 'p', 'author1.jpg'),
+('Layla', 'Nashat', 776655443, 1, '2023-01-10', 'F', 'laylapass', '1995-02-28', 'Zamalek', 'Cairo', 'layla.nashat@example.com', 'p', 'author1.jpg'),
 
 -- Doctors
-('Tamer', 'Saad', 123123123, 1, '2023-01-11', 'M', 'tamerpass', '1980-05-01', 'Giza', 'Giza', 'tamer.saad@example.com', 'd'),
-('Heba', 'Ezz', 987987987, 0, '2023-01-12', 'F', 'hebapass', '1985-09-10', 'Alexandria', 'Alexandria', 'heba.ezz@example.com', 'd'),
-('Omar', 'Rashid', 456456456, 1, '2023-01-13', 'M', 'omarpass', '1990-12-15', 'Aswan', 'Aswan', 'omar.rashid@example.com', 'd'),
-('Salma', 'Khaled', 789789789, 1, '2023-01-14', 'F', 'salmapass', '1983-03-25', 'Cairo', 'Cairo', 'salma.khaled@example.com', 'd'),
-('Youssef', 'Nader', 321321321, 0, '2023-01-15', 'M', 'youssefpass', '1987-07-30', 'Dokki', 'Giza', 'youssef.nader@example.com', 'd'),
-('Hana', 'Mostafa', 654654654, 1, '2023-01-16', 'F', 'hanapass', '1995-11-05', 'Maadi', 'Cairo', 'hana.mostafa@example.com', 'd'),
-('Karim', 'Fathi', 888888888, 1, '2023-01-17', 'M', 'karimpass', '1978-02-20', '6th of October', 'Giza', 'karim.fathi@example.com', 'd'),
-('Amira', 'Zain', 555555555, 1, '2023-01-18', 'F', 'amirapass', '1992-08-14', 'El Sheikh Zayed', 'Giza', 'amira.zain@example.com', 'd'),
-('Hisham', 'Hafez', 333333333, 1,'2023-01-19', 'M', 'hishampass', '1986-04-28', 'Alexandria', 'Alexandria', 'hisham.hafez@example.com', 'd'),
-('Rana', 'Tamer', 999999999, 1, '2023-01-20', 'F', 'ranapass', '1994-06-06', 'Heliopolis', 'Cairo', 'rana.tamer@example.com', 'd'),
+('Tamer', 'Saad', 123123123, 1, '2023-01-11', 'M', 'tamerpass', '1980-05-01', 'Giza', 'Giza', 'tamer.saad@example.com', 'd', 'author1.jpg'),
+('Heba', 'Ezz', 987987987, 0, '2023-01-12', 'F', 'hebapass', '1985-09-10', 'Alexandria', 'Alexandria', 'heba.ezz@example.com', 'd', 'author1.jpg'),
+('Omar', 'Rashid', 456456456, 1, '2023-01-13', 'M', 'omarpass', '1990-12-15', 'Aswan', 'Aswan', 'omar.rashid@example.com', 'd', 'author1.jpg'),
+('Salma', 'Khaled', 789789789, 1, '2023-01-14', 'F', 'salmapass', '1983-03-25', 'Cairo', 'Cairo', 'salma.khaled@example.com', 'd', 'author1.jpg'),
+('Youssef', 'Nader', 321321321, 0, '2023-01-15', 'M', 'youssefpass', '1987-07-30', 'Dokki', 'Giza', 'youssef.nader@example.com', 'd', 'author1.jpg'),
+('Hana', 'Mostafa', 654654654, 1, '2023-01-16', 'F', 'hanapass', '1995-11-05', 'Maadi', 'Cairo', 'hana.mostafa@example.com', 'd', 'author1.jpg'),
+('Karim', 'Fathi', 888888888, 1, '2023-01-17', 'M', 'karimpass', '1978-02-20', '6th of October', 'Giza', 'karim.fathi@example.com', 'd', 'author1.jpg'),
+('Amira', 'Zain', 555555555, 1, '2023-01-18', 'F', 'amirapass', '1992-08-14', 'El Sheikh Zayed', 'Giza', 'amira.zain@example.com', 'd', 'author1.jpg'),
+('Hisham', 'Hafez', 333333333, 1,'2023-01-19', 'M', 'hishampass', '1986-04-28', 'Alexandria', 'Alexandria', 'hisham.hafez@example.com', 'd', 'author1.jpg'),
+('Rana', 'Tamer', 999999999, 1, '2023-01-20', 'F', 'ranapass', '1994-06-06', 'Heliopolis', 'Cairo', 'rana.tamer@example.com', 'd', 'author1.jpg'),
 
 -- Admin
-('admin', 'admin', 00000001, 1, '0001-01-01', 'M', 'adminpass', '0001-01-01', 'Giza', 'Giza', 'admin@gmail.com', 'a');
+('admin', 'admin', 00000001, 1, '0001-01-01', 'M', 'adminpass', '0001-01-01', 'Giza', 'Giza', 'admin@gmail.com', 'a', 'author1.jpg');
 
 
 
