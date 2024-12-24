@@ -38,7 +38,7 @@ namespace webclinic.Pages
         {
             if (HttpContext.Session.GetString("user_type") == "d")
             {
-                int? doctorId = HttpContext.Session.GetInt32("id");
+                int? doctorId = HttpContext.Session.GetInt32("user_id");
                 if (doctorId.HasValue)
                 {
                     DoctorID = doctorId.Value;
@@ -66,15 +66,21 @@ namespace webclinic.Pages
                 RedirectToPage("/index");
             }
         }
-        public IActionResult OnGetCancel(int id)
+        public IActionResult OnPostCancel(int id)
         {
             db.CancelAppointment(id);
-            return Page();
+            return RedirectToPage("/DrApp");
         }
-
+        public IActionResult OnPostConfirm(int id)
+        {
+            db.confirmappointment(id);
+            return RedirectToPage("/DrApp");
+        }
         public IActionResult OnPostDiagnose(int aid, int pid, int did)
         {
-            return RedirectToPage("/diagnosis", new { AppointmentID = aid, PatientID = pid, DoctorID = did });
+            HttpContext.Session.SetInt32("appid", aid);
+            HttpContext.Session.SetInt32("paid", pid);
+            return RedirectToPage("/diagnosis");
         }
         public IActionResult OnPostView(int aid, int pid, int did)
         {
@@ -86,65 +92,35 @@ namespace webclinic.Pages
 
             foreach (DataRow row in app.Rows)
             {
+                int appointmentId = row.Table.Columns.Contains("AppointmentID") ?
+                    Convert.ToInt32(row["AppointmentID"]) : 0;
+
                 var appointment = new Appointment
                 {
-                    id = row.Table.Columns.Contains("AppointmentID") ? Convert.ToInt32(row["AppointmentID"]) : 0,
-
+                    id = appointmentId,
                     Pid = row.Table.Columns.Contains("PatientID") ? Convert.ToInt32(row["PatientID"]) : 0,
-
                     Did = row.Table.Columns.Contains("DoctorID") ? Convert.ToInt32(row["DoctorID"]) : 0,
-
                     Name = row.Table.Columns.Contains("FName") && row.Table.Columns.Contains("LName")
-                    ? row["FName"].ToString() + " " + row["LName"].ToString()
-                    : "Unknown Name",
-
+                        ? row["FName"].ToString() + " " + row["LName"].ToString()
+                        : "Unknown Name",
                     Date = row.Table.Columns.Contains("DatenTime")
-                    ? Convert.ToDateTime(row["DatenTime"]).ToString("yyyy-MM-dd")
-                    : "Unknown Date",
-
+                        ? Convert.ToDateTime(row["DatenTime"]).ToString("yyyy-MM-dd")
+                        : "Unknown Date",
                     Time = row.Table.Columns.Contains("DatenTime")
-                     ? Convert.ToDateTime(row["DatenTime"]).ToString("HH:mm")
-                       : "Unknown Time",
-
-                    Status = GetAppointmentStatus(row),
-
+                        ? Convert.ToDateTime(row["DatenTime"]).ToString("HH:mm")
+                        : "Unknown Time",
+                    Status = db.GetAppointmentStatus(appointmentId),
                     image = row.Table.Columns.Contains("ProfileImageUrl")
-                    ? row["ProfileImageUrl"].ToString()
-                    : "default-image-url.jpg" 
+                        ? row["ProfileImageUrl"].ToString()
+                        : "default-image-url.jpg"
                 };
 
                 appointments.Add(appointment);
-
             }
 
             return appointments;
         }
-
-        private string GetAppointmentStatus(DataRow row)
-        {
-            bool isConfirmed = row.Table.Columns.Contains("IsConfirmed") && Convert.ToBoolean(row["IsConfirmed"]);
-            bool isFinished = row.Table.Columns.Contains("IsFinished") && Convert.ToBoolean(row["IsFinished"]);
-
-            // Map the status based on the IsConfirmed and IsFinished values
-            if (isConfirmed && !isFinished)
-            {
-                return "Confirmed";
-            }
-            else if (isConfirmed && isFinished)
-            {
-                return "Completed";
-            }
-            else if (!isConfirmed && !isFinished)
-            {
-                return "Pending";
-            }
-            else if (!isConfirmed && isFinished)
-            {
-                return "Cancelled";
-            }
-            return "Unknown Status";
-        }
-
+        
         public void OnPost()
         {
             // Your post logic here, if necessary

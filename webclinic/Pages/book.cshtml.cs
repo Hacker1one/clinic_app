@@ -59,8 +59,8 @@ public class bookModel : PageModel
         maxprice = new DataTable();
         minprice = new DataTable();
 
-        maxprice = db.getmaxprice();
-        minprice = db.getminprice();
+        //maxprice = db.getmaxprice();
+        //minprice = db.getminprice();
 
         
 
@@ -109,8 +109,8 @@ public class bookModel : PageModel
         allCities = new DataTable();
         Doctors = db.GetDoctorData();
         Therapists = MapDoctorsToTherapists(Doctors);
-        maxprice = db.getmaxprice();
-        minprice = db.getminprice();
+        //maxprice = db.getmaxprice();
+        //minprice = db.getminprice();
 
         return Page();
     }

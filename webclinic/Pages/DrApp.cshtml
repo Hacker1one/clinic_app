@@ -1,7 +1,7 @@
 @page
 @model DrAppModel
 @{
-    ViewData["Title"] = "Patient Appointment";
+    ViewData["Title"] = "Doctor Appointment";
 }
 <div class="header-inner">
             <div class="container">
@@ -97,13 +97,13 @@
                         </div>
                     </div>
                     <div class="Appointment-actions">
-                        <form method="get" asp-page-handler="Cancel">
-                            <input type="hidden" name="aid" value="@Appointment.id" />
+                        <form method="post" asp-page-handler="Cancel">
+                            <input type="hidden" name="id" value="@Appointment.id" />
                             <button class="btn cancel">Cancel</button>
 
                         </form>
                         <form method="post" asp-page-handler="Diagnose">
-                            <input type="hidden" name="aid" value="@Appointment.id" />
+                            <input type="hidden" name="id" value="@Appointment.id" />
                             <input type="hidden" name="pid" value="@Appointment.Pid" />
                             <input type="hidden" name="did" value="@Appointment.Did" />
                             <button class="btn diagnose">Diagnose</button>
@@ -135,12 +135,14 @@
                     <div class="Appointment-actions">
                         <input type="hidden" name="aid" value="@Appointment.id" />
 
-                        <form method="get" asp-page-handler="Cancel">
+                        <form method="post" asp-page-handler="Cancel">
+                            <input type="hidden" name="id" value="@Appointment.id" />
+
                             <button class="btn cancel">Cancel</button>
 
                         </form>
                         <form method="post" asp-page-handler="Diagnose">
-                            <input type="hidden" name="aid" value="@Appointment.id" />
+                            <input type="hidden" name="id" value="@Appointment.id" />
                             <input type="hidden" name="pid" value="@Appointment.Pid" />
                             <input type="hidden" name="did" value="@Appointment.Did" />
                             <button class="btn diagnose">Diagnose</button>
@@ -171,14 +173,14 @@
                         </div>
                     </div>
                     <div class="Appointment-actions">
-                        <form method="get" asp-page-handler="Cancel">
-                            <input type="hidden" name="aid" value="@Appointment.id" />
+                        <form method="post" asp-page-handler="Cancel">
+                            <input type="hidden" name="id" value="@Appointment.id" />
 
                             <button class="btn cancel">Cancel</button>
 
                         </form>
                         <form method="post" asp-page-handler="Diagnose">
-                            <input type="hidden" name="aid" value="@Appointment.id" />
+                            <input type="hidden" name="id" value="@Appointment.id" />
                             <input type="hidden" name="pid" value="@Appointment.Pid" />
                             <input type="hidden" name="did" value="@Appointment.Did" />
                             <button class="btn diagnose">Diagnose</button>
@@ -211,11 +213,13 @@
                         </div>
                     </div>
                     <div class="Appointment-actions">
-                        <form method="get" asp-page-handler="Confirm">
+                        <form method="post" asp-page-handler="Confirm">
+                            <input type="hidden" name="id" value="@Appointment.id" />
+
                             <button class="btn confirm">Confirm</button>
 
                         </form>
-                        <form method="get" asp-page-handler="Cancel">
+                        <form method="post" asp-page-handler="Cancel">
                             <input type="hidden" name="id" value="@Appointment.id" />
                             <button class="btn decline">Decline</button>
                         </form>
@@ -248,11 +252,11 @@
                         </div>
                     </div>
                     <div class="Appointment-actions">
-                        <form method="post" asp-page-handler="View">
-                            <input type="hidden" name="aid" value="@Appointment.id" />
+                        <form method="post" asp-page-handler="View" style="display: block; margin: 0 auto;">
+                            <input type="hidden" name="id" value="@Appointment.id" />
                             <input type="hidden" name="pid" value="@Appointment.Pid" />
                             <input type="hidden" name="did" value="@Appointment.Did" />
-                            <button class="btn diagnose" style="display: block; margin: 0 auto;">View Diagnose</button>
+                            <button class="btn diagnose">View Diagnose</button>
                         </form>
                     </div>
                 </div>

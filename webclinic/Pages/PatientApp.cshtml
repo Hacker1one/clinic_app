@@ -26,6 +26,7 @@
                                         <li><a href="ContactUs">Contact Us</a></li>
 										<li class="active"><a href="/Appointments/PatientApp">Appointments</a></li>
                                         <li><a href="PatientProfile">My Profile</a></li>
+
 									
                                     </ul>
                                 </nav>
@@ -90,8 +91,8 @@
             {
                 <div class="Appointment-card">
                     <div class="Appointment-header">
-                        <img src="default-user.png" alt="User Photo" class="user-photo" />
-                        <span>@Appointment.Name</span>
+                        <img src="@Appointment.image" alt="User Photo" class="user-photo" />
+                        <span>Dr @Appointment.Name</span>
                         <span class="status confirmed">@Appointment.Status</span>
                     </div>
                     <div class="Appointment-info">
@@ -102,8 +103,13 @@
                             <span class="icon">📅</span> @Appointment.Date
                         </div>
                     </div>
-                    <div class="Appointment-actions">
-                        <button class="btn cancel" style="display: block; margin: 0 auto;">Cancel</button>
+
+
+                    <div class="Appointment-actions" style="display: block; margin: 0 auto;">
+                        <form method="post" asp-page-handler="Cancel">
+                            <input type="hidden" name="id" value="@Appointment.id" />
+                            <button class="btn cancel" >Cancel</button>
+                        </form>
                     </div>
                 </div>
             }
@@ -116,8 +122,8 @@
             {
                 <div class="Appointment-card">
                     <div class="Appointment-header">
-                        <img src="default-user.png" alt="User Photo" class="user-photo" />
-                        <span>@Appointment.Name</span>
+                        <img src="@Appointment.image" alt="User Photo" class="user-photo" />
+                        <span>Dr @Appointment.Name</span>
                         <span class="status confirmed">@Appointment.Status</span>
                     </div>
                     <div class="Appointment-info">
@@ -129,7 +135,10 @@
                         </div>
                     </div>
                     <div class="Appointment-actions">
-                        <button class="btn cancel" style="display: block; margin: 0 auto;">Cancel</button>
+                        <form method="post" asp-page-handler="Cancel" style="display: block; margin: 0 auto;">
+                            <input type="hidden" name="id" value="@Appointment.id" />
+                            <button class="btn cancel" >Cancel</button>
+                        </form>
                     </div>
                 </div>
             }
@@ -142,8 +151,8 @@
             {
                 <div class="Appointment-card">
                     <div class="Appointment-header">
-                        <img src="default-user.png" alt="User Photo" class="user-photo" />
-                        <span>@Appointment.Name</span>
+                        <img src="@Appointment.image" alt="User Photo" class="user-photo" />
+                        <span>Dr @Appointment.Name</span>
                         <span class="status confirmed">@Appointment.Status</span>
                     </div>
                     <div class="Appointment-info">
@@ -155,7 +164,10 @@
                         </div>
                     </div>
                     <div class="Appointment-actions">
-                        <button class="btn cancel" style="display: block; margin: 0 auto;">Cancel</button>
+                        <form method="post" asp-page-handler="Cancel" style="display: block; margin: 0 auto;">
+                            <input type="hidden" name="id" value="@Appointment.id" />
+                            <button class="btn cancel" >Cancel</button>
+                        </form>
                     </div>
                 </div>
             }
@@ -171,8 +183,8 @@
             {
                 <div class="Appointment-card">
                     <div class="Appointment-header">
-                        <img src="default-user.png" alt="User Photo" class="user-photo" />
-                        <span>@Appointment.Name</span>
+                        <img src="@Appointment.image" alt="User Photo" class="user-photo" />
+                        <span>Dr @Appointment.Name</span>
                         <span class="status pending">@Appointment.Status</span>
                     </div>
                     <div class="Appointment-info">
@@ -184,7 +196,10 @@
                         </div>
                     </div>
                     <div class="Appointment-actions">
-                        <button class="btn cancel" style="display: block; margin: 0 auto;">Cancel</button>
+                        <form method="post" asp-page-handler="Cancel" style="display: block; margin: 0 auto;">
+                            <input type="hidden" name="id" value="@Appointment.id" />
+                            <button class="btn cancel" >Cancel</button>
+                        </form>
                     </div>
                 </div>
             }
@@ -200,8 +215,8 @@
             {
                 <div class="Appointment-card">
                     <div class="Appointment-header">
-                        <img src="default-user.png" alt="User Photo" class="user-photo" />
-                        <span>@Appointment.Name</span>
+                        <img src="@Appointment.image" alt="User Photo" class="user-photo" />
+                        <span>Dr @Appointment.Name</span>
                         <span class="status completed">@Appointment.Status</span>
                     </div>
                     <div class="Appointment-info">
@@ -212,8 +227,13 @@
                             <span class="icon">📅</span> @Appointment.Date
                         </div>
                     </div>
-                     <div class="Appointment-actions">
-                        <button class="btn diagnose" style="display: block; margin: 0 auto;">View Diagnose</button>
+                    <div class="Appointment-actions">
+                        <form method="post" asp-page-handler="View" style="display: block; margin: 0 auto;">
+                            <input type="hidden" name="id" value="@Appointment.id" />
+                            <input type="hidden" name="pid" value="@Appointment.Pid" />
+                            <input type="hidden" name="did" value="@Appointment.Did" />
+                            <button class="btn diagnose" >View Diagnose</button>
+                        </form>
                     </div>
                 </div>
             }
@@ -229,8 +249,8 @@
             {
                 <div class="Appointment-card">
                     <div class="Appointment-header">
-                        <img src="default-user.png" alt="User Photo" class="user-photo" />
-                        <span>@Appointment.Name</span>
+                        <img src="@Appointment.image" alt="User Photo" class="user-photo" />
+                        <span>Dr @Appointment.Name</span>
                         <span class="status canceled">@Appointment.Status</span>
                     </div>
                     <div class="Appointment-info">
