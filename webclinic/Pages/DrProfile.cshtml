@@ -166,42 +166,89 @@
         
 
         <div class="col-md-6">
-            <div class="p-4 border rounded">
-                <h5 class="mb-3">Available Times</h5>
+            </div>
+        </div>
+        <!-- Add Dates and Available Times Table -->
+<div class="mb-3">
+    <p class="text-muted">Add Dates and Available Times</p>
+    <hr class="my-2">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Available Times</th>
+            </tr>
+        </thead>
+        <tbody>
+                @for (int i = 0; i < Model.dates.Rows.Count; i++)
+                {
+                    DateTime dateValue = Convert.ToDateTime(Model.dates.Rows[i]["date"]);
+                        <tr>
+                            <td>@dateValue.ToString("MM/dd dddd")</td>
+                            <td>
+                            @* Fetch available times for this date *@
+                            @{
+                                var times = Model.gettimes(dateValue);
+                            }
+                            @* Loop through available times and display as buttons *@
+                            @for (int j = 0; j < times.Rows.Count; j++)
+                            {
+                                            <button class="btn btn-outline-secondary time-slot-btn" data-toggle="modal" data-target="#bookTimeModal">
+                                    @times.Rows[j]["time"].ToString()
+                                            </button>
 
-                <!-- Add Dates Section -->
-                <div class="mb-3">
-                    <p class="text-muted">Add Dates</p>
-                    <hr class="my-2">
-                    <div class="btn-group w-100" role="group" aria-label="Add Dates">
-                        @foreach (var date in Model.AvailableDates)
-                        {
-                                <button class="btn btn-outline-secondary time-slot-btn">@date</button>
-                        }
-                    </div>
+                            }
+                            </td>
+                        </tr>
+                }
+        </tbody>
+    </table>
+        @if (HttpContext.Session.GetString("user_type") == "d")
+        {
+                            <!-- Add Button -->
+                            <button class="btn btn-outline-primary w-100 mt-3" data-toggle="modal" data-target="#addTimeModal">
+                                + Add Time
+                        </button>
+        }
+</div>
+    </div>
+</div>
+
+
+
+
+
+
+@if (HttpContext.Session.GetString("user_type") == "d")
+{
+    <!-- Modal for Add Time -->
+    <div class="modal fade" id="bookTimeModal" tabindex="-1" role="dialog" aria-labelledby="addTimeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTimeModalLabel">Add Available Time</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-
-                <!-- Add Available Time Section -->
-                <div>
-                    <p class="text-muted">Add Available Time</p>
-                    <hr class="my-2">
-                    <div class="btn-group w-100" role="group" aria-label="Available Time Slots">
-                        @foreach (var time in Model.AvailableTimes)
-                        {
-                                <button class="btn btn-outline-secondary time-slot-btn">@time</button>
-                        }
-                    </div>
-                    @if (HttpContext.Session.GetString("user_type") == "d")
-                    {
-                        <!-- Add Button -->
-                        <button class="btn btn-outline-primary w-100 mt-3" data-toggle="modal" data-target="#addTimeModal">
-                            + Add Time
-                    </button>}
+                <div class="modal-body">
+                    <input type="time" class="form-control" id="newTime" />
+                </div>
+                <div class="modal-body">
+                    <input type="date" class="form-control" id="newDate" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Time</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
+}
+
+
+
+
 <!-- Modal for Add Time -->
 <div class="modal fade" id="addTimeModal" tabindex="-1" role="dialog" aria-labelledby="addTimeModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
