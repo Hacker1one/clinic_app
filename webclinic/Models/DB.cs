@@ -37,7 +37,7 @@ namespace webclinic.Models
 			// connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
 			// yassin's connection string:
-            connectionString = "Data Source=AMNESIA\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
+            connectionString = "Data Source=AN\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
             con.ConnectionString = connectionString;
 		}
@@ -566,6 +566,167 @@ namespace webclinic.Models
             return dt;
         }
         // End of view diagbosis
+        public bool addUser(string fname, string lname, string ssn, string password, string governorate, string city, string email, string gender, DateTime birthdate, string user_type, int field_code)
+		{
+			string today = DateTime.Today.Date.ToString("yyyy-MM-dd");
+			string bd = birthdate.Date.ToString("yyyy-MM-dd");
+
+			string queryString;
+			if (user_type == "p")
+			{
+				queryString = "BEGIN TRANSACTION \n" +
+				"INSERT INTO[user] \n" +
+				"(FName, LName, SSN, RegistrationDate, Gender, [Password], BirthDate, City, Governorate, Email, [type], SSNValidation) \n" +
+				"VALUES " +
+				$"('{fname}', '{lname}', {ssn}, '{today}', '{gender}', '{password}', '{bd}', '{city}', '{governorate}', '{email}', '{user_type}', 0)\n" +
+				"DECLARE @NewUserID INT = SCOPE_IDENTITY(); \n" +
+				"INSERT INTO Patient(ID, PenaltyFees)\n" +
+				"VALUES(@NewUserID, 0);\n" +
+				"COMMIT TRANSACTION;";
+			}
+			else if (user_type == "d")
+			{
+				queryString = "BEGIN TRANSACTION \n" +
+				"INSERT INTO[user] \n" +
+				"(FName, LName, SSN, RegistrationDate, Gender, [Password], BirthDate, City, Governorate, Email, [type]) \n" +
+				"VALUES " +
+				$"('{fname}', '{lname}', {ssn}, '{today}', '{gender}', '{password}', '{bd}', '{city}', '{governorate}', '{email}', '{user_type}')\n" +
+				"DECLARE @NewUserID INT = SCOPE_IDENTITY(); \n" +
+				"INSERT INTO Doctor(ID, PricePA, Banned, FieldCode)\n" +
+				$"VALUES(@NewUserID, 0, 0, {field_code});\n" +
+				"COMMIT TRANSACTION;";
+			}
+			else
+			{
+				return false;
+			}
+            SqlCommand cmd = new SqlCommand(queryString, con);
+
+   //         try
+   //         {
+   //             con.Open();
+   //             cmd.ExecuteReader();
+
+   //             // recieve images from post request
+   //             if (nationalIDPic == null || nationalIDPic.Length == 0)
+   //             {
+   //                 throw new InvalidOperationException("Please upload a valid file.");
+   //             }
+
+   //             // Save the Picture temporarily in the backend
+   //             var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
+   //             if (!Directory.Exists(uploadsFolder))
+   //             {
+   //                 Directory.CreateDirectory(uploadsFolder);
+   //             }
+   //             string natIDPath = Path.Combine(uploadsFolder, "NationalID_" + email + Path.GetExtension(nationalIDPic.FileName));
+   //             using (var fileStream = new FileStream(natIDPath, FileMode.Create))
+   //             {
+   //                 await nationalIDPic.CopyToAsync(fileStream);
+   //             }
+
+   //             string docCertPath = "";
+
+   //             if (user_type == "d")
+   //             {
+   //                 if (docCertPic == null || docCertPic.Length == 0)
+   //                 {
+   //                     throw new InvalidOperationException("Please upload a valid file.");
+   //                 }
+   //                 docCertPath = Path.Combine(uploadsFolder, "DocCert_" + email + Path.GetExtension(docCertPic.FileName));
+   //                 using (var fileStream = new FileStream(docCertPath, FileMode.Create))
+   //                 {
+   //                     await docCertPic.CopyToAsync(fileStream);
+   //                 }
+   //             }
+
+   //             List<string> filePaths = new List<string> { natIDPath };
+   //             if (!string.IsNullOrEmpty(docCertPath))
+   //             {
+   //                 filePaths.Add(docCertPath);
+   //             }
+
+
+   //             // upload National ID to google drive
+   //             string credentialsPath = ".\\bin\\Debug\\credentials.json";
+   //             string folderID = "10_kLHobgMJhTHluPik28qiK9k3q4T0B4";
+   //             GoogleCredential credential;
+
+   //             using (var stream = new FileStream(credentialsPath, FileMode.Open, FileAccess.Read))
+   //             {
+   //                 credential = GoogleCredential.FromStream(stream).CreateScoped(new[]
+   //                 {
+   //                     DriveService.ScopeConstants.DriveFile
+   //                 });
+   //             }
+
+   //             var service = new DriveService(new BaseClientService.Initializer()
+   //             {
+   //                 HttpClientInitializer = credential,
+   //                 ApplicationName = "Google drive SSN upload"
+   //             });
+
+   //             foreach (var p in filePaths)
+   //             {
+   //                 var fileMetaData = new Google.Apis.Drive.v3.Data.File()
+   //                 {
+   //                     Name = Path.GetFileName(p),
+   //                     Parents = new List<string> { folderID }
+   //                 };
+
+   //                 FilesResource.CreateMediaUpload request;
+   //                 using (var stream = new FileStream(p, FileMode.Open))
+   //                 {
+
+   //                     request = service.Files.Create(fileMetaData, stream, "");
+   //                     request.Fields = "id";
+   //                     request.Upload();
+   //                 }
+   //                 var uploadedFile = request.ResponseBody;
+   //                 string link = $"https://drive.google.com/file/d/{uploadedFile.Id}/view";
+   //                 Console.WriteLine($"File '{fileMetaData.Name}' uploaded with ID: {link}");
+
+   //                 if(Path.GetFileName(p).StartsWith("National"))
+   //                 {
+   //                     queryString = $"UPDATE [user] SET SSNPicture = '{link}' WHERE email = '{email}';";
+   //                     con.Close();
+   //                     con.Open();
+   //                     SqlCommand cmd2 = new SqlCommand(queryString, con);
+   //                     cmd2.ExecuteReader();
+   //                 }
+   //                 else
+   //                 {
+   //                     con.Close();
+   //                     int docid = getID(email);
+   //                     queryString = $"Insert INTO DoctorCertificate(CertPic, DoctorID, cert_validation, [Description]) values('{link}', {docid}, 0, 'Official Certificate of general Medical Practice')";
+   //                     con.Open();
+   //                     SqlCommand cmd2 = new SqlCommand(queryString, con);
+   //                     cmd2.ExecuteReader();
+   //                 }
+
+   //             }
+                
+   //             if (File.Exists(natIDPath))
+   //             {
+   //                 File.Delete(natIDPath);
+   //             }
+   //             if (File.Exists(docCertPath))
+   //             {
+   //                 File.Delete(docCertPath);
+   //             }
+   //         }
+			//catch (Exception ex)
+			//{
+			//	Console.Write(ex.ToString());
+			//	return false;
+			//}
+			//finally
+			//{
+			//	con.Close();
+			//}
+
+			return true;
+		}
 		
 		public string isValidLogin(string email, string password)
 		{

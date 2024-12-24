@@ -64,14 +64,131 @@
 
 
 <style>
-    h1 {text-align: center;}
-    h2 {text-align: center;}
-    p {text-align: center;}
+    h1 {
+        text-align: center;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    p {
+        text-align: center;
+    }
+
     .Appointments {
         align-items: center;
         margin: 0 auto;
         width: 80%;
+        /* General Body Styling */
+        body
+
+    {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f7f7f7;
     }
+
+    /* Review Form Container */
+    .review-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        width: 100%;
+        max-width: 350px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin: 10px auto;
+    }
+
+        .review-card h2 {
+            margin: 0 0 5px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .review-card .info {
+            margin-bottom: 15px;
+            color: #555;
+            font-size: 14px;
+        }
+
+    .stars {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        margin: 10px 0;
+    }
+
+    .star {
+        width: 30px;
+        height: 30px;
+        background: url('star-outline.svg') no-repeat center;
+        background-size: contain;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+        .star:hover,
+        .star.selected {
+            background: url('star-filled.svg') no-repeat center;
+            transform: scale(1.2);
+        }
+
+    .feedback {
+        margin: 10px 0;
+        color: #777;
+    }
+
+        .feedback textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: none;
+            font-size: 14px;
+        }
+
+    .add-btn {
+        margin-top: 10px;
+        padding: 10px 20px;
+        border: none;
+        background: #007bff;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        font-size: 14px;
+    }
+
+        .add-btn:hover {
+            background: #0056b3;
+        }
+
+        .add-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+    /* Review Form Container (Hidden by Default) */
+    .review-form-container {
+        display: none;
+        margin-top: 15px;
+    }
+
+    .star {
+        font-size: 30px; /* Size of the star */
+        color: #ccc; /* Color of empty stars */
+        cursor: pointer;
+        transition: color 0.3s ease, transform 0.2s ease; /* Hover effects */
+    }
+
+        .star.selected, .star:hover {
+           
+            transform: scale(1.2); /* Slight enlargement on hover */
+        }
+
 </style>
 
 <div class="Appointments">
@@ -229,13 +346,50 @@
                         </div>
                     </div>
                     <div class="Appointment-actions">
-                        <form method="post" asp-page-handler="View" style="display: block; margin: 0 auto;">
+                        @if (@Model.db.CheckReviewExists(Appointment.Did, Appointment.Pid))
+                        {
+                            <form method="post" asp-page-handler="View" style="display: block; margin: 0 auto;">
                             <input type="hidden" name="aid" value="@Appointment.id" />
                             <input type="hidden" name="pid" value="@Appointment.Pid" />
                             <input type="hidden" name="did" value="@Appointment.Did" />
                             <button class="btn diagnose" >View Diagnose</button>
                         </form>
+                        }
+                        else
+                        {
+                        <form method="post" asp-page-handler="View">
+                            <input type="hidden" name="aid" value="@Appointment.id" />
+                            <input type="hidden" name="pid" value="@Appointment.Pid" />
+                            <input type="hidden" name="did" value="@Appointment.Did" />
+                            <button class="btn diagnose" >View Diagnose</button>
+                        </form>
+                            <button class="btn diagnose" style="background-color: white;" onclick="toggleReviewForm(this)">Add Review</button>
+                        }
                     </div>
+                    <div id="review-form-@Appointment.Name" class="review-form-container" style="display: none;">
+                        <div class="review-card">
+                            <h2>Dr @Appointment.Name</h2>
+                            <p class="info">General Practitioner</p>
+                            <form method="post" asp-page-handler="Review">
+                                <div class="stars">
+                                    <input type="hidden" id="ns" name="ns" value="0" />
+                                    <input type="hidden" name="did" value="@Appointment.Did" />
+                                    <input type="hidden" name="pid" value="@Appointment.Pid" />
+
+                                    <span class="star" data-value="1" onclick="setStarValue(1)">☆</span>
+                                    <span class="star" data-value="2" onclick="setStarValue(2)">☆</span>
+                                    <span class="star" data-value="3" onclick="setStarValue(3)">☆</span>
+                                    <span class="star" data-value="4" onclick="setStarValue(4)">☆</span>
+                                    <span class="star" data-value="5" onclick="setStarValue(5)">☆</span>
+                                </div>
+                                <div class="feedback">
+                                    <textarea placeholder="Write your feedback..." rows="3" name="com"></textarea>
+                                </div>
+                                <button class="add-btn" type="submit">Add</button>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
             }
         </div>
@@ -268,28 +422,111 @@
     </div>
 </div>
 
-</script>
+
 <script>
+    // Function to show a specific section
     function showSection(sectionId) {
+        // Hide all sections
         document.querySelectorAll('.Appointment-section').forEach(function (section) {
             section.classList.remove('active');
             section.style.display = "none"; // Hide all sections
         });
 
+        // Remove active class from all tabs
         document.querySelectorAll('.tab').forEach(function (tab) {
             tab.classList.remove('active');
         });
 
+        // Show the selected section
         const selectedSection = document.getElementById(sectionId);
         if (selectedSection) {
             selectedSection.classList.add('active');
             selectedSection.style.display = "block";
         }
 
-        event.target.classList.add('active');
+        // Add active class to the clicked tab
+        if (event.target) {
+            event.target.classList.add('active');
+        }
     }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        showSection('upcoming'); 
+    // Function to show the review form for a specific appointment
+    function showReviewForm(appointmentId) {
+        // Hide all open forms
+        document.querySelectorAll('.review-form-container').forEach(form => {
+            form.style.display = 'none';
+        });
+
+        // Show the form for the selected appointment
+        const reviewForm = document.getElementById(`review-form-${appointmentId}`);
+        if (reviewForm) {
+            reviewForm.style.display = 'block';
+        }
+    }
+
+    // Function to toggle the visibility of a review form
+    function toggleReviewForm(button) {
+        // Get the parent container of the clicked button
+        const appointmentCard = button.closest('.Appointment-card');
+
+        // Find the review form within this card
+        const reviewForm = appointmentCard.querySelector('.review-form-container');
+
+        // Toggle display
+        if (reviewForm.style.display === 'block') {
+            reviewForm.style.display = 'none';
+        } else {
+            reviewForm.style.display = 'block';
+        }
+    }
+
+    // Function to initialize interactions for stars and review buttons
+    document.addEventListener('DOMContentLoaded', () => {
+        // Initialize star ratings
+        const stars = document.querySelectorAll('.star');
+        const feedbackAreas = document.querySelectorAll('.feedback textarea');
+        const addButtons = document.querySelectorAll('.add-btn');
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const starGroup = star.parentNode;
+                const starsInGroup = starGroup.querySelectorAll('.star');
+
+                // Reset stars and highlight the selected one
+                starsInGroup.forEach(s => s.classList.remove('selected'));
+                star.classList.add('selected');
+
+                // Enable the Add button
+                const button = star.closest('.review-card').querySelector('.add-btn');
+                if (button) button.disabled = false;
+
+                // Set the star value in the hidden input field
+                const starValueInput = starGroup.querySelector('input[type="hidden"]');
+                if (starValueInput) {
+                    starValueInput.value = star.dataset.value;
+                }
+            });
+        });
+
+        // Enable/disable Add button based on feedback input
+        feedbackAreas.forEach(feedback => {
+            feedback.addEventListener('input', () => {
+                const button = feedback.closest('.review-card').querySelector('.add-btn');
+                button.disabled = !feedback.value.trim();
+            });
+        });
+
+        // Default to showing the "upcoming" section on page load
+        showSection('upcoming');
     });
+
+    // Function to set star value and visually update stars
+    function setStarValue(value) {
+        document.getElementById("ns").value = value;
+
+        const stars = document.querySelectorAll(".star");
+        stars.forEach(star => {
+            star.textContent = star.dataset.value <= value ? "★" : "☆";
+        });
+    }
 </script>

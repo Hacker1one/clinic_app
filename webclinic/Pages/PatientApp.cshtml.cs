@@ -72,7 +72,9 @@ namespace webclinic.Pages
         }
         public IActionResult OnPostView(int aid, int pid, int did)
         {
-            return RedirectToPage("/ViewDiagnosis", new { AppointmentID = aid, PatientID = pid, DoctorID = did });
+            HttpContext.Session.SetInt32("appid", aid);
+            HttpContext.Session.SetInt32("paid", pid);
+            return RedirectToPage("/ViewDiagnosis");
         }
         private List<DrAppointment> convertappointment(DataTable app)
         {
@@ -112,6 +114,12 @@ namespace webclinic.Pages
         {
         }
 
+        public IActionResult OnPostReview(int did, int pid, int ns, string com)
+        {
+            db.AddReview(did, pid, ns, com);
+            return RedirectToPage("/PatientApp");
+        }
+
     }
 }
 
@@ -126,4 +134,7 @@ public class DrAppointment
     public string Date { get; set; }
     public string Status { get; set; }
     public string image { get; set; }
+    public string comment { get; set; }
+    public int Ns { get; set; }
+    
 }
