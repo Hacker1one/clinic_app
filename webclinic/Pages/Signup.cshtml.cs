@@ -79,12 +79,12 @@ namespace webapplication.Pages
             bool r = true;
             if(!string.IsNullOrEmpty(specialty))
             {
-                r = await db.addUserAsync(fname, lname, ssn, password, governorate, city, email, gender,
+                r = await db.addUser(fname, lname, ssn, password, governorate, city, email, gender,
                     birthdate, HttpContext.Session.GetString("user_type")!, int.Parse(specialty) + 1, nationalIDPic, docCertPic);
             }
             else
             {
-                r = await db.addUserAsync(fname, lname, ssn, password, governorate, city, email, gender, 
+                r = await db.addUser(fname, lname, ssn, password, governorate, city, email, gender, 
                     birthdate, HttpContext.Session.GetString("user_type")!, -1, nationalIDPic, docCertPic);
             }
 
