@@ -68,7 +68,7 @@ CREATE TABLE DoctorExperience
 CREATE TABLE DoctorCertificate
 (
 	CertID int IDENTITY(1,1),
-    CertPic VARCHAR(150) not null,
+    CertPic VARCHAR(150),
 	DoctorID int,
 	date_of_acq date,
     cert_validation bit,
