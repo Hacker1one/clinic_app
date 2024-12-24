@@ -15,6 +15,12 @@ using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
 using Google.Apis.Services;
 using Microsoft.AspNetCore.Http;
+using System.Data.SqlClient;
+using SqlCommand = Microsoft.Data.SqlClient.SqlCommand;
+using SqlConnection = Microsoft.Data.SqlClient.SqlConnection;
+using SqlDataReader = Microsoft.Data.SqlClient.SqlDataReader;
+using SqlParameter = Microsoft.Data.SqlClient.SqlParameter;
+using SqlException = Microsoft.Data.SqlClient.SqlException;
 
 namespace webclinic.Models
 {
