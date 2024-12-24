@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("webclinic")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d5c270774e88116693afe0c73766435e8e9e5bc3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+424d6592ca8cadb6a0efa6c9456349e146e80b15")]
 [assembly: System.Reflection.AssemblyProductAttribute("webclinic")]
 [assembly: System.Reflection.AssemblyTitleAttribute("webclinic")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
