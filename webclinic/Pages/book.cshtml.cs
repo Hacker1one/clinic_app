@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
+using System.Reflection;
 using webclinic.Models;
 namespace webclinic.Pages;
 
@@ -20,13 +21,31 @@ public class bookModel : PageModel
     // Public property for therapists
     [BindProperty(SupportsGet = true)]
     public DataTable fields { get; set; }
+    [BindProperty(SupportsGet = true)]
+
     public DataTable Doctors { get; set; }
+    [BindProperty(SupportsGet = true)]
+
     public List<Therapist> Therapists { get; private set; }
+    [BindProperty(SupportsGet = true)]
+
     public DB db { get; set; }
+    [BindProperty(SupportsGet = true)]
+
     public DataTable allGovernorates { get; set; }
+    
+    [BindProperty(SupportsGet = true)]
     public string governorate { get; set; }
+    [BindProperty(SupportsGet = true)]
     public string special { get; set; }
+    [BindProperty(SupportsGet = true)]
     public string city { get; set; }
+    public int maxp { get; set; }
+    public int feesRange { get; set; }
+    public int minp { get; set; }
+    public DataTable maxprice { get; set; }
+    public DataTable minprice { get; set; }
+
     public DataTable allCities { get; set; }
     public void OnGet()
     {
@@ -37,8 +56,42 @@ public class bookModel : PageModel
         allCities = new DataTable();
         Doctors = new DataTable();
         Doctors = db.GetDoctorData();
-       Therapists = MapDoctorsToTherapists(Doctors);
+        maxprice = new DataTable();
+        minprice = new DataTable();
+
+        //maxprice = db.getmaxprice();
+        //minprice = db.getminprice();
+
+        
+
+        var filteredRows = Doctors.AsEnumerable();
+
+        // Filtering based on the search term (name)
+        if (!string.IsNullOrEmpty(special))
+        {
+            filteredRows = filteredRows.Where(row => row.Field<object>("FieldName") != DBNull.Value && row.Field<object>("FieldName").ToString().Contains(special, StringComparison.OrdinalIgnoreCase));
+
+        }
+
+        if (!string.IsNullOrEmpty(governorate))
+        {
+            filteredRows = filteredRows.Where(row => row.Field<object>("Governorate") != DBNull.Value && row.Field<object>("Governorate").ToString().Contains(governorate, StringComparison.OrdinalIgnoreCase));
+        }
+
+        
+        if (filteredRows.Any())
+        {
+            Doctors = filteredRows.CopyToDataTable();
+        }
+        else
+        {
+            Doctors = new DataTable(); // This will result in no therapists being displayed
+        }
+
+        Therapists = MapDoctorsToTherapists(Doctors);
+
     }
+
     public IActionResult OnPostB()
     {
         return RedirectToPage("/book");
@@ -48,6 +101,19 @@ public class bookModel : PageModel
         return RedirectToPage("/DrProfile");
     }
 
+    public IActionResult OnPostResetFilters()
+    {
+        // Reset all filters
+        fields = db.getdrspecialities();
+        allGovernorates = db.getdrgovernments();
+        allCities = new DataTable();
+        Doctors = db.GetDoctorData();
+        Therapists = MapDoctorsToTherapists(Doctors);
+        //maxprice = db.getmaxprice();
+        //minprice = db.getminprice();
+
+        return Page();
+    }
     public JsonResult OnGetChangeCities(string govern)
     {
 
@@ -74,7 +140,9 @@ public class bookModel : PageModel
                 },
                 SessionFees = Convert.ToDouble(row["PricePA"]),
                 Ratings = Convert.ToDouble(row["AverageRating"]),
-                ProfileImageUrl = "img/author1.jpg", // You can replace this with the actual profile image path if available
+                ProfileImageUrl = $"{row["ProfileImageUrl"]}", 
+                Governerate = $"{row["Governorate"]}",
+                City = $"{row["City"]}",
                 NextDrAppointment = DateTime.Now.AddDays(1) // This is a placeholder, you can replace with actual appointment date
             };
 

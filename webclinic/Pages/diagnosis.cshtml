@@ -107,22 +107,23 @@
 
     <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10">
-            <form method="post" class="bg-light p-5 rounded shadow-lg">
+            <form method="post" class="bg-light p-5 rounded shadow-lg" asp-page-handler="Complete">
                 <div class="mb-3">
                     <label for="conditions" class="form-label">Conditions</label>
-                    <input type="text" class="form-control" id="conditions" name="Conditions" placeholder="Enter the diagnosed conditions" required>
+                    <input type="text" asp-for="condition1" class="form-control" id="conditions" name="condition1" placeholder="Enter the diagnosed conditions" required>
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control" id="description" name="Description" rows="4" placeholder="Enter a detailed description of the diagnosis" required></textarea>
+                    <textarea class="form-control" asp-for="description" id="description" name="description" rows="4" placeholder="Enter a detailed description of the diagnosis" required></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="prescription" class="form-label">Prescription</label>
-                    <textarea class="form-control" id="prescription" name="Prescription" rows="3" placeholder="Enter the prescribed medications or treatment" required></textarea>
+                    <textarea class="form-control" asp-for="prescription" id="prescription" name="prescription" rows="3" placeholder="Enter the prescribed medications or treatment" required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Submit Diagnosis</button>
             </form>
         </div>
     </div>
+
 </div>
  

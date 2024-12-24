@@ -14,6 +14,7 @@ using System.Reflection.Metadata;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
 using Google.Apis.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace webclinic.Models
 {
@@ -30,7 +31,7 @@ namespace webclinic.Models
 			// connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
 			// yassin's connection string:
-            connectionString = "Data Source=AMNESIA\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
+            connectionString = "Data Source=AN\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
             con.ConnectionString = connectionString;
 		}
@@ -120,7 +121,7 @@ namespace webclinic.Models
         }
         public DataTable getdrspecialities()
         {
-            string queryString = $"SELECT DISTINCT \r\n    FieldName\r\nFROM \r\n    Doctor join FieldOfMedicine on (Doctor.FieldCode = FieldOfMedicine.FieldCode)";
+            string queryString = $"SELECT DISTINCT \r\n    FieldName\r\nFROM \r\n    Doctor join FieldOfMedicine on (Doctor.FieldCode = FieldOfMedicine.FieldCode) ORDER BY FIELDNAME ASC";
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand(queryString, con);
             try
@@ -141,37 +142,37 @@ namespace webclinic.Models
         public DataTable GetDoctorData()
         {
             string queryString = @"
-        SELECT 
-            FName, 
-            LName, 
-            Governorate,
-            City,
-            Doctor.ID, 
-            PricePA,
-            Doctor.FieldCode,
-            FieldName, 
-            ProfileImageUrl,
-            COALESCE(AVG(NStars), 5) AS AverageRating
+    SELECT 
+        FName, 
+        LName, 
+        Governorate,
+        City,
+        Doctor.ID, 
+        PricePA,
+        Doctor.FieldCode,
+        FieldName, 
+        ProfileImageUrl,
+        COALESCE(AVG(NStars), 5) AS AverageRating
         FROM 
-            [user]
+        [user]
         JOIN 
-            Doctor ON [user].ID = Doctor.ID
-        JOIN 
-            FieldOfMedicine ON Doctor.FieldCode = FieldOfMedicine.FieldCode
-        LEFT JOIN 
-            Reviews ON Doctor.ID = Reviews.DoctorID
-        WHERE 
-            [user].type = 'd'
-        GROUP BY 
-            FName, 
-            LName, 
-            Doctor.ID, 
-            PricePA, 
-            Doctor.FieldCode,
-            FieldName,
-            Governorate,
-	        City,
-            ProfileImageUrl";
+        Doctor ON [user].ID = Doctor.ID
+    JOIN 
+        FieldOfMedicine ON Doctor.FieldCode = FieldOfMedicine.FieldCode
+    LEFT JOIN 
+        Reviews ON Doctor.ID = Reviews.DoctorID
+    WHERE 
+        [user].type = 'd' and Banned = 0 and SSNValidation = 1
+    GROUP BY 
+        FName, 
+        LName, 
+        Doctor.ID, 
+        PricePA, 
+        Doctor.FieldCode,
+        FieldName,
+        Governorate,
+        City,
+        ProfileImageUrl";
 
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand(queryString, con);
@@ -193,9 +194,352 @@ namespace webclinic.Models
             return dt;
         }
 
+        public DataTable getupcomingappointment(int id)
+        {
+            string queryString = $"SELECT AppointmentID, PatientID, DoctorID, u.FName, u.LName, Appointment.DatenTime, ProfileImageUrl\r\n\r\nfrom [user] as u join Patient on (u.ID = Patient.ID ) join Appointment on (Patient.ID = PatientID)\r\nwhere IsConfirmed = 1 and IsFinished = 0 and DoctorID = {id}";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+        public DataTable getpendingappointment(int id)
+        {
+            string queryString = $"SELECT AppointmentID, PatientID, DoctorID, u.FName, u.LName, Appointment.DatenTime, ProfileImageUrl\r\n\r\nfrom [user] as u join Patient on (u.ID = Patient.ID ) join Appointment on (Patient.ID = PatientID)\r\nwhere IsConfirmed = 0 and IsFinished = 0 and DoctorID = {id}";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+        public DataTable getcompletedappointment(int id)
+        {
+            string queryString = $"SELECT AppointmentID, PatientID, DoctorID, u.FName, u.LName, Appointment.DatenTime, ProfileImageUrl\r\n\r\nfrom [user] as u join Patient on (u.ID = Patient.ID ) join Appointment on (Patient.ID = PatientID)\r\nwhere IsConfirmed = 1 and IsFinished = 1 and DoctorID = {id}";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+        public DataTable getcanceledappointment(int id)
+        {
+            string queryString = $"SELECT AppointmentID, PatientID, DoctorID, u.FName, u.LName, Appointment.DatenTime, ProfileImageUrl\r\n\r\nfrom [user] as u join Patient on (u.ID = Patient.ID ) join Appointment on (Patient.ID = PatientID)\r\nwhere IsConfirmed = 0 and IsFinished = 1 and DoctorID = {id}";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+        public string GetAppointmentStatus(int appointmentId)
+        {
+            string query = @"SELECT 
+        CASE 
+            WHEN IsConfirmed = 0 AND IsFinished = 0 THEN 'Pending'
+            WHEN IsConfirmed = 1 AND IsFinished = 0 THEN 'Confirmed'
+            WHEN IsConfirmed = 1 AND IsFinished = 1 THEN 'Completed'
+            WHEN IsConfirmed = 0 AND IsFinished = 1 THEN 'Cancelled'
+            ELSE 'Unknown Status'
+        END AS Status
+    FROM Appointment
+    WHERE AppointmentID = @AppointmentID";
+
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@AppointmentID", appointmentId);
+
+                string status = cmd.ExecuteScalar()?.ToString() ?? "Unknown Status";
+                return status;
+            }
+            finally
+            {
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                }
+            }
+        }
+        public void CancelAppointment(int aid)
+        {
+            string queryString = "UPDATE Appointment SET IsConfirmed = 0, IsFinished = 1 WHERE AppointmentID = @aid";
+
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(queryString, con))
+                {
+                    // Add parameters to prevent SQL injection
+                    cmd.Parameters.AddWithValue("@aid", aid);
+
+                    con.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        Console.WriteLine("Appointment canceled successfully.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("No appointment found to cancel.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (consider logging it to a file or a logging system)
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            finally
+            {
+                // Ensure that the connection is closed, even in case of an exception
+                if (con.State == System.Data.ConnectionState.Open)
+                {
+                    con.Close();
+                }
+            }
+        }
+        public void confirmappointment(int aid)
+        {
+            string queryString = "UPDATE Appointment SET IsConfirmed = 1, IsFinished = 0 WHERE AppointmentID = @aid";
+
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(queryString, con))
+                {
+                    // Add parameters to prevent SQL injection
+                    cmd.Parameters.AddWithValue("@aid", aid);
+
+                    con.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        Console.WriteLine("Appointment Confirmed successfully.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("No appointment found to cancel.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (consider logging it to a file or a logging system)
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            finally
+            {
+                // Ensure that the connection is closed, even in case of an exception
+                if (con.State == System.Data.ConnectionState.Open)
+                {
+                    con.Close();
+                }
+            }
+        }
+        public void completeappointment(int aid)
+        {
+            string queryString = "UPDATE Appointment SET IsConfirmed = 1, IsFinished = 1 WHERE AppointmentID = @aid";
+
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(queryString, con))
+                {
+                    // Add parameters to prevent SQL injection
+                    cmd.Parameters.AddWithValue("@aid", aid);
+
+                    con.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        Console.WriteLine("Appointment completed successfully.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("No appointment found to cancel.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (consider logging it to a file or a logging system)
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            finally
+            {
+                // Ensure that the connection is closed, even in case of an exception
+                if (con.State == System.Data.ConnectionState.Open)
+                {
+                    con.Close();
+                }
+            }
+        }
+        // Patient appointment Queries
+        public DataTable getpaupcomingappointment(int id)
+        {
+            string queryString = $"SELECT AppointmentID, PatientID, DoctorID, u.FName, u.LName, Appointment.DatenTime, ProfileImageUrl\r\n\r\nfrom [user] as u join Doctor on (u.ID = Doctor.ID ) join Appointment on (Doctor.ID = DoctorID)\r\nwhere IsConfirmed = 1 and IsFinished = 0 and PatientID = {id}";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+        public DataTable getpapendingappointment(int id)
+        {
+            string queryString = $"SELECT AppointmentID, PatientID, DoctorID, u.FName, u.LName, Appointment.DatenTime, ProfileImageUrl\r\nfrom [user] as u join Doctor on (u.ID = Doctor.ID ) join Appointment on (Doctor.ID = DoctorID)\r\nwhere IsConfirmed = 0 and IsFinished = 0 and PatientID = {id}";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+        public DataTable getpacompletedappointment(int id)
+        {
+            string queryString = $"SELECT AppointmentID, PatientID, DoctorID, u.FName, u.LName, Appointment.DatenTime, ProfileImageUrl\r\nfrom [user] as u join Doctor on (u.ID = Doctor.ID ) join Appointment on (Doctor.ID = DoctorID)\r\nwhere IsConfirmed = 1 and IsFinished = 1 and PatientID = {id}";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+        public DataTable getpacanceledappointment(int id)
+        {
+            string queryString = $"SELECT AppointmentID, PatientID, DoctorID, u.FName, u.LName, Appointment.DatenTime, ProfileImageUrl\r\nfrom [user] as u join Doctor on (u.ID = Doctor.ID ) join Appointment on (Doctor.ID = DoctorID)\r\nwhere IsConfirmed = 0 and IsFinished = 1 and PatientID = {id}";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+        //End of patient appointment queries
+
+        //Add Diagnosis
+        public void AddDiagnosis(int aid, int did, int pid, string cond, string des, string pre)
+        {
+            string query = "INSERT INTO Diagnosis (AppointmentID, DoctorID, PatientID, condition, [description], prescription) " +
+                           "VALUES (@AppointmentID, @DoctorID, @PatientID, @Condition, @Description, @Prescription)";
+
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@AppointmentID", SqlDbType.Int) { Value = aid });
+                    cmd.Parameters.Add(new SqlParameter("@DoctorID", SqlDbType.Int) { Value = did });
+                    cmd.Parameters.Add(new SqlParameter("@PatientID", SqlDbType.Int) { Value = pid });
+                    cmd.Parameters.Add(new SqlParameter("@Condition", SqlDbType.NVarChar) { Value = (object)cond ?? DBNull.Value });
+                    cmd.Parameters.Add(new SqlParameter("@Description", SqlDbType.NVarChar) { Value = (object)des ?? DBNull.Value });
+                    cmd.Parameters.Add(new SqlParameter("@Prescription", SqlDbType.NVarChar) { Value = (object)pre ?? DBNull.Value });
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Log exception
+                throw new Exception("Error while inserting diagnosis data.", ex);
+            }
+            finally
+            {
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                }
+            }
+        }
 
 
-        public async Task<bool> addUserAsync(string fname, string lname, string ssn, string password, string governorate, string city, string email, string gender, DateTime birthdate, string user_type, int field_code, IFormFile nationalIDPic, IFormFile docCertPic)
+
+        // End of Add Diagnosis
+        public bool addUser(string fname, string lname, string ssn, string password, string governorate, string city, string email, string gender, DateTime birthdate, string user_type, int field_code)
 		{
 			string today = DateTime.Today.Date.ToString("yyyy-MM-dd");
 			string bd = birthdate.Date.ToString("yyyy-MM-dd");
@@ -229,6 +573,198 @@ namespace webclinic.Models
 			{
 				return false;
 			}
+            SqlCommand cmd = new SqlCommand(queryString, con);
+
+   //         try
+   //         {
+   //             con.Open();
+   //             cmd.ExecuteReader();
+
+   //             // recieve images from post request
+   //             if (nationalIDPic == null || nationalIDPic.Length == 0)
+   //             {
+   //                 throw new InvalidOperationException("Please upload a valid file.");
+   //             }
+
+   //             // Save the Picture temporarily in the backend
+   //             var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
+   //             if (!Directory.Exists(uploadsFolder))
+   //             {
+   //                 Directory.CreateDirectory(uploadsFolder);
+   //             }
+   //             string natIDPath = Path.Combine(uploadsFolder, "NationalID_" + email + Path.GetExtension(nationalIDPic.FileName));
+   //             using (var fileStream = new FileStream(natIDPath, FileMode.Create))
+   //             {
+   //                 await nationalIDPic.CopyToAsync(fileStream);
+   //             }
+
+   //             string docCertPath = "";
+
+   //             if (user_type == "d")
+   //             {
+   //                 if (docCertPic == null || docCertPic.Length == 0)
+   //                 {
+   //                     throw new InvalidOperationException("Please upload a valid file.");
+   //                 }
+   //                 docCertPath = Path.Combine(uploadsFolder, "DocCert_" + email + Path.GetExtension(docCertPic.FileName));
+   //                 using (var fileStream = new FileStream(docCertPath, FileMode.Create))
+   //                 {
+   //                     await docCertPic.CopyToAsync(fileStream);
+   //                 }
+   //             }
+
+   //             List<string> filePaths = new List<string> { natIDPath };
+   //             if (!string.IsNullOrEmpty(docCertPath))
+   //             {
+   //                 filePaths.Add(docCertPath);
+   //             }
+
+
+   //             // upload National ID to google drive
+   //             string credentialsPath = ".\\bin\\Debug\\credentials.json";
+   //             string folderID = "10_kLHobgMJhTHluPik28qiK9k3q4T0B4";
+   //             GoogleCredential credential;
+
+   //             using (var stream = new FileStream(credentialsPath, FileMode.Open, FileAccess.Read))
+   //             {
+   //                 credential = GoogleCredential.FromStream(stream).CreateScoped(new[]
+   //                 {
+   //                     DriveService.ScopeConstants.DriveFile
+   //                 });
+   //             }
+
+   //             var service = new DriveService(new BaseClientService.Initializer()
+   //             {
+   //                 HttpClientInitializer = credential,
+   //                 ApplicationName = "Google drive SSN upload"
+   //             });
+
+   //             foreach (var p in filePaths)
+   //             {
+   //                 var fileMetaData = new Google.Apis.Drive.v3.Data.File()
+   //                 {
+   //                     Name = Path.GetFileName(p),
+   //                     Parents = new List<string> { folderID }
+   //                 };
+
+   //                 FilesResource.CreateMediaUpload request;
+   //                 using (var stream = new FileStream(p, FileMode.Open))
+   //                 {
+
+   //                     request = service.Files.Create(fileMetaData, stream, "");
+   //                     request.Fields = "id";
+   //                     request.Upload();
+   //                 }
+   //                 var uploadedFile = request.ResponseBody;
+   //                 string link = $"https://drive.google.com/file/d/{uploadedFile.Id}/view";
+   //                 Console.WriteLine($"File '{fileMetaData.Name}' uploaded with ID: {link}");
+
+   //                 if(Path.GetFileName(p).StartsWith("National"))
+   //                 {
+   //                     queryString = $"UPDATE [user] SET SSNPicture = '{link}' WHERE email = '{email}';";
+   //                     con.Close();
+   //                     con.Open();
+   //                     SqlCommand cmd2 = new SqlCommand(queryString, con);
+   //                     cmd2.ExecuteReader();
+   //                 }
+   //                 else
+   //                 {
+   //                     con.Close();
+   //                     int docid = getID(email);
+   //                     queryString = $"Insert INTO DoctorCertificate(CertPic, DoctorID, cert_validation, [Description]) values('{link}', {docid}, 0, 'Official Certificate of general Medical Practice')";
+   //                     con.Open();
+   //                     SqlCommand cmd2 = new SqlCommand(queryString, con);
+   //                     cmd2.ExecuteReader();
+   //                 }
+
+   //             }
+                
+   //             if (File.Exists(natIDPath))
+   //             {
+   //                 File.Delete(natIDPath);
+   //             }
+   //             if (File.Exists(docCertPath))
+   //             {
+   //                 File.Delete(docCertPath);
+   //             }
+   //         }
+			//catch (Exception ex)
+			//{
+			//	Console.Write(ex.ToString());
+			//	return false;
+			//}
+			//finally
+			//{
+			//	con.Close();
+			//}
+
+			return true;
+		}
+		
+		public string isValidLogin(string email, string password)
+		{
+			string queryString = $"Select * from [user] Where Email = '{email}' and [password] = '{password}'";
+			DataTable dt = new DataTable();
+			SqlCommand cmd = new SqlCommand(queryString, con);
+			try
+			{
+				con.Open();
+				dt.Load(cmd.ExecuteReader());
+			}
+			catch (Exception ex)
+			{
+				Console.Write(ex.ToString());
+			}
+			finally
+			{
+				con.Close();
+			}
+			if (dt.Rows.Count == 1 && dt.Rows[0]["Email"].ToString() == email)
+			{
+                return dt.Rows[0]["type"].ToString()!;
+			}
+
+			return "";
+		}
+
+
+        
+
+
+        public async Task<bool> addUserAsync(string fname, string lname, string ssn, string password, string governorate, string city, string email, string gender, DateTime birthdate, string user_type, int field_code, IFormFile nationalIDPic, IFormFile docCertPic)
+        {
+            string today = DateTime.Today.Date.ToString("yyyy-MM-dd");
+            string bd = birthdate.Date.ToString("yyyy-MM-dd");
+
+            string queryString;
+            if (user_type == "p")
+            {
+                queryString = "BEGIN TRANSACTION \n" +
+                "INSERT INTO[user] \n" +
+                "(FName, LName, SSN, RegistrationDate, Gender, [Password], BirthDate, City, Governorate, Email, [type], SSNValidation) \n" +
+                "VALUES " +
+                $"('{fname}', '{lname}', {ssn}, '{today}', '{gender}', '{password}', '{bd}', '{city}', '{governorate}', '{email}', '{user_type}', 0)\n" +
+                "DECLARE @NewUserID INT = SCOPE_IDENTITY(); \n" +
+                "INSERT INTO Patient(ID, PenaltyFees)\n" +
+                "VALUES(@NewUserID, 0);\n" +
+                "COMMIT TRANSACTION;";
+            }
+            else if (user_type == "d")
+            {
+                queryString = "BEGIN TRANSACTION \n" +
+                "INSERT INTO[user] \n" +
+                "(FName, LName, SSN, RegistrationDate, Gender, [Password], BirthDate, City, Governorate, Email, [type]) \n" +
+                "VALUES " +
+                $"('{fname}', '{lname}', {ssn}, '{today}', '{gender}', '{password}', '{bd}', '{city}', '{governorate}', '{email}', '{user_type}')\n" +
+                "DECLARE @NewUserID INT = SCOPE_IDENTITY(); \n" +
+                "INSERT INTO Doctor(ID, PricePA, Banned, FieldCode)\n" +
+                $"VALUES(@NewUserID, 0, 0, {field_code});\n" +
+                "COMMIT TRANSACTION;";
+            }
+            else
+            {
+                return false;
+            }
             SqlCommand cmd = new SqlCommand(queryString, con);
 
             try
@@ -315,7 +851,7 @@ namespace webclinic.Models
                     string link = $"https://drive.google.com/file/d/{uploadedFile.Id}/view";
                     Console.WriteLine($"File '{fileMetaData.Name}' uploaded with ID: {link}");
 
-                    if(Path.GetFileName(p).StartsWith("National"))
+                    if (Path.GetFileName(p).StartsWith("National"))
                     {
                         queryString = $"UPDATE [user] SET SSNPicture = '{link}' WHERE email = '{email}';";
                         con.Close();
@@ -334,7 +870,7 @@ namespace webclinic.Models
                     }
 
                 }
-                
+
                 if (File.Exists(natIDPath))
                 {
                     File.Delete(natIDPath);
@@ -344,53 +880,22 @@ namespace webclinic.Models
                     File.Delete(docCertPath);
                 }
             }
-			catch (Exception ex)
-			{
-				Console.Write(ex.ToString());
-				return false;
-			}
-			finally
-			{
-				con.Close();
-			}
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
 
-			return true;
-		}
-		
-		public string isValidLogin(string email, string password)
-		{
-			string queryString = $"Select * from [user] Where Email = '{email}' and [password] = '{password}'";
-			DataTable dt = new DataTable();
-			SqlCommand cmd = new SqlCommand(queryString, con);
-			try
-			{
-				con.Open();
-				dt.Load(cmd.ExecuteReader());
-			}
-			catch (Exception ex)
-			{
-				Console.Write(ex.ToString());
-			}
-			finally
-			{
-				con.Close();
-			}
-			if (dt.Rows.Count == 1 && dt.Rows[0]["Email"].ToString() == email)
-			{
-                return dt.Rows[0]["type"].ToString()!;
-			}
-
-			return "";
-		}
+            return true;
+        }
 
 
 
-
-
-
-
-
-		public Dictionary<string, int> getRegisteredUsers(string from, string to, string type)
+        public Dictionary<string, int> getRegisteredUsers(string from, string to, string type)
 		{
 			string queryString;
 			if (type == "dp")

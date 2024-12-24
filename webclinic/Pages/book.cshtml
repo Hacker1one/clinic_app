@@ -1,4 +1,4 @@
-@page
+﻿@page
 @model bookModel
 @{
     ViewData["Title"] = "Book Page";
@@ -25,14 +25,21 @@
                                     </ul>
                                 </li>
                                 <li><a href="ContactUs">Contact Us</a></li>
-                                @*  @if (HttpContext.Session.GetString("UserType") == "Patient")                                        {
-                                            <li><a href="PatientApp">Appointments</a></li>                                            <li><a href="PatientProfile">My Profile</a></li>
-                                        }                                        else if (HttpContext.Session.GetString("UserType") == "Doctor")
-                                        {                                                                                   <li><a href="DrApp">Appointments</a></li>
-                                            <li><a href="DrProfile">My Profile</a></li>                                        }
-                                        else *@                                        
-                                            <li><a href="Login">Login</a></li>
-                                <li><a href="Signup2">Sign Up</a></li>
+                                @if (HttpContext.Session.GetString("UserType") == "p")
+                                {
+                                    <li><a href="PatientApp">Appointments</a></li>                                            
+                                    <li><a href="PatientProfile">My Profile</a></li>
+                                }
+                                else if (HttpContext.Session.GetString("UserType") == "d")
+                                {
+                                    <li><a href="DrApp">Appointments</a></li>
+                                    <li><a href="DrProfile">My Profile</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="Login">Login</a></li>
+                                    <li><a href="Signup2">Sign Up</a></li>
+                                }
                             </ul>
                         </nav>
                     </div>
@@ -45,70 +52,100 @@
 </div>
         </div>    </header>
 <div class="container mt-5">
+
+    <style>
+        .star-rating {
+            color: #ffd700; 
+            font-size: 1.2rem;
+        }
+
+        .star-empty {
+            color: #e4e5e9;
+        }
+
+        .rating-number {
+            color: #666;
+            font-size: 0.9rem;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+    </style>
     <div class="row">
         <!-- Filters Section on the left -->
         <div class="col-md-3 mb-4">
             <div class="filters">
-                <h4 class="mb-4">Filters</h4>
-                <!-- Availability -->                
-                <div class="mb-4">
-                    <label>Availability</label>                    
-                    <div>
-                        <input type="checkbox" id="today" name="availability" value="today">                        
-                        <label for="today">Today</label>
-                    </div>                    <div>
-                        <input type="checkbox" id="this-week" name="availability" value="this-week">                        
-                        <label for="this-week">This Week</label>
-                    </div>                    <div>
-                        <input type="checkbox" id="online" name="availability" value="online">                       
-                        <label for="online">Online</label>
+                <form method="get">
+                    <!-- Availability -->
+                    <div class="mb-4">
+                        <label>Availability</label>
+                        <div>
+                            <input type="checkbox" id="today" name="availability" value="today">
+                            <label for="today">Today</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="this-week" name="availability" value="this-week">
+                            <label for="this-week">This Week</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="online" name="availability" value="online">
+                            <label for="online">Online</label>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Specific Date or Range -->
-                <div class="mb-4">
-                    <label for="date-range">Specific date or range</label>
-                    <input type="date" id="date-range" name="date-range"
-                           class="form-control">
-                </div>
+                    <!-- Specific Date or Range -->
+                    <div class="mb-4">
+                        <label for="date-range">Specific date or range</label>
+                        <input type="date" id="date-range" name="dateRange" class="form-control">
+                    </div>
 
-                <div class="mb-4" ">
-                    <label for="specialization">Speciality</label>
-                    <br>
-                    <select id="specialization" class="form-control" asp-for="special" >
-                        <option value="">Select Specialization</option>
-                        
-                        @for (int i = 0; i < Model.fields.Rows.Count; i++)
-                        {
-                            <option value="@i">@Model.fields.Rows[i]["FieldName"].ToString()</option>
-                        }
-                    </select>
-                </div>
-                
-                <!-- Governorate dropdown -->
-                <div class="mb-4" style="margin: 60px 0;">
-                    <label for="action="government"">Government</label>
-                    <br >
-                    <select id="governorateSelect"  class="form-control" asp-for="governorate" onchange="showCity()">
-                        <option value="">Governorate</option>
-                        @for (int i = 0; i < Model.allGovernorates.Rows.Count; i++)
-                        {
-                            <option value="@i">@Model.allGovernorates.Rows[i]["Governorate"].ToString()</option>
-                        }
-                    </select>
-                </div>
+                    <!-- Specialization -->
+                    <div class="mb-4">
+                        <label for="specialization">Speciality</label>
+                        <select id="special" name="special" class="form-control" asp-for="special">
+                            <option value="">Select Specialization</option>
+                            @for (int i = 0; i < Model.fields.Rows.Count; i++)
+                            {
+                                <option value="@Model.fields.Rows[i]["FieldName"].ToString()">
+                                    @Model.fields.Rows[i]["FieldName"].ToString()
+                                </option>
+                            }
+                        </select>
+                    </div>
 
-     @*            <!-- City dropdown -->
-                <select class="form-select d-none justify-content-center align-items-center w-50 mx-auto mb-3" asp-for="city" id="citySelect" aria-label="City" required>
-                    <option value="">City</option>
-                </select>
-                *@
-                <!-- Session Fees -->
-                <div class="mb-4" style="margin: 60px 0;">
-                    <label for="fees-range">Session Fees</label>
-                    <input type="range" id="fees-range" name="fees-range" min="140" max="4700" step="10">
-                    <div>140 EGP - 4700 EGP</div>
-                </div>
+                    <!-- Governorate -->
+                    <div class="mb-4">
+                        <label for="governorate">Governorate</label>
+                        <br >
+                        <select id="governorate" name="governorate" class="form-control" asp-for="governorate">
+                            <option value="">Select Governorate</option>
+                            @for (int i = 0; i < Model.allGovernorates.Rows.Count; i++)
+                            {
+                                <option value="@Model.allGovernorates.Rows[i]["Governorate"].ToString()">
+                                    @Model.allGovernorates.Rows[i]["Governorate"].ToString()
+                                </option>
+                            }
+                        </select>
+                    </div>
+
+                    <!-- Session Fees -->
+                    <div class="mb-4" style="margin: 70px 0">
+                        <label for="fees-range">Session Fees</label>
+                        <input type="range" name="feesRange" id="fees-range" min="400" max="800" step="10" class="form-control" asp-for="feesRange">
+                        <div> 400 EGP -  800 EGP</div>
+                      
+                    </div>
+
+                    <div class="mb-4">
+                        <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
+                    </div>
+
+                    
+                </form>
+                <form method="post">
+                    <div class="mb-4">
+                        <button type="submit" asp-page-handler="ResetFilters" class="btn btn-outline-primary w-100" style="background-color: white;">Reset Filters</button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -129,12 +166,32 @@
                                         <small class="text-muted">@therapist.Specialization.Name</small>
                                     </div>
                                 </div>
-                                <p><strong>Interests:</strong> @string.Join(", ", therapist.Interests)</p>
+                                <strong>Rating:</strong>
+                                <span class="star-rating">
+                                    @{
+                                        var rating = therapist.Ratings;
+                                        for (int i = 1; i <= 5; i++)
+                                        {
+                                            if (i <= rating)
+                                            {
+                                                <span>★</span> @* Filled star *@
+                                            }
+                                            else
+                                            {
+                                                <span class="star-empty">☆</span> @* Empty star *@
+                                            }
+                                        }
+                                    }
+                                </span>
+                                <span class="rating-number">(@rating.ToString("0.0"))</span>
+
                                 <p>
                                     <strong>Nearest Dr. Appointment:</strong>
                                     @therapist.NextDrAppointment.ToString("dddd, MMM dd, yyyy hh:mm tt")
                                 </p>
-                                <p><strong>Fees:</strong> @therapist.SessionFees.ToString("C2") / 60 Min</p>
+                                <p><strong>Fees:</strong> @therapist.SessionFees.ToString() EGP</p>
+                                <p><strong>Governorate:</strong> @therapist.Governerate  </p>
+                                <p><strong>City:</strong> @therapist.City </p>
                                 <div class="d-flex justify-content-between mt-3">
                                     <form method="post" asp-page-handler="P">
                                         <input type="hidden" name="therapistId" value="@therapist.Id" />
@@ -191,5 +248,4 @@
          }
      }
 
-</script>
 </script>

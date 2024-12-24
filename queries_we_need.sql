@@ -306,7 +306,7 @@ where IsConfirmed = 0 and IsFinished = 1
 /*Cancel in Dr Appointment*/
 /UPDATE Appointment 
 SET IsConfirmed = 0, IsFinished = 1
-where ID = PatientID
+where ID = PatientID 
 
 
 /* Confirm in Dr Appointment*/
