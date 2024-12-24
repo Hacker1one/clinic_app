@@ -25,15 +25,18 @@
                                             </ul>
                                         </li>
                                         <li><a href="ContactUs">Contact Us</a></li>
-                                        @if (HttpContext.Session.GetString("type") == "dr")
+                                        @if (HttpContext.Session.GetString("user_type") == "d")
                                         {
 										    <li class="active"><a href="DrApp">Appointments</a></li>
+                                            <li><a href="DrProfile">My Profile</a></li>
                                         }
                                         else
                                         {
                                             <li class="active"><a href="PatientApp">Appointments</a></li>
-                                        }       
-                                        <li><a href="DrProfile">My Profile</a></li>
+                                            <li><a href="PatientProfile">My Profile</a></li>
+                                        }
+                                        <li><a href="Logout">Logout</a></li>
+                                       
                                     </ul>
                                 </nav>
                             </div>
@@ -81,13 +84,13 @@
             <p>@Model.Prescription</p>
         </div>
         <div class="card-footer text-end">
-             @if (HttpContext.Session.GetString("type") == "dr")
+             @if (HttpContext.Session.GetString("user_type") == "d")
                 {
-                    <a href="/DrApp" class="btn btn-secondary">Appointments</a>
+                    <a href="/DrApp" class="btn btn-secondary" style="color: white">Appointments</a>
                 }
                 else
                 {
-                    <a href="/PatientApp" class="btn btn-secondary">Appointments</a>
+                <a href="/PatientApp" class="btn btn-secondary" style="color: white">Appointments</a>
                 }      
         </div>
     </div>

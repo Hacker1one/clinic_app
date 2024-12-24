@@ -26,6 +26,8 @@
                                         <li><a href="ContactUs">Contact Us</a></li>
 										<li class="active"><a href="DrApp">Appointments</a></li>
                                         <li><a href="DrProfile">My Profile</a></li>
+                                        <li><a href="Logout">Logout</a></li>
+
                                     </ul>
                                 </nav>
                             </div>
@@ -120,6 +122,9 @@
                     <label for="prescription" class="form-label">Prescription</label>
                     <textarea class="form-control" asp-for="prescription" id="prescription" name="prescription" rows="3" placeholder="Enter the prescribed medications or treatment" required></textarea>
                 </div>
+                <input type="hidden" name="aid" value="@Model.AppointmentID" />
+                <input type="hidden" name="did" value="@Model.DoctorID" />
+                <input type="hidden" name="pid" value="@Model.PatientID" />
                 <button type="submit" class="btn btn-primary w-100">Submit Diagnosis</button>
             </form>
         </div>

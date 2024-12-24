@@ -85,7 +85,7 @@ public class bookModel : PageModel
         }
         else
         {
-            Doctors = new DataTable(); // This will result in no therapists being displayed
+            Doctors = new DataTable(); 
         }
 
         Therapists = MapDoctorsToTherapists(Doctors);

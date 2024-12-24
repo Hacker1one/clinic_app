@@ -84,7 +84,9 @@ namespace webclinic.Pages
         }
         public IActionResult OnPostView(int aid, int pid, int did)
         {
-            return RedirectToPage("/ViewDiagnosis", new { AppointmentID = aid, PatientID = pid, DoctorID = did });
+            HttpContext.Session.SetInt32("appid", aid);
+            HttpContext.Session.SetInt32("paid", pid);
+            return RedirectToPage("/ViewDiagnosis");
         }
         private List<Appointment> convertappointment(DataTable app)
         {
