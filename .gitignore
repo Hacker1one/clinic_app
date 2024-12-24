@@ -40,3 +40,8 @@
 /.vs/ProjectEvaluation/webclinic.strings.v9.bin
 /.vs/ProjectEvaluation/webclinic.projects.v9.bin
 /.vs/webclinic/v17/.futdcache.v2
+/webclinic/obj/Debug/net8.0/webclinic.AssemblyInfo.cs
+/webclinic/obj/Debug/net8.0/webclinic.AssemblyInfoInputs.cache
+/webclinic/obj/Debug/net8.0/webclinic.assets.cache
+/webclinic/obj/Debug/net8.0/webclinic.csproj.AssemblyReference.cache
+/webclinic/obj/Debug/net8.0/webclinic.GeneratedMSBuildEditorConfig.editorconfig
