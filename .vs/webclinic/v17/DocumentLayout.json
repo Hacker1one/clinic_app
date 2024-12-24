@@ -3,40 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\patientapp.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\patientapp.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\drapp.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\drapp.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\drapp.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\drapp.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\drapp.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\drapp.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\diagnosis.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\diagnosis.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\diagnosis.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\diagnosis.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\diagnosis.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\diagnosis.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\models\\db.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\models\\db.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\contactus.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\contactus.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\viewdiagnosis.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\viewdiagnosis.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\patientapp.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\patientapp.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\patientapp.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\patientapp.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|c:\\users\\antah\\onedrive\\desktop\\clinicapp\\webclinic\\pages\\contactus.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{007DABDD-D594-403E-8783-08EDE4911454}|webclinic\\webclinic.csproj|solutionrelative:webclinic\\pages\\contactus.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,16 +50,17 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "DB.cs",
               "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Models\\DB.cs",
               "RelativeDocumentMoniker": "webclinic\\Models\\DB.cs",
               "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Models\\DB.cs",
               "RelativeToolTip": "webclinic\\Models\\DB.cs",
-              "ViewState": "AgIAAAcBAAAAAAAAAAAuwBwBAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAANsBAAAAAAAAAAAiwPkBAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-21T16:53:34.988Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -79,51 +80,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ViewDiagnosis.cshtml",
-              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\ViewDiagnosis.cshtml",
-              "RelativeDocumentMoniker": "webclinic\\Pages\\ViewDiagnosis.cshtml",
-              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\ViewDiagnosis.cshtml",
-              "RelativeToolTip": "webclinic\\Pages\\ViewDiagnosis.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-21T22:07:39.522Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
               "Title": "diagnosis.cshtml.cs",
               "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\diagnosis.cshtml.cs",
               "RelativeDocumentMoniker": "webclinic\\Pages\\diagnosis.cshtml.cs",
               "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\diagnosis.cshtml.cs",
               "RelativeToolTip": "webclinic\\Pages\\diagnosis.cshtml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAABwAAAAAAAAAAAAwwFsAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-21T22:00:34.859Z"
+              "WhenOpened": "2024-12-23T23:05:34.214Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "diagnosis.cshtml",
               "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\diagnosis.cshtml",
               "RelativeDocumentMoniker": "webclinic\\Pages\\diagnosis.cshtml",
               "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\diagnosis.cshtml",
               "RelativeToolTip": "webclinic\\Pages\\diagnosis.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAAAH4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-21T22:00:29.829Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PatientApp.cshtml",
-              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\PatientApp.cshtml",
-              "RelativeDocumentMoniker": "webclinic\\Pages\\PatientApp.cshtml",
-              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\PatientApp.cshtml",
-              "RelativeToolTip": "webclinic\\Pages\\PatientApp.cshtml",
-              "ViewState": "AgIAALQAAAAAAAAAAAAAAN8AAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-21T20:49:17.693Z",
+              "WhenOpened": "2024-12-23T23:06:07.811Z",
               "EditorCaption": ""
             },
             {
@@ -134,25 +112,53 @@
               "RelativeDocumentMoniker": "webclinic\\Pages\\DrApp.cshtml",
               "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\DrApp.cshtml",
               "RelativeToolTip": "webclinic\\Pages\\DrApp.cshtml",
-              "ViewState": "AgIAAMYAAAAAAAAAAIAwwNoAAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAAPkAAAAAAAAAAAAAAMwAAABPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-05T17:53:44.151Z"
+              "WhenOpened": "2024-12-23T22:23:40.959Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "DrApp.cshtml.cs",
               "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\DrApp.cshtml.cs",
               "RelativeDocumentMoniker": "webclinic\\Pages\\DrApp.cshtml.cs",
               "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\DrApp.cshtml.cs",
               "RelativeToolTip": "webclinic\\Pages\\DrApp.cshtml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADMAAAAAAAAAAAAuwFEAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-05T17:54:31.585Z"
+              "WhenOpened": "2024-12-23T22:22:23.393Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "PatientApp.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\PatientApp.cshtml.cs",
+              "RelativeDocumentMoniker": "webclinic\\Pages\\PatientApp.cshtml.cs",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\PatientApp.cshtml.cs",
+              "RelativeToolTip": "webclinic\\Pages\\PatientApp.cshtml.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAwwEQAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-23T21:22:48.087Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PatientApp.cshtml",
+              "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\PatientApp.cshtml",
+              "RelativeDocumentMoniker": "webclinic\\Pages\\PatientApp.cshtml",
+              "ToolTip": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\PatientApp.cshtml",
+              "RelativeToolTip": "webclinic\\Pages\\PatientApp.cshtml",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAqwFkAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-23T21:22:45.65Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "ContactUs.cshtml",
               "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\ContactUs.cshtml",
               "RelativeDocumentMoniker": "webclinic\\Pages\\ContactUs.cshtml",
@@ -164,7 +170,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 5,
               "Title": "Privacy.cshtml",
               "DocumentMoniker": "C:\\Users\\antah\\OneDrive\\Desktop\\Clinicapp\\webclinic\\Pages\\Privacy.cshtml",
               "RelativeDocumentMoniker": "webclinic\\Pages\\Privacy.cshtml",
@@ -172,7 +178,8 @@
               "RelativeToolTip": "webclinic\\Pages\\Privacy.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-05T17:44:16.741Z"
+              "WhenOpened": "2024-12-05T17:44:16.741Z",
+              "EditorCaption": ""
             }
           ]
         }
