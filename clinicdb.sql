@@ -8,8 +8,9 @@ create table [user]
 	FName VARCHAR(20) NOT NULL,
 	LName VARCHAR(20) NOT NULL,
 	[type] char NOT NULL,
-	SSN bigint not null,
+	SSN bigint unique not null,
 	SSNValidation BIT,
+    SSNPicture VARCHAR(150),
 	RegistrationDate Date NOT NULL,
 	Gender CHAR,
 	[Password] VARCHAR(40),
@@ -55,7 +56,7 @@ CREATE TABLE DoctorExperience
 	ExpID int IDENTITY(1,1),
 	DoctorID int,
 	Institution VARCHAR(40),
-	Proof VARBINARY(max),
+	Proof VARCHAR(150),
 	SpanYears int CHECK (SpanYears <= 80 and SpanYears >=0),
 	SpanMonths int CHECK (SpanMonths <= 12 and SpanMonths > 0),
 	JobPosition VARCHAR(40),
@@ -66,6 +67,7 @@ CREATE TABLE DoctorExperience
 CREATE TABLE DoctorCertificate
 (
 	CertID int IDENTITY(1,1),
+    CertPic VARCHAR(150) not null,
 	DoctorID int,
 	date_of_acq date,
     cert_validation bit,

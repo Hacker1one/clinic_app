@@ -1,7 +1,12 @@
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Drive.v3;
+using Google.Apis.Http;
+using Google.Apis.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
+using System.Web.Helpers;
 using webclinic.Models;
 
 namespace webapplication.Pages
@@ -21,6 +26,8 @@ namespace webapplication.Pages
         public string city { get; set; }
         public string governorate { get; set; }
         public string ssn { get; set; }
+        public IFormFile nationalIDPic { get; set; }
+        public IFormFile docCertPic { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
@@ -58,7 +65,7 @@ namespace webapplication.Pages
         {
             HttpContext.Session.SetString("user_type", "p");
         }
-        public IActionResult OnPostSignUpPatient()
+        public async Task<IActionResult> OnPostSignUpAsync()
         {
             if(string.IsNullOrEmpty(HttpContext.Session.GetString("user_type")))
             {
@@ -69,16 +76,24 @@ namespace webapplication.Pages
             allCities = db.getCities(governorate);
             city = allCities.Rows[int.Parse(city)]["City"].ToString()!;
 
+            bool r = true;
             if(!string.IsNullOrEmpty(specialty))
             {
-                db.addUser(fname, lname, ssn, password, governorate, city, email, gender, 
-                    birthdate, HttpContext.Session.GetString("user_type")!, int.Parse(specialty)+1);
+                r = await db.addUserAsync(fname, lname, ssn, password, governorate, city, email, gender,
+                    birthdate, HttpContext.Session.GetString("user_type")!, int.Parse(specialty) + 1, nationalIDPic, docCertPic);
             }
             else
             {
-                db.addUser(fname, lname, ssn, password, governorate, city, email, gender, 
-                    birthdate, HttpContext.Session.GetString("user_type")!, -1);
+                r = await db.addUserAsync(fname, lname, ssn, password, governorate, city, email, gender, 
+                    birthdate, HttpContext.Session.GetString("user_type")!, -1, nationalIDPic, docCertPic);
             }
+
+            if (!r)
+            {
+                HttpContext.Session.SetString("invsignup", "1");
+                return RedirectToPage();
+            }
+
             return RedirectToPage("Login");
         }
 
