@@ -25,20 +25,22 @@
                                     </ul>
                                 </li>
                                 <li><a href="ContactUs">Contact Us</a></li>
-                                @if (HttpContext.Session.GetString("UserType") == "p")
-                                {
-                                    <li><a href="PatientApp">Appointments</a></li>                                            
-                                    <li><a href="PatientProfile">My Profile</a></li>
-                                }
-                                else if (HttpContext.Session.GetString("UserType") == "d")
+                                @if (HttpContext.Session.GetString("user_type") == "d")
                                 {
                                     <li><a href="DrApp">Appointments</a></li>
                                     <li><a href="DrProfile">My Profile</a></li>
+                                    <li><a href="Logout">Logout</a></li>
+                                }
+                                else if (HttpContext.Session.GetString("user_type") == "p")
+                                {
+                                    <li><a href="PatientApp">Appointments</a></li>
+                                    <li><a href="PatientProfile">My Profile</a></li>
+                                    <li><a href="Logout">Logout</a></li>
                                 }
                                 else
                                 {
                                     <li><a href="Login">Login</a></li>
-                                    <li><a href="Signup2">Sign Up</a></li>
+                                    <li><a href="Signup">Sign Up</a></li>
                                 }
                             </ul>
                         </nav>

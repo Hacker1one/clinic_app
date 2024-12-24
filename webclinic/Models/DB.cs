@@ -535,10 +535,31 @@ namespace webclinic.Models
                 }
             }
         }
-
-
-
         // End of Add Diagnosis
+
+
+        // View Diagnosis
+        public DataTable getdiagnosis(int id)
+        {
+            string queryString = $"SELECT condition, [description], prescription, FName, LName from Diagnosis join [user] on (PatientID = ID)  where AppointmentID = {id}";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return dt;
+        }
+        // End of view diagbosis
         public bool addUser(string fname, string lname, string ssn, string password, string governorate, string city, string email, string gender, DateTime birthdate, string user_type, int field_code)
 		{
 			string today = DateTime.Today.Date.ToString("yyyy-MM-dd");

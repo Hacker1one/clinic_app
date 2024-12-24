@@ -1,38 +1,48 @@
 @page
 @model ContactUsModel
 @{
-    ViewData["Title"] = "Contact Us";
+	ViewData["Title"] = "Contact Us";
 }
 
 <div class="header-inner">
-            <div class="container">
-                <div class="inner">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 col-12">
-                            <div class="logo">
-                                <a href="index"><img src="img/logo.png" alt="#"></a>
-                            </div>
-                            <div class="mobile-nav"></div>
-                        </div>
-                        <div class="col-lg-7 col-md-9 col-12">
-                            <div class="main-menu">
-                                <nav class="navigation">
-                                    <ul class="nav menu">
-                                        <li><a href="index">Home</a></li>
-                                        <li><a href="#">Pages <i class="icofont-rounded-down"></i></a>
-                                            <ul class="dropdown">
-                                                <li><a href="404.html">404 Error</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="active"><a href="ContactUs">Contact Us</a></li>
-										<li><a href="Login">Login</a></li>
-										<li><a href="Signup">Sign Up<i class="icofont-rounded-down"></i></a>
-                                            <ul class="dropdown">
-                                                <li><a href="SignUp?type=p">Patient Sign Up</a></li>
-                								<li><a href="SignUp?type=dr">Physician Sign Up</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+	<div class="container">
+		<div class="inner">
+			<div class="row">
+				<div class="col-lg-3 col-md-3 col-12">
+					<div class="logo">
+						<a href="index"><img src="img/logo.png" alt="#"></a>
+					</div>
+					<div class="mobile-nav"></div>
+				</div>
+				<div class="col-lg-7 col-md-9 col-12">
+					<div class="main-menu">
+						<nav class="navigation">
+							<ul class="nav menu">
+								<li><a href="index">Home</a></li>
+								<li><a href="#">Pages <i class="icofont-rounded-down"></i></a>
+									<ul class="dropdown">
+										<li><a href="404.html">404 Error</a></li>
+									</ul>
+								</li>
+								<li class="active"><a href="ContactUs">Contact Us</a></li>
+								@if (HttpContext.Session.GetString("user_type") == "d")
+								{
+									<li><a href="DrApp">Appointments</a></li>
+									<li><a href="DrProfile">My Profile</a></li>
+									<li><a href="Logout">Logout</a></li>
+								}
+								else if (HttpContext.Session.GetString("user_type") == "p")
+								{
+									<li><a href="PatientApp">Appointments</a></li>
+									<li><a href="PatientProfile">My Profile</a></li>
+									<li><a href="Logout">Logout</a></li>
+								}
+								else
+								{
+									<li><a href="Login">Login</a></li>
+									<li><a href="Signup">Sign Up</a></li>
+								}
+							</ul>
                                 </nav>
                             </div>
                         </div>

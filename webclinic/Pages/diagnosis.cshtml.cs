@@ -40,7 +40,7 @@ namespace webclinic.Pages
         public List<History> History { get; set; }
         public IActionResult OnGet()
         {
-            if (HttpContext.Session.GetInt32("appid").HasValue && HttpContext.Session.GetInt32("appid").Value > -1 &&
+            if (HttpContext.Session.GetInt32("appid").HasValue && HttpContext.Session.GetInt32("appid").Value > 0 &&
                 HttpContext.Session.GetInt32("paid").HasValue && HttpContext.Session.GetInt32("paid").Value > 0)
             {
                 int? doctorId = HttpContext.Session.GetInt32("user_id");
@@ -49,15 +49,12 @@ namespace webclinic.Pages
                     DoctorID = doctorId.Value;
                 }
                 int? patientId = HttpContext.Session.GetInt32("paid");
-                if (patientId.HasValue)
-                {
-                    PatientID = patientId.Value;
-                }
+                PatientID = patientId.Value;
+                
                 int? appointmentid = HttpContext.Session.GetInt32("appid");
-                if (appointmentid.HasValue)
-                {
-                    AppointmentID = appointmentid.Value;
-                }
+
+                AppointmentID = appointmentid.Value;
+
 
                 PatientName = "Anna Jones";
                 PatientAge = 19;
@@ -81,12 +78,12 @@ namespace webclinic.Pages
             }
         }
 
-        public IActionResult OnPostComplete()
+        public IActionResult OnPostComplete(int aid, int did, int pid)
         {
-            db.AddDiagnosis(AppointmentID, DoctorID, PatientID, condition1, description, prescription);
-            HttpContext.Session.SetInt32("appid", -1);
+            db.AddDiagnosis(aid, did, pid, condition1, description, prescription);
+            HttpContext.Session.SetInt32("appid", 0);
             HttpContext.Session.SetInt32("paid", 0);
-            db.completeappointment(AppointmentID);
+            db.completeappointment(aid);
             return RedirectToPage("/DrApp");
         }
         public void OnPost()

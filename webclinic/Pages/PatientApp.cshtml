@@ -26,6 +26,7 @@
                                         <li><a href="ContactUs">Contact Us</a></li>
 										<li class="active"><a href="/Appointments/PatientApp">Appointments</a></li>
                                         <li><a href="PatientProfile">My Profile</a></li>
+                                        <li><a href="Logout">Logout</a></li>
 
 									
                                     </ul>
@@ -229,7 +230,7 @@
                     </div>
                     <div class="Appointment-actions">
                         <form method="post" asp-page-handler="View" style="display: block; margin: 0 auto;">
-                            <input type="hidden" name="id" value="@Appointment.id" />
+                            <input type="hidden" name="aid" value="@Appointment.id" />
                             <input type="hidden" name="pid" value="@Appointment.Pid" />
                             <input type="hidden" name="did" value="@Appointment.Did" />
                             <button class="btn diagnose" >View Diagnose</button>
