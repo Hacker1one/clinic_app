@@ -15,6 +15,12 @@ using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
 using Google.Apis.Services;
 using Microsoft.AspNetCore.Http;
+using System.Data.SqlClient;
+using SqlCommand = Microsoft.Data.SqlClient.SqlCommand;
+using SqlConnection = Microsoft.Data.SqlClient.SqlConnection;
+using SqlDataReader = Microsoft.Data.SqlClient.SqlDataReader;
+using SqlParameter = Microsoft.Data.SqlClient.SqlParameter;
+using SqlException = Microsoft.Data.SqlClient.SqlException;
 
 namespace webclinic.Models
 {
@@ -560,75 +566,6 @@ namespace webclinic.Models
             return dt;
         }
         // End of view diagbosis
-
-        // get if this doctor is reviewed from this patient
-        public bool CheckReviewExists(int doctorId, int patientId)
-        {
-            string queryString = "SELECT COUNT(1) FROM Reviews WHERE DoctorID = @DoctorID AND PatientID = @PatientID";
-            bool exists = false;
-
-            using (SqlCommand cmd = new SqlCommand(queryString, con))
-            {
-                cmd.Parameters.AddWithValue("@DoctorID", doctorId);
-                cmd.Parameters.AddWithValue("@PatientID", patientId);
-
-                try
-                {
-                    con.Open();
-                    var result = cmd.ExecuteScalar();
-                    if (result != null && int.TryParse(result.ToString(), out int count))
-                    {
-                        exists = count > 0;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error: " + ex.Message);
-                }
-                finally
-                {
-                    con.Close();
-                }
-            }
-
-            return exists;
-        }
-
-        // End
-
-        // Add Review
-        public void AddReview(int did, int pid, int stars, string comment)
-        {
-            string query = "INSERT INTO Reviews (DoctorID, PatientID, NStars, Comment) " +
-                           "VALUES (@DoctorID, @PatientID, @NSars, @Comment)";
-
-            try
-            {
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    cmd.Parameters.Add(new SqlParameter("@DoctorID", SqlDbType.Int) { Value = did });
-                    cmd.Parameters.Add(new SqlParameter("@PatientID", SqlDbType.Int) { Value = pid });
-                    cmd.Parameters.Add(new SqlParameter("@NSars", SqlDbType.Int) { Value = stars });
-                    cmd.Parameters.Add(new SqlParameter("@Comment", SqlDbType.NVarChar) { Value = (object)comment ?? DBNull.Value });
-
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (SqlException ex)
-            {
-                // Log exception
-                throw new Exception("Error while inserting review data.", ex);
-            }
-            finally
-            {
-                if (con.State == ConnectionState.Open)
-                {
-                    con.Close();
-                }
-            }
-        }
-        // End of Add Review
         public bool addUser(string fname, string lname, string ssn, string password, string governorate, string city, string email, string gender, DateTime birthdate, string user_type, int field_code)
 		{
 			string today = DateTime.Today.Date.ToString("yyyy-MM-dd");
@@ -821,7 +758,7 @@ namespace webclinic.Models
         
 
 
-        public async Task<bool> addUserAsync(string fname, string lname, string ssn, string password, string governorate, string city, string email, string gender, DateTime birthdate, string user_type, int field_code, IFormFile nationalIDPic, IFormFile docCertPic)
+        public async Task<bool> addUser(string fname, string lname, string ssn, string password, string governorate, string city, string email, string gender, DateTime birthdate, string user_type, int field_code, IFormFile nationalIDPic, IFormFile docCertPic)
         {
             string today = DateTime.Today.Date.ToString("yyyy-MM-dd");
             string bd = birthdate.Date.ToString("yyyy-MM-dd");
