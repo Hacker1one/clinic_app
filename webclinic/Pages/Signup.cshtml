@@ -1,28 +1,30 @@
 ﻿@page
+@using System.Text.Json
 @model webapplication.Pages.SignupPatientModel
 @{
     ViewData["Title"] = "SignUp";
-	Layout = ".\\Shared\\_LayoutLogin.cshtml";
+    Layout = ".\\Shared\\_LayoutLogin.cshtml";
 }
 
 <div class="w-75 mx-auto mt-5 my-auto">
 
-	@if(@Model.HttpContext.Session.GetString("user_type") == "p")
-	{
+    @if(@Model.HttpContext.Session.GetString("user_type") == "p")
+    {
         <div class="d-flex justify-content-center align-items-baseline ms-2 mb-4">
             <h2 class="text-primary fw-bold mb-0 me-2">Sign Up</h2>
             <p class="text-secondary fw-bold mb-0 me-2">as a</p>
             <p class="text-primary fw-bold mb-0 text-lg-center">Patient.</p>
         </div>
 
-	}else
-	{
+    }else
+    {
         <div class="d-flex justify-content-center align-items-baseline ms-2 mb-4">
             <h2 class="text-primary fw-bold mb-0 me-2">Sign Up</h2>
             <p class="text-secondary fw-bold mb-0 me-2">as a</p>
             <p class="text-primary fw-bold text-lg mb-0">Doctor.</p>
         </div>
-	}
+    }
+
 
     @if (!string.IsNullOrEmpty(HttpContext.Session.GetString("invsignup")))
     {
@@ -30,6 +32,21 @@
             Something went wrong while signing you up, please check the console for errors and try again.
         </div>
     }
+    @if (TempData["model_errors"] != null)
+    {
+        var errors = ((string[])TempData["model_errors"]!).ToList(); // Convert to List<string>
+        TempData["model_errors"] = null; // Clear TempData explicitly
+
+		<div class="alert alert-danger w-50 mx-auto">
+			<ul class="text-danger">
+				@foreach (var err in errors)
+				{
+					<li>@err</li>
+				}
+			</ul>
+		</div>
+	}
+
     <form method="post" asp-page-handler="SignUp" enctype="multipart/form-data">
         <!-- First Name -->
         <div class="form-floating mb-3 mx-auto w-50">

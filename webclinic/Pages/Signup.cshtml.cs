@@ -1,12 +1,8 @@
-using Google.Apis.Auth.OAuth2;
-using Google.Apis.Drive.v3;
-using Google.Apis.Http;
-using Google.Apis.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
-using System.Web.Helpers;
 using webclinic.Models;
 
 namespace webapplication.Pages
@@ -14,23 +10,49 @@ namespace webapplication.Pages
     [BindProperties]
     public class SignupPatientModel : PageModel
     {
-        [BindProperty (SupportsGet=true)]
-        public string user_type { get; set; }
+        [StringLength(20, MinimumLength = 2, ErrorMessage = "First name length must be between 2 and 20 characters.")]
+        [Required]
         public string fname { get; set; }
+
+        [Required]
+        [StringLength(20, MinimumLength = 2, ErrorMessage = "Last name length must be between 2 and 20 characters.")]
         public string lname { get; set; }
+
+        [Required]
         public string phone_number { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        [Required]
         public string email { get; set; }
+
+        [Required]
+        [StringLength(40, MinimumLength = 8, ErrorMessage = "The password must be between 8 and 40 characters.")]
+        [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*[\W_]).+$", ErrorMessage = "The password must contain at least one uppercase letter and one symbol.")]
         public string password { get; set; }
+
+        [Required]
         public string gender { get; set; }
-        public string specialty { get; set; }
+
+        [ValidateNever]
+        public string? specialty { get; set; }
+
         public string city { get; set; }
+
         public string governorate { get; set; }
+
+        [StringLength(14, MinimumLength = 14, ErrorMessage = "We only support egyptian national IDs. Please make sure you have entered a valid National ID.")]
+        [Required]
         public string ssn { get; set; }
+
+        [Required]
         public IFormFile nationalIDPic { get; set; }
-        public IFormFile docCertPic { get; set; }
+
+        [ValidateNever]
+        public IFormFile? docCertPic { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [Required]
         public DateTime birthdate { get; set; }
 
         [BindProperty(SupportsGet=true)]
@@ -70,6 +92,20 @@ namespace webapplication.Pages
             if(string.IsNullOrEmpty(HttpContext.Session.GetString("user_type")))
             {
                 return RedirectToPage("Signup");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                // Gather all errors
+                var errors = ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => e.ErrorMessage)
+                    .ToArray();
+
+                // Pass errors to the view
+                TempData["model_errors"] = errors;
+
+                return RedirectToPage();
             }
 
             governorate = HttpContext.Session.GetString("govern")!;
