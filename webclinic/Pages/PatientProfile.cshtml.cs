@@ -16,6 +16,7 @@ namespace webclinic.Pages
         public string PatientName { get; set; }
         public int PatientAge { get; set; }
         public bool IsVerified { get; set; } = true;
+        public string natIDPic { get; set; }
 
 
         public PatientProfileModel(DB db)
@@ -44,11 +45,11 @@ namespace webclinic.Pages
             symptoms = new DataTable();
             symptoms = db.getSymptoms(id);
 
+            natIDPic = db.getNationalIDPic(id);
+
             history = new DataTable();
             history = db.getHistory(id);
             IsVerified = db.getSSN(id);
-
-
         }
 
 

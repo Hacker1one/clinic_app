@@ -9,6 +9,7 @@ namespace webclinic.Pages
         {
             HttpContext.Session.Remove("email");
             HttpContext.Session.Remove("user_type");
+            HttpContext.Session.Remove("user_id");
             return RedirectToPage("Index");
         }
     }

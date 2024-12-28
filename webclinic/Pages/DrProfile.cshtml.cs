@@ -25,6 +25,8 @@ namespace webclinic.Pages
         public int Fee { get; set; }
         public List<string> AvailableDates { get; set; }
         public List<string> AvailableTimes { get; set; }
+        public string natIDPic { get; set; }
+        public string docCertPic { get; set; }
         public DB db { get; set; }
 
         public DataTable experiance { get; set; }
@@ -86,6 +88,8 @@ namespace webclinic.Pages
             Fee = db.getFee(id);
             IsActivated = !db.getDrStatus(id);
             IsVerified = db.getSSN(id);
+            natIDPic = db.getNationalIDPic(id);
+            docCertPic = db.getDocCertPic(id);
 
             experiance = new DataTable();
             experiance = db.getExperiance(id);

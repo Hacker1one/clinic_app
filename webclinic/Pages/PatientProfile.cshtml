@@ -70,6 +70,10 @@
                     @(Model.IsVerified ? "Verified" : "Unverified")
                 </span>
 
+				@if(!string.IsNullOrEmpty(@Model.natIDPic))
+				{
+					<a class="badge text-white bg-primary" href="@Model.natIDPic" target="_blank">View National ID</a>
+				}
             }
 
 

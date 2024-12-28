@@ -67,15 +67,24 @@
                 <p><strong>Rating:</strong> @Model.Rating/5</p>
                 <p><strong>Patients Treated:</strong> @Model.PatientsTreated</p>
                 @if (HttpContext.Session.GetString("user_type") == "a")
-{
-        <span class="badge text-white @(Model.IsActivated ? "bg-success" : "bg-warning text-dark")">
-                        @(Model.IsActivated ? "Active" : "Banned")
-        </span>
-            <span class="badge text-white @(Model.IsVerified ? "bg-success" : "bg-warning text-dark")">
-                        @(Model.IsVerified ? "Verified" : "Unverified")
-            </span>
+				{
+					<span class="badge text-white @(Model.IsActivated ? "bg-success" : "bg-warning text-dark")">
+							@(Model.IsActivated ? "Active" : "Banned")
+					</span>
+					<span class="badge text-white @(Model.IsVerified ? "bg-success" : "bg-warning text-dark")">
+							@(Model.IsVerified ? "Verified" : "Unverified")
+					</span>
 
-}
+                    @if(!string.IsNullOrEmpty(@Model.natIDPic))
+                    {
+						<a class="badge text-white bg-primary" href="@Model.natIDPic" target="_blank">View National ID</a>
+                    }
+                    @if(!string.IsNullOrEmpty(@Model.docCertPic))
+                    {
+						<a class="badge text-white bg-primary" href="@Model.docCertPic" target="_blank">View Medical Cert.</a>
+                    }
+
+				}
 
             </div>
 
