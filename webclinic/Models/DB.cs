@@ -38,7 +38,7 @@ namespace webclinic.Models
             connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
             // yassin's connection string:
-            connectionString = "Data Source=AMNESIA\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
+            //connectionString = "Data Source=AMNESIA\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
             con.ConnectionString = connectionString;
 		}
@@ -1670,6 +1670,82 @@ namespace webclinic.Models
         }
 
 
+        public DataTable getCondations()
+        {
+
+            string queryString = $"select ConditionName from  LTCTypes";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+
+        public int getCondationID(int id, string condation)
+        {
+            int num = 0;
+            string queryString;
+            queryString = $"select top 1 ConditionID from LongTermConditions where PatientID = '{id}' order by ConditionID desc ";
+
+            SqlCommand cmd = new SqlCommand(queryString, con);
+
+            try
+            {
+                con.Open();
+                num = (int)cmd.ExecuteScalar();
+                
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+                
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return num;
+        }
+
+
+        public bool Addcondation(int id, string condation, int severity, DateTime date)
+        {
+            int num = getCondationID(id,condation);
+            string queryString;
+            queryString = $"INSERT INTO LongTermConditions (PatientID, ConditionID, Severity, DateOfFirstInstance)\r\nVALUES\r\n    ('{id}', (select ConditionID from LTCTypes where ConditionName = '{condation}'), '{severity}', '{date.ToString("yyyy-MM-dd HH:mm:ss")}');";
+            
+            SqlCommand cmd = new SqlCommand(queryString, con);
+
+            try
+            {
+                con.Open();
+                cmd.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return true;
+        }
 
 
 

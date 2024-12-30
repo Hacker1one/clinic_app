@@ -1,0 +1,26 @@
+﻿@page
+@model AddConditionModel
+
+<form method="post">
+    <div>
+        <label for="ConditionName">Condition Name:</label>
+        <select id="ConditionName" name="ConditionName">
+            @foreach (var condition in Model.ConditionList)
+            {
+                    <option value="@condition">@condition</option>
+            }
+        </select>
+    </div>
+
+    <div>
+        <label for="Severity">Severity:</label>
+        <input type="number" id="Severity" name="Severity" required />
+    </div>
+
+    <div>
+        <label for="DateOfFirstInstance">Date of First Instance:</label>
+        <input type="date" id="DateOfFirstInstance" name="DateOfFirstInstance" required />
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
