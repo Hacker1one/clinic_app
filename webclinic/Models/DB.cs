@@ -1572,9 +1572,10 @@ namespace webclinic.Models
         }
 
 
-        public void bookAppointment(int PID, int DrID,DateTime date)
+        public void bookAppointment(int PID, int DrID, DateTime date)
         {
-            string queryString = $"update Appointment\r\nset PatientID = '{PID}'\r\nwhere DoctorID = {DrID} and DatenTime = '{date}'";
+            Console.WriteLine(date.ToString("yyyy-MM-dd HH:mm:ss"));
+            string queryString = $"update Appointment set PatientID = {PID} where DoctorID = {DrID} and DatenTime = '{date.ToString("yyyy-MM-dd HH:mm:ss")}'";
             SqlCommand cmd = new SqlCommand(queryString, con);
             try
             {

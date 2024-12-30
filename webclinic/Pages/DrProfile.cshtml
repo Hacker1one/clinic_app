@@ -199,12 +199,12 @@
                             }
                             @for (int j = 0; j < times.Rows.Count; j++)
                             {
-                    <button class="btn btn-outline-secondary time-slot-btn"
-                            data-toggle="modal"
-                            data-target="#bookTimeModal"
-                            onclick="setSelectedDateTime('@dateValue', '@times.Rows[j]["time"].ToString()')">
-                                    @times.Rows[j]["time"].ToString()
-                    </button>
+								<button class="btn btn-outline-secondary time-slot-btn"
+										data-toggle="modal"
+										data-target="#bookTimeModal"
+										onclick="setSelectedDateTime('@dateValue', '@times.Rows[j]["time"].ToString()')">
+												@times.Rows[j]["time"].ToString()
+								</button>
                             }
         </td>
     </tr>
@@ -233,11 +233,6 @@
 
 
 
-
-
-
-
-
 <div class="modal fade" id="bookTimeModal" tabindex="-1" role="dialog" aria-labelledby="bookTimeModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -253,28 +248,13 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <form method="post" asp-page-handler="BookAppointment">
-                <button type="button" class="btn btn-primary" onclick="confirmAppointment()">Confirm Appointment</button>
+                    <input type="datetime-local" id="dateTimeINP" class="d-none" asp-for="appDateTime" value=0/>
+					<button type="submit" class="btn btn-primary">Confirm Appointment</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-function setSelectedDateTime(date, time) {
-    const dateObject = new Date(date); // Convert the string date to Date object
-    const formattedDate = new Intl.DateTimeFormat('en-US', { month: '2-digit', day: '2-digit', weekday: 'long' }).format(dateObject);
-
-    // Set the hidden fields
-    document.getElementById('selectedDate').value = formattedDate;
-    document.getElementById('selectedTime').value = time;
-
-    // Update the modal message
-    document.getElementById('modalMessage').textContent = `You selected: ${formattedDate} at ${time}`;
-}
-
 
 
 
@@ -285,41 +265,16 @@ function setSelectedDateTime(date, time) {
     function setSelectedDateTime(date, time) {
         selectedDate = date; // Save the selected date
         selectedTime = time; // Save the selected time
-        const dateObject = new Date(date); // Convert the date string to a Date object
-        const formattedDate = new Intl.DateTimeFormat('en-US', { month: '2-digit', day: '2-digit', weekday: 'long' }).format(dateObject);
+
+		const [month, day, year] = date.split(" ")[0].split("/"); // Extract the date components
+		const formattedDate = `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+
         document.getElementById('modalMessage').textContent = `You selected: ${formattedDate} at ${time}`;
 
-    }
+		console.log("Raw Date:", formattedDate); 
+		console.log("Raw Time:", time);
 
-    function confirmAppointment() {
-        if (!selectedDate || !selectedTime) {
-            alert("Date and time must be selected!");
-            return;
-        }
-
-        // Combine date and time into a single DateTime string
-        const dateTime = new Date(`${selectedDate}T${selectedTime}`);
-
-        // Send the combined date and time to the backend
-        fetch('/DrProfile/BookAppointment', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
-            },
-            body: JSON.stringify({ dateTime: dateTime.toISOString() })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert("Appointment booked successfully!");
-                // Optionally close the modal
-                $('#bookTimeModal').modal('hide');
-            } else {
-                alert("Failed to book the appointment.");
-            }
-        })
-        .catch(error => console.error('Error:', error));
+        document.getElementById('dateTimeINP').value = `${formattedDate}T${time}`;
     }
 </script>
 

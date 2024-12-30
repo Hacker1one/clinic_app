@@ -8,6 +8,7 @@ namespace webclinic.Pages
 
 {
 
+    [BindProperties]
     public class DrProfileModel : PageModel
     {
         
@@ -38,6 +39,7 @@ namespace webclinic.Pages
         public DateTime date { get; set; }
 
         public DateTime booktime { get; set; }
+        public DateTime appDateTime { get; set; }
 
 
         public IActionResult OnPostToggleStatus()
@@ -129,54 +131,24 @@ namespace webclinic.Pages
         }
 
 
-        [HttpPost]
-        public IActionResult BookAppointment([FromBody] dynamic appointmentData)
-        {
-            DateTime selectedDateTime = appointmentData.dateTime;
-
-            // Logic to save the appointment (e.g., database operations)
-            bool isAppointmentSaved = SaveAppointmentToDatabase(selectedDateTime);
-
-            if (isAppointmentSaved)
-            {
-                return new JsonResult(new { success = true, message = "Appointment booked successfully!" });
-            }
-            else
-            {
-                return new JsonResult(new { success = false, message = "Failed to book the appointment." });
-            }
-        }
-
-
-
-        [BindProperty]
-        public string SelectedDate { get; set; }
-        [BindProperty]
-        public string SelectedTime { get; set; }
 
         public IActionResult OnPostBookAppointment()
         {
-            // Parse the date and time into a DateTime object
-            DateTime selectedDateTime = DateTime.Parse($"{SelectedDate} {SelectedTime}");
+            type = HttpContext.Session.GetString("user_type");
 
-            // Now you can pass the `selectedDateTime` to your booking function
-            db.bookAppointment(1,id,selectedDateTime);  // Call your actual booking function here
+            // If a doctor is behind this post request, "decline" it.
+            if (type == "d")
+            {
+                return RedirectToPage();
+            }
 
-            // Redirect or return a view
+            int DrID = HttpContext.Session.GetInt32("Dr_ID")!.Value;
+            id = HttpContext.Session.GetInt32("user_id").Value;
+
+            db.bookAppointment(id, DrID, appDateTime);
+
             return RedirectToPage();
         }
-
-
-        private bool SaveAppointmentToDatabase(DateTime dateTime)
-        {
-            db.bookAppointment(1,id,dateTime);
-            return true; // Simulating a successful save operation
-        }
-
-
-
-
-
 
 
     }
