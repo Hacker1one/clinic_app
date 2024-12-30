@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Data;
 using webclinic.Models;
 
@@ -126,6 +127,55 @@ namespace webclinic.Pages
             
             return time;
         }
+
+
+        [HttpPost]
+        public IActionResult BookAppointment([FromBody] dynamic appointmentData)
+        {
+            DateTime selectedDateTime = appointmentData.dateTime;
+
+            // Logic to save the appointment (e.g., database operations)
+            bool isAppointmentSaved = SaveAppointmentToDatabase(selectedDateTime);
+
+            if (isAppointmentSaved)
+            {
+                return new JsonResult(new { success = true, message = "Appointment booked successfully!" });
+            }
+            else
+            {
+                return new JsonResult(new { success = false, message = "Failed to book the appointment." });
+            }
+        }
+
+
+
+        [BindProperty]
+        public string SelectedDate { get; set; }
+        [BindProperty]
+        public string SelectedTime { get; set; }
+
+        public IActionResult OnPostBookAppointment()
+        {
+            // Parse the date and time into a DateTime object
+            DateTime selectedDateTime = DateTime.Parse($"{SelectedDate} {SelectedTime}");
+
+            // Now you can pass the `selectedDateTime` to your booking function
+            db.bookAppointment(1,id,selectedDateTime);  // Call your actual booking function here
+
+            // Redirect or return a view
+            return RedirectToPage();
+        }
+
+
+        private bool SaveAppointmentToDatabase(DateTime dateTime)
+        {
+            db.bookAppointment(1,id,dateTime);
+            return true; // Simulating a successful save operation
+        }
+
+
+
+
 
 
 

@@ -192,23 +192,24 @@
                 @for (int i = 0; i < Model.dates.Rows.Count; i++)
                 {
                     DateTime dateValue = Convert.ToDateTime(Model.dates.Rows[i]["date"]);
-                        <tr>
-                            <td>@dateValue.ToString("MM/dd dddd")</td>
-                            <td>
-                            @* Fetch available times for this date *@
+    <tr>
+        <td>@dateValue.ToString("MM/dd dddd")</td>
+        <td>
                             @{
                                 var times = Model.gettimes(dateValue);
                             }
-                            @* Loop through available times and display as buttons *@
                             @for (int j = 0; j < times.Rows.Count; j++)
                             {
-                                            <button class="btn btn-outline-secondary time-slot-btn" data-toggle="modal" data-target="#bookTimeModal">
+                    <button class="btn btn-outline-secondary time-slot-btn"
+                            data-toggle="modal"
+                            data-target="#bookTimeModal"
+                            onclick="setSelectedDateTime('@dateValue', '@times.Rows[j]["time"].ToString()')">
                                     @times.Rows[j]["time"].ToString()
-                                            </button>
-
+                    </button>
                             }
-                            </td>
-                        </tr>
+        </td>
+    </tr>
+
                 }
         </tbody>
     </table>
@@ -226,38 +227,102 @@
 </div>
 
 
+<form method="post" id="bookAppointmentForm">
+    <input type="hidden" id="selectedDate" name="selectedDate" />
+    <input type="hidden" id="selectedTime" name="selectedTime" />
+</form>
 
 
 
 
-@if (HttpContext.Session.GetString("user_type") == "p")
-{
-    <!-- Modal for Add Time -->
-    <div class="modal fade" id="bookTimeModal" tabindex="-1" role="dialog" aria-labelledby="addTimeModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addTimeModalLabel">book this time</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <input type="time" class="form-control" id="newTime" />
-                </div>
-                <div class="modal-body">
-                    <input type="date" class="form-control" id="newDate" />
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save Time</button>
-                </div>
+
+
+
+
+<div class="modal fade" id="bookTimeModal" tabindex="-1" role="dialog" aria-labelledby="bookTimeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookTimeModalLabel">Confirm Appointment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="modalMessage">No date and time selected yet.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form method="post" asp-page-handler="BookAppointment">
+                <button type="button" class="btn btn-primary" onclick="confirmAppointment()">Confirm Appointment</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
+
+
+
+
+function setSelectedDateTime(date, time) {
+    const dateObject = new Date(date); // Convert the string date to Date object
+    const formattedDate = new Intl.DateTimeFormat('en-US', { month: '2-digit', day: '2-digit', weekday: 'long' }).format(dateObject);
+
+    // Set the hidden fields
+    document.getElementById('selectedDate').value = formattedDate;
+    document.getElementById('selectedTime').value = time;
+
+    // Update the modal message
+    document.getElementById('modalMessage').textContent = `You selected: ${formattedDate} at ${time}`;
 }
 
 
+
+
+<script>
+    let selectedDate = null;
+    let selectedTime = null;
+
+    function setSelectedDateTime(date, time) {
+        selectedDate = date; // Save the selected date
+        selectedTime = time; // Save the selected time
+        const dateObject = new Date(date); // Convert the date string to a Date object
+        const formattedDate = new Intl.DateTimeFormat('en-US', { month: '2-digit', day: '2-digit', weekday: 'long' }).format(dateObject);
+        document.getElementById('modalMessage').textContent = `You selected: ${formattedDate} at ${time}`;
+
+    }
+
+    function confirmAppointment() {
+        if (!selectedDate || !selectedTime) {
+            alert("Date and time must be selected!");
+            return;
+        }
+
+        // Combine date and time into a single DateTime string
+        const dateTime = new Date(`${selectedDate}T${selectedTime}`);
+
+        // Send the combined date and time to the backend
+        fetch('/DrProfile/BookAppointment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+            },
+            body: JSON.stringify({ dateTime: dateTime.toISOString() })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Appointment booked successfully!");
+                // Optionally close the modal
+                $('#bookTimeModal').modal('hide');
+            } else {
+                alert("Failed to book the appointment.");
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
 
 
 
