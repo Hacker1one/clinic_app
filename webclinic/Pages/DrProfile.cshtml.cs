@@ -25,6 +25,7 @@ namespace webclinic.Pages
         public int id { get; set; }
         public DataTable ClinicDetails { get; set; }
         public int Fee { get; set; }
+        public int changedPPA { get; set; }
         public List<string> AvailableDates { get; set; }
         public List<string> AvailableTimes { get; set; }
         public string natIDPic { get; set; }
@@ -150,6 +151,11 @@ namespace webclinic.Pages
             return RedirectToPage();
         }
 
+        public IActionResult OnPostChangePPA()
+        {
+            db.changePrice(HttpContext.Session.GetInt32("user_id")!.Value, changedPPA);
+            return RedirectToPage();
+        }
 
     }
 }

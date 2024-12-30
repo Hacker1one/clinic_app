@@ -113,7 +113,7 @@
     <!-- Education Section -->
     <div class="mb-5">
         <h5 class="mb-3">Education 
-            <a href="#" class="ms-2 text-decoration-none">✎</a>
+            <button href="#" data-toggle="modal" data-target="#ppaModal" class="ms-2 text-decoration-none">✎</button>
         </h5>
         <div class="row g-3">
             @for (int i = 0; i < Model.education.Rows.Count; i++)
@@ -166,7 +166,12 @@
         <div class="col-md-6">
             <div class="p-4 border rounded">
                 <h5 class="mb-3">Booking Information 
-                    <a href="#" class="ms-2 text-decoration-none">✎</a>
+					<button class="btn btn-outline-secondary time-slot-btn"
+					@if (HttpContext.Session.GetString("user_type") == "d")
+					{
+						@:data-toggle="modal"
+					}
+							data-target="#ppaModal">✎</button>
                 </h5>
                 <p class="h4 text-primary">@Model.Fee</p>
             </div>
@@ -260,6 +265,28 @@
     </div>
 </div>
 
+<div class="modal fade" id="ppaModal" tabindex="-1" role="dialog" aria-labelledby="ppaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ppaModalLabel">Change Price</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="modalMessage">Change your Price Per Appointment</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form method="post" asp-page-handler="ChangePPA">
+                    <input type="number" value=0 required asp-for="changedPPA"/>
+					<button type="submit" class="btn btn-primary">Change</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script>

@@ -1644,7 +1644,7 @@ namespace webclinic.Models
 
         }
 
-        public bool ChangePrice(int id, int price)
+        public bool changePrice(int id, int price)
         {
 
             string queryString;
