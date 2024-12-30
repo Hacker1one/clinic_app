@@ -120,7 +120,7 @@ namespace webclinic.Pages
         {
             type = HttpContext.Session.GetString("user_type")!;
 
-            // If a doctor is behind this post request, "decline" it.
+
             if (type == "d")
             {
                 return RedirectToPage();
