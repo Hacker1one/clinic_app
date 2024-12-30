@@ -1,6 +1,106 @@
 ﻿@page
 @model AddConditionModel
 
+
+
+
+
+
+
+
+
+<div class="header-inner">
+            <div class="container">
+                <div class="inner">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-12">
+                            <div class="logo">
+                                <a href="index"><img src="img/logo.png" alt="#"></a>
+                            </div>
+                            <div class="mobile-nav"></div>
+                        </div>
+                        <div class="col-lg-7 col-md-9 col-12">
+                            <div class="main-menu">
+                                <nav class="navigation">
+                                    <ul class="nav menu">
+                                        <li><a href="index">Home</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+<!-- Breadcrumbs -->
+<div class="breadcrumbs overlay">
+    <div class="container">
+        <div class="bread-inner">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Add condition</h2>
+                    <ul class="bread-list">
+                        <li><a href="Index">Home</a></li>
+                        <li><i class="icofont-simple-right"></i></li>
+                        <li class="active">Add condition</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+
+
+
+
+<style>
+    form {
+        max-width: 500px;
+        margin: 20px auto;
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    form div {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    select, input {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
 <form method="post">
     <div>
         <label for="ConditionName">Condition Name:</label>
@@ -9,11 +109,11 @@
             {
                     <option value="@condition">@condition</option>
             }
-        </select>
+        </select><br>
     </div>
 
     <div>
-        <label for="Severity">Severity:</label>
+        <br><label for="Severity">Severity:</label>
         <input type="number" id="Severity" name="Severity" required />
     </div>
 
