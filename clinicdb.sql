@@ -8,19 +8,26 @@ create table [user]
 	FName VARCHAR(20) NOT NULL,
 	LName VARCHAR(20) NOT NULL,
 	[type] char NOT NULL,
-	SSN bigint unique not null,
+	SSN bigint unique,
 	SSNValidation BIT,
     SSNPicture VARCHAR(150),
 	RegistrationDate Date NOT NULL,
 	Gender CHAR,
-	[Password] VARCHAR(40),
+	[Password] VARCHAR(40) not null,
 	BirthDate Date,
 	City VARCHAR(50),
 	Governorate VARCHAR(50),
-	Email VARCHAR(50),
+	Email VARCHAR(50) not null,
 	ProfileImageUrl Varchar(150),
 	PRIMARY KEY(ID),
 	UNIQUE(Email),
+);
+
+create table [admin]
+(
+    Email varchar(50),
+    [Password] varchar(40),
+    PRIMARY KEY (Email),
 );
 
 CREATE TABLE Patient
@@ -354,11 +361,11 @@ VALUES
 ('Karim', 'Fathi', 888888888, 1, '2023-01-17', 'M', 'karimpass', '1978-02-20', '6th of October', 'Giza', 'karim.fathi@example.com', 'd', 'author1.jpg'),
 ('Amira', 'Zain', 555555555, 1, '2023-01-18', 'F', 'amirapass', '1992-08-14', 'El Sheikh Zayed', 'Giza', 'amira.zain@example.com', 'd', 'author1.jpg'),
 ('Hisham', 'Hafez', 333333333, 1,'2023-01-19', 'M', 'hishampass', '1986-04-28', 'Alexandria', 'Alexandria', 'hisham.hafez@example.com', 'd', 'author1.jpg'),
-('Rana', 'Tamer', 999999999, 1, '2023-01-20', 'F', 'ranapass', '1994-06-06', 'Heliopolis', 'Cairo', 'rana.tamer@example.com', 'd', 'author1.jpg'),
+('Rana', 'Tamer', 999999999, 1, '2023-01-20', 'F', 'ranapass', '1994-06-06', 'Heliopolis', 'Cairo', 'rana.tamer@example.com', 'd', 'author1.jpg');
 
--- Admin
-('admin', 'admin', 00000001, 1, '0001-01-01', 'M', 'adminpass', '0001-01-01', 'Giza', 'Giza', 'admin@gmail.com', 'a', 'author1.jpg');
-
+INSERT INTO [admin] (Email, [Password])
+VALUES
+('admin@gmail.com', 'adminpass');
 
 
 

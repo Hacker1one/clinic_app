@@ -21,6 +21,7 @@ using SqlConnection = Microsoft.Data.SqlClient.SqlConnection;
 using SqlDataReader = Microsoft.Data.SqlClient.SqlDataReader;
 using SqlParameter = Microsoft.Data.SqlClient.SqlParameter;
 using SqlException = Microsoft.Data.SqlClient.SqlException;
+using Microsoft.Extensions.Primitives;
 
 namespace webclinic.Models
 {
@@ -37,7 +38,7 @@ namespace webclinic.Models
             //connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
             // yassin's connection string:
-            connectionString = "Data Source=AN\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
+            connectionString = "Data Source=AMNESIA\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
             con.ConnectionString = connectionString;
 		}
@@ -64,9 +65,39 @@ namespace webclinic.Models
 			return dt;
 		}
 
-        public bool changePassword(string newP, int id)
+        public bool changePassword(string newP, string email, string type)
         {
-            string queryString = $"UPDATE [user] SET [password] = '{newP}' WHERE ID = {id}";
+            string queryS = "";
+            if (type != "a")
+            {
+                queryS = $"UPDATE [user] SET [password] = '{newP}' WHERE Email = '{email}'";
+            }
+            else
+            {
+                queryS = $"UPDATE [admin] SET [password] = '{newP}' WHERE Email = '{email}'";
+            }
+            SqlCommand cmd = new SqlCommand(queryS, con);
+            try
+            {
+                con.Open();
+                cmd.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return true;
+        }
+        public bool createAdmin(string email, string password)
+        {
+            string today = DateTime.Today.Date.ToString("yyyy-MM-dd");
+            string queryString = "INSERT INTO [admin] (Email, [Password]) " +
+            $"VALUES ('{email}', '{password}')";
             SqlCommand cmd = new SqlCommand(queryString, con);
             try
             {
@@ -716,13 +747,35 @@ namespace webclinic.Models
 			{
                 return dt.Rows[0]["type"].ToString()!;
 			}
+            else if (checkAdmin(email, password))
+            {
+                return "a";
+            }
 
 			return "";
 		}
 
+        public bool checkAdmin(string email, string password)
+        {
+            string queryS = $"select Email from [admin] where Email = '{email}' and [Password] = '{password}'";
+			SqlCommand cmd = new SqlCommand(queryS, con);
+            string retEmail = "";
+			try
+			{
+				con.Open();
+                retEmail = (string)cmd.ExecuteScalar();
+			}
+			catch (Exception ex)
+			{
+				Console.Write(ex.ToString());
+			}
+			finally
+			{
+				con.Close();
+			}
 
-        
-
+            return (retEmail == email);
+        }
 
         public async Task<bool> addUser(string fname, string lname, string ssn, string password, string governorate, string city, string email, string gender, DateTime birthdate, string user_type, int field_code, IFormFile nationalIDPic, IFormFile docCertPic)
         {
