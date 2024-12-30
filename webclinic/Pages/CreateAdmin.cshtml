@@ -1,10 +1,12 @@
 ﻿@page
 @model webclinic.Pages.CreateAdminModel
 @{
+    ViewData["Title"] = "Create New Admin";
+	Layout = ".\\Shared\\_LayoutLogin.cshtml";
 }
 
 <div class="w-75 mx-auto mt-5 my-auto">
-    <h2 class="text-center text-primary fw-bold mb-4">Change Password</h2>
+    <h2 class="text-center text-primary fw-bold mb-4">Create a New Admin</h2>
 
     @if (TempData["invChangeP"] != null)
     {
@@ -65,3 +67,29 @@
         <p><a href="Index" class="text-primary">Return</a></p>
     </div>
 </div>
+
+
+<script>
+	// Toggle Password Visibility
+	const toggleNewPassword = document.getElementById('toggleNewPassword');
+	const newPInput = document.getElementById('newP');
+
+	toggleNewPassword.addEventListener('click', () => {
+		const type = newPInput.getAttribute('type') === 'password' ? 'text' : 'password';
+		newPInput.setAttribute('type', type);
+
+		// Toggle button text
+		toggleNewPassword.textContent = type === 'password' ? 'Show' : 'Hide';
+	});
+
+	const toggleConfirm = document.getElementById('toggleConfirm');
+	const confirmInput = document.getElementById('confirmNewP');
+
+	toggleConfirm.addEventListener('click', () => {
+		const type = confirmInput.getAttribute('type') === 'password' ? 'text' : 'password';
+		confirmInput.setAttribute('type', type);
+
+		// Toggle button text
+		toggleConfirm.textContent = type === 'password' ? 'Show' : 'Hide';
+	});
+</script>

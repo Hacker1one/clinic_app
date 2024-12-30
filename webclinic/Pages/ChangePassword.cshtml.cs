@@ -47,9 +47,11 @@ namespace webclinic.Pages
                 return RedirectToPage();
             }
 
-            int id = (int)HttpContext.Session.GetInt32("user_id")!;
 
-            if (!db.changePassword(newP, id))
+            string email = (string)HttpContext.Session.GetString("email")!;
+            string type = (string)HttpContext.Session.GetString("user_type")!;
+
+            if (!db.changePassword(newP, email, type))
             {
                 TempData["invChangeP"] = "An error occurred while changing the password. Please try again or contact us.";
                 return RedirectToPage();

@@ -5,8 +5,11 @@ using webclinic.Models;
 
 namespace webclinic.Pages
 {
+    [BindProperties]
     public class CreateAdminModel : PageModel
     {
+        [DataType(DataType.EmailAddress)]
+        [Required]
         public string email { get; set; }
 
         [Required]
@@ -39,8 +42,14 @@ namespace webclinic.Pages
 
                 return RedirectToPage();
             }
+            
+            if (!db.createAdmin(email, newP))
+            {
+                TempData["invAdminC"] = "An error occurred while changing the password. Please try again or contact us.";
+                return RedirectToPage();
+            }
 
-            return RedirectToPage();
+            return RedirectToPage("Index");
         }
         public void OnGet()
         {
