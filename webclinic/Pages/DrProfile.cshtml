@@ -205,10 +205,7 @@
                             @for (int j = 0; j < times.Rows.Count; j++)
                             {
                                 <button class="btn btn-outline-secondary time-slot-btn"
-                                @if (HttpContext.Session.GetString("user_type") == "p")
-                                {
-                                    @:data-toggle="modal"
-                                }
+										data-toggle="modal"
                                         data-target="#bookTimeModal"
                                         onclick="setSelectedDateTime('@dateValue', '@times.Rows[j]["time"].ToString()')">
                                     @times.Rows[j]["time"].ToString()
@@ -246,7 +243,15 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="bookTimeModalLabel">Confirm Appointment</h5>
+				@if (HttpContext.Session.GetString("user_type") == "p")
+                {
+					<h5 class="modal-title" id="bookTimeModalLabel">Confirm Appointment</h5>
+                }
+                else
+                {
+
+					<h5 class="modal-title" id="bookTimeModalLabel">Cancel Appointment</h5>
+                }
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -256,10 +261,21 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <form method="post" asp-page-handler="BookAppointment">
-                    <input type="datetime-local" id="dateTimeINP" class="d-none" asp-for="appDateTime" value=0/>
-					<button type="submit" class="btn btn-primary">Confirm Appointment</button>
-                </form>
+				@if (HttpContext.Session.GetString("user_type") == "p")
+				{
+					<form method="post" asp-page-handler="BookAppointment">
+						<input type="datetime-local" id="dateTimeINP" class="d-none" asp-for="appDateTime" value=0/>
+						<button type="submit" class="btn btn-primary">Confirm Appointment</button>
+					</form>
+				}
+                else
+                {
+                    <form method="post" asp-page-handler="CancelAppointment">
+						<input type="datetime-local" id="dateTimeINP" class="d-none" asp-for="appDateTime" value=0/>
+						<button type="submit" class="btn btn-primary">Cancel</button>
+                    </form>
+                }
+
             </div>
         </div>
     </div>
@@ -287,6 +303,7 @@
         </div>
     </div>
 </div>
+
 
 
 <script>

@@ -1601,7 +1601,6 @@ namespace webclinic.Models
 
         public void bookAppointment(int PID, int DrID, DateTime date)
         {
-            Console.WriteLine(date.ToString("yyyy-MM-dd HH:mm:ss"));
             string queryString = $"update Appointment set PatientID = {PID} where DoctorID = {DrID} and DatenTime = '{date.ToString("yyyy-MM-dd HH:mm:ss")}'";
             SqlCommand cmd = new SqlCommand(queryString, con);
             try
@@ -1644,6 +1643,25 @@ namespace webclinic.Models
 
         }
 
+        public bool cancelAppointment(int DrID, DateTime date)
+        {
+            string queryString = $"DELETE FROM Appointment WHERE DoctorID = {DrID} AND DatenTime = '{date.ToString("yyyy-MM-dd HH:mm:ss")}'";
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                cmd.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return true;
+        }
         public bool changePrice(int id, int price)
         {
 
