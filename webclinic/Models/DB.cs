@@ -34,10 +34,10 @@ namespace webclinic.Models
             // change the constring before running locally here
 
             // adel's connection string:
-            connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
+            //connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
             // yassin's connection string:
-            //connectionString = "Data Source=AMNESIA\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
+            connectionString = "Data Source=AMNESIA\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
             con.ConnectionString = connectionString;
 		}
@@ -63,6 +63,27 @@ namespace webclinic.Models
 
 			return dt;
 		}
+
+        public bool changePassword(string newP, int id)
+        {
+            string queryString = $"UPDATE [user] SET [password] = '{newP}' WHERE ID = {id}";
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                cmd.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return true;
+        }
 
         public string getNationalIDPic(int id)
         {
