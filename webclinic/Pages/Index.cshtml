@@ -78,6 +78,21 @@
                 </div>
             </div>
         </div>
+		<style>
+			.profile-menu img.profile-image {
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				border: 2px solid #fff;
+				cursor: pointer;
+				transition: transform 0.2s;
+			}
+
+				.profile-menu img.profile-image:hover {
+					transform: scale(1.1);
+				}
+
+		</style>
         <div class="header-inner">
             <div class="container">
                 <div class="inner">
@@ -88,13 +103,12 @@
                             </div>
                             <div class="mobile-nav"></div>
                         </div>
-                        <div class="col-lg-7 col-md-9 col-12">
+                        <div class="col-lg-8 col-md-10 col-13">
                             <div class="main-menu">
                                 <nav class="navigation">
                                     <ul class="nav menu">
                                         <li class="active"><a href="index">Home</a></li>
-                                        <li><a href="#">Pages <i class="icofont-rounded-down"></i></a>
-                                        </li>
+                                      
                                         <li><a href="ContactUs">Contact Us</a></li>
 
 										@if (string.IsNullOrEmpty(this.ViewContext.HttpContext.Session.GetString("email")))
@@ -104,25 +118,48 @@
                                         }
                                         else
                                         {
-											<li><a href="Logout">LogOut</a></li>
+											
 											@if (this.ViewContext.HttpContext.Session.GetString("user_type") == "a")
 											{
-												<li><a href="ListOfDoctors">List of Doctors</a></li>
-												<li><a href="ListOfPatients">List of Patients</a></li>
+												<li>
+													<a href="#">Lists <i class="icofont-rounded-down"></i></a>
+													<ul class="dropdown">
+														<li><a href="ListOfDoctors">List of Doctors</a></li>
+														<li><a href="ListOfPatients">List of Patients</a></li>
+													</ul>
+												</li>
+												
 												<li><a href="AdminAnalytics">Analytics</a></li>
 												<li><a href="CreateAdmin">Create New Admin</a></li>
+												<li><a href="Logout">LogOut</a></li>
+												<li><a href="ChangePassword">Change Password</a></li>
 											}
 											@if (this.ViewContext.HttpContext.Session.GetString("user_type") == "d")
 											{
 												<li><a href="DrApp">My Appointments</a></li>
 												<li><a href="DrProfile">Profile</a></li>
+												<li><a href="Logout">LogOut</a></li>
+												<li><a href="ChangePassword">Change Password</a></li>
+												@* <li class="profile-menu">
+													<a href="DrProfile">
+														<img src="@Url.Content(Model.img ?? "img/defaultuser.jpg")" alt="Profile" class="profile-image" />
+													</a>
+												</li> *@
 											}
 											@if (this.ViewContext.HttpContext.Session.GetString("user_type") == "p")
 											{
 												<li><a href="PatientApp">My Appointments</a></li>
-												<li><a href="PatientProfile">Profile</a></li>
+												<li><a href="PatientProfile">My Profile</a></li>
+												<li><a href="Logout">LogOut</a></li>
+												<li><a href="ChangePassword">Change Password</a></li>
+												@* <li class="profile-menu">
+													<a href="PatientProfile">
+														<img src="@Url.Content(Model.img ?? "img/defaultuser.jpg")" alt="Profile" class="profile-image" />
+													</a>
+												</li> *@
 											}
-											<li><a href="ChangePassword">Change Password</a></li>
+											
+											
                                         }
                                     </ul>
                                 </nav>

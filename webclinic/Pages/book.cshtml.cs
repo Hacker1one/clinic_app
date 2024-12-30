@@ -92,12 +92,14 @@ public class bookModel : PageModel
 
     }
 
-    public IActionResult OnPostB()
+    public IActionResult OnPostB(int did)
     {
-        return RedirectToPage("/book");
+        HttpContext.Session.SetInt32("Dr_ID", did);
+        return RedirectToPage("/DrProfile");
     }
-    public IActionResult OnPostP()
+    public IActionResult OnPostP(int did)
     {
+        HttpContext.Session.SetInt32("Dr_ID", did);
         return RedirectToPage("/DrProfile");
     }
 

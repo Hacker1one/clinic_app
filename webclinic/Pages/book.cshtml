@@ -18,12 +18,7 @@
                         <nav class="navigation">
                             <ul class="nav menu">
                                 <li class="active"><a href="index">Home</a></li>
-                                <li>
-                                    <a href="#">Pages <i class="icofont-rounded-down"></i></a>
-                                    <ul class="dropdown">
-                                        <li><a href="404.html">404 Error</a></li>
-                                    </ul>
-                                </li>
+                               
                                 <li><a href="ContactUs">Contact Us</a></li>
                                 @if (HttpContext.Session.GetString("user_type") == "d")
                                 {
@@ -196,11 +191,11 @@
                                 <p><strong>City:</strong> @therapist.City </p>
                                 <div class="d-flex justify-content-between mt-3">
                                     <form method="post" asp-page-handler="P">
-                                        <input type="hidden" name="therapistId" value="@therapist.Id" />
+                                        <input type="hidden" name="did" value="@therapist.Id" />
                                         <button type="submit" class="btn btn-outline-primary" style="background-color: white;">View Profile</button>
                                     </form>&nbsp;
                                     <form method="post" asp-page-handler="B">
-                                        <input type="hidden" name="therapistId" value="@therapist.Id" />
+                                        <input type="hidden" name="did" value="@therapist.Id" />
                                         <button type="submit" class="btn btn-primary">Book Now</button>
                                     </form>
                                 </div>
