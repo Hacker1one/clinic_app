@@ -25,6 +25,7 @@ namespace webclinic.Pages
         public int id { get; set; }
         public DataTable ClinicDetails { get; set; }
         public int Fee { get; set; }
+        public int changedPPA { get; set; }
         public List<string> AvailableDates { get; set; }
         public List<string> AvailableTimes { get; set; }
         public string natIDPic { get; set; }
@@ -102,31 +103,14 @@ namespace webclinic.Pages
 
             ClinicDetails = db.getClinic(id);
 
-
-
-
-
             dates = new DataTable();
-            dates = db.getDates(id);
-
-
-
+            dates = db.getAvailableDates(id);
         }
 
         public DataTable gettimes(DateTime d)
         {
             date = d;
-            time = new DataTable();
-            if(type == "p")
-            {
-                time = db.getAvailableTime(date, id);
-            }
-            else
-            {
-                time = db.getTime(date, id);
-
-            }
-            
+            time = db.getAvailableTime(date, id);
             return time;
         }
 
@@ -134,7 +118,7 @@ namespace webclinic.Pages
 
         public IActionResult OnPostBookAppointment()
         {
-            type = HttpContext.Session.GetString("user_type");
+            type = HttpContext.Session.GetString("user_type")!;
 
             // If a doctor is behind this post request, "decline" it.
             if (type == "d")
@@ -150,6 +134,21 @@ namespace webclinic.Pages
             return RedirectToPage();
         }
 
+        public IActionResult OnPostChangePPA()
+        {
+            db.changePrice(HttpContext.Session.GetInt32("user_id")!.Value, changedPPA);
+            return RedirectToPage();
+        }
+        public IActionResult OnPostCancelAppointment()
+        {
+            int DrID = 0;
+            if (HttpContext.Session.GetString("user_type") == "d")
+            {
+                DrID = HttpContext.Session.GetInt32("user_id")!.Value;
+            }
+            db.cancelAppointment(DrID, appDateTime);
+            return RedirectToPage();
+        }
 
     }
 }
