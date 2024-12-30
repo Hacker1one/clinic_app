@@ -37,7 +37,7 @@ namespace webclinic.Models
             //connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
             // yassin's connection string:
-            connectionString = "Data Source=AMNESIA\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
+            connectionString = "Data Source=AN\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
             con.ConnectionString = connectionString;
 		}
@@ -1539,6 +1539,29 @@ namespace webclinic.Models
 
         }
 
+
+
+        public string getimage(int id)
+        {
+            string x = "";
+            string queryString = $"select ProfileImageUrl\r\nfrom [user]\r\nwhere ID = {id}";
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                x = (string)cmd.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+            return x;
+
+        }
 
 
 
