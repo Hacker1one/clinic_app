@@ -199,12 +199,16 @@
                             }
                             @for (int j = 0; j < times.Rows.Count; j++)
                             {
-								<button class="btn btn-outline-secondary time-slot-btn"
-										data-toggle="modal"
-										data-target="#bookTimeModal"
-										onclick="setSelectedDateTime('@dateValue', '@times.Rows[j]["time"].ToString()')">
-												@times.Rows[j]["time"].ToString()
-								</button>
+                                <button class="btn btn-outline-secondary time-slot-btn"
+                                @if (HttpContext.Session.GetString("user_type") == "p")
+                                {
+                                    @:data-toggle="modal"
+                                }
+                                        data-target="#bookTimeModal"
+                                        onclick="setSelectedDateTime('@dateValue', '@times.Rows[j]["time"].ToString()')">
+                                    @times.Rows[j]["time"].ToString()
+                                </button>
+
                             }
         </td>
     </tr>
