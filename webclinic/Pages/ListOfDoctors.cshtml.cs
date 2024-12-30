@@ -23,6 +23,9 @@ namespace webclinic.Pages
         [BindProperty(SupportsGet = true)]
         public string SelectedStatus { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public string SelectedStatus2 { get; set; }
+
         public DB db { get; set; }
 
         public List<SelectListItem> StatusOptions { get; set; }
@@ -65,13 +68,24 @@ namespace webclinic.Pages
             }
 
 
-            if (SelectedStatus == "Verified")
+            if (SelectedStatus == "Banned")
             {
-                filteredRows = filteredRows.Where(row => row.Field<bool>("Unverified") == true);
+                filteredRows = filteredRows.Where(row => row.Field<bool>("Banned") == false);
             }
-            else if (SelectedStatus == "Unverified")
+            else if (SelectedStatus == "Active")
             {
-                filteredRows = filteredRows.Where(row => row.Field<bool>("Unverified") == false);
+                filteredRows = filteredRows.Where(row => row.Field<bool>("Banned") == true);
+            }
+
+
+
+            if (SelectedStatus2 == "Active")
+            {
+                filteredRows = filteredRows.Where(row => row.Field<bool>("SSNValidation") == true);
+            }
+            else if (SelectedStatus2 == "Banned")
+            {
+                filteredRows = filteredRows.Where(row => row.Field<bool>("SSNValidation") == false);
             }
 
             if (filteredRows.Any())

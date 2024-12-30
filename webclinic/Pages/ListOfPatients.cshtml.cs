@@ -75,7 +75,7 @@ namespace webclinic.Pages
             {
                 filteredRows = filteredRows.Where(row => row.Field<bool>("SSNValidation") == true);
             }
-            else if (SelectedStatus == "SSNValidation")
+            else if (SelectedStatus == "Banned")
             {
                 filteredRows = filteredRows.Where(row => row.Field<bool>("SSNValidation") == false);
             }
