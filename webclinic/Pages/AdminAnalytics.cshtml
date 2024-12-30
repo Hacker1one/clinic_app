@@ -38,7 +38,7 @@
 
 <body>
 <div class="container @(HttpContext.Session.GetString("tab") == "users" ? "d-flex" : "d-none") flex-column" id="users">
-	<h2 class="mt-4 mx-auto w-50 text-center">Number of registered users</h2>
+	<h2 class="mt-4 mx-auto w-50 text-center">Number of Registered Users</h2>
 
 	<form method="post" asp-page-handler="RegisteredUsers">
 		<div class="container d-flex justify-content-center align-items-center w-50 mx-auto">
@@ -79,7 +79,7 @@
 </div>
 
 <div class="container @(HttpContext.Session.GetString("tab") == "app" ? "d-flex" : "d-none") flex-column" id="app">
-	<h2 class="mt-4 mx-auto w-50 text-center">Number of appointments</h2>
+	<h2 class="mt-4 mx-auto w-50 text-center">Number of Appointments</h2>
 
 	<form method="post" asp-page-handler="AppRange">
 		<div class="d-flex justify-content-center gap-3">
@@ -108,7 +108,7 @@
 
 
 <div class="container @(HttpContext.Session.GetString("tab") == "doc" ? "d-flex" : "d-none") flex-column" id="doc">
-	<h2 class="mt-4 mx-auto w-50 text-center">Field of medicine decomposition</h2>
+	<h2 class="mt-4 mx-auto w-50 text-center">Field of Medicine Decomposition</h2>
 
 	<form method="post" asp-page-handler="AppRange">
 		<div class="d-flex justify-content-center gap-3">
