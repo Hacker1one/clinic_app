@@ -1,0 +1,67 @@
+﻿@page
+@model webclinic.Pages.CreateAdminModel
+@{
+}
+
+<div class="w-75 mx-auto mt-5 my-auto">
+    <h2 class="text-center text-primary fw-bold mb-4">Change Password</h2>
+
+    @if (TempData["invChangeP"] != null)
+    {
+        <div class="alert alert-danger w-50 mx-auto">
+			@TempData["invChangeP"]!.ToString()
+        </div>
+    }
+    @if (TempData["model_errors"] != null)
+    {
+        var errors = ((string[])TempData["model_errors"]!).ToList(); // Convert to List<string>
+        TempData["model_errors"] = null; // Clear TempData explicitly
+
+        <div class="alert alert-danger w-50 mx-auto">
+            <ul class="text-danger">
+                @foreach (var err in errors)
+                {
+                    <li>@err</li>
+                }
+            </ul>
+        </div>
+    }
+
+
+    <form method="post">
+        <!-- Email -->
+        <div class="form-floating mb-3 mx-auto w-50">
+            <input type="email" class="form-control" asp-for="email" id="email" placeholder="Email Address" required>
+            <label for="email">Email</label>
+        </div>
+
+        <!-- Password -->
+        <div class="form-floating mb-3 mx-auto w-50">
+            <input type="password" class="form-control" asp-for="newP" id="newP" placeholder="New Password" required>
+            <label for="newP">New Password</label>
+            <button type="button" class="btn btn-link btn-sm position-absolute top-50 end-0 translate-middle-y me-2" id="toggleNewPassword">
+                Show
+            </button>
+        </div>
+
+
+        <!-- Confirm Password -->
+        <div class="form-floating mb-3 mx-auto w-50">
+            <input type="password" class="form-control" asp-for="confirmNewP" id="confirmNewP" placeholder="New Password" required>
+            <label for="confirmNewP">Confirm Password</label>
+            <button type="button" class="btn btn-link btn-sm position-absolute top-50 end-0 translate-middle-y me-2" id="toggleConfirm">
+                Show
+            </button>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid w-25 mx-auto">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+
+    <!-- Return -->
+    <div class="text-center mt-3">
+        <p><a href="Index" class="text-primary">Return</a></p>
+    </div>
+</div>

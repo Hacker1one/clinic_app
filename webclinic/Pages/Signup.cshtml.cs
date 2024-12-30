@@ -26,7 +26,7 @@ namespace webapplication.Pages
         public string email { get; set; }
 
         [Required]
-        [StringLength(40, MinimumLength = 8, ErrorMessage = "The password must be between 8 and 40 characters.")]
+        [StringLength(40, MinimumLength = 4, ErrorMessage = "The password must be between 4 and 40 characters.")]
         [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*[\W_]).+$", ErrorMessage = "The password must contain at least one uppercase letter and one symbol.")]
         public string password { get; set; }
 
@@ -126,7 +126,7 @@ namespace webapplication.Pages
 
             if (!r)
             {
-                HttpContext.Session.SetString("invsignup", "1");
+                TempData["invSignUp"] = "An error occurred while changing the password. Please try again or contact us.";
                 return RedirectToPage();
             }
 

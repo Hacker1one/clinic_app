@@ -26,10 +26,10 @@
     }
 
 
-    @if (!string.IsNullOrEmpty(HttpContext.Session.GetString("invsignup")))
+    @if (TempData["invSignUp"] != null)
     {
         <div class="alert alert-danger w-50 mx-auto">
-            Something went wrong while signing you up, please check the console for errors and try again.
+            @TempData["invSignUp"]!.ToString();
         </div>
     }
     @if (TempData["model_errors"] != null)
