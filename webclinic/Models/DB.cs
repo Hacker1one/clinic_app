@@ -31,13 +31,13 @@ namespace webclinic.Models
 
 		public DB()
 		{
-			// change the constring before running locally here
+            // change the constring before running locally here
 
-			// adel's connection string:
-			// connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
+            // adel's connection string:
+            connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
-			// yassin's connection string:
-            connectionString = "Data Source=AMNESIA\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
+            // yassin's connection string:
+            //connectionString = "Data Source=AMNESIA\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
             con.ConnectionString = connectionString;
 		}
@@ -1445,10 +1445,83 @@ namespace webclinic.Models
 
             return dt;
         }
+        public void GenerateAppointments(DateTime startDate, DateTime endDate, TimeSpan startHour, TimeSpan endHour, int appointmentDuration, int doctorId)
+        {
+            try
+            {
+
+                con.Open();
+
+                for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+                {
+                    DateTime currentTime = date.Date + startHour;
+                    DateTime endTime = date.Date + endHour;
+
+                    while (currentTime < endTime)
+                    {
+                        string checkQuery = "SELECT COUNT(*) FROM Appointment WHERE DoctorID = @DoctorID AND DatenTime = @DatenTime";
+                        SqlCommand checkCmd = new SqlCommand(checkQuery, con);
+                        checkCmd.Parameters.AddWithValue("@DoctorID", doctorId);
+                        checkCmd.Parameters.AddWithValue("@DatenTime", currentTime);
+
+                        int count = (int)checkCmd.ExecuteScalar();
+                        if (count > 0)
+                        {
+                            currentTime = currentTime.AddMinutes(appointmentDuration);
+                            continue;
+                        }
+
+                        string insertQuery = "INSERT INTO Appointment (DoctorID, IsFinished, IsConfirmed, DatenTime) VALUES (@DoctorID, @IsFinished, @IsConfirmed, @DatenTime)";
+                        SqlCommand insertCmd = new SqlCommand(insertQuery, con);
+                        insertCmd.Parameters.AddWithValue("@DoctorID", doctorId);
+                        insertCmd.Parameters.AddWithValue("@IsFinished", false);
+                        insertCmd.Parameters.AddWithValue("@IsConfirmed", false);
+                        insertCmd.Parameters.AddWithValue("@DatenTime", currentTime);
+
+                        insertCmd.ExecuteNonQuery();
+
+                        currentTime = currentTime.AddMinutes(appointmentDuration);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                {
+                    con.Close();
+                }
+            }
+        }
+
+
+        public void bookAppointment(int PID, int DrID,DateTime date)
+        {
+            string queryString = $"update Appointment\r\nset PatientID = '{PID}'\r\nwhere DoctorID = {DrID} and DatenTime = '{date}'";
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                cmd.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
+
 
 
 
 
 
     }
-    }
+}
