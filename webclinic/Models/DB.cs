@@ -35,7 +35,7 @@ namespace webclinic.Models
             // change the constring before running locally here
 
             // adel's connection string:
-            //connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
+            connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
             // yassin's connection string:
             connectionString = "Data Source=AMNESIA\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
@@ -1519,6 +1519,33 @@ namespace webclinic.Models
 
             return dt;
         }
+
+
+
+
+        public DataTable getAvailableDates(int id)
+        {
+            string queryString = $"select distinct convert(date,(DatenTime)) as [date]\r\nfrom appointment\r\nwhere DoctorID = '{id}' and PatientID is null";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(queryString, con);
+            try
+            {
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+
+
         public void GenerateAppointments(DateTime startDate, DateTime endDate, TimeSpan startHour, TimeSpan endHour, int appointmentDuration, int doctorId)
         {
             try
@@ -1615,6 +1642,31 @@ namespace webclinic.Models
             }
             return x;
 
+        }
+
+        public bool ChangePrice(int id, int price)
+        {
+
+            string queryString;
+            queryString = $"update Doctor\r\nset PricePA = '{price}'\r\nwhere ID = '{id}'";
+            SqlCommand cmd = new SqlCommand(queryString, con);
+
+            try
+            {
+                con.Open();
+                cmd.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return true;
         }
 
 

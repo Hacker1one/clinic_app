@@ -25,7 +25,6 @@
                                 <nav class="navigation">
                                     <ul class="nav menu">
                                         <li><a href="index">Home</a></li>
-                                        <li><a href="#">Pages <i class="icofont-rounded-down"></i></a>
                                     </ul>
                                 </nav>
                             </div>
@@ -80,6 +79,14 @@
                     <option value="">Show All</option>
                     <option value="Active">Show Only Active</option>
                     <option value="Banned">Show Only Banned</option>
+                </select>
+            </div>
+
+                        <div class="col-md-3">
+                <select asp-for="SelectedStatus2" class="form-control" onchange="this.form.submit()">
+                    <option value="">Show All</option>
+                    <option value="Active">Show Only Verified</option>
+                    <option value="Banned">Show Only Unverified</option>
                 </select>
             </div>
 
