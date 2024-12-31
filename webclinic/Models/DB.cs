@@ -35,10 +35,10 @@ namespace webclinic.Models
             // change the constring before running locally here
 
             // adel's connection string:
-            connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
+//            connectionString = "Data Source=DESKTOP-NQ0JKHE; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
             // yassin's connection string:
-            connectionString = "Data Source=AN\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
+            connectionString = "Data Source=AMNESIA\\SQLEXPRESS; Initial Catalog=clinicdb; Integrated Security=True; Trust Server Certificate = True;";
 
             con.ConnectionString = connectionString;
 		}
@@ -799,9 +799,9 @@ namespace webclinic.Models
             {
                 queryString = "BEGIN TRANSACTION \n" +
                 "INSERT INTO[user] \n" +
-                "(FName, LName, SSN, RegistrationDate, Gender, [Password], BirthDate, City, Governorate, Email, [type]) \n" +
+                "(FName, LName, SSN, RegistrationDate, Gender, [Password], BirthDate, City, Governorate, Email, [type], SSNValidation) \n" +
                 "VALUES " +
-                $"('{fname}', '{lname}', {ssn}, '{today}', '{gender}', '{password}', '{bd}', '{city}', '{governorate}', '{email}', '{user_type}')\n" +
+                $"('{fname}', '{lname}', {ssn}, '{today}', '{gender}', '{password}', '{bd}', '{city}', '{governorate}', '{email}', '{user_type}', 0)\n" +
                 "DECLARE @NewUserID INT = SCOPE_IDENTITY(); \n" +
                 "INSERT INTO Doctor(ID, PricePA, Banned, FieldCode)\n" +
                 $"VALUES(@NewUserID, 0, 0, {field_code});\n" +
@@ -1688,10 +1688,10 @@ namespace webclinic.Models
         }
 
 
-        public DataTable getCondations()
+        public DataTable getConditions()
         {
 
-            string queryString = $"select ConditionName from  LTCTypes";
+            string queryString = $"select ConditionName from LTCTypes";
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand(queryString, con);
             try
