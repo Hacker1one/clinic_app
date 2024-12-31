@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
+using System.Data;
 using webclinic.Models;
 
 public class AddConditionModel : PageModel
@@ -16,6 +17,8 @@ public class AddConditionModel : PageModel
     [BindProperty]
     public DateTime DateOfFirstInstance { get; set; }
 
+    public DataTable d { get; set; }
+
     public DB db { get; set; }
 
     public void OnGet()
@@ -24,7 +27,7 @@ public class AddConditionModel : PageModel
     }
 
 
-    public void AddCondationModel(DB db)
+    public AddConditionModel(DB db)
     {
         this.db = db;
 
@@ -39,10 +42,10 @@ public class AddConditionModel : PageModel
 
     private List<string> GetConditions()
     {
-        var dataTable = db.getCondations();
+        d = db.getCondations();
         var conditions = new List<string>();
 
-        foreach (System.Data.DataRow row in dataTable.Rows)
+        foreach (System.Data.DataRow row in d.Rows)
         {
             conditions.Add(row["ConditionName"].ToString());
         }
